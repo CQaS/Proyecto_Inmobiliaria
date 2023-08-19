@@ -21,8 +21,12 @@ tipo_servicio VARCHAR(45),
 id_cliente INT,
 imagen1 LONGBLOB,
 imagen2 LONGBLOB,
-imagen3 LONGBLOB
+imagen3 LONGBLOB,
+valor_inmueble INT
 );
+
+ALTER TABLE `inmobiliaria`.`inmueble` 
+ADD COLUMN `valor_inmueble` INT NULL AFTER `imagen3`;
 
 CREATE TABLE clientes (
 id_cliente INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -44,10 +48,11 @@ puesto_empleado VARCHAR(45),
 id_inmueble INT
 );
 
-CREATE TABLE categoria_empleado (
+CREATE TABLE categoria_inmueble (
 id_categoria INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 tipo_inmueble VARCHAR(45)
 );
+
 
 CREATE TABLE operaciones (
 id_operacion INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -75,4 +80,5 @@ CREATE TABLE servicios (
 id_servicio INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 tipo_servicio VARCHAR(45)
 );
- 
+
+RENAME TABLE categoria_empleado TO categoria_inmueble;
