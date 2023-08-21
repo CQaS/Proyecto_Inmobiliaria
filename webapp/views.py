@@ -1,10 +1,40 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from .forms import ContactForm
-
+from django.db import connection
+import json, collections
+from datetime import date
 
 # Create your views here.
 def index(request):
+    
+    def serialize_date(obj):
+        if isinstance(obj, date):
+            return obj.strftime('%Y-%m-%d')
+        raise TypeError("Type not serializable")
+    
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("select * from clientes")
+            columns = [col[0] for col in cursor.description]
+            res = cursor.fetchall()
+
+        # Convertir los resultados a una lista de diccionarios
+        results_as_dicts = []
+        for row in res:
+            row_dict = {}
+            for i, value in enumerate(row):
+                column_name = columns[i]
+                row_dict[column_name] = value
+            results_as_dicts.append(row_dict)
+
+        # Convertir a formato JSON
+        json_result = json.dumps(results_as_dicts, default=serialize_date)
+
+        print(json_result)
+
+    except Exception as e:
+        print("Error:", e)    
+
     form = ContactForm(request.POST or None, request.FILES or None)
     return render(request, 'index.html', {'form': form})
 
