@@ -2,19 +2,19 @@
 
 {% load static %}
 
-{% block content %} 
- 
+{% block content %}
+
 <div class="container-form">
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        <!-- {{ form.as_p }} -->
+        {% for f in form %}
+        <label for="inputName" class="">{{ f.label }}</label>
+        <input type="{{ f.field.widget.input_type }}" class="" name="{{ f.name }}" id="" placeholder="{{ f.label }}"
+            value="{{ f.value | default:'' }}">
+        {% endfor %}
         <button type="submit">Enviar</button>
     </form>
 </div>
-    
+
 {% endblock%}
-              
-                     
-        
-        
-    
