@@ -29,7 +29,7 @@
       <nav class="menu">
         <a href="#">Home</a>
         <a href="#">Nosotros</a>
-        <a href="contact.html">Contacto</a>
+        <a href="#">Contacto</a>
       </nav>
     </div>
   </header>
@@ -39,12 +39,12 @@
   <div class="container-menu">
     <div class="cont-menu">
       <nav>
-        <a href="#">Whatsapp<i class="fa-brands fa-whatsapp" style="color: #ccc"></i></a>
-        <a href="#">Instagram<i class="fa-brands fa-instagram" style="color: #ccc"></i></a>
-        <a href="#">Facebook<i class="fa-brands fa-facebook" style="color: #ccc"></i></a>
-        <a href="#">Servicios<i class="fa-brands fa-gear" style="color: #ccc"></i></a>
+        <a href="#"><i class="fa-brands fa-whatsapp" style="color: #ccc">   Whatsapp</i></a>
+        <a href="#"><i class="fa-brands fa-instagram" style="color: #ccc">   Instagram</i></a>
+        <a href="#"><i class="fa-brands fa-facebook" style="color: #ccc">   Facebook</i></a>
+        <a href="#"><i class="fa-solid fa-gear" style="color: #ccc">   Service</i></a>
       </nav>
-      <label for="btn-menu">✖️</label>
+      <label for="btn-menu">❎</label>
     </div>
   </div>
   <div id="myid">Choose Language</div>
@@ -60,24 +60,7 @@
   <!-- Footer Links -->
   <div class="footer">
     <div class="footer-container">
-      <!-- <ul>
-              <li>
-              <a href="#">
-                  <h3>Social Icons</h3>
-                  <div class="links">
-                      <a href="https://facebook.com">
-                        <i class="fa-brands fa-facebook" style="color: #ccc"></i>
-                      </a>
-                      <a href="https://twitter.com">
-                        <i class="fa-brands fa-twitter" style="color: #ccc"></i>
-                      </a>
-                      <a href="https://linkdin.com" >
-                        <i class="fa-brands fa-linkedin" style="color: #ccc"></i>
-                      </a>
-                  </div>
-              </a>
-              </li>
-          </ul> -->
+      
 
       <ul>
         <li>
@@ -98,9 +81,9 @@
       </footer>
       <!-- Scroll Reveal -->
       <script src="https://unpkg.com/scrollreveal"></script>
-      <script src="assets/js/main.js"></script>
-      <script src="assets/js/language.js"></script>
-
+      <script src="{% static 'webapp/static/assets/js/main.js' %}"></script>
+      <script src="{% static 'webapp/static/assets/js/language.js' %}"></script>
+      
 </body>
 
 </html>

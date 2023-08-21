@@ -6,9 +6,29 @@
 
 
 <!--Filtro de propiedades-->
-<div class="filter">
-  <p>FILTRAR POR:</p>
+<div class="box">
+  <h3>BUSCAR POR:</h3>
+  <form action="" method="get" class="search-form">
+    <div class="search-group">
+      <label for="tipo">Tipo de Operación:</label>
+      <select name="tipo" id="tipo" class="search-select">
+        <opcion value="operacion">Operacion</opcion>
+        <opcion value="venta">Venta</opcion>
+        <opcion value="alquiler-permanente">Alquiler Permante</opcion>
+        <opcion value="alquiler-temporario">Alquiler Temporario</opcion>
+      </select>
+    </div>
+    <input type="text" name="q" placeholder="Buscar.....">
+    <button type="submit">Buscar</button>
+  </form>
 </div>
+
+<h2>Resultados de la Búsqueda:</h2>
+    <ul>
+        {% for resultado in resultados %}
+            <li>{{ resultado }}</li>
+        {% endfor %}
+    </ul>
 
 <!-- Propiedades destacadas -->
 <div class="flex-destacado">
@@ -66,7 +86,7 @@
 <div class="container-form">
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <!-- {{ form.as_p }} -->
+    <!--{{ form.as_p }}-->
     {% for f in form %}
     <input type="{{ f.field.widget.input_type }}" class="" name="{{ f.name }}" id="" placeholder="{{ f.label }}"
       value="{{ f.value | default:'' }}">
