@@ -2,29 +2,19 @@
 
 {% load static %}
 
-{% block content %} 
-#formulario nuevo
+{% block content %}
+
 <div class="container-form">
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-
-        {% for f in formulario %}
-        <div class="mb-3 row">
-            <label for="inputName" clas="col-4 col-form">{{ f.label }}</label>
-            <div class="col-8">
-                <input type="{{ f.field.widget.input_type }}" class="form-control" name="{{ f.name }}" id="" placeholder="{{ f.label }}" value="{{ f.value | default:'' }}">
-            </div>
-        </div>
-        <div class="err">{{ f.errors }}</div>
-
+        <!-- {{ form.as_p }} -->
+        {% for f in form %}
+        <label for="inputName" class="">{{ f.label }}</label>
+        <input type="{{ f.field.widget.input_type }}" class="" name="{{ f.name }}" id="" placeholder="{{ f.label }}"
+            value="{{ f.value | default:'' }}">
         {% endfor %}
-        
+        <button type="submit">Enviar</button>
     </form>
 </div>
-    
+
 {% endblock%}
-              
-                     
-        
-        
-    
