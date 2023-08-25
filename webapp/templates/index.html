@@ -4,24 +4,43 @@
 
 {% block content %}
 
+<!--Filtro de propiedades -->
+<section>
+<div class="container-form">
+  <div class="titulo-form">
+    <span>Buscar por:</span>
+  </div>
+  <form class="form-destino">
+    <div class="form-group"><label for="origen"><i class="fa-solid fa-location-dot fa-lg" style="color:#2b90e2"></i>
+      Tipo Operacion:</label>
+    <select id="origen" name="origen">
+      <option value="venta">Venta</option>
+      <option value="alquiler-permanente">Alquiler Permante</option>
+      <option value="alquiler-temporario">Alquiler Temporario</option>
+    </select>
+  </div>
 
-<!--Filtro de propiedades-->
-<div class="box">
-  <h3>BUSCAR POR:</h3>
-  <form action="" method="get" class="search-form">
-    <div class="search-group">
-      <label for="tipo">Tipo de Operación:</label>
-      <select name="tipo" id="tipo" class="search-select">
-        <opcion value="operacion">Operacion</opcion>
-        <opcion value="venta">Venta</opcion>
-        <opcion value="alquiler-permanente">Alquiler Permante</opcion>
-        <opcion value="alquiler-temporario">Alquiler Temporario</opcion>
-      </select>
-    </div>
-    <input type="text" name="q" placeholder="Buscar.....">
-    <button type="submit">Buscar</button>
-  </form>
+  <div class="form-group">
+    <label for="destino"><i class="fa-solid fa-location-dot fa-lg" style="color:#2b90e2"></i> Tipo Propiedad:</label>
+    <select id="destino" name="destino">
+      <option value="casa">Casa</option>
+      <option value="departamento">Departamento</option>
+      <option value="apart">Apart</option>
+      <option value="Complejos">Complejos</option>
+      <option value="oficina">Oficina</option>
+      <option value="otros">Otros</option>
+    </select>
+  </div>
+
+  
+  <div class="form-group">
+    <button type="submit" class="btn-search">Buscar</button>
+  </div>
+</form>
 </div>
+</section>
+
+
 
 <h2>Resultados de la Búsqueda:</h2>
     <ul>
@@ -31,6 +50,7 @@
     </ul>
 
 <!-- Propiedades destacadas -->
+<section>
 <div class="flex-destacado">
   <div class="flex-item">Destacado
   </div>
@@ -41,8 +61,10 @@
   <div class="flex-item">Destacado
   </div>
 </div>
+</section>
 
 <!-- Propiedades -->
+<section>
 <div class="flex-container">
   <div class="flex-item">Caja Flexible
   </div>
@@ -68,8 +90,8 @@
   </div>
   <div class="flex-item">Caja Flexible
   </div>
-
 </div>
+</section>
 
 
 
@@ -82,7 +104,7 @@
 </section>
 
 <!-- Formulario de contacto -->
-
+<section>
 <div class="container-form">
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
@@ -94,6 +116,7 @@
     <button type="submit">Enviar</button>
   </form>
 </div>
+</section>
 
 
 
