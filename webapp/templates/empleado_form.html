@@ -1,0 +1,36 @@
+{% extends 'layouts/base00.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<div class="container-form-empleados">
+    <div class="welcome-back">
+    </div>
+    <form action="https://formsubmit.co/9ec76a5d36afc60db58eda0b46ef40ce" class="formulario" method="POST">
+        <h2 class="create-contact">EMPLEADOS</h2>
+        <div class="iconos">
+            <div class="border-icon">
+                <a href=""><i class="fa-solid fa-plus" style="color: #edeff3;"></i></a> 
+            </div>
+            <div class="border-icon">
+                <a href=""><i class="fa-solid fa-pen" style="color: #edeff3;"></i></a>
+            </div>
+            <div class="border-icon">
+                <a href=""><i class="fa-solid fa-trash" style="color: #edeff3;"></i></a>
+            </div>
+        </div>
+        
+        <input type="text" placeholder="Nombre y Apellido" required>
+        <select id="puesto" name="Puesto">
+            <option value="maestranza">Maestranza</option>
+            <option value="jardineria">Jardineria</option>
+            <option value="piletero">Piletero</option>
+          </select>
+        
+        <input type="button" value="Send" class="form_enviar">
+    </form>
+</div> 
+
+{% endblock%}

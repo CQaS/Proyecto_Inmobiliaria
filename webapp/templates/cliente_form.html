@@ -1,0 +1,38 @@
+{% extends 'layouts/base00.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<div class="container-form-cliente">
+    <div class="welcome-back">
+    </div>
+    <form action="https://formsubmit.co/9ec76a5d36afc60db58eda0b46ef40ce" class="formulario" method="POST">
+        <h2 class="create-contact">CLIENTE</h2>
+        <div class="iconos">
+            <div class="border-icon">
+                <a href=""><i class="fa-solid fa-plus" style="color: #edeff3;"></i></a> 
+            </div>
+            <div class="border-icon">
+                <a href=""><i class="fa-solid fa-pen" style="color: #edeff3;"></i></a>
+            </div>
+            <div class="border-icon">
+                <a href=""><i class="fa-solid fa-trash" style="color: #edeff3;"></i></a>
+            </div>
+        </div>
+        
+        <input type="text" placeholder="Nombre y Apellido" required>
+        <input type="number" placeholder="Nº Pasaporte" required>
+        <input type="text" placeholder="Direccion" required>
+        <input type="tel" placeholder="Telefono" required>
+        <input type="email" placeholder="Email" required>
+        <input type="text" placeholder="Ciudad" required>
+        <input type="text" placeholder="Pais" required>
+        <input type="date" placeholder="Fecha Nacimiento" required>
+        
+        <input type="button" value="Send" class="form_enviar">
+    </form>
+</div> 
+
+{% endblock%}

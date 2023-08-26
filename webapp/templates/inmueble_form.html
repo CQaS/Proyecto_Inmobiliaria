@@ -1,0 +1,91 @@
+{% extends 'layouts/base00.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<div class="container-form-inmueble">
+    <div class="welcome-back">
+    </div>
+    <form action="https://formsubmit.co/9ec76a5d36afc60db58eda0b46ef40ce" class="formulario" method="POST">
+        <h2 class="create-contact">PROPIEDADES</h2>
+        <div class="iconos">
+            <div class="border-icon">
+                <a href=""><i class="fa-solid fa-plus" style="color: #edeff3;"></i></a> 
+            </div>
+            <div class="border-icon">
+                <a href=""><i class="fa-solid fa-pen" style="color: #edeff3;"></i></a>
+            </div>
+            <div class="border-icon">
+                <a href=""><i class="fa-solid fa-trash" style="color: #edeff3;"></i></a>
+            </div>
+        </div>
+        
+        <input type="text" placeholder="Direccion" required>
+
+        <select id="operacion" name="operacion">
+            <option value="venta">Venta</option>
+            <option value="alquiler-permanente">Alquiler Permante</option>
+            <option value="alquiler-temporario">Alquiler Temporario</option>
+          </select>
+        
+        <input type="number" placeholder="Sup. total" required>
+        <input type="number" placeholder="Sup. cubierta" required>
+        <input type="number" placeholder="Sup. semicubierta" required>
+
+        <input type="number" placeholder="Cantidad Plantas" required>
+        <input type="number" placeholder="Cantidad Dormitorios" required>
+        <input type="number" placeholder="Cantidad Banos" required>
+
+        <select id="cochera" name="Cochera">
+            <option value="si">Si</option>
+            <option value="no">No</option>
+        </select>
+
+        <input type="number" placeholder="Antiguedad" required>
+        <select id="condicion" name="Condicion">
+            <option value="muy_buena">Muy Buena</option>
+            <option value="buena">Buena</option>
+            <option value="regular">Regular</option>
+            <option value="mala">Mala</option>
+        </select>
+
+        <select id="expensas" name="Expensas">
+            <option value="si">Si</option>
+            <option value="no">No</option>
+        </select>
+
+        <input type="text" placeholder="Descripcion" required>
+
+        <label>Servicios</label><br>
+        <input type="checkbox" id="wifi" name="servicios[]" value="WI-FI">
+        <label for="wifi">WI-FI</label><br>
+        
+        <input type="checkbox" id="ropa_cama" name="servicios[]" value="Ropa de cama">
+        <label for="ropa_cama">Ropa de cama</label><br>
+        
+        <input type="checkbox" id="piscinas" name="servicios[]" value="Piscinas">
+        <label for="piscinas">Piscinas</label><br>
+        
+        <input type="checkbox" id="mucama" name="servicios[]" value="Mucama">
+        <label for="mucama">Mucama</label><br><br>
+        
+        <input type="number" placeholder="Valor" required>
+        
+    
+        <!-- Cargar imágenes -->
+        <label for="imagen1">Imagen 1:</label>
+        <input type="file" id="imagen1" name="imagen1"><br>
+        
+        <label for="imagen2">Imagen 2:</label>
+        <input type="file" id="imagen2" name="imagen2"><br>
+        
+        <label for="imagen3">Imagen 3:</label>
+        <input type="file" id="imagen3" name="imagen3"><br>
+        
+        <input type="button" value="Send" class="form_enviar">
+    </form>
+</div> 
+
+{% endblock%}
