@@ -8,8 +8,9 @@
 <div class="container-form-inmueble">
     <div class="welcome-back">
     </div>
-    <form action="https://formsubmit.co/9ec76a5d36afc60db58eda0b46ef40ce" class="formulario" method="POST">
-        <h2 class="create-contact">PROPIEDADES</h2>
+    <form action="" class="formulario" method="POST">
+        {% csrf_token %}
+        <h2 class="create-contact">INMUEBLES</h2>
         <div class="iconos">
             <div class="border-icon">
                 <a href=""><i class="fa-solid fa-plus" style="color: #edeff3;"></i></a> 
@@ -22,28 +23,32 @@
             </div>
         </div>
         
-        <input type="text" placeholder="Direccion" required>
+        <input type="text" name="" placeholder="Direccion" required>
 
+        <label for="operacion">Tipo Operacion:</label>
         <select id="operacion" name="operacion">
-            <option value="venta">Venta</option>
-            <option value="alquiler-permanente">Alquiler Permante</option>
             <option value="alquiler-temporario">Alquiler Temporario</option>
+            <option value="alquiler-permanente">Alquiler Permante</option>
+            <option value="venta">Venta</option>
           </select>
         
-        <input type="number" placeholder="Sup. total" required>
-        <input type="number" placeholder="Sup. cubierta" required>
-        <input type="number" placeholder="Sup. semicubierta" required>
+        <input type="number" name="" placeholder="Sup. total" required>
+        <input type="number" name="" placeholder="Sup. cubierta" required>
+        <input type="number" name="" placeholder="Sup. semicubierta" required>
 
-        <input type="number" placeholder="Cantidad Plantas" required>
-        <input type="number" placeholder="Cantidad Dormitorios" required>
-        <input type="number" placeholder="Cantidad Banos" required>
+        <input type="number" name="" placeholder="Cantidad Plantas" required>
+        <input type="number" name="" placeholder="Cantidad Dormitorios" required>
+        <input type="number" name="" placeholder="Cantidad Banos" required>
 
-        <select id="cochera" name="Cochera">
+        <label for="cochera">Cochera:</label>
+        <select id="cochera" name="cochera"  placeholder="Cochera" required>
             <option value="si">Si</option>
             <option value="no">No</option>
         </select>
 
-        <input type="number" placeholder="Antiguedad" required>
+        <input type="number" name="" placeholder="Antiguedad" required>
+
+        <label for="condicion">Condicion:</label>
         <select id="condicion" name="Condicion">
             <option value="muy_buena">Muy Buena</option>
             <option value="buena">Buena</option>
@@ -51,13 +56,14 @@
             <option value="mala">Mala</option>
         </select>
 
+        <label for="expensas">Expensas:</label>
         <select id="expensas" name="Expensas">
             <option value="si">Si</option>
             <option value="no">No</option>
         </select>
 
-        <input type="text" placeholder="Descripcion" required>
-
+        <input type="text" name="" placeholder="Descripcion" required>
+        <br>
         <label>Servicios</label><br>
         <input type="checkbox" id="wifi" name="servicios[]" value="WI-FI">
         <label for="wifi">WI-FI</label><br>
@@ -71,10 +77,11 @@
         <input type="checkbox" id="mucama" name="servicios[]" value="Mucama">
         <label for="mucama">Mucama</label><br><br>
         
-        <input type="number" placeholder="Valor" required>
+        <input type="number" name="" placeholder="Valor" required>
         
     
         <!-- Cargar imágenes -->
+        <br><br>
         <label for="imagen1">Imagen 1:</label>
         <input type="file" id="imagen1" name="imagen1"><br>
         

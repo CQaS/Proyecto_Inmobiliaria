@@ -8,7 +8,8 @@
 <div class="container-form-cliente">
     <div class="welcome-back">
     </div>
-    <form action="https://formsubmit.co/9ec76a5d36afc60db58eda0b46ef40ce" class="formulario" method="POST">
+    <form action="" class="formulario" method="POST">
+        {% csrf_token %}
         <h2 class="create-contact">CLIENTE</h2>
         <div class="iconos">
             <div class="border-icon">
@@ -22,14 +23,14 @@
             </div>
         </div>
         
-        <input type="text" placeholder="Nombre y Apellido" required>
-        <input type="number" placeholder="Nº Pasaporte" required>
-        <input type="text" placeholder="Direccion" required>
-        <input type="tel" placeholder="Telefono" required>
-        <input type="email" placeholder="Email" required>
-        <input type="text" placeholder="Ciudad" required>
-        <input type="text" placeholder="Pais" required>
-        <input type="date" placeholder="Fecha Nacimiento" required>
+        <input type="text" name="" placeholder="Apellido y Nombre" required>
+        <input type="number" name="" placeholder="Nº Pasaporte" required>
+        <input type="text" name="" placeholder="Direccion" required>
+        <input type="tel" name="" placeholder="Telefono" required>
+        <input type="email" name="" placeholder="Email" required>
+        <input type="text" name="" placeholder="Ciudad" required>
+        <input type="text" name="" placeholder="Pais" required>
+        <input type="date" name="" placeholder="Fecha Nacimiento" required><br>
         
         <input type="button" value="Send" class="form_enviar">
     </form>
