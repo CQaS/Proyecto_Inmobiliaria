@@ -80,7 +80,7 @@ class Clientes(models.Model):
     ciudad_cliente = models.CharField(max_length=45, verbose_name='Ciudad de Cliente', null=False, blank=False, validators=[validar_nombre])
     pais_cliente = models.CharField(max_length=45, verbose_name='Pais de Cliente', null=False, blank=False, validators=[validar_letras])
     fechnac = models.TimeField(verbose_name='Fecha de Nac.', null=False, blank=False,)
-    categoria = models.CharField(max_length=45, verbose_name='Num. Categ.', null=False, blank=False, validators=[validar_letras])
+    categoria = models.CharField(max_length=45, verbose_name='Categoria', null=False, blank=False, validators=[validar_letras])
 
     def __str__(self):
         return self.nom_cliente

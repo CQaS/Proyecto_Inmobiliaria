@@ -11,10 +11,11 @@ def index_cliente(req):
 
 def crear_cliente(req):     
     clientes = ClienteForm(req.POST or None, req.FILES or None)
+    print(req.POST)
     if clientes.is_valid():
-        clientes.save()
+        #clientes.save()
         return redirect('index_cliente')
-    return render(req, 'cliente/index.html', {'clientes':clientes})
+    return render(req, 'cliente/cliente_form.html', {'clientes':clientes})
 
 
 def editar_cliente(req, id_cliente):
