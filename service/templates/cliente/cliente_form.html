@@ -8,8 +8,9 @@
 <div class="container-form-cliente">
     <div class="welcome-back">
     </div>
-    <form action="" class="formulario" method="POST">
+    <form action="crear" class="formulario" method="POST">
         {% csrf_token %}
+        
         <h2 class="create-contact">CLIENTE</h2>
         <div class="iconos">
             <div class="border-icon">
@@ -23,16 +24,17 @@
             </div>
         </div>
         
-        <input type="text" name="" placeholder="Apellido y Nombre" required>
-        <input type="number" name="" placeholder="Nº Pasaporte" required>
-        <input type="text" name="" placeholder="Direccion" required>
-        <input type="tel" name="" placeholder="Telefono" required>
-        <input type="email" name="" placeholder="Email" required>
-        <input type="text" name="" placeholder="Ciudad" required>
-        <input type="text" name="" placeholder="Pais" required>
-        <input type="date" name="" placeholder="Fecha Nacimiento" required><br>
+        {% for c in clientes %}
+        <input type="{{ c.field.widget.input_type }}" class="" name="{{ c.name }}" id="" placeholder="{{ c.label }}" value="{{ c.value | default:'' }}">
+
+       {% endfor %}
+       <span>Categoria Cliente</span>
+       <select id="categoria" name="categoria" required>
+        <option value="propietario">Propietario</option>
+        <option value="inquilino">Inquilino</option>
+    </select>
         
-        <input type="button" value="Send" class="form_enviar">
+        <input type="submit" value="Send" class="form_enviar">
     </form>
 </div> 
 

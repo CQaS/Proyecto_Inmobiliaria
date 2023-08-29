@@ -11,6 +11,7 @@ class ClienteForm(forms.ModelForm):
     class Meta:
         model = Clientes
         fields = '__all__'
+        exclude = ['categoria']
         widgets = {
             'fechnac': forms.DateInput(
                 attrs = {
