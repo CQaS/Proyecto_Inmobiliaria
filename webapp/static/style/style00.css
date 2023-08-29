@@ -67,6 +67,28 @@
 		border-bottom: 2px solid #c7c7c7;
 		padding-bottom: 5px;
 	}
+
+	/*Sub menu*/
+	.sub-nav{
+		position: absolute;
+		width: 50%;
+		visibility: hidden;
+		opacity: 0;
+		transition: opacity 1.3s;
+	  }
+		  
+	  .sub-nav li a{
+		display: block;
+		padding: 15px;
+		color:white;
+	  }
+	  
+	  .nav-main li:hover .sub-nav {
+		visibility: visible;
+		opacity: 1;
+		
+	  }
+	  
 	/*Fin de Estilos para el encabezado*/
 
 	/*Menù lateral*/
