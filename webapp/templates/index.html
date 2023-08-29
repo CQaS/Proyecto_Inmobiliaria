@@ -6,91 +6,93 @@
 
 <!--Filtro de propiedades -->
 <section>
-<div class="container-form">
-  <div class="titulo-form">
-    <span>Buscar por:</span>
-  </div>
-  <form class="form-destino">
-    <div class="form-group"><label for="origen"><i class="fa-solid fa-location-dot fa-lg" style="color:#2b90e2"></i>
-      Tipo Operacion:</label>
-    <select id="origen" name="origen">
-      <option value="venta">Venta</option>
-      <option value="alquiler-permanente">Alquiler Permante</option>
-      <option value="alquiler-temporario">Alquiler Temporario</option>
-    </select>
-  </div>
+  <div class="container-form">
+    <div class="titulo-form">
+      <span>Buscar por:</span>
+    </div>
+    <form method="POST" class="form-destino">
+      {% csrf_token %}
+      <div class="form-group"><label for="origen"><i class="fa-solid fa-location-dot fa-lg" style="color:#2b90e2"></i>
+          Tipo Operacion:</label>
+        <select id="origen" name="origen">
+          <option value="venta">Venta</option>
+          <option value="alquiler-permanente">Alquiler Permante</option>
+          <option value="alquiler-temporario">Alquiler Temporario</option>
+        </select>
+      </div>
 
-  <div class="form-group">
-    <label for="destino"><i class="fa-solid fa-location-dot fa-lg" style="color:#2b90e2"></i> Tipo Propiedad:</label>
-    <select id="destino" name="destino">
-      <option value="casa">Casa</option>
-      <option value="departamento">Departamento</option>
-      <option value="apart">Apart</option>
-      <option value="Complejos">Complejos</option>
-      <option value="oficina">Oficina</option>
-      <option value="otros">Otros</option>
-    </select>
-  </div>
+      <div class="form-group">
+        <label for="destino"><i class="fa-solid fa-location-dot fa-lg" style="color:#2b90e2"></i> Tipo
+          Propiedad:</label>
+        <select id="destino" name="destino">
+          <option value="casa">Casa</option>
+          <option value="departamento">Departamento</option>
+          <option value="apart">Apart</option>
+          <option value="Complejos">Complejos</option>
+          <option value="oficina">Oficina</option>
+          <option value="otros">Otros</option>
+        </select>
+      </div>
 
-  
-  <div class="form-group">
-    <button type="submit" class="btn-search">Buscar</button>
+
+      <div class="form-group">
+        <button type="submit" class="btn-search">Buscar</button>
+      </div>
+    </form>
   </div>
-</form>
-</div>
 </section>
 
 
 
 <h2>Resultados de la Búsqueda:</h2>
-    <ul>
-        {% for resultado in resultados %}
-            <li>{{ resultado }}</li>
-        {% endfor %}
-    </ul>
+<ul>
+  {% for resultado in resultados %}
+  <li>{{ resultado }}</li>
+  {% endfor %}
+</ul>
 
 <!-- Propiedades destacadas -->
 <section>
-<div class="flex-destacado">
-  <div class="flex-item">Destacado
+  <div class="flex-destacado">
+    <div class="flex-item">Destacado
+    </div>
+    <div class="flex-item">Destacado
+    </div>
+    <div class="flex-item">Destacado
+    </div>
+    <div class="flex-item">Destacado
+    </div>
   </div>
-  <div class="flex-item">Destacado
-  </div>
-  <div class="flex-item">Destacado
-  </div>
-  <div class="flex-item">Destacado
-  </div>
-</div>
 </section>
 
 <!-- Propiedades -->
 <section>
-<div class="flex-container">
-  <div class="flex-item">Caja Flexible
+  <div class="flex-container">
+    <div class="flex-item">Caja Flexible
+    </div>
+    <div class="flex-item">Caja Flexible
+    </div>
+    <div class="flex-item">Caja Flexible
+    </div>
+    <div class="flex-item">Caja Flexible
+    </div>
+    <div class="flex-item">Caja Flexible
+    </div>
+    <div class="flex-item">Caja Flexible
+    </div>
+    <div class="flex-item">Caja Flexible
+    </div>
+    <div class="flex-item">Caja Flexible
+    </div>
+    <div class="flex-item">Caja Flexible
+    </div>
+    <div class="flex-item">Caja Flexible
+    </div>
+    <div class="flex-item">Caja Flexible
+    </div>
+    <div class="flex-item">Caja Flexible
+    </div>
   </div>
-  <div class="flex-item">Caja Flexible
-  </div>
-  <div class="flex-item">Caja Flexible
-  </div>
-  <div class="flex-item">Caja Flexible
-  </div>
-  <div class="flex-item">Caja Flexible
-  </div>
-  <div class="flex-item">Caja Flexible
-  </div>
-  <div class="flex-item">Caja Flexible
-  </div>
-  <div class="flex-item">Caja Flexible
-  </div>
-  <div class="flex-item">Caja Flexible
-  </div>
-  <div class="flex-item">Caja Flexible
-  </div>
-  <div class="flex-item">Caja Flexible
-  </div>
-  <div class="flex-item">Caja Flexible
-  </div>
-</div>
 </section>
 
 
@@ -105,17 +107,17 @@
 
 <!-- Formulario de contacto -->
 <section>
-<div class="container-form">
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <!--{{ form.as_p }}-->
-    {% for f in form %}
-    <input type="{{ f.field.widget.input_type }}" class="" name="{{ f.name }}" id="" placeholder="{{ f.label }}"
-      value="{{ f.value | default:'' }}">
-    {% endfor %}
-    <button type="submit">Enviar</button>
-  </form>
-</div>
+  <div class="container-form">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <!--{{ form.as_p }}-->
+      {% for f in form %}
+      <input type="{{ f.field.widget.input_type }}" class="" name="{{ f.name }}" id="" placeholder="{{ f.label }}"
+        value="{{ f.value | default:'' }}">
+      {% endfor %}
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
 </section>
 
 

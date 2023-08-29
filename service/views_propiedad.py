@@ -21,7 +21,7 @@ def index_propiedad(req):
 def crear_propiedad(req):
     try:
         with connection.cursor() as cursor:
-            cursor.execute("select * from propietarios")
+            cursor.execute("select * from clientes")
             columns = [col[0] for col in cursor.description]
             res = cursor.fetchall()
 
@@ -44,7 +44,7 @@ def crear_propiedad(req):
     formulario = InmuebleForm(req.POST or None, req.FILES or None)
     if formulario.is_valid():
         formulario.save()
-        return redirect('index')
+        return redirect('index_propiedad')
     return render(req, 'propiedad/crear.html', {'formulario':formulario, 'clientes':lista})
 
 def editar_propiedad(req, id_inmueble):
@@ -55,18 +55,18 @@ def editar_propiedad(req, id_inmueble):
             res = cursor.fetchall()
 
         # Convertir los resultados a una lista de diccionarios
-        results_as_dicts = []
+        lista = []
         for row in res:
             row_dict = {}
             for i, value in enumerate(row):
                 column_name = columns[i]
                 row_dict[column_name] = value
-            results_as_dicts.append(row_dict)
+            lista.append(row_dict)
 
         # Convertir a formato JSON
-        clientes = json.dumps(results_as_dicts, default=serialize_date)
+        clientes = json.dumps(lista, default=serialize_date)
 
-        print(clientes)
+        #print(clientes)
 
     except Exception as e:
         print("Error:", e)
@@ -76,11 +76,11 @@ def editar_propiedad(req, id_inmueble):
     formulario = InmuebleForm(req.POST or None, req.FILES or None, instance=inmueble)
     if formulario.is_valid() and req.POST:
         formulario.save()
-        return redirect('index')
+        return redirect('index_propiedad')
     
-    return render(req, 'propiedad/editar.html', {'formulario':formulario, 'clientes':clientes})
+    return render(req, 'propiedad/editar.html', {'formulario':formulario, 'clientes':lista})
 
 def eliminar_propiedad(req, id_inmueble):
     inmueble = Inmueble.objects.get(id_inmueble=id_inmueble)
     inmueble.delete()
-    return redirect('index')
+    return redirect('index_propiedad')
