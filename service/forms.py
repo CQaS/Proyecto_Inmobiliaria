@@ -9,6 +9,17 @@ class InmuebleForm(forms.ModelForm):
 
 class ClienteForm(forms.ModelForm):
     class Meta:
-        model = Cliente
+        model = Clientes
         fields = '__all__'
-        exclude = ['id_catcliente']
+        widgets = {
+            'fechnac': forms.DateInput(
+                attrs = {
+                    'type':'date'
+                    }
+            )
+        }
+
+class EmpleadoForm(forms.ModelForm):
+    class Meta:
+        model = Empleados
+        fields = '__all__'

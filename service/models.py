@@ -1,29 +1,65 @@
 from django.db import models
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
+from PIL import Image
+import re
 
-# Create your models here.
+pattern_Nombre = r'^[A-Z]*[a-z]{2,}[a-zA-Z ]*$'
+pattern_Direccion = r'^[A-Z][a-zA-Z0-9 ]*$'
+pattern_soloNumeros = r'^[0-9][0-9]*$'
+pattern_soloLetras = r'^[A-Z][a-zA-Z ]*$'
+
+def validar_nombre(value):
+    if not re.match(pattern_Nombre, value):
+        raise ValidationError('El valor debe comenzar con una letra Mayuscula')
+    
+def validar_direccion(value):
+    if not re.match(pattern_Direccion, value):
+        raise ValidationError('El valor debe comenzar con una letra Mayuscula')
+
+def validar_numero(value):
+    if not re.match(pattern_soloNumeros, value):
+        raise ValidationError('El valor debe contener solo numeros')
+
+def validar_letras(value):
+    if not re.match(pattern_soloLetras, value):
+        raise ValidationError('El valor debe contener solo Letras')
+
+def validar_imagen(value):
+    formato = ['jpeg', 'jpg', 'gif', 'png']
+    tamanio = 2 * 1024 * 1024  # 2MB
+
+    img = Image.open(value)
+    img_format = img.format.lower()
+
+    if img_format not in formato:
+        raise ValidationError('El formato de la imagen no es válido.')
+
+    if len(value) > tamanio:
+        raise ValidationError('La imagen es demasiado grande (máximo 2MB).')
 
 class Inmueble(models.Model):
     id_inmueble = models.AutoField(primary_key=True)
-    dir_inmueble = models.CharField(max_length=100, null=False, blank=False, verbose_name='Direccion')
-    tipo_inmueble = models.CharField(max_length=25, null=False, blank=False, verbose_name='Tipo de Propiedad')
-    tipo_operacion = models.CharField(max_length=25, null=False, blank=False, verbose_name='Tipo de Operacion')
-    sup_total = models.IntegerField(null=False, blank=False, verbose_name='Superficie')
-    sup_cubierta = models.IntegerField(null=False, blank=False, verbose_name='Super. Cubierta')
-    sup_semicub = models.IntegerField(null=False, blank=False, verbose_name='Super. Semicubierta')
-    cant_plantas = models.IntegerField(null=False, blank=False, verbose_name='Cant. de Plantas')
-    cant_dormitorios = models.IntegerField(null=False, blank=False, verbose_name='Cant. de Dormitorios')
-    cant_banos = models.IntegerField(null=False, blank=False, verbose_name='Cant. de Baños')
+    dir_inmueble = models.CharField(max_length=100, null=False, blank=False, verbose_name='Direccion', validators=[validar_direccion])
+    tipo_inmueble = models.CharField(max_length=25, null=False, blank=False, verbose_name='Tipo de Propiedad', validators=[validar_letras])
+    tipo_operacion = models.CharField(max_length=25, null=False, blank=False, verbose_name='Tipo de Operacion', validators=[validar_letras])
+    sup_total = models.IntegerField(null=False, blank=False, verbose_name='Superficie', validators=[validar_numero])
+    sup_cubierta = models.IntegerField(null=False, blank=False, verbose_name='Super. Cubierta', validators=[validar_numero])
+    sup_semicub = models.IntegerField(null=False, blank=False, verbose_name='Super. Semicubierta', validators=[validar_numero])
+    cant_plantas = models.IntegerField(null=False, blank=False, verbose_name='Cant. de Plantas', validators=[validar_numero])
+    cant_dormitorios = models.IntegerField(null=False, blank=False, verbose_name='Cant. de Dormitorios', validators=[validar_numero])
+    cant_banos = models.IntegerField(null=False, blank=False, verbose_name='Cant. de Baños', validators=[validar_numero])
     cochera = models.BooleanField(verbose_name='Cochera', null=False, blank=False,)
-    antiguedad = models.IntegerField(null=False, blank=False, verbose_name='Antiguedad')
-    condicion = models.IntegerField(null=False, blank=False, verbose_name='Condicion')
+    antiguedad = models.IntegerField(null=False, blank=False, verbose_name='Antiguedad', validators=[validar_numero])
+    condicion = models.IntegerField(null=False, blank=False, verbose_name='Condicion', validators=[validar_numero])
     expensas = models.BooleanField(verbose_name='Expensas')
-    descripcion = models.TextField(null=False, blank=False, verbose_name='Descripcion')
-    tipo_servicio = models.CharField(max_length=45, null=False, blank=False, verbose_name='Tipo de Servicio')
+    descripcion = models.TextField(null=False, blank=False, verbose_name='Descripcion', validators=[validar_direccion])
+    tipo_servicio = models.CharField(max_length=45, null=False, blank=False, verbose_name='Tipo de Servicio', validators=[validar_letras])
     id_cliente = models.ForeignKey('Clientes',on_delete=models.CASCADE, verbose_name='Num. Cliente')
-    imagen1 = models.ImageField(upload_to='img/', null=False, blank=False, verbose_name='Foto 1')
-    imagen2 = models.ImageField(upload_to='img/', null=False, blank=False, verbose_name='Foto 2')
-    imagen3 = models.ImageField(upload_to='img/', null=False, blank=False, verbose_name='Foto 3')
-    valor_inmueble = models.IntegerField(verbose_name='Valor', null=False, blank=False,)
+    imagen1 = models.ImageField(upload_to='img/', null=False, blank=False, verbose_name='Foto 1', validators=[validar_imagen])
+    imagen2 = models.ImageField(upload_to='img/', null=False, blank=False, verbose_name='Foto 2', validators=[validar_imagen])
+    imagen3 = models.ImageField(upload_to='img/', null=False, blank=False, verbose_name='Foto 3', validators=[validar_imagen])
+    valor_inmueble = models.IntegerField(verbose_name='Valor', null=False, blank=False, validators=[validar_numero])
 
     def __str__(self):
         return self.dir_inmueble
@@ -36,18 +72,29 @@ class Inmueble(models.Model):
 
 class Clientes(models.Model):
     id_cliente = models.AutoField(primary_key=True)
-    nom_cliente = models.CharField(max_length=70, null=False, blank=False, verbose_name='Nombre de Cliente')
-    dni_cliente = models.IntegerField(verbose_name='Dni de Cliente', null=False, blank=False,)
-    dir_cliente = models.CharField(max_length=100, verbose_name='Direccion de Cliente', null=False, blank=False,)
-    tel_cliente = models.IntegerField(verbose_name='Tel de Cliente', null=False, blank=False,)
-    email_cliente = models.EmailField(max_length=45, verbose_name='Email de Cliente', null=False, blank=False,)
-    ciudad_cliente = models.CharField(max_length=45, verbose_name='Ciudad de Cliente', null=False, blank=False,)
-    pais_cliente = models.CharField(max_length=45, verbose_name='Pais de Cliente', null=False, blank=False,)
-    fechnac = models.DateField(verbose_name='Fecha de Nac.', null=False, blank=False,)
-    id_catcliente = models.IntegerField(verbose_name='Num. Categ.', null=False, blank=False,)
+    nom_cliente = models.CharField(max_length=70, null=False, blank=False, verbose_name='Nombre de Cliente', validators=[validar_nombre])
+    dni_cliente = models.IntegerField(verbose_name='Dni de Cliente', null=False, blank=False, validators=[validar_numero])
+    dir_cliente = models.CharField(max_length=100, verbose_name='Direccion de Cliente', null=False, blank=False, validators=[validar_direccion])
+    tel_cliente = models.IntegerField(verbose_name='Tel de Cliente', null=False, blank=False, validators=[validar_numero])
+    email_cliente = models.EmailField(max_length=45, verbose_name='Email de Cliente', null=False, blank=False, validators=[validate_email])
+    ciudad_cliente = models.CharField(max_length=45, verbose_name='Ciudad de Cliente', null=False, blank=False, validators=[validar_nombre])
+    pais_cliente = models.CharField(max_length=45, verbose_name='Pais de Cliente', null=False, blank=False, validators=[validar_letras])
+    fechnac = models.TimeField(verbose_name='Fecha de Nac.', null=False, blank=False,)
+    categoria = models.CharField(max_length=45, verbose_name='Num. Categ.', null=False, blank=False, validators=[validar_letras])
 
     def __str__(self):
         return self.nom_cliente
+    
+    def delete(self, using=None, keep_parents=False):
+        super().delete()
+
+class Empleados(models.Model):
+    id_empleado = models.AutoField(primary_key=True)
+    nom_empleado = models.CharField(max_length=70, null=False, blank=False, verbose_name='Nombre de empleado', validators=[validar_nombre])
+    nom_puesto = models.CharField(max_length=45, null=False, blank=False, verbose_name='Nombre de puesto', validators=[validar_letras])
+
+    def __str__(self):
+        return self.nom_empleado
     
     def delete(self, using=None, keep_parents=False):
         super().delete()
