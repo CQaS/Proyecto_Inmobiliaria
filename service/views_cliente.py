@@ -9,12 +9,18 @@ def index_cliente(req):
     list = Clientes.objects.all()
     return render(req, 'cliente/index.html', {'list': list})
 
-def crear_cliente(req):     
+def crear_cliente(req):
+    
     clientes = ClienteForm(req.POST or None, req.FILES or None)
-    print(req.POST)
     if clientes.is_valid():
+        print('OK, client')
         #clientes.save()
-        return redirect('index_cliente')
+        return redirect('crear_cliente')
+    else:
+        for field_name, error_msgs in clientes.errors.items():
+            for error_msg in error_msgs:
+                print(f"Error en el campo '{field_name}': {error_msg}")
+
     return render(req, 'cliente/cliente_form.html', {'clientes':clientes})
 
 

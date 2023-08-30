@@ -18,6 +18,7 @@ def validar_direccion(value):
         raise ValidationError('El valor debe comenzar con una letra Mayuscula')
 
 def validar_numero(value):
+    value = str(value)
     if not re.match(pattern_soloNumeros, value):
         raise ValidationError('El valor debe contener solo numeros')
 
@@ -75,12 +76,12 @@ class Clientes(models.Model):
     nom_cliente = models.CharField(max_length=70, null=False, blank=False, verbose_name='Nombre de Cliente', validators=[validar_nombre])
     dni_cliente = models.IntegerField(verbose_name='Dni de Cliente', null=False, blank=False, validators=[validar_numero])
     dir_cliente = models.CharField(max_length=100, verbose_name='Direccion de Cliente', null=False, blank=False, validators=[validar_direccion])
-    tel_cliente = models.IntegerField(verbose_name='Tel de Cliente', null=False, blank=False, validators=[validar_numero])
+    tel_cliente = models.BigIntegerField(verbose_name='Tel de Cliente', null=False, blank=False, validators=[validar_numero])
     email_cliente = models.EmailField(max_length=45, verbose_name='Email de Cliente', null=False, blank=False, validators=[validate_email])
     ciudad_cliente = models.CharField(max_length=45, verbose_name='Ciudad de Cliente', null=False, blank=False, validators=[validar_nombre])
     pais_cliente = models.CharField(max_length=45, verbose_name='Pais de Cliente', null=False, blank=False, validators=[validar_letras])
-    fechnac = models.TimeField(verbose_name='Fecha de Nac.', null=False, blank=False,)
-    categoria = models.CharField(max_length=45, verbose_name='Categoria', null=False, blank=False, validators=[validar_letras])
+    fechnac = models.DateField(verbose_name='Fecha de Nac.', null=False, blank=False,)
+    categoria = models.CharField(max_length=45, verbose_name='Num. Categ.', null=False, blank=False, validators=[validar_letras])
 
     def __str__(self):
         return self.nom_cliente
