@@ -5,25 +5,24 @@
 {% block content %}
 
 <!--Filtro de propiedades -->
-<section>
-  <div class="container-form">
-    <div class="titulo-form">
-      <span>Buscar por:</span>
+<section class="container-filter">
+    <div>
+      <h3>Buscar por:</h3>
     </div>
     <form method="POST" class="form-destino">
       {% csrf_token %}
-      <div class="form-group"><label for="origen"><i class="fa-solid fa-location-dot fa-lg" style="color:#2b90e2"></i>
+      <div class="form-group"><label for="origen">
           Tipo Operacion:</label>
         <select id="origen" name="origen">
-          <option value="venta">Venta</option>
-          <option value="alquiler-permanente">Alquiler Permante</option>
           <option value="alquiler-temporario">Alquiler Temporario</option>
+          <option value="alquiler-permanente">Alquiler Permante</option>
+          <option value="venta">Venta</option>
         </select>
       </div>
+      
 
       <div class="form-group">
-        <label for="destino"><i class="fa-solid fa-location-dot fa-lg" style="color:#2b90e2"></i> Tipo
-          Propiedad:</label>
+        <label for="destino"> Tipo Propiedad:</label>
         <select id="destino" name="destino">
           <option value="casa">Casa</option>
           <option value="departamento">Departamento</option>
@@ -34,12 +33,16 @@
         </select>
       </div>
 
+      <div class="form-group">
+        <input type="text" placeholder="Busca ubicacion, direcion o calle" autocomplete="off"></input>
+      </div>
+
 
       <div class="form-group">
         <button type="submit" class="btn-search">Buscar</button>
       </div>
     </form>
-  </div>
+  
 </section>
 
 
@@ -108,6 +111,9 @@
 <!-- Formulario de contacto -->
 <section>
   <div class="container-form">
+    <div class="titulo-form">
+      <h3>Contacto</h3>
+    </div>
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
       <!--{{ form.as_p }}-->

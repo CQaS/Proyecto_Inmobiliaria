@@ -8,7 +8,7 @@
 <div class="container-form-cliente">
     <div class="welcome-back">
     </div>
-    <form action="crear" class="formulario" method="POST">
+    <form action="{% url 'crear_cliente' %}" class="formulario" method="POST">
         {% csrf_token %}
         
         <h2 class="create-contact">CLIENTE</h2>
