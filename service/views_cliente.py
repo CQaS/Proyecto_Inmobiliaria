@@ -14,7 +14,7 @@ def crear_cliente(req):
     clientes = ClienteForm(req.POST or None, req.FILES or None)
     if clientes.is_valid():
         print('OK, client')
-        #clientes.save()
+        clientes.save()
         return redirect('crear_cliente')
     else:
         for field_name, error_msgs in clientes.errors.items():

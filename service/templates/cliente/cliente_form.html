@@ -1,4 +1,4 @@
-{% extends 'layouts/base00.html' %}
+<!-- {% extends 'layouts/base00.html' %} -->
 
 {% load static %}
 
@@ -8,6 +8,8 @@
 <div class="container-form-cliente">
     <form action="{% url 'crear_cliente' %}" id="formulario" method="POST">
         {% csrf_token %}
+        <!--Muestra si algun campo tiene error-->
+        {{ error }}
         
         <h2 class="create-contact">CLIENTE</h2>
         <div class="iconos">
@@ -24,18 +26,19 @@
         
         <!-- Validamos maxlength, autofoco required-->
         {% for c in clientes %}
-        <input type="{{ c.field.widget.input_type }}" id="c_name"class="" name="{{ c.name }}" maxlength="70" placeholder="{{ c.label }}" autofocus required value="{{ c.value | default:'' }}">
-
-       {% endfor %}
-       <span>Categoria Cliente</span>
-       <select id="categoria" name="categoria" required>
-        <option value="propietario">Propietario</option>
-        <option value="inquilino">Inquilino</option>
-    </select>
+        {% if c.name != 'categoria' %}
+            <input type="{{ c.field.widget.input_type }}" id="{{ c.name }}"  name="{{ c.name }}" maxlength="70" placeholder="{{ c.label }}" autofocus required value="{{ c.value | default:'' }}">
+        {% endif %}
+        {% endfor %}
+        <span>Categoria Cliente</span>
+        <select id="categoria" name="categoria" required>
+            <option value="propietario">Propietario</option>
+            <option value="inquilino">Inquilino</option>
+        </select>
         
         <input type="submit" value="Send" class="form_enviar">
     </form>
 </div> 
-<script src="{% static '/assets/js/validation.js'}"></script>
+<script src="{% static '/assets/js/validation.js' %}"></script>
 
 {% endblock%}
