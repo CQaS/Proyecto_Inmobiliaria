@@ -97,7 +97,7 @@ DATABASES = {
 } """
 
 
-# Password validation
+#Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -138,7 +138,11 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-""" MIGRATION_MODULES = {
-    'app_name': None,
+MIGRATION_MODULES = {
+    'webapp': None,
+    'service': None,
+    'admin': None,
+    'contenttypes': None,
+    'auth': None,
+    'sessions': None,
 }
- """

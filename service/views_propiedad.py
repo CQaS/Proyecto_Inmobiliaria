@@ -45,6 +45,11 @@ def crear_propiedad(req):
     if formulario.is_valid():
         formulario.save()
         return redirect('index_propiedad')
+    else:
+        for field_name, error_msgs in formulario.errors.items():
+            for error_msg in error_msgs:
+                print(f"Error en el campo '{field_name}': {error_msg}")
+    
     return render(req, 'propiedad/crear.html', {'formulario':formulario, 'clientes':lista})
 
 def editar_propiedad(req, id_inmueble):
@@ -77,6 +82,10 @@ def editar_propiedad(req, id_inmueble):
     if formulario.is_valid() and req.POST:
         formulario.save()
         return redirect('index_propiedad')
+    else:
+        for field_name, error_msgs in formulario.errors.items():
+            for error_msg in error_msgs:
+                print(f"Error en el campo '{field_name}': {error_msg}")
     
     return render(req, 'propiedad/editar.html', {'formulario':formulario, 'clientes':lista})
 

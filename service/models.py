@@ -11,7 +11,7 @@ pattern_soloLetras = r'^[A-Z][a-zA-Z ]*$'
 
 def validar_nombre(value):
     if not re.match(pattern_Nombre, value):
-        raise ValidationError('El valor debe comenzar con una letra Mayuscula')
+        raise ValidationError('El valor debe comenzar con una letra Mayuscula y un minimo de dos letras')
     
 def validar_direccion(value):
     if not re.match(pattern_Direccion, value):
@@ -71,6 +71,9 @@ class Inmueble(models.Model):
         self.imagen3.storage.delete(self.imagen3.name)
         super().delete()
 
+    class Meta:
+        db_table = 'inmueble'
+
 class Clientes(models.Model):
     id_cliente = models.AutoField(primary_key=True)
     nom_cliente = models.CharField(max_length=70, null=False, blank=False, verbose_name='Nombre de Cliente', validators=[validar_nombre])
@@ -89,6 +92,9 @@ class Clientes(models.Model):
     def delete(self, using=None, keep_parents=False):
         super().delete()
 
+    class Meta:
+        db_table = 'clientes'
+
 class Empleados(models.Model):
     id_empleado = models.AutoField(primary_key=True)
     nom_empleado = models.CharField(max_length=70, null=False, blank=False, verbose_name='Nombre de empleado', validators=[validar_nombre])
@@ -99,3 +105,6 @@ class Empleados(models.Model):
     
     def delete(self, using=None, keep_parents=False):
         super().delete()
+
+    class Meta:
+        db_table = 'empleados'
