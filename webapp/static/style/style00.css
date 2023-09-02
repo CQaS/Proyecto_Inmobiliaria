@@ -192,7 +192,7 @@
 		height: 150px;
 		width: 100%;
 		gap: 10px;
-		}
+		} 
 
 		.container-filter h3{
 		text-align: center;
@@ -208,7 +208,7 @@
 		color: #fff;
 		display: flex;
 		justify-content: space-around;	
-		}
+		} 
 		
 		.form-group {
 		display: flex;
