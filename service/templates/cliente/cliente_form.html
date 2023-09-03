@@ -27,6 +27,7 @@
         <!-- Validamos maxlength, autofoco required-->
         {% for c in clientes %}
         {% if c.name != 'categoria' %}
+            <label>{{c.label}}</label>
             <input type="{{ c.field.widget.input_type }}" id="{{ c.name }}"  name="{{ c.name }}" maxlength="70" placeholder="{{ c.label }}" autofocus required value="{{ c.value | default:'' }}">
         {% endif %}
         {% endfor %}
@@ -36,7 +37,7 @@
             <option value="Inquilino">Inquilino</option>
         </select>
         
-        <input type="submit" value="Send" class="form_enviar">
+        <input type="submit" value="Send" id="send" class="form_enviar">
     </form>
 </div> 
 <script src="{% static '/assets/js/validation.js' %}"></script>
