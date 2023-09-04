@@ -5,7 +5,6 @@ class InmuebleForm(forms.ModelForm):
     class Meta:
         model = Inmueble
         fields = '__all__'
-        exclude = ['id_cliente']
 
 class ClienteForm(forms.ModelForm):
     class Meta:

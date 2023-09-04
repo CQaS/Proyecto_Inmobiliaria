@@ -44,7 +44,7 @@ def crear_propiedad(req):
     formulario = InmuebleForm(req.POST or None, req.FILES or None)
     if formulario.is_valid():
         formulario.save()
-        return redirect('index_propiedad')
+        return redirect('crear_propiedad')
     else:
         for field_name, error_msgs in formulario.errors.items():
             for error_msg in error_msgs:
@@ -81,7 +81,7 @@ def editar_propiedad(req, id_inmueble):
     formulario = InmuebleForm(req.POST or None, req.FILES or None, instance=inmueble)
     if formulario.is_valid() and req.POST:
         formulario.save()
-        return redirect('index_propiedad')
+        return redirect('editar_propiedad')
     else:
         for field_name, error_msgs in formulario.errors.items():
             for error_msg in error_msgs:
