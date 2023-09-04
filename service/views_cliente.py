@@ -17,6 +17,7 @@ def crear_cliente(req):
         clientes.save()
         return redirect('crear_cliente')
     else:
+        print(clientes.errors)
         for field_name, error_msgs in clientes.errors.items():
             for error_msg in error_msgs:
                 print(f"Error en el campo '{field_name}': {error_msg}")
