@@ -170,20 +170,68 @@
 	}
 
     /*Filtro de propiedades*/
-		.titulo-form span{
-		color: white;
-		font-size: 25px;
-		position:absolute;
-		margin-top: 5px;
-		text-align: center;
-		justify-content: center;
-		right: 45%;
-		top: 55%;
+		.container-filter{
+			display: flex;
+			justify-content:space-between;
+			flex-wrap: wrap;
+			margin:auto;
+			background-color: #222;
+			color: white;
+			border: 3px solid white;
+			border-radius: 5px;
+			height: 150px;
+			width: 80%;	
+			
+
+		}
+		.titulo-filter{
+			color: white;
+			text-align: center;
+			justify-content: center;
+			padding: 10px;
+		}
+
+		.form-group {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		  }
+		
+
+		.form-group label, input, select {
+			font-size: 16px;
+			display: flex;
+			align-items: center;
+			margin-top: 20px;
+			padding: 10px;
+			border-radius: 10px;	
 		}
 		
-		.container-filter {
+		input[type="submit"] {
+			width: 60%;
+			margin: auto;
+			border: solid thin #222;
+			padding: .7rem;
+			border-radius: 10px;
+			background-color: white;
+			font-weight: 600;
+			margin-top: 3rem;
+			font-size: 16px;
+			cursor: pointer;
+			color: rgb(51, 51, 51);
+		}
+		
+		
+		
+		input[type="submit"]:hover {
+			background: rgb(51, 51, 51, 0.302);
+			color: white;
+		} 
+	
+		
+		/* .container-filter {
 		/* background-image: url(https://assets.turismocity.com/cdn-cgi/image/format=auto/img/home-package.png); */
-		background-position: center;
+		/*background-position: center;
 		background-size:cover;
 		display: flex;
 		margin-top: 80px;
@@ -192,14 +240,11 @@
 		height: 150px;
 		width: 100%;
 		gap: 10px;
-		} 
+		}  */
 
-		.container-filter h3{
-		text-align: center;
-		}
 		
 		
-		.form-destino {
+		/* .form-destino {
 		max-width: 1350px;
 		margin: 0px auto;
 		background:white;
@@ -260,14 +305,13 @@
 		
 		} 
 		.titulo-form span{
-
 			color: var(--color-white);
 			font-size: 25px;
 			position: relative;
 			right: 30.5%;
 		}
 	
-		  
+		   */
 		  
 
     /* imagenes de destacados y no destacados*/
@@ -299,46 +343,112 @@
          flex-grow: 1;
       }
 
-      .about {
-        display: flex;
-        border:#1f1f1f;
-        border-radius: 5px;
-		height: 30vh;
-        
-      }
 
-	  /* .container-form {
-		background-color: #12cfc6;
-		width: 100%;
-		height: 70vh;
+	  /* QUIENES SOMOS Y FORMULARIO DE CONTACTO */
+	  .box {
 		display: flex;
-		align-items: center;
-		justify-content: space-around;
+		justify-content:space-between;
+		flex-wrap: wrap;
+		color: white;
 	  }
 
-	  .titulo-form{
-		font-size: 18px;
+	  .about {
+		margin: 50px 10px 50px 10px; /*arriba-der-abajo-izq*/
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		border: 2px solid white;
+		border-radius: 5px 50px;
+		width: 450px;
+		height: 500px;
+		background-color: rgb(51, 51, 51, 0.302);
+		float: left;
+		padding: 10px;
+	  }
+
+	  .titulo-about {
 		text-align: center;
-		} */
+		justify-content: center;
+		padding: 10px;
+	} 
+
+
+	  /* FORMULARIO DE CONTACTO*/
+
+	  .container-form {
+		margin: 50px 10px 50px 10px; /*arriba-der-abajo-izq*/
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		border: 2px solid white;
+		border-radius: 5px 50px;
+		width: 450px;
+		height: 500px;
+		background-color: rgb(51, 51, 51, 0.302);
+		float: right;
+	}
+	
+	.titulo-form {
+		color: white;
+		text-align: center;
+		justify-content: center;
+		padding: 10px;
+	} 
+	
+	
+	label, input, select {
+		font-size: 16px;
+		display: inline-block;
+		vertical-align: middle; 
+		align-items: center;
+		margin-top: 20px;
+		padding: 10px;
+		border-radius: 10px;	
+	}
+	
+	input[type="submit"] {
+		width: 60%;
+		margin: auto;
+		border: solid thin #222;
+		padding: .7rem;
+		border-radius: 10px;
+		background-color: white;
+		font-weight: 600;
+		margin-top: 3rem;
+		font-size: 16px;
+		cursor: pointer;
+		color: rgb(51, 51, 51);
+	}
+	
+	
+	
+	input[type="submit"]:hover {
+		background: rgb(51, 51, 51, 0.302);
+		color: white;
+	} 
 
 
 	  /*FOOTER */
 	  .footer-container {
+		background-color: rgb(4, 49, 49);
 		display: flex;
-		text-decoration: none;
+		height: 15vh;
+		flex-direction: center;
 		align-items: center;
 		justify-content: center;
-		height: 30vh;
-		
+		margin-top: 100px;
+		padding: 50px;
+		color: white;
 	  }
 
-	  .footer-container ul li a {
+	  .date {
+		margin-left: 150px;
 		list-style: none;
 		text-decoration: none;
-		}
-	
-	   .footer {
-		position: relative;
+	  }
+
+	   .copy {
+		margin-right: 100px;
 		bottom: -4em;
 		}
 	   

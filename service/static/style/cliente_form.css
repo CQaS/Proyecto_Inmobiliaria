@@ -1,0 +1,71 @@
+
+.container-form-cliente {
+    margin: 150px 50px 50px 280px; /*arriba-der-abajo-izq*/
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    border: 2px solid white;
+    border-radius: 5px 50px;
+    width: 650px;
+    height: 700px;
+    background-color: rgb(51, 51, 51, 0.302);
+}
+
+.create-contact {
+    color: white;
+    text-align: center;
+    justify-content: center;
+    padding: 10px;
+} 
+
+.iconos {
+    width: 200px;
+    display: flex;
+    justify-content: space-around;
+    margin: auto;
+}
+
+.border-icon {
+    height: 20px;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    border: solid thin white;
+    border-radius: 50%;
+    font-size: 1.5rem;
+}
+
+label, input, select {
+    font-size: 16px;
+    display: inline-block;
+    vertical-align: middle; 
+    align-items: center;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    
+
+}
+
+input[type="submit"] {
+    width: 60%;
+    margin: auto;
+    border: solid thin #222;
+    padding: .7rem;
+    border-radius: 10px;
+    background-color: white;
+    font-weight: 600;
+    margin-top: 3rem;
+    font-size: 16px;
+    cursor: pointer;
+    color: rgb(51, 51, 51);
+}
+
+
+
+input[type="submit"]:hover {
+    background: rgb(51, 51, 51, 0.302);
+    color: white;
+} 

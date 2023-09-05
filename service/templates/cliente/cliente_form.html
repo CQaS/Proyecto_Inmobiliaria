@@ -1,4 +1,4 @@
-<!-- {% extends 'layouts/base00.html' %} -->
+{% extends 'layouts/base00.html' %} 
 
 {% load static %}
 
@@ -11,7 +11,7 @@
         <!--Muestra si algun campo tiene error-->
         {{ error }}
         
-        <h2 class="create-contact">CLIENTE</h2>
+        <h2 class="create-contact">CLIENTES</h2>
         <div class="iconos">
             <div class="border-icon">
                 <a href=""><i class="fa-solid fa-plus" style="color: #edeff3;"></i></a> 
@@ -29,6 +29,7 @@
         {% if c.name != 'categoria' %}
             <label>{{c.label}}</label>
             <input type="{{ c.field.widget.input_type }}" id="{{ c.name }}"  name="{{ c.name }}" maxlength="70" placeholder="{{ c.label }}" autofocus required value="{{ c.value | default:'' }}">
+            <br>
         {% endif %}
         {% endfor %}
         <span>Categoria Cliente</span>

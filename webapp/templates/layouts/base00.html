@@ -8,6 +8,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=header, initial-scale=1.0">
   <link rel="stylesheet" href="{% static '/style/style00.css' %}">
+  <!-- css formulario CRUD cliente -->
+  <link rel="stylesheet" href="{% static '/style/cliente_form.css' %}">
 
   <!-- FONT AWESOME -->
   <script src="https://kit.fontawesome.com/3a34f10376.js" crossorigin="anonymous"></script>
@@ -64,8 +66,8 @@
   </main>
 
   <!-- Footer Links -->
-  <div class="footer">   
-
+  <footer class="footer-container">
+  <div class="date">   
     <ul>
       <li>
         <a href="#">Direccion</a>
@@ -78,16 +80,14 @@
       </li>
     </ul>
   </div>
-
-
-      <!-- Footer -->
-      <footer class="footer">
-        <h3>SVD Inside Copyright</h3>
-      </footer>
+    <div class="copy">
+      <h3>SVD Inside Copyright</h3>
+    </div>
+  </footer>
       <!-- Scroll Reveal -->
       <script src="https://unpkg.com/scrollreveal"></script>
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-      <script src="{% static '/assets/js/main.js' %}"></script>
+      <!-- <script src="{% static '/assets/js/main.js' %}"></script> -->
       <script src="{% static '/assets/js/language.js' %}"></script>
       
 </body>

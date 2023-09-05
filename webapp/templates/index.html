@@ -4,10 +4,15 @@
 
 {% block content %}
 
-<!--Filtro de propiedades -->
-<section class="container-filter">
-    <div>
-      <h3>Buscar por:</h3>
+
+<script src="http://translate.google.com/translate_a/element.js?cb=loadGoogleTranslate"></script>
+      <div id="myid">Choose Language</div>
+
+<!--Filtro de propiedades -->      
+<section>
+  <div class="container-filter">
+    <div class="titulo-filter">
+      <h3>BUSCAR POR</h3>
     </div>
     <form method="POST" class="form-destino">
       {% csrf_token %}
@@ -38,10 +43,10 @@
 
 
       <div class="form-group">
-        <button type="submit" class="btn-search">Buscar</button>
+        <input type="submit" class="btn-search">>
       </div>
     </form>
-  
+  </div>
 </section>
 
 
@@ -101,26 +106,39 @@
 
 <!--quienes somos-->
 
-<section class="about">
-  <h3>quienes somos</h3>
-  <p>Son prioridad nuestros clientes y les brindamos el mejor servicio</p>
-</section>
+<section class="box">
+  <div class="about">
+    <div class="titulo-about">
+      <h3>QUIENES SOMOS</h3>
+    </div>
+    <p>Loren30
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, quibusdam! Saepe natus deleniti recusandae eum
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod? Eius deleniti doloremque iure nemo repell
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius quas nobis repellat delectus voluptatum? Quaerat,
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam quod nobis aperiam voluptatum deleniti repellat sint
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam doloremque quibusdam deleniti nemo voluptatum perferendis molest
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam quae doloremque eaque repellendus nobis debitis
+    </p>
+  </div>
+
 
 <!-- Formulario de contacto -->
-<section>
   <div class="container-form">
     <div class="titulo-form">
-      <h3>Contacto</h3>
+      <h3>CONTACTO</h3>
     </div>
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
       <!--{{ form.as_p }}-->
       {% for f in form %}
-      <input type="{{ f.field.widget.input_type }}" class="" name="{{ f.name }}" id="" placeholder="{{ f.label }}"
+      <label>{{f.label}}</label>
+        <input type="{{ f.field.widget.input_type }}" class="" name="{{ f.name }}" id="" placeholder="{{ f.label }}"
         value="{{ f.value | default:'' }}">
+        <br>
       {% endfor %}
-      <button type="submit">Enviar</button>
+      <input type="submit" value="Send" id="send" class="form_enviar">
     </form>
+
   </div>
 </section>
 
