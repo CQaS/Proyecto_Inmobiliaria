@@ -97,7 +97,10 @@ class Clientes(models.Model):
 
 class Empleados(models.Model):
     id_empleado = models.AutoField(primary_key=True)
-    nom_empleado = models.CharField(max_length=70, null=False, blank=False, verbose_name='Nombre de empleado', validators=[validar_nombre])
+    nom_empleado = models.CharField(max_length=70, null=False, blank=False, verbose_name='Nombre de empleado', validators=[validar_nombre])    
+    dni_empleado = models.IntegerField(null=False, blank=False, verbose_name='DNI de empleado', validators=[validar_numero])  
+    tel_empleado = models.IntegerField(null=False, blank=False, verbose_name='Tel. de empleado', validators=[validar_numero])  
+    email_empleado = models.MailField(null=False, blank=False, verbose_name='Mail de empleado', validators=[validate_email])    
     nom_puesto = models.CharField(max_length=45, null=False, blank=False, verbose_name='Nombre de puesto', validators=[validar_letras])
 
     def __str__(self):
@@ -108,3 +111,4 @@ class Empleados(models.Model):
 
     class Meta:
         db_table = 'empleados'
+
