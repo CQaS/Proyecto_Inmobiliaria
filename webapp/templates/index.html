@@ -11,9 +11,7 @@
 <!--Filtro de propiedades -->      
 <section>
   <div class="container-filter">
-    <div class="titulo-filter">
       <h3>BUSCAR POR</h3>
-    </div>
     <form method="POST" class="form-destino">
       {% csrf_token %}
       <div class="form-group"><label for="origen">
@@ -22,7 +20,6 @@
           <option value="alquiler-temporario">Alquiler Temporario</option>
           <option value="alquiler-permanente">Alquiler Permante</option>
           <option value="venta">Venta</option>
-        </select>
       </div>
 
       <div class="form-group">
@@ -43,7 +40,7 @@
 
 
       <div class="form-group">
-        <input type="submit" class="btn-search">>
+        <input type="submit" class="btn-search">
       </div>
     </form>
   </div>
