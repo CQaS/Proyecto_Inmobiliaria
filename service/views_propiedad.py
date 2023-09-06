@@ -4,6 +4,7 @@ from .models import *
 import json
 from datetime import date
 from .forms import InmuebleForm
+from django.http import HttpResponse
 
 #query = "SELECT * FROM Inmuebles i JOIN Propietarios p ON i.prop_Id = p.id_Prop WHERE (SELECT COUNT(c.id_Cont) AS contID FROM Contratos c WHERE c.inm_Id = i.id_Inm AND ((c.fecha_In BETWEEN @inicio AND @fin) OR (c.fecha_fin BETWEEN @inicio AND @fin) OR (c.fecha_In < @inicio AND c.fecha_fin > @fin))) = 0 AND i.estado = 1 AND i.disponible = 1" % (fecha_inicio, fecha_fin)
 
@@ -93,3 +94,38 @@ def eliminar_propiedad(req, id_inmueble):
     inmueble = Inmueble.objects.get(id_inmueble=id_inmueble)
     inmueble.delete()
     return redirect('index_propiedad')
+
+def buscar_por(req):
+    if req.method == 'POST':
+        print(req.POST['origen'])
+        #query = 
+        """SELECT * FROM clientes WHERE id_cliente = {0} AND pais_cliente = '{1}'""".format('4', 'algo')
+            #print(query)
+            #cursor.execute(query)
+        """ try:
+        with connection.cursor() as cursor:
+            cursor.execute("select * from clientes")
+            columns = [col[0] for col in cursor.description]
+            res = cursor.fetchall()
+
+        # Convertir los resultados a una lista de diccionarios
+        lista = []
+        for row in res:
+            row_dict = {}
+            for i, value in enumerate(row):
+                column_name = columns[i]
+                row_dict[column_name] = value
+            lista.append(row_dict)
+
+        # Convertir a formato JSON
+        R = json.dumps(lista, default=serialize_date)
+
+        #print(R)
+
+    except Exception as e:
+        print("Error:", e) """
+        return HttpResponse('POST')
+    else:
+        print('GET ')
+        return HttpResponse('GET')
+    

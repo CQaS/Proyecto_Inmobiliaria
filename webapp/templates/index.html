@@ -6,15 +6,15 @@
 
 
 <script src="http://translate.google.com/translate_a/element.js?cb=loadGoogleTranslate"></script>
-      <div id="myid">Choose Language</div>
+<div id="myid">Choose Language</div>
 
-<!--Filtro de propiedades -->      
+<!--Filtro de propiedades -->
 <section>
   <div class="container-filter">
     <div class="titulo-filter">
       <h3>BUSCAR POR</h3>
     </div>
-    <form method="POST" class="form-destino">
+    <form action="{% url 'buscar_por' %}" method="POST" class="form-destino">
       {% csrf_token %}
       <div class="form-group"><label for="origen">
           Tipo Operacion:</label>
@@ -115,14 +115,16 @@
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, quibusdam! Saepe natus deleniti recusandae eum
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod? Eius deleniti doloremque iure nemo repell
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius quas nobis repellat delectus voluptatum? Quaerat,
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam quod nobis aperiam voluptatum deleniti repellat sint
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam doloremque quibusdam deleniti nemo voluptatum perferendis molest
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam quod nobis aperiam voluptatum deleniti repellat
+      sint
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam doloremque quibusdam deleniti nemo voluptatum
+      perferendis molest
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam quae doloremque eaque repellendus nobis debitis
     </p>
   </div>
 
 
-<!-- Formulario de contacto -->
+  <!-- Formulario de contacto -->
   <div class="container-form">
     <div class="titulo-form">
       <h3>CONTACTO</h3>
@@ -132,9 +134,9 @@
       <!--{{ form.as_p }}-->
       {% for f in form %}
       <label>{{f.label}}</label>
-        <input type="{{ f.field.widget.input_type }}" class="" name="{{ f.name }}" id="" placeholder="{{ f.label }}"
+      <input type="{{ f.field.widget.input_type }}" class="" name="{{ f.name }}" id="" placeholder="{{ f.label }}"
         value="{{ f.value | default:'' }}">
-        <br>
+      <br>
       {% endfor %}
       <input type="submit" value="Send" id="send" class="form_enviar">
     </form>

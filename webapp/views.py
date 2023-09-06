@@ -14,9 +14,15 @@ def index(request):
     
     try:
         with connection.cursor() as cursor:
-            cursor.execute("select * from clientes")
+            p='Argentina'
+            query = """
+                    SELECT * FROM clientes WHERE id_cliente = {0} AND pais_cliente = '{1}'
+                    """.format('4', p)
+            print(query)
+            cursor.execute(query)
             columns = [col[0] for col in cursor.description]
             res = cursor.fetchall()
+            cursor.close()
 
         # Convertir los resultados a una lista de diccionarios
         results_as_dicts = []
@@ -31,6 +37,7 @@ def index(request):
         json_result = json.dumps(results_as_dicts, default=serialize_date)
 
         print(results_as_dicts)
+        print(json_result)
 
     except Exception as e:
         print("Error:", e)    
