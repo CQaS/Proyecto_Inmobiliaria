@@ -174,146 +174,77 @@
 			display: flex;
 			justify-content:space-between;
 			flex-wrap: wrap;
+			align-items: center;
 			margin:auto;
 			background-color: #222;
 			color: white;
 			border: 3px solid white;
 			border-radius: 5px;
 			height: 150px;
-			width: 80%;	
+			width: 90%;	
 			
 
 		}
-		.titulo-filter{
+		.container-filter h3{
 			color: white;
-			text-align: center;
-			justify-content: center;
+			text-align: left;
+			justify-content: left;
 			padding: 10px;
 		}
 
 		.form-group {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-		  }
+			display: inline-block;
+			margin-right: 10px;
+		}
 		
 
 		.form-group label, input, select {
 			font-size: 16px;
 			display: flex;
-			align-items: center;
+			justify-content: center; 
 			margin-top: 20px;
 			padding: 10px;
 			border-radius: 10px;	
 		}
 		
-		input[type="submit"] {
+		/* input[type="submit"] {
 			width: 60%;
 			margin: auto;
 			border: solid thin #222;
 			padding: .7rem;
 			border-radius: 10px;
 			background-color: white;
-			font-weight: 600;
+			font-weight: 600; 
 			margin-top: 3rem;
 			font-size: 16px;
 			cursor: pointer;
 			color: rgb(51, 51, 51);
 		}
-		
-		
+			
 		
 		input[type="submit"]:hover {
 			background: rgb(51, 51, 51, 0.302);
 			color: white;
-		} 
-	
-		
-		/* .container-filter {
-		/* background-image: url(https://assets.turismocity.com/cdn-cgi/image/format=auto/img/home-package.png); */
-		/*background-position: center;
-		background-size:cover;
-		display: flex;
-		margin-top: 80px;
-		padding: 20px 16px;
-		text-align: center;
-		height: 150px;
-		width: 100%;
-		gap: 10px;
 		}  */
-
-		
-		
-		/* .form-destino {
-		max-width: 1350px;
-		margin: 0px auto;
-		background:white;
-		border-radius: 10px;
-		padding: 38px 16px 38px 32px;
-		color: #fff;
-		display: flex;
-		justify-content: space-around;	
-		} 
-		
-		.form-group {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		}
-		
-		.form-group label {
-			display: flex;
-			justify-content: flex-start;
-			align-items: flex-start;
-			flex-direction: column;
-			color: #fff;
-			font-weight: bold;
-			font-size: 17px;
-			width: 150px;
-			height: 100rem;
-			margin-top: -10px;
-		}
-		
-		.form-group input {
-		font-size: 15px;
-		width: 250px;
-		height: 50px;
-		border-radius: 5px;
-		justify-content: center;
-		align-items: center;
-		}
-		
-		
-		.btn-search {
-		background-color:white;
-		color:black;
-		padding: 14px;
-		border: 1px solid grey;
-		font-size: 15px;
-		cursor: pointer;
-		margin-top: 45px;
-		margin-left: 15px;
-		margin-bottom: 10px;
-		border-radius: 5px;
-		
-		}
-		
-		.btn-search:hover{
-		
-		background-color:var(--second-color);
-		color:var(--color-white);
-		
-		} 
-		.titulo-form span{
-			color: var(--color-white);
-			font-size: 25px;
-			position: relative;
-			right: 30.5%;
-		}
 	
-		   */
-		  
-
+		/* Estiliza el input de búsqueda */
+.form-group input[type="text"] {
+	width: 250px; /* Ancho del campo de búsqueda */
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+  }
+  
+  /* Estiliza el botón de búsqueda */
+  .form-group .btn-search {
+	background-color: #007bff; /* Cambia el color de fondo según tu preferencia */
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+  }
+	
     /* imagenes de destacados y no destacados*/
     .flex-destacado{
         margin: 300 300 50 50px;

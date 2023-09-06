@@ -1,4 +1,5 @@
 
+/* CONTAINER CRUD CLIENTE*/
 .container-form-cliente {
     margin: 150px 50px 50px 280px; /*arriba-der-abajo-izq*/
     display: flex;
@@ -8,6 +9,32 @@
     border-radius: 5px 50px;
     width: 650px;
     height: 700px;
+    background-color: rgb(51, 51, 51, 0.302);
+}
+
+/* CONTAINER CRUD EMPLEADOS*/
+.container-form-empleados {
+    margin: 150px 50px 50px 280px; /*arriba-der-abajo-izq*/
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    border: 2px solid white;
+    border-radius: 5px 50px;
+    width: 650px;
+    height: 350px;
+    background-color: rgb(51, 51, 51, 0.302);
+}
+
+/* CONTAINER CRUD INMUEBLES*/
+.container-form-inmuebles {
+    margin: 150px 50px 50px 280px; /*arriba-der-abajo-izq*/
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    border: 2px solid white;
+    border-radius: 5px 50px;
+    width: 650px;
+    height: 900px;
     background-color: rgb(51, 51, 51, 0.302);
 }
 
