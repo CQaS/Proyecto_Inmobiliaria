@@ -6,10 +6,11 @@
 
 
 <div class="container-form-empleados">
-    <div class="welcome-back">
-    </div>
     <form action="" class="formulario" method="POST">
         {% csrf_token %}
+        <!--Muestra si algun campo tiene error-->
+        {{ error }}
+         
         <h2 class="create-contact">EMPLEADOS</h2>
         <div class="iconos">
             <div class="border-icon">
@@ -22,19 +23,27 @@
                 <a href=""><i class="fa-solid fa-trash" style="color: #edeff3;"></i></a>
             </div>
         </div>
-        
-        <input type="text" placeholder="Nombre y Apellido" required><br>
-        
-        <label for="puesto">Puesto:</label>
-        <select id="puesto" name="Puesto">
+
+        <!-- Validamos maxlength, autofoco required-->
+        {% for e in empleados %}
+        {% if e.name != 'puesto' %}
+            <label>{{e.label}}</label>
+            <input type="{{ e.field.widget.input_type }}" id="{{ e.name }}"  name="{{ e.name }}" maxlength="70" placeholder="{{ e.label }}" autofocus required value="{{ e.value | default:'' }}">
+            <br>
+        {% endif %}
+        {% endfor %}
+
+        <span>Puesto Empleado</span>
+        <select id="puesto" name="Puesto" required>
             <option value="maestranza">Maestranza</option>
             <option value="jardineria">Jardineria</option>
             <option value="piletero">Piletero</option>
         </select>
         <br>
         
-        <input type="button" value="Send" class="form_enviar">
+        <input type="submit" value="Send" class="form_enviar">
     </form>
 </div> 
 
 {% endblock%}
+         

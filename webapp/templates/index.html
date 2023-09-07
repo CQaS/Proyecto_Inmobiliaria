@@ -11,41 +11,40 @@
 <!--Filtro de propiedades -->
 <section>
   <div class="container-filter">
-    <div class="titulo-filter">
-      <h3>BUSCAR POR</h3>
+    <h3>BUSCAR POR</h3>
+    <form method="POST" class="form-destino">
+  </div>
+  <form action="{% url 'buscar_por' %}" method="POST" class="form-destino">
+    {% csrf_token %}
+    <div class="form-group"><label for="origen">
+        Tipo Operacion:</label>
+      <select id="origen" name="origen">
+        <option value="alquiler-temporario">Alquiler Temporario</option>
+        <option value="alquiler-permanente">Alquiler Permante</option>
+        <option value="venta">Venta</option>
     </div>
-    <form action="{% url 'buscar_por' %}" method="POST" class="form-destino">
-      {% csrf_token %}
-      <div class="form-group"><label for="origen">
-          Tipo Operacion:</label>
-        <select id="origen" name="origen">
-          <option value="alquiler-temporario">Alquiler Temporario</option>
-          <option value="alquiler-permanente">Alquiler Permante</option>
-          <option value="venta">Venta</option>
-        </select>
-      </div>
 
-      <div class="form-group">
-        <label for="destino"> Tipo Propiedad:</label>
-        <select id="destino" name="destino">
-          <option value="casa">Casa</option>
-          <option value="departamento">Departamento</option>
-          <option value="apart">Apart</option>
-          <option value="Complejos">Complejos</option>
-          <option value="oficina">Oficina</option>
-          <option value="otros">Otros</option>
-        </select>
-      </div>
+    <div class="form-group">
+      <label for="destino"> Tipo Propiedad:</label>
+      <select id="destino" name="destino">
+        <option value="casa">Casa</option>
+        <option value="departamento">Departamento</option>
+        <option value="apart">Apart</option>
+        <option value="Complejos">Complejos</option>
+        <option value="oficina">Oficina</option>
+        <option value="otros">Otros</option>
+      </select>
+    </div>
 
-      <div class="form-group">
-        <input type="text" placeholder="Busca ubicacion, direcion o calle" autocomplete="off"></input>
-      </div>
+    <div class="form-group">
+      <input type="text" placeholder="Busca ubicacion, direcion o calle" autocomplete="off"></input>
+    </div>
 
 
-      <div class="form-group">
-        <input type="submit" class="btn-search">>
-      </div>
-    </form>
+    <div class="form-group">
+      <input type="submit" class="btn-search">
+    </div>
+  </form>
   </div>
 </section>
 

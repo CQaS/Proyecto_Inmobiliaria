@@ -5,11 +5,12 @@
 {% block content %}
 
 
-<div class="container-form-inmueble">
-    <div class="welcome-back">
-    </div>
+<div class="container-form-inmuebles">
     <form action="" class="formulario" method="POST">
         {% csrf_token %}
+        <!--Muestra si algun campo tiene error-->
+        {{ error }}
+         
         <h2 class="create-contact">INMUEBLES</h2>
         <div class="iconos">
             <div class="border-icon">
@@ -22,33 +23,38 @@
                 <a href=""><i class="fa-solid fa-trash" style="color: #edeff3;"></i></a>
             </div>
         </div>
-        
-        <input type="text" name="" placeholder="Direccion" required>
 
-        <label for="operacion">Tipo Operacion:</label>
+        <!-- Validamos maxlength, autofoco required-->
+        {% for i in inmuebles %}
+        {% if i.dir != 'tipo' && 'operacion' && 'cochera' && 'condicion' && 'expensas' && 'servicios' %}
+            <label>{{i.label}}</label>
+        
+            <input type="{{ i.field.widget.input_type }}" id="{{ i.dir }}"  name="{{ i.dir }}" maxlength="70" placeholder="{{ i.label }}" autofocus required value="{{ i.value | default:'' }}">
+            <br>
+        {% endif %}
+        {% endfor %}
+
+        <span>Categoria Cliente</span>
+        <select id="categoria" name="categoria" required>
+            <option value="Propietario">Propietario</option>
+            <option value="Inquilino">Inquilino</option>
+        </select>
+
+
+        <span>Tipo Operacion</span>
         <select id="operacion" name="operacion">
             <option value="alquiler-temporario">Alquiler Temporario</option>
             <option value="alquiler-permanente">Alquiler Permante</option>
             <option value="venta">Venta</option>
           </select>
         
-        <input type="number" name="" placeholder="Sup. total" required>
-        <input type="number" name="" placeholder="Sup. cubierta" required>
-        <input type="number" name="" placeholder="Sup. semicubierta" required>
-
-        <input type="number" name="" placeholder="Cantidad Plantas" required>
-        <input type="number" name="" placeholder="Cantidad Dormitorios" required>
-        <input type="number" name="" placeholder="Cantidad Banos" required>
-
-        <label for="cochera">Cochera:</label>
+          <span>Cochera</span>
         <select id="cochera" name="cochera"  placeholder="Cochera" required>
             <option value="1">Si</option>
             <option value="0">No</option>
         </select>
 
-        <input type="number" name="" placeholder="Antiguedad" required>
-
-        <label for="condicion">Condicion:</label>
+        <span>Condicion</span>
         <select id="condicion" name="Condicion">
             <option value="muy_buena">Muy Buena</option>
             <option value="buena">Buena</option>
@@ -56,15 +62,15 @@
             <option value="mala">Mala</option>
         </select>
 
-        <label for="expensas">Expensas:</label>
+        <span>Expensas</span>
         <select id="expensas" name="Expensas">
             <option value="si">Si</option>
             <option value="no">No</option>
         </select>
 
-        <input type="text" name="" placeholder="Descripcion" required>
+    
         <br>
-        <label>Servicios</label><br>
+        <span>Servicios</span><br>
         <input type="checkbox" id="wifi" name="servicios[]" value="WI-FI">
         <label for="wifi">WI-FI</label><br>
         
@@ -77,21 +83,7 @@
         <input type="checkbox" id="mucama" name="servicios[]" value="Mucama">
         <label for="mucama">Mucama</label><br><br>
         
-        <input type="number" name="" placeholder="Valor" required>
-        
-    
-        <!-- Cargar imágenes -->
-        <br><br>
-        <label for="imagen1">Imagen 1:</label>
-        <input type="file" id="imagen1" name="imagen1"><br>
-        
-        <label for="imagen2">Imagen 2:</label>
-        <input type="file" id="imagen2" name="imagen2"><br>
-        
-        <label for="imagen3">Imagen 3:</label>
-        <input type="file" id="imagen3" name="imagen3"><br>
-        
-        <input type="button" value="Send" class="form_enviar">
+        <input type="submit" value="Send" class="form_enviar">
     </form>
 </div> 
 

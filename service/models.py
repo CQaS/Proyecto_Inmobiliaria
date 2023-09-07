@@ -61,7 +61,8 @@ class Inmueble(models.Model):
     imagen2 = models.ImageField(upload_to='img/', null=False, blank=False, verbose_name='Foto 2', validators=[validar_imagen])
     imagen3 = models.ImageField(upload_to='img/', null=False, blank=False, verbose_name='Foto 3', validators=[validar_imagen])
     valor_inmueble = models.IntegerField(verbose_name='Valor', null=False, blank=False, validators=[validar_numero])
-
+    estado = models.IntegerField(null=False, blank=False, verbose_name='Estado', validators=[validar_numero])
+    # Estado = 1 seria Disponible
     def __str__(self):
         return self.dir_inmueble
     
