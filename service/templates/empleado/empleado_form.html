@@ -6,15 +6,16 @@
 
 
 <div class="container-form-empleados">
-    <form action="" class="formulario" method="POST">
+    <!--Muestra si algun campo tiene error-->
+    <span class="err">{{ error }}</span>
+
+    <form action="{% url 'crear_empleado' %}" id="formulario_empleado" class="formulario" method="POST">
         {% csrf_token %}
-        <!--Muestra si algun campo tiene error-->
-        {{ error }}
-         
+
         <h2 class="create-contact">EMPLEADOS</h2>
         <div class="iconos">
             <div class="border-icon">
-                <a href=""><i class="fa-solid fa-plus" style="color: #edeff3;"></i></a> 
+                <a href=""><i class="fa-solid fa-plus" style="color: #edeff3;"></i></a>
             </div>
             <div class="border-icon">
                 <a href=""><i class="fa-solid fa-pen" style="color: #edeff3;"></i></a>
@@ -25,25 +26,26 @@
         </div>
 
         <!-- Validamos maxlength, autofoco required-->
-        {% for e in empleados %}
-        {% if e.name != 'puesto' %}
-            <label>{{e.label}}</label>
-            <input type="{{ e.field.widget.input_type }}" id="{{ e.name }}"  name="{{ e.name }}" maxlength="70" placeholder="{{ e.label }}" autofocus required value="{{ e.value | default:'' }}">
-            <br>
+        {% for e in empleado_form %}
+        {% if e.name != 'nom_puesto' %}
+        <label>{{e.label}}</label>
+        <input type="{{ e.field.widget.input_type }}" id="{{ e.name }}" name="{{ e.name }}" maxlength="70"
+            placeholder="{{ e.label }}" autofocus required value="{{ e.value | default:'' }}">
+        <br>
         {% endif %}
         {% endfor %}
 
         <span>Puesto Empleado</span>
-        <select id="puesto" name="Puesto" required>
-            <option value="maestranza">Maestranza</option>
-            <option value="jardineria">Jardineria</option>
-            <option value="piletero">Piletero</option>
+        <select id="nom_puesto" name="nom_puesto" required>
+            <option value="Maestranza">Maestranza</option>
+            <option value="Jardineria">Jardineria</option>
+            <option value="Piletero">Piletero</option>
         </select>
         <br>
-        
-        <input type="submit" value="Send" class="form_enviar">
+
+        <input type="submit" value="Crear" id="crear_empleado" class="form_enviar">
     </form>
-</div> 
+</div>
+<script src="{% static '/assets/js/validacion_empleado.js' %}"></script>
 
 {% endblock%}
-         

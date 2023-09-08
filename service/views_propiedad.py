@@ -20,9 +20,10 @@ def index_propiedad(req):
     return render(req, 'propiedad/index.html')
 
 def crear_propiedad(req):
+    ERR = ''
     try:
         with connection.cursor() as cursor:
-            cursor.execute("select * from clientes")
+            cursor.execute("select * from clientes where categoria = 'Propietario'")
             columns = [col[0] for col in cursor.description]
             res = cursor.fetchall()
 
@@ -39,24 +40,34 @@ def crear_propiedad(req):
         clientes = json.dumps(lista, default=serialize_date)
 
     except Exception as e:
+        ERR = 'Algo fallo, intenta nuevamente o ponte en contacto con Admin'
         print("Error:", e)
-
      
-    formulario = InmuebleForm(req.POST or None, req.FILES or None)
-    if formulario.is_valid():
-        formulario.save()
-        return redirect('crear_propiedad')
+    inmueble_form = InmuebleForm(req.POST or None, req.FILES or None)
+    if inmueble_form.is_valid():
+        try:
+            #inmueble_form.save()
+            print('Inmueble, OK')
+            return redirect('crear_propiedad')
+        
+        except Exception as e:
+            error_message = f"Error al guardar el Inmueble: {str(e)}"
+            ERR = error_message
+            print(f"error: {error_message}")
+            return redirect('crear_propiedad')
     else:
-        for field_name, error_msgs in formulario.errors.items():
+        for field_name, error_msgs in inmueble_form.errors.items():
             for error_msg in error_msgs:
+                ERR = 'Algun campo contiene Errores'
                 print(f"Error en el campo '{field_name}': {error_msg}")
     
-    return render(req, 'propiedad/crear.html', {'formulario':formulario, 'clientes':lista})
+    return render(req, 'propiedad/inmueble_form.html', {'inmueble_form':inmueble_form, 'clientes':lista, 'error':ERR})
 
 def editar_propiedad(req, id_inmueble):
+    ERR = ''
     try:
         with connection.cursor() as cursor:
-            cursor.execute("select * from clientes")
+            cursor.execute("select * from clientes where categoria = 'Propietario'")
             columns = [col[0] for col in cursor.description]
             res = cursor.fetchall()
 
@@ -75,20 +86,30 @@ def editar_propiedad(req, id_inmueble):
         #print(clientes)
 
     except Exception as e:
+        ERR = 'Algo fallo, intenta nuevamente o ponte en contanto con Admin'
         print("Error:", e)
 
      
     inmueble = Inmueble.objects.get(id_inmueble=id_inmueble)
     formulario = InmuebleForm(req.POST or None, req.FILES or None, instance=inmueble)
     if formulario.is_valid() and req.POST:
-        formulario.save()
-        return redirect('editar_propiedad')
+        try:
+            formulario.save()
+            print('Inmueble, OK')
+            return redirect('editar_propiedad')
+        
+        except Exception as e:
+            error_message = f"Error al guardar el Inmueble: {str(e)}"
+            ERR = error_message
+            print(f"error: {error_message}")
+            return redirect('editar_propiedad')
     else:
         for field_name, error_msgs in formulario.errors.items():
             for error_msg in error_msgs:
+                ERR = 'Algun campo contiene Errores'
                 print(f"Error en el campo '{field_name}': {error_msg}")
     
-    return render(req, 'propiedad/editar.html', {'formulario':formulario, 'clientes':lista})
+    return render(req, 'propiedad/editar.html', {'formulario':formulario, 'clientes':lista, 'error':ERR})
 
 def eliminar_propiedad(req, id_inmueble):
     inmueble = Inmueble.objects.get(id_inmueble=id_inmueble)
