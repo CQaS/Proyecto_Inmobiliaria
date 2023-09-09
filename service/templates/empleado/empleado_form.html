@@ -25,7 +25,7 @@
         </div>
 
         <!-- Validamos maxlength, autofoco required-->
-        {% for e in empleados %}
+        {% for e in empleado %}
         {% if e.name != 'puesto' %}
             <label>{{e.label}}</label>
             <input type="{{ e.field.widget.input_type }}" id="{{ e.name }}"  name="{{ e.name }}" maxlength="70" placeholder="{{ e.label }}" autofocus required value="{{ e.value | default:'' }}">
@@ -35,9 +35,9 @@
 
         <span>Puesto Empleado</span>
         <select id="puesto" name="Puesto" required>
-            <option value="maestranza">Maestranza</option>
-            <option value="jardineria">Jardineria</option>
-            <option value="piletero">Piletero</option>
+            <option value="Maestranza">Maestranza</option>
+            <option value="Jardineria">Jardineria</option>
+            <option value="Piletero">Piletero</option>
         </select>
         <br>
         

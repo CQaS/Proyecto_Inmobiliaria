@@ -6,7 +6,7 @@
 
 
 <div class="container-form-inmuebles">
-    <form action="" class="formulario" method="POST">
+    <form action="" class="formulario" method="POST" >
         {% csrf_token %}
         <!--Muestra si algun campo tiene error-->
         {{ error }}
@@ -43,12 +43,15 @@
 
         <span>Tipo Operacion</span>
         <select id="operacion" name="operacion">
-            <option value="alquiler-temporario">Alquiler Temporario</option>
-            <option value="alquiler-permanente">Alquiler Permante</option>
-            <option value="venta">Venta</option>
+            <option value="Alquiler-temporario">Alquiler Temporario</option>
+            <option value="Alquiler-permanente">Alquiler Permante</option>
+            <option value="Venta">Venta</option>
           </select>
         
           <span>Cochera</span>
+
+          <!-- falta definir y arreglar -->
+          <input type="radio" name="nombre_coche"/> 
         <select id="cochera" name="cochera"  placeholder="Cochera" required>
             <option value="1">Si</option>
             <option value="0">No</option>
@@ -56,13 +59,14 @@
 
         <span>Condicion</span>
         <select id="condicion" name="Condicion">
-            <option value="muy_buena">Muy Buena</option>
-            <option value="buena">Buena</option>
-            <option value="regular">Regular</option>
-            <option value="mala">Mala</option>
+            <option value="Muy_buena">Muy Buena</option>
+            <option value="Buena">Buena</option>
+            <option value="Regular">Regular</option>
+            <option value="Mala">Mala</option>
         </select>
 
         <span>Expensas</span>
+        <!-- falta definir y arreglar -->
         <select id="expensas" name="Expensas">
             <option value="si">Si</option>
             <option value="no">No</option>
