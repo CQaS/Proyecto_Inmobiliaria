@@ -11,7 +11,7 @@ class ClienteForm(forms.ModelForm):
         model = Clientes
         fields = '__all__'
         widgets = {
-            'fechnac': forms.DateInput(
+            'fechnasc': forms.DateInput(
                 attrs = {
                     'type':'date'
                     }
