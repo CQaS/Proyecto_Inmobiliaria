@@ -279,7 +279,7 @@
 		  .about {
 			margin: 50px 10px 50px 10px; /*arriba-der-abajo-izq*/
 			display: flex;
-			justify-content: center;
+			justify-content: space-evenly;
 			flex-wrap: wrap;
 			border: 2px solid white;
 			border-radius: 5px 50px;
@@ -302,7 +302,7 @@
 		  .container-form {
 			margin: 50px 10px 50px 10px; /*arriba-der-abajo-izq*/
 			display: flex;
-			justify-content: center;
+			justify-content: space-evenly;
 			flex-wrap: wrap;
 			border: 2px solid white;
 			border-radius: 5px 50px;
@@ -359,7 +359,7 @@
 			height: 15vh;
 			flex-direction: center;
 			align-items: center;
-			justify-content: center;
+			justify-content: space-evenly;
 			margin-top: 100px;
 			padding: 50px;
 			color: white;
@@ -371,6 +371,7 @@
 			text-decoration: none;
 		  }
 	
+		   
 		   .copy {
 			margin-right: 100px;
 			bottom: -4em;
