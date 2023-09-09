@@ -52,10 +52,11 @@ send.addEventListener("click", (e) => {
         return
     }
 
-    if (solo_numeros(c_dni) == null || c_dni.value.length < 8) {
+    if (solo_numeros(c_dni) == null || c_dni.value.length < 8 ) {
         _alerta('DNI de Cliente no valido!')
         return
     }
+    //
 
     if (solo_numeros(c_tel) == null || c_tel.value.length < 10) {
         _alerta('Telefono de Cliente no valido!')

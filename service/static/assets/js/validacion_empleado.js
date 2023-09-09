@@ -1,10 +1,10 @@
-const send = document.getElementById('send')
-const formulario = document.getElementById('formulario')
+const crear_empleado = document.getElementById('crear_empleado')
+const formulario_empleado = document.getElementById('formulario_empleado')
 const e_nombre = document.getElementById('nom_empleado')
 const e_dni = document.getElementById('dni_empleado')
 const e_tel = document.getElementById('tel_empleado')
+const e_direccion = document.getElementById('dir_empleado')
 const e_mail = document.getElementById('email_empleado')
-
 const e_puesto = document.getElementById('nom_puesto')
 
 const pattern_letras_espacios = /^[A-Z][a-zA-Z ]*$/
@@ -12,7 +12,7 @@ const pattern_letras_numero_espacios = /^[A-Z][a-zA-Z0-9 ]*$/
 const pattern_solo_numeros = /^[0-9][0-9]*$/
 const pattern_mail = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
 
-send.addEventListener("click", (e) => {
+crear_empleado.addEventListener("click", (e) => {
     e.preventDefault()
 
     const _alerta = (texto) => {
@@ -64,16 +64,16 @@ send.addEventListener("click", (e) => {
         return
     }
 
-   
+
     if (e_puesto.value.length == 0) {
         _alerta('Selecciona un Puesto de Empleado')
         return
     }
 
-    
+
 
 
     // SI ESTA TODO BIEN SE ENVIA EL FORMULARIO...
-    formulario.submit()
+    formulario_empleado.submit()
 
 })

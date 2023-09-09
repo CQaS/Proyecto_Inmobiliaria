@@ -6,7 +6,7 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=header, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="{% static '/style/style00.css' %}">
   <!-- css formulario CRUD cliente -->
   <link rel="stylesheet" href="{% static '/style/cliente_form.css' %}">
@@ -29,16 +29,16 @@
         <h1>Logotipo</h1>
       </div>
       <nav class="menu">
-          <a href="#">Home</a>
-          <a href="#">Nosotros</a>
-          <a href="#">Contacto</a>
-          <a href="#sub-nav">Idioma</a> 
-            <ul class="sub-nav">
-              <li><a href="#">Portugues</a></li>
-              <li><a href="#">Español</a></li>
-              <li><a href="#">Ingles</a></li>
-            </ul>
-        </ul>  
+        <a href="#">Home</a>
+        <a href="#">Nosotros</a>
+        <a href="#">Contacto</a>
+        <a href="#sub-nav">Idioma</a>
+        <ul class="sub-nav">
+          <li><a href="#">Portugues</a></li>
+          <li><a href="#">Español</a></li>
+          <li><a href="#">Ingles</a></li>
+        </ul>
+        </ul>
       </nav>
     </div>
   </header>
@@ -49,15 +49,15 @@
   <div class="container-menu">
     <div class="cont-menu">
       <nav>
-        <a href="#"><i class="fa-brands fa-whatsapp" style="color: #ccc">   Whatsapp</i></a>
-        <a href="#"><i class="fa-brands fa-instagram" style="color: #ccc">   Instagram</i></a>
-        <a href="#"><i class="fa-brands fa-facebook" style="color: #ccc">   Facebook</i></a>
-        <a href="#"><i class="fa-solid fa-gear" style="color: #ccc">   Service</i></a>
+        <a href="#"><i class="fa-brands fa-whatsapp" style="color: #ccc"> Whatsapp</i></a>
+        <a href="#"><i class="fa-brands fa-instagram" style="color: #ccc"> Instagram</i></a>
+        <a href="#"><i class="fa-brands fa-facebook" style="color: #ccc"> Facebook</i></a>
+        <a href="#"><i class="fa-solid fa-gear" style="color: #ccc"> Service</i></a>
       </nav>
       <label for="btn-menu">❎</label>
     </div>
   </div>
-  
+
   <main>
 
     {% block content %}
@@ -67,29 +67,29 @@
 
   <!-- Footer Links -->
   <footer class="footer-container">
-  <div class="date">   
-    <ul>
-      <li>
-        <a href="#">Direccion</a>
-      </li>
-      <li>
-        <a href="#">Bombas y Bombinhas</a>
-      </li>
-      <li>
-        <a href="#">Brasil</a>
-      </li>
-    </ul>
-  </div>
+    <div class="date">
+      <ul>
+        <li>
+          <a href="#">Direccion</a>
+        </li>
+        <li>
+          <a href="#">Bombas y Bombinhas</a>
+        </li>
+        <li>
+          <a href="#">Brasil</a>
+        </li>
+      </ul>
+    </div>
     <div class="copy">
       <h3>SVD Inside Copyright</h3>
     </div>
   </footer>
-      <!-- Scroll Reveal -->
-      <script src="https://unpkg.com/scrollreveal"></script>
-      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-      <!-- <script src="{% static '/assets/js/main.js' %}"></script> -->
-      <script src="{% static '/assets/js/language.js' %}"></script>
-      
+  <!-- Scroll Reveal -->
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- <script src="{% static '/assets/js/main.js' %}"></script> -->
+  <script src="{% static '/assets/js/language.js' %}"></script>
+
 </body>
 
 </html>

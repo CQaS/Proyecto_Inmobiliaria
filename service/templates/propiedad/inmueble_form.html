@@ -6,15 +6,13 @@
 
 
 <div class="container-form-inmuebles">
-    <form action="" class="formulario" method="POST" >
+    <form action="" class="formulario" method="POST">
         {% csrf_token %}
-        <!--Muestra si algun campo tiene error-->
-        {{ error }}
-         
+
         <h2 class="create-contact">INMUEBLES</h2>
         <div class="iconos">
             <div class="border-icon">
-                <a href=""><i class="fa-solid fa-plus" style="color: #edeff3;"></i></a> 
+                <a href=""><i class="fa-solid fa-plus" style="color: #edeff3;"></i></a>
             </div>
             <div class="border-icon">
                 <a href=""><i class="fa-solid fa-pen" style="color: #edeff3;"></i></a>
@@ -25,33 +23,31 @@
         </div>
 
         <!-- Validamos maxlength, autofoco required-->
-        {% for i in inmuebles %}
-        {% if i.dir != 'tipo' && 'operacion' && 'cochera' && 'condicion' && 'expensas' && 'servicios' %}
-            <label>{{i.label}}</label>
-        
-            <input type="{{ i.field.widget.input_type }}" id="{{ i.dir }}"  name="{{ i.dir }}" maxlength="70" placeholder="{{ i.label }}" autofocus required value="{{ i.value | default:'' }}">
-            <br>
+        {% for i in inmueble_form %}
+        {% if i.name != 'tipo_operacion' and i.name != 'condicion' and i.name != 'tipo_servicio' and i.name != 'id_cliente' and i.name != 'estado' %}
+        <label>{{i.label}}</label>
+        <input type="{{ i.field.widget.input_type }}" id="{{ i.name }}" name="{{ i.name }}" maxlength="70"
+            placeholder="{{ i.label }}" autofocus required value="{{ i.value | default:'' }}">
+        <br>
         {% endif %}
         {% endfor %}
 
-        <span>Categoria Cliente</span>
-        <select id="categoria" name="categoria" required>
-            <option value="Propietario">Propietario</option>
-            <option value="Inquilino">Inquilino</option>
+        <span>Selecciona Cliente/propietaro</span>
+        <select name="id_cliente" id="id_cliente">
+            <option>Selecciona</option>
+            {% for c in clientes %}
+            <option value="{{ c.id_cliente }}">{{ c.nom_cliente }}</option>
+            {% endfor %}
         </select>
-
 
         <span>Tipo Operacion</span>
         <select id="operacion" name="operacion">
-            <option value="Alquiler-temporario">Alquiler Temporario</option>
-            <option value="Alquiler-permanente">Alquiler Permante</option>
-            <option value="Venta">Venta</option>
+            <option value="alquiler-temporario">Alquiler Temporario</option>
+            <option value="alquiler-permanente">Alquiler Permante</option>
+            <option value="venta">Venta</option>
           </select>
         
           <span>Cochera</span>
-
-          <!-- falta definir y arreglar -->
-          <input type="radio" name="nombre_coche"/> 
         <select id="cochera" name="cochera"  placeholder="Cochera" required>
             <option value="1">Si</option>
             <option value="0">No</option>
@@ -59,14 +55,13 @@
 
         <span>Condicion</span>
         <select id="condicion" name="Condicion">
-            <option value="Muy_buena">Muy Buena</option>
-            <option value="Buena">Buena</option>
-            <option value="Regular">Regular</option>
-            <option value="Mala">Mala</option>
+            <option value="muy_buena">Muy Buena</option>
+            <option value="buena">Buena</option>
+            <option value="regular">Regular</option>
+            <option value="mala">Mala</option>
         </select>
 
         <span>Expensas</span>
-        <!-- falta definir y arreglar -->
         <select id="expensas" name="Expensas">
             <option value="si">Si</option>
             <option value="no">No</option>
@@ -75,20 +70,21 @@
     
         <br>
         <span>Servicios</span><br>
-        <input type="checkbox" id="wifi" name="servicios[]" value="WI-FI">
+        <input type="checkbox" id="wifi" name="tipo_servicio[]" value="WI-FI">
         <label for="wifi">WI-FI</label><br>
-        
-        <input type="checkbox" id="ropa_cama" name="servicios[]" value="Ropa de cama">
-        <label for="ropa_cama">Ropa de cama</label><br>
-        
-        <input type="checkbox" id="piscinas" name="servicios[]" value="Piscinas">
-        <label for="piscinas">Piscinas</label><br>
-        
-        <input type="checkbox" id="mucama" name="servicios[]" value="Mucama">
-        <label for="mucama">Mucama</label><br><br>
-        
-        <input type="submit" value="Send" class="form_enviar">
-    </form>
-</div> 
 
-{% endblock%}
+        <input type="checkbox" id="ropa_cama" name="tipo_servicio[]" value="Ropa de cama">
+        <label for="ropa_cama">Ropa de cama</label><br>
+
+        <input type="checkbox" id="piscinas" name="tipo_servicio[]" value="Piscinas">
+        <label for="piscinas">Piscinas</label><br>
+
+        <input type="checkbox" id="mucama" name="tipo_servicio[]" value="Mucama">
+        <label for="mucama">Mucama</label><br><br>
+
+        <input type="submit" value="Send" id="send" class="form_enviar">
+    </form>
+</div>
+<script src="{% static '/assets/js/validacion_inmueble.js' %}"></script>
+
+{% endblock %}

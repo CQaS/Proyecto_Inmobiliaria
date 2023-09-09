@@ -50,10 +50,10 @@ class Inmueble(models.Model):
     cant_plantas = models.IntegerField(null=False, blank=False, verbose_name='Cant. de Plantas', validators=[validar_numero])
     cant_dormitorios = models.IntegerField(null=False, blank=False, verbose_name='Cant. de Dormitorios', validators=[validar_numero])
     cant_banos = models.IntegerField(null=False, blank=False, verbose_name='Cant. de Baños', validators=[validar_numero])
-    cochera = models.BooleanField(verbose_name='Cochera', null=False, blank=False,)
+    cochera = models.BooleanField(verbose_name='Cochera', null=False, blank=False, default=False,)
     antiguedad = models.IntegerField(null=False, blank=False, verbose_name='Antiguedad', validators=[validar_numero])
     condicion = models.IntegerField(null=False, blank=False, verbose_name='Condicion', validators=[validar_numero])
-    expensas = models.BooleanField(verbose_name='Expensas')
+    expensas = models.BooleanField(verbose_name='Expensas', null=False, blank=False, default=False,)
     descripcion = models.TextField(null=False, blank=False, verbose_name='Descripcion', validators=[validar_direccion])
     tipo_servicio = models.CharField(max_length=45, null=False, blank=False, verbose_name='Tipo de Servicio', validators=[validar_letras])
     id_cliente = models.ForeignKey('Clientes',on_delete=models.CASCADE, verbose_name='Num. Cliente')
@@ -61,7 +61,8 @@ class Inmueble(models.Model):
     imagen2 = models.ImageField(upload_to='img/', null=False, blank=False, verbose_name='Foto 2', validators=[validar_imagen])
     imagen3 = models.ImageField(upload_to='img/', null=False, blank=False, verbose_name='Foto 3', validators=[validar_imagen])
     valor_inmueble = models.IntegerField(verbose_name='Valor', null=False, blank=False, validators=[validar_numero])
-
+    estado = models.IntegerField(null=False, default=1, blank=False, verbose_name='Estado', validators=[validar_numero])
+    # Estado = 1 seria Disponible
     def __str__(self):
         return self.dir_inmueble
     
@@ -99,7 +100,8 @@ class Empleados(models.Model):
     id_empleado = models.AutoField(primary_key=True)
     nom_empleado = models.CharField(max_length=70, null=False, blank=False, verbose_name='Nombre de empleado', validators=[validar_nombre])    
     dni_empleado = models.IntegerField(null=False, blank=False, verbose_name='DNI de empleado', validators=[validar_numero])  
-    tel_empleado = models.IntegerField(null=False, blank=False, verbose_name='Tel. de empleado', validators=[validar_numero])  
+    tel_empleado = models.BigIntegerField(null=False, blank=False, verbose_name='Tel. de empleado', validators=[validar_numero])  
+    dir_empleado = models.CharField(max_length=100, null=False, blank=False, verbose_name='Direccion de Empleado', validators=[validar_direccion])  
     email_empleado = models.EmailField(null=False, blank=False, verbose_name='Mail de empleado', validators=[validate_email])    
     nom_puesto = models.CharField(max_length=45, null=False, blank=False, verbose_name='Nombre de puesto', validators=[validar_letras])
 
