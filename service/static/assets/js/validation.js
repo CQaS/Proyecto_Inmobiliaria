@@ -47,15 +47,16 @@ send.addEventListener("click", (e) => {
         return
     }
 
-    if (letras_numero_espacios(c_direccion) == null || c_direccion.value.length < 3) {
+    if (letras_numero_espacios(c_direccion) == null ) {
         _alerta('Direccion de Cliente solo letras/numeros y comenzar con MAYUSCULAS!')
         return
     }
-
-    if (solo_numeros(c_dni) == null || c_dni.value.length < 8) {
+    // || c_direccion.value.length < 3
+    if (solo_numeros(c_dni) == null || c_dni.value.length < 8 ) {
         _alerta('DNI de Cliente no valido!')
         return
     }
+    //
 
     if (solo_numeros(c_tel) == null || c_tel.value.length < 10) {
         _alerta('Telefono de Cliente no valido!')

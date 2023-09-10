@@ -8,7 +8,7 @@
     border: 2px solid white;
     border-radius: 5px 50px;
     width: 650px;
-    height: 700px;
+    height: 720px;
     background-color: rgb(51, 51, 51, 0.302);
 }
 
@@ -21,7 +21,7 @@
     border: 2px solid white;
     border-radius: 5px 50px;
     width: 650px;
-    height: 350px;
+    height: 520px;
     background-color: rgb(51, 51, 51, 0.302);
 }
 
@@ -64,17 +64,28 @@
     font-size: 1.5rem;
 }
 
-label, input, select {
+label, span {
     font-size: 16px;
-    display: inline-block;
+    display: flex;
     vertical-align: middle; 
-    align-items: center;
+    align-items: left;
+    margin-top: 20px;
+    padding: 12px;
+    border-radius: 10px;
+    float: left;
+}
+
+input, select{
+    font-size: 16px;
+    display: flex;
+    vertical-align: middle; 
+    align-items: right;
     margin-top: 20px;
     padding: 10px;
     border-radius: 10px;
-    
-
+    float: right;
 }
+
 
 input[type="submit"] {
     width: 60%;
@@ -84,15 +95,21 @@ input[type="submit"] {
     border-radius: 10px;
     background-color: white;
     font-weight: 600;
-    margin-top: 3rem;
+    margin-top: 70px;
     font-size: 16px;
     cursor: pointer;
     color: rgb(51, 51, 51);
+    float: left;
 }
-
-
 
 input[type="submit"]:hover {
     background: rgb(51, 51, 51, 0.302);
     color: white;
 } 
+
+/* Mobil */
+@media (max-width: 700px) {
+
+    /* CONTAINER CRUD CLIENTE*/
+
+}
