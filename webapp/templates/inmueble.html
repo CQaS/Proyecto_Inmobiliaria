@@ -1,0 +1,52 @@
+{% extends 'layouts/base00.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="dir">
+    <p>{{ direccion }}</p>  <!-- {{ variable }} -->
+</div>
+
+<div class="operacion">
+    <p>{{ tipo_operacion }}</p>  <!-- {{ variable }} -->
+</div>
+
+<div class="valor">
+    <p>{{ valor }}</p>  <!-- {{ variable }} -->
+</div>
+
+<div class="imagen">
+
+</div>
+
+<div class="detalles">
+    <!-- va una table 2 columnas x 4 filas -->
+    <table>
+        <tr>
+            <th>titulo 1</th>
+            <th>titulo 2</th>
+        </tr>
+        {% for elemento in lista_elemento %} 
+        <tr>
+            <td>{{ elemento.titulo1 }}</td>
+            <td>{{ elemento.titulo2 }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<div class="info_basica">
+    <h3>INFOMACION BASICA</h3>
+    <br>
+    <h3>SUPERFICIES Y MEDIDAS</h3>
+    <br>
+    <h3>DESCRIPCION</h3>
+    <br>
+    <h3>SERVICIOS</h3>
+    <br>
+    <h3>UBICACION</h3>
+
+</div>
+
+{% endblock%}
