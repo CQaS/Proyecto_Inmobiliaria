@@ -1,0 +1,24 @@
+.ordenar {
+    display: flex;
+    float: right;
+    }
+.titulo {
+    font-size: 18px;
+    float: left;
+}
+
+.flex-destacado {
+    display: grid;
+    grid-template-columns : repeat(3, 1fr);
+    gap: 10px;	
+}
+
+
+.flex-item {
+    background-color:  rgb(222, 178, 213, 0.5);
+    color: #fff;
+    margin: 5px;
+    height: 230px;
+    min-width: 40px;
+    text-align: center;
+}
