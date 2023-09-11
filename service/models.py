@@ -55,13 +55,14 @@ class Inmueble(models.Model):
     condicion = models.IntegerField(null=False, blank=False, verbose_name='Condicion', validators=[validar_numero])
     expensas = models.BooleanField(verbose_name='Expensas', null=False, blank=False, default=False,)
     descripcion = models.TextField(null=False, blank=False, verbose_name='Descripcion', validators=[validar_direccion])
-    tipo_servicio = models.CharField(max_length=45, null=False, blank=False, verbose_name='Tipo de Servicio', validators=[validar_letras])
+    tipo_servicio = models.CharField(max_length=200, null=False, blank=False, verbose_name='Tipo de Servicio', default='S/D')
     id_cliente = models.ForeignKey('Clientes',on_delete=models.CASCADE, verbose_name='Num. Cliente')
     imagen1 = models.ImageField(upload_to='img/', null=False, blank=False, verbose_name='Foto 1', validators=[validar_imagen])
     imagen2 = models.ImageField(upload_to='img/', null=False, blank=False, verbose_name='Foto 2', validators=[validar_imagen])
     imagen3 = models.ImageField(upload_to='img/', null=False, blank=False, verbose_name='Foto 3', validators=[validar_imagen])
     valor_inmueble = models.IntegerField(verbose_name='Valor', null=False, blank=False, validators=[validar_numero])
     estado = models.IntegerField(null=False, default=1, blank=False, verbose_name='Estado', validators=[validar_numero])
+    destacado = models.BooleanField(verbose_name='Destacado', null=False, blank=False, default=False,)
     # Estado = 1 seria Disponible
     def __str__(self):
         return self.dir_inmueble
