@@ -209,7 +209,8 @@
 			
 		}
 		
-		button {
+		/* button { */
+			#buscar {
 			width: 15%;
 			border: solid thin #222;
 			padding: 10px 20px;
@@ -227,7 +228,8 @@
 			
 		}
 		
-		button:hover {
+		/* button:hover { */
+			#buscar:hover{
 			background-color: rgb(51, 51, 51);
 			color: white;
 		}
