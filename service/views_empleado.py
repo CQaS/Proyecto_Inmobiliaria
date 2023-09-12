@@ -30,7 +30,7 @@ def crear_empleado(req):
                 ERR = 'Algun campo contiene Errores'
                 print(f"Error en el campo '{field_name}': {error_msg}")
 
-    return render(req, 'empleado/empleado_form.html', {'empleado_form':empleado_form, 'error':ERR})
+    return render(req, 'empleado/empleado_form.html', {'empleados':empleado_form, 'error':ERR})
 
 def editar_empleado(req, id_empleado):
     ERR = ''     
