@@ -12,21 +12,19 @@
 <div class="search-bar">
   <h3>Buscar por:</h3>
   <div class="search-input">
-    <form method="POST" class="form-destino">
+    <form action="{% url 'buscar_por' %}" method="POST" class="form-destino">
       {% csrf_token %}
-        <select name="" id="">
+        <select name="por_operacion" id="por_operacion">
           <option>Tipo de Operacion</option>
           <option value="alquiler-temporario">Alquiler Temporario</option>
           <option value="alquiler-permanente">Alquiler Permante</option>
           <option value="venta">Venta</option>
         </select>
-      </form>
+     
   </div>
   
-  <div class="search-input">
-    <form action="{% url 'buscar_por' %}" method="POST" class="form-destino">
-      {% csrf_token %}
-      <select name="" id="">
+  <div class="search-input">   
+      <select name="por_propiedad" id="por_propiedad">
           <option>Tipo Propiedad</option>
           <option value="casa">Casa</option>
           <option value="departamento">Departamento</option>
