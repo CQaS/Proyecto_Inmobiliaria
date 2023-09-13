@@ -10,8 +10,8 @@ const c_pais = document.getElementById('pais_cliente')
 const c_fecha = document.getElementById('fechnac')
 const c_categoria = document.getElementById('categoria')
 
-const pattern_letras_espacios = /^[A-Z][a-zA-Z ]*$/
-const pattern_letras_numero_espacios = /^[A-Z][a-zA-Z0-9 ]*$/
+const pattern_letras_espacios = /^[a-zA-Z ]*$/
+const pattern_letras_numero_espacios = /^[a-zA-Z0-9 ]*$/
 const pattern_solo_numeros = /^[0-9][0-9]*$/
 const pattern_mail = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
 
@@ -47,12 +47,12 @@ send.addEventListener("click", (e) => {
         return
     }
 
-    if (letras_numero_espacios(c_direccion) == null ) {
+    if (letras_numero_espacios(c_direccion) == null) {
         _alerta('Direccion de Cliente solo letras/numeros y comenzar con MAYUSCULAS!')
         return
     }
     // || c_direccion.value.length < 3
-    if (solo_numeros(c_dni) == null || c_dni.value.length < 8 ) {
+    if (solo_numeros(c_dni) == null || c_dni.value.length < 8) {
         _alerta('DNI de Cliente no valido!')
         return
     }

@@ -3,7 +3,7 @@ const formulario = document.getElementById('formulario_inmueble')
 
 const i_direccion = document.getElementById("dir_inmueble")
 const i_tipo = document.getElementById("tipo_inmueble")
-const i_operacion = document.getElementById("tipo_operacion")
+const i_operacion = document.getElementById("operacion")
 const i_suptotal = document.getElementById("sup_total")
 const i_supcubierta = document.getElementById("sup_cubierta")
 const i_supsemicubierta = document.getElementById("sup_semicub")
@@ -18,6 +18,7 @@ const i_idcliente = document.getElementById("id_cliente")
 const i_img1 = document.getElementById("imagen1")
 const i_img2 = document.getElementById("imagen2")
 const i_img3 = document.getElementById("imagen3")
+const tipo_servicio = document.getElementsByName('tipo_servicio')
 
 
 const pattern_letras_espacios = /^[A-Z][a-zA-Z ]*$/
@@ -58,6 +59,18 @@ send.addEventListener("click", (e) => {
     if (i_tipo.value.length == 0) {
         _alerta('Selecciona un Tipo de Inmueble')
         return
+    }
+
+    if (tipo_servicio) {
+        tipos = ''
+        for (var i = 0; i < tipo_servicio.length; i++) {
+            tipo_servicio[i].checked == true ? tipos = tipos + tipo_servicio[i].value + ', ' : console.log('NO')
+        }
+
+        if (tipos.charAt(tipos.length - 2) == ',') {
+            tipos = tipos.slice(0, -2)
+        }
+        console.log(tipos)
     }
 
     if (i_operacion.value == 'Selecciona') {
@@ -189,6 +202,91 @@ send.addEventListener("click", (e) => {
         }
     }
 
+    /* let imgs = document.getElementById('imgs');
+    //uploadImg.files: FileList
+    for (let i = 0; i < imgs.files.length; i++) {
+        let f = imgs.files[i];
+        // Verificar extensión del archivo
+        let filePath = f.name
+        let allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i
+
+        if (!allowedExtensions.exec(filePath)) {
+            console.log(`foto ${i} no Valida!`)
+        } else {
+            console.log(`ext ${i} ok`)
+        }
+
+        //Verificar tamaño del archivo(máximo 2 MB) 2w
+        const maxSize = 2 * 1024 * 1024 // 2MB en bytes
+
+        if (f.size > maxSize) {
+            console.log(`Por favor, seleccione en ${i} archivos que no excedan los 2MB.`)
+        } else {
+            console.log(`size ${i} ok`)
+        }
+    } 
+    
+    
+    image = models.FileField(upload_to = "products")
+    
+    from django
+    import forms
+    from django.forms
+    import ClearableFileInput
+    from.models
+    import Project, ProjectImage
+
+
+    class ProjectForm(forms.ModelForm):
+
+        class Meta:
+        model = Project
+    fields = ['title', 'describtion']
+
+
+    class ProjectImageForm(forms.ModelForm):
+        class Meta:
+        model = ProjectImage
+    fields = ['image']
+    widgets = {
+        'image': ClearableFileInput(attrs = {
+            'multiple': True
+        }),
+    }
+
+    def createProject(request):
+        form = ProjectForm()
+    form2 = ProjectImageForm()
+
+    if request.method == 'POST':
+        form = ProjectForm(request.POST)
+    form2 = ProjectImageForm(request.POST, request.FILES)
+    images = request.FILES.getlist('image')
+    if form.is_valid() and form2.is_valid():
+        title = form.cleaned_data['title']
+    describ = form.cleaned_data['describtion']
+    print(title, describ)
+    project_instance = Project.objects.create(
+        title = title, describtion = describ)
+    print('-------------------------------------------')
+    print(project_instance)
+    print('-------------------------------------------')
+
+    for i in images:
+        ProjectImage.objects.create(project = project_instance, image = i)
+    return redirect('thanks')
+
+    context = {
+        'form': form,
+        'form2': form2
+    }
+    return render(request, 'projects/project_form.html', context)
+
+
+    
+    */
+
+    console.log('OKOKOKOKOKOKO')
 
     // SI ESTA TODO BIEN SE ENVIA EL FORMULARIO...
     //formulario.submit()
