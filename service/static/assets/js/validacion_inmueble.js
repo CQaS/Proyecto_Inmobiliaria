@@ -202,89 +202,34 @@ send.addEventListener("click", (e) => {
         }
     }
 
-    /* let imgs = document.getElementById('imgs');
+    let imgs = document.getElementById('imgs');
     //uploadImg.files: FileList
     for (let i = 0; i < imgs.files.length; i++) {
         let f = imgs.files[i];
+
         // Verificar extensión del archivo
         let filePath = f.name
         let allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i
 
         if (!allowedExtensions.exec(filePath)) {
-            console.log(`foto ${i} no Valida!`)
+            console.log(`foto Nro:${i} no Valida!`)
+            _alerta(`foto Nro:${i} no Valida!`)
+            return
         } else {
-            console.log(`ext ${i} ok`)
+            console.log(`ext Nro:${i} ok`)
         }
 
         //Verificar tamaño del archivo(máximo 2 MB) 2w
         const maxSize = 2 * 1024 * 1024 // 2MB en bytes
 
         if (f.size > maxSize) {
-            console.log(`Por favor, seleccione en ${i} archivos que no excedan los 2MB.`)
+            console.log(`Por favor, Foto Nro:${i} que no excedan los 2MB.`)
+            _alerta(`foto Nro:${i} no Valida!`)
+            return
         } else {
             console.log(`size ${i} ok`)
         }
-    } 
-    
-    
-    image = models.FileField(upload_to = "products")
-    
-    from django
-    import forms
-    from django.forms
-    import ClearableFileInput
-    from.models
-    import Project, ProjectImage
-
-
-    class ProjectForm(forms.ModelForm):
-
-        class Meta:
-        model = Project
-    fields = ['title', 'describtion']
-
-
-    class ProjectImageForm(forms.ModelForm):
-        class Meta:
-        model = ProjectImage
-    fields = ['image']
-    widgets = {
-        'image': ClearableFileInput(attrs = {
-            'multiple': True
-        }),
     }
-
-    def createProject(request):
-        form = ProjectForm()
-    form2 = ProjectImageForm()
-
-    if request.method == 'POST':
-        form = ProjectForm(request.POST)
-    form2 = ProjectImageForm(request.POST, request.FILES)
-    images = request.FILES.getlist('image')
-    if form.is_valid() and form2.is_valid():
-        title = form.cleaned_data['title']
-    describ = form.cleaned_data['describtion']
-    print(title, describ)
-    project_instance = Project.objects.create(
-        title = title, describtion = describ)
-    print('-------------------------------------------')
-    print(project_instance)
-    print('-------------------------------------------')
-
-    for i in images:
-        ProjectImage.objects.create(project = project_instance, image = i)
-    return redirect('thanks')
-
-    context = {
-        'form': form,
-        'form2': form2
-    }
-    return render(request, 'projects/project_form.html', context)
-
-
-    
-    */
 
     console.log('OKOKOKOKOKOKO')
 

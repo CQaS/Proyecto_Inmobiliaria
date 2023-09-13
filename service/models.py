@@ -57,9 +57,6 @@ class Inmueble(models.Model):
     descripcion = models.TextField(null=False, blank=False, verbose_name='Descripcion', validators=[validar_direccion])
     tipo_servicio = models.CharField(max_length=45, null=False, blank=False, verbose_name='Tipo de Servicio', validators=[validar_letras])
     id_cliente = models.ForeignKey('Clientes',on_delete=models.CASCADE, verbose_name='Num. Cliente')
-    imagen1 = models.ImageField(upload_to='img/', null=False, blank=False, verbose_name='Foto 1', validators=[validar_imagen])
-    imagen2 = models.ImageField(upload_to='img/', null=False, blank=False, verbose_name='Foto 2', validators=[validar_imagen])
-    imagen3 = models.ImageField(upload_to='img/', null=False, blank=False, verbose_name='Foto 3', validators=[validar_imagen])
     valor_inmueble = models.IntegerField(verbose_name='Valor', null=False, blank=False, validators=[validar_numero])
     estado = models.IntegerField(null=False, default=1, blank=False, verbose_name='Estado', validators=[validar_numero])
     destacado = models.BooleanField(verbose_name='Destacado', null=False, blank=False, default=False,)
@@ -68,13 +65,15 @@ class Inmueble(models.Model):
         return self.dir_inmueble
     
     def delete(self, using=None, keep_parents=False):
-        self.imagen1.storage.delete(self.imagen1.name)
-        self.imagen2.storage.delete(self.imagen2.name)
-        self.imagen3.storage.delete(self.imagen3.name)
+        self.imagen.storage.delete(self.imagen1.name)
         super().delete()
 
     class Meta:
         db_table = 'inmueble'
+
+class Fotos(models.Model):
+    image = models.ImageField(upload_to='img/', null=False, blank=False, validators=[validar_imagen])
+    inmueble_id = models.ForeignKey(Inmueble, on_delete=models.SET_NULL, null=False, blank=False)
 
 class Clientes(models.Model):
     id_cliente = models.AutoField(primary_key=True)

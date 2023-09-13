@@ -47,7 +47,15 @@ def crear_propiedad(req):
     if inmueble_form.is_valid():
         try:
             #inmueble_form.save()
-            print('Inmueble, OK')
+
+            images = req.FILES.getlist('images')
+            for image in images:
+                F = Fotos.objects.create(
+                    image = image,
+                    inmueble_id = 5
+                )
+
+            print('Inmueble creado, OK')
             return redirect('crear_propiedad')
         
         except Exception as e:
