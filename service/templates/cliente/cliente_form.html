@@ -1,47 +1,49 @@
-{% extends 'layouts/base00.html' %}
+{% extends 'layouts/base00.html' %} {% load static %} {% block content %}
 
-{% load static %}
-
-{% block content %}
-
-
+<div>
+  <!--Muestra si algun campo tiene error-->
+  <span class="err">{{ error }}</span>
+</div>
 <div class="container-form-cliente">
-    <!--Muestra si algun campo tiene error-->
-    <span class="err">{{ error }}</span>
+  <form action="{% url 'crear_cliente' %}" id="formulario" method="POST">
+    {% csrf_token %}
 
-    <form action="{% url 'crear_cliente' %}" id="formulario" method="POST">
-        {% csrf_token %}
+    <h2 class="create-contact">CLIENTES</h2>
+    <div class="iconos">
+      <div class="border-icon">
+        <a href=""><i class="fa-solid fa-plus" style="color: #edeff3"></i></a>
+      </div>
+      <div class="border-icon">
+        <a href=""><i class="fa-solid fa-pen" style="color: #edeff3"></i></a>
+      </div>
+      <div class="border-icon">
+        <a href=""><i class="fa-solid fa-trash" style="color: #edeff3"></i></a>
+      </div>
+    </div>
 
-        <h2 class="create-contact">CLIENTES</h2>
-        <div class="iconos">
-            <div class="border-icon">
-                <a href=""><i class="fa-solid fa-plus" style="color: #edeff3;"></i></a>
-            </div>
-            <div class="border-icon">
-                <a href=""><i class="fa-solid fa-pen" style="color: #edeff3;"></i></a>
-            </div>
-            <div class="border-icon">
-                <a href=""><i class="fa-solid fa-trash" style="color: #edeff3;"></i></a>
-            </div>
-        </div>
+    <!-- Validamos maxlength, autofoco required-->
+    {% for c in clientes %} {% if c.name != 'categoria' %}
+    <label>{{c.label}}</label>
+    <input
+      type="{{ c.field.widget.input_type }}"
+      id="{{ c.name }}"
+      name="{{ c.name }}"
+      maxlength="70"
+      placeholder="{{ c.label }}"
+      autofocus
+      required
+      value="{{ c.value | default:'' }}"
+    />
+    <br />
+    {% endif %} {% endfor %}
+    <span class="eleccion">Categoria Cliente</span>
+    <select id="categoria" name="categoria" required>
+      <option value="Propietario">Propietario</option>
+      <option value="Inquilino">Inquilino</option>
+    </select>
 
-        <!-- Validamos maxlength, autofoco required-->
-        {% for c in clientes %}
-        {% if c.name != 'categoria' %}
-        <label>{{c.label}}</label>
-        <input type="{{ c.field.widget.input_type }}" id="{{ c.name }}" name="{{ c.name }}" maxlength="70"
-            placeholder="{{ c.label }}" autofocus required value="{{ c.value | default:'' }}">
-        <br>
-        {% endif %}
-        {% endfor %}
-        <span>Categoria Cliente</span>
-        <select id="categoria" name="categoria" required>
-            <option value="Propietario">Propietario</option>
-            <option value="Inquilino">Inquilino</option>
-        </select>
-
-        <input type="submit" value="Send" id="send" class="form_enviar">
-    </form>
+    <input type="submit" value="Send" id="send" class="form_enviar" />
+  </form>
 </div>
 <script src="{% static '/assets/js/validation.js' %}"></script>
 

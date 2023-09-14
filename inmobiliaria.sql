@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-08-2023 a las 22:23:18
+-- Tiempo de generación: 13-09-2023 a las 23:02:57
 -- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Versión de PHP: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -93,7 +93,8 @@ CREATE TABLE `inmueble` (
   `imagen1` varchar(250) DEFAULT NULL,
   `imagen2` varchar(250) DEFAULT NULL,
   `imagen3` varchar(250) DEFAULT NULL,
-  `valor_inmueble` int(11) DEFAULT NULL
+  `valor_inmueble` int(11) DEFAULT NULL,
+  `estado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------

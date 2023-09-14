@@ -49,11 +49,11 @@ def crear_propiedad(req):
             #inmueble_form.save()
 
             images = req.FILES.getlist('images')
-            for image in images:
-                F = Fotos.objects.create(
-                    image = image,
-                    inmueble_id = 5
-                )
+            # for image in images:
+            #     F = Fotos.objects.create(
+            #         image = image,
+            #         inmueble_id = 5
+            #     )
 
             print('Inmueble creado, OK')
             return redirect('crear_propiedad')

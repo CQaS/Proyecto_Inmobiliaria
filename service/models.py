@@ -73,7 +73,7 @@ class Inmueble(models.Model):
 
 class Fotos(models.Model):
     image = models.ImageField(upload_to='img/', null=False, blank=False, validators=[validar_imagen])
-    inmueble_id = models.ForeignKey(Inmueble, on_delete=models.SET_NULL, null=False, blank=False)
+    #inmueble_id = models.ForeignKey(Inmueble, on_delete=models.SET_NULL, null=False, blank=False)
 
 class Clientes(models.Model):
     id_cliente = models.AutoField(primary_key=True)
