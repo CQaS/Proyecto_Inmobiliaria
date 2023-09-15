@@ -52,7 +52,7 @@ Clientes
   R.N.M. (extranjeros radicados en brasil) Ejemplo: Número de R.N.M.: 2023-123456
   Nº Cedula identidad (Uruguay y Paraguay)
 
-- Cambiar inquilino por locatario
+→ Cambiar inquilino por locatario
 
 - Rendicion de gastos a los propietarios por ejemplo Mantenimiento
 
