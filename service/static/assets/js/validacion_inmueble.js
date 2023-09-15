@@ -24,7 +24,7 @@ const tipo_servicio = document.getElementsByName('tipo_servicio')
 const pattern_letras_espacios = /^[A-Z][a-zA-Z ]*$/
 const pattern_letras_numero_espacios = /^[A-Z][a-zA-Z0-9 ]*$/
 const pattern_solo_numeros = /^[0-9][0-9]*$/
-const pattern_cod_ref = /^[0-9][0-9]*$/
+const pattern_cod_ref = /^[0-9][0-9-]*$/
 const pattern_mail = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
 
 send.addEventListener("click", (e) => {
@@ -51,7 +51,7 @@ send.addEventListener("click", (e) => {
     }
 
     const cod_ref = (DATO) => {
-        return DATO.value.match(pattern_solo_numeros)
+        return DATO.value.match(pattern_cod_ref)
     }
 
 
