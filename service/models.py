@@ -51,15 +51,17 @@ class Inmueble(models.Model):
     cant_dormitorios = models.IntegerField(null=False, blank=False, verbose_name='Cant. de Dormitorios', validators=[validar_numero])
     cant_banos = models.IntegerField(null=False, blank=False, verbose_name='Cant. de Baños', validators=[validar_numero])
     cochera = models.BooleanField(verbose_name='Cochera', null=False, blank=False, default=False,)
-    antiguedad = models.IntegerField(null=False, blank=False, verbose_name='Antiguedad', validators=[validar_numero])
+    cod_referencia = models.IntegerField(null=False, blank=False, verbose_name='Cod. Referencia', validators=[validar_numero])
     condicion = models.IntegerField(null=False, blank=False, verbose_name='Condicion', validators=[validar_numero])
     expensas = models.BooleanField(verbose_name='Expensas', null=False, blank=False, default=False,)
     descripcion = models.TextField(null=False, blank=False, verbose_name='Descripcion', validators=[validar_direccion])
+    clave_puerta_ingreso = models.CharField(max_length=100, null=False, blank=False, verbose_name='Clave Puerta Ingreso', validators=[validar_direccion])
+    clave_wifi = models.CharField(max_length=50, null=False, blank=False, verbose_name='Clave Wi-Fi', validators=[validar_direccion])
     tipo_servicio = models.CharField(max_length=45, null=False, blank=False, verbose_name='Tipo de Servicio', validators=[validar_letras])
     id_cliente = models.ForeignKey('Clientes',on_delete=models.CASCADE, verbose_name='Num. Cliente')
     valor_inmueble = models.IntegerField(verbose_name='Valor', null=False, blank=False, validators=[validar_numero])
+    exclusividad = models.BooleanField(verbose_name='Exclusividad', null=False, blank=False, default=False,)
     estado = models.IntegerField(null=False, default=1, blank=False, verbose_name='Estado', validators=[validar_numero])
-    destacado = models.BooleanField(verbose_name='Destacado', null=False, blank=False, default=False,)
     # Estado = 1 seria Disponible
     def __str__(self):
         return self.dir_inmueble
@@ -73,7 +75,7 @@ class Inmueble(models.Model):
 
 class Fotos(models.Model):
     image = models.ImageField(upload_to='img/', null=False, blank=False, validators=[validar_imagen])
-    inmueble_id = models.ForeignKey(Inmueble, on_delete=models.SET_NULL, null=True, blank=False)
+    inmueble_id = models.ForeignKey(Inmueble, on_delete=models.SET_NULL, null=False, blank=False)
 
 class Clientes(models.Model):
     id_cliente = models.AutoField(primary_key=True)

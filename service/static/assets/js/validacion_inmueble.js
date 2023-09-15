@@ -10,7 +10,7 @@ const i_supsemicubierta = document.getElementById("sup_semicub")
 const i_cantplantas = document.getElementById("cant_plantas")
 const i_cantdormitorios = document.getElementById("cant_dormitorios")
 const i_cantbanos = document.getElementById("cant_banos")
-const i_antiguedad = document.getElementById("antiguedad")
+const i_cod_referencia = document.getElementById("cod_referencia")
 const i_condicion = document.getElementById("condicion")
 const i_descripcion = document.getElementById("descripcion")
 const i_valorinmueble = document.getElementById("valor_inmueble")
@@ -24,6 +24,7 @@ const tipo_servicio = document.getElementsByName('tipo_servicio')
 const pattern_letras_espacios = /^[A-Z][a-zA-Z ]*$/
 const pattern_letras_numero_espacios = /^[A-Z][a-zA-Z0-9 ]*$/
 const pattern_solo_numeros = /^[0-9][0-9]*$/
+const pattern_cod_ref = /^[0-9][0-9]*$/
 const pattern_mail = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
 
 send.addEventListener("click", (e) => {
@@ -46,6 +47,10 @@ send.addEventListener("click", (e) => {
     }
 
     const solo_numeros = (DATO) => {
+        return DATO.value.match(pattern_solo_numeros)
+    }
+
+    const cod_ref = (DATO) => {
         return DATO.value.match(pattern_solo_numeros)
     }
 
@@ -115,9 +120,9 @@ send.addEventListener("click", (e) => {
         return
     }
 
-    if (solo_numeros(i_antiguedad) == null || Number(i_antiguedad.value) <= 0) {
-        i_antiguedade.focus()
-        _alerta('Antiguedad del Inmueble no valido!')
+    if (cod_ref(i_cod_referencia) == null) {
+        i_cod_referencia.focus()
+        _alerta('Cod. Referencia del Inmueble no valido!')
         return
     }
 
