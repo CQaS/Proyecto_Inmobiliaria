@@ -22,14 +22,13 @@
     </div>
 
     <!-- Validamos maxlength, autofoco required-->
-    {% for i in inmueble_form %} 
-    {% if i.name != 'tipo_operacion' and i.name !='condicion' and i.name != 'tipo_servicio' 
-    and i.name != 'id_cliente' and i.name != 'estado' %}
-      <label>{{i.label}}</label>
-      <input type="{{ i.field.widget.input_type }}" id="{{ i.name }}" name="{{ i.name }}"    maxlength="70" placeholder="{{ i.label }}" autofocus required
-      value="{{ i.value | default:'' }}">
-      <br>
-    {% endif %} 
+    {% for i in inmueble_form %}
+    {% if i.name != 'tipo_operacion' and i.name != 'condicion' and i.name != 'tipo_servicio' and i.name != 'id_cliente' and i.name != 'estado' %}
+    <label>{{i.label}}</label>
+    <input type="{{ i.field.widget.input_type }}" id="{{ i.name }}" name="{{ i.name }}" maxlength="70"
+      placeholder="{{ i.label }}" autofocus required value="{{ i.value | default:'' }}">
+    <br>
+    {% endif %}
     {% endfor %}
 
     <span class="eleccion">Selecciona Cliente/propietaro</span>
