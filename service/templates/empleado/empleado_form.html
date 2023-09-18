@@ -9,8 +9,7 @@
     action="{% url 'crear_empleado' %}"
     id="formulario_empleado"
     class="formulario"
-    method="POST"
-  >
+    method="POST">
     {% csrf_token %}
 
     <h2 class="create-contact">EMPLEADOS</h2>
@@ -37,9 +36,8 @@
       placeholder="{{ e.label }}"
       autofocus
       required
-      value="{{ e.value | default:'' }}"
-    />
-    <br />
+      value="{{ e.value | default:'' }}">
+    <br>
     {% endif %} {% endfor %}
 
     <span class="eleccion">Puesto Empleado</span>
@@ -49,14 +47,13 @@
       <option value="Piletero">Piletero</option>
       <option value="Administracion">Administracion</option>
     </select>
-    <br />
+    <br>
 
     <input
       type="submit"
       value="Crear"
       id="crear_empleado"
-      class="form_enviar"
-    />
+      class="form_enviar">
   </form>
 </div>
 <script src="{% static '/assets/js/validacion_empleado.js' %}"></script>

@@ -32,9 +32,8 @@
       placeholder="{{ c.label }}"
       autofocus
       required
-      value="{{ c.value | default:'' }}"
-    />
-    <br />
+      value="{{ c.value | default:'' }}">
+    <br>
     {% endif %} {% endfor %}
     <span class="eleccion">Categoria Cliente</span>
     <select id="categoria" name="categoria" required>
@@ -42,7 +41,7 @@
       <option value="Locatario">Locatario</option>
     </select>
 
-    <input type="submit" value="Send" id="send" class="form_enviar" />
+    <input type="submit" value="Send" id="send" class="form_enviar">
   </form>
 </div>
 <script src="{% static '/assets/js/validation.js' %}"></script>

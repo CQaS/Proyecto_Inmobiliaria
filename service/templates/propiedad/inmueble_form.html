@@ -1,11 +1,11 @@
 {% extends 'layouts/base00.html' %} {% load static %} {% block content %}
 
 <!--Muestra si algun campo tiene error-->
-<div>
+<div class="alert">
   <span class="err">{{ error }}</span>
 </div>
 <div class="container-form-inmuebles">
-  <form action="" class="formulario" method="POST">
+  <form action="{% url 'crear_propiedad' %}" class="formulario" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
 
     <h2 class="create-contact">INMUEBLES</h2>
@@ -23,12 +23,10 @@
 
     <!-- Validamos maxlength, autofoco required-->
     {% for i in inmueble_form %} 
-    {% if i.name != 'tipo_operacion' and i.name !='condicion' and i.name != 'tipo_servicio' 
-    and i.name != 'id_cliente' and i.name != 'estado' %}
-      <label>{{i.label}}</label>
-      <input type="{{ i.field.widget.input_type }}" id="{{ i.name }}" name="{{ i.name }}"    maxlength="70" placeholder="{{ i.label }}" autofocus required
-      value="{{ i.value | default:'' }}">
-      <br>
+    {% if i.name != 'tipo_operacion' and i.name != 'condicion' and i.name != 'tipo_servicio' and i.name != 'id_cliente' and i.name != 'estado' %} 
+    <label>{{i.label}}</label>
+    <input type="{{ i.field.widget.input_type }}" id="{{ i.name }}" name="{{ i.name }}"    maxlength="70" placeholder="{{ i.label }}" autofocus required value="{{ i.value | default:'' }}">
+    <br>
     {% endif %} 
     {% endfor %}
 
