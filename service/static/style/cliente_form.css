@@ -36,7 +36,7 @@
     border: 2px solid white;
     border-radius: 5px 50px;
     width: 650px;
-    height: 1000px;
+    height: 1250px;
     background-color: rgb(51, 51, 51, 0.302);
 }
 
@@ -78,6 +78,8 @@ label,
     float: left;
 }
 
+
+
 input,
 select {
     font-size: 16px;
@@ -90,6 +92,22 @@ select {
     float: right;
 }
 
+input[type="checkbox"] {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background: white;
+    border-radius: 3px;
+}
+
+input:checked::before {
+    content: "✅";
+    font-size: 11px;
+    width: 100%;
+    height: 100%;
+    background-size: 100%; 
+    display: block;
+}
 
 input[type="submit"] {
     width: 60%;
