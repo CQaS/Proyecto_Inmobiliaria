@@ -23,6 +23,10 @@ urlpatterns = [
     path('empleado/editar/<int:id_empleado>', views_empleado.editar_empleado, name="editar_empleado"),
     path('empleado/eliminar/<int:id_empleado>', views_empleado.eliminar_empleado, name="eliminar_empleado"),
     ##### FIN RUTAS EMPLEADOS #####
+    ##### RUTAS CONTATOS #####
+    #path('empleado', views_contrato.index_contrato, name="index_contrato"),
+    #path('contrato/crear', views_contrato.crear_contrato, name="crear_contrato"),
+    ##### FIN RUTAS CONTATOS #####
     
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  

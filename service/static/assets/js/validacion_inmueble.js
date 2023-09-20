@@ -3,7 +3,7 @@ const formulario = document.getElementById('formulario_inmueble')
 
 const i_direccion = document.getElementById("dir_inmueble")
 const i_tipo = document.getElementById("tipo_inmueble")
-const i_operacion = document.getElementById("operacion")
+const i_operacion = document.getElementById("tipo_operacion")
 const i_suptotal = document.getElementById("sup_total")
 const i_supcubierta = document.getElementById("sup_cubierta")
 const i_supsemicubierta = document.getElementById("sup_semicub")
@@ -14,10 +14,8 @@ const i_cod_referencia = document.getElementById("cod_referencia")
 const i_condicion = document.getElementById("condicion")
 const i_descripcion = document.getElementById("descripcion")
 const i_valorinmueble = document.getElementById("valor_inmueble")
-const i_idcliente = document.getElementById("id_cliente")
-const i_img1 = document.getElementById("imagen1")
-const i_img2 = document.getElementById("imagen2")
-const i_img3 = document.getElementById("imagen3")
+const i_idcliente = document.getElementById("cliente_id")
+const imgs = document.getElementById('imgs')
 const tipo_servicio = document.getElementsByName('tipo_servicio')
 
 
@@ -138,7 +136,7 @@ send.addEventListener("click", (e) => {
         return
     }
 
-    if (i_idcliente.value == 'Selecciona') {
+    if (i_idcliente.value == '') {
         i_idcliente.focus()
         _alerta('Selecciona un Cliente')
         return
@@ -150,67 +148,9 @@ send.addEventListener("click", (e) => {
         return
     }
 
-    if (i_img1) {
-        // Verificar extensión del archivo
-        let filePath = i_img1.value
-        let allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i
-
-        if (!allowedExtensions.exec(filePath)) {
-            _alerta('Primera foto no Valida!')
-            return
-        }
-
-        //Verificar tamaño del archivo(máximo 2 MB) 
-        const maxSize = 2 * 1024 * 1024 // 2MB en bytes 
-
-        if (i_img1.files[0].size > maxSize) {
-            _alerta('Por favor, seleccione en primer archivos que no excedan los 2MB.')
-            return
-        }
-    }
-
-    if (i_img2) {
-        // Verificar extensión del archivo
-        let filePath = i_img1.value
-        let allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i
-
-        if (!allowedExtensions.exec(filePath)) {
-            _alerta('Segunda foto no Valida!')
-            return
-        }
-
-        //Verificar tamaño del archivo(máximo 2 MB) 
-        const maxSize = 2 * 1024 * 1024 // 2MB en bytes 
-
-        if (i_img1.files[0].size > maxSize) {
-            _alerta('Por favor, seleccione en segunda archivos que no excedan los 2MB.')
-            return
-        }
-    }
-
-    if (i_img3) {
-        // Verificar extensión del archivo
-        let filePath = i_img1.value
-        let allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i
-
-        if (!allowedExtensions.exec(filePath)) {
-            _alerta('Tercera foto no Valida!')
-            return
-        }
-
-        //Verificar tamaño del archivo(máximo 2 MB) 2w
-        const maxSize = 2 * 1024 * 1024 // 2MB en bytes 
-
-        if (i_img1.files[0].size > maxSize) {
-            _alerta('Por favor, seleccione en tercer archivos que no excedan los 2MB.')
-            return
-        }
-    }
-
-    let imgs = document.getElementById('imgs');
     //uploadImg.files: FileList
     for (let i = 0; i < imgs.files.length; i++) {
-        let f = imgs.files[i];
+        let f = imgs.files[i]
 
         // Verificar extensión del archivo
         let filePath = f.name
@@ -239,5 +179,5 @@ send.addEventListener("click", (e) => {
     console.log('OKOKOKOKOKOKO')
 
     // SI ESTA TODO BIEN SE ENVIA EL FORMULARIO...
-    //formulario.submit()
+    formulario.submit()
 })

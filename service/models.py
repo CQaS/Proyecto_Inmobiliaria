@@ -7,6 +7,7 @@ import re
 pattern_Nombre = r'^[A-Z]*[a-z]{2,}[a-zA-Z ]*$'
 pattern_Direccion = r'^[A-Z][a-zA-Z0-9 ]*$'
 pattern_soloNumeros = r'^[0-9][0-9]*$'
+pattern_cod_ = r'^[0-9][0-9-]*$'
 pattern_soloLetras = r'^[A-Z][a-zA-Z ]*$'
 
 def validar_nombre(value):
@@ -21,6 +22,11 @@ def validar_numero(value):
     value = str(value)
     if not re.match(pattern_soloNumeros, value):
         raise ValidationError('El valor debe contener solo numeros')
+
+def validar_codigo(value):
+    value = str(value)
+    if not re.match(pattern_cod_, value):
+        raise ValidationError('El valor del codigo no es valido')
 
 def validar_letras(value):
     if not re.match(pattern_soloLetras, value):
@@ -50,18 +56,18 @@ class Inmueble(models.Model):
     cant_plantas = models.IntegerField(null=False, blank=False, verbose_name='Cant. de Plantas', validators=[validar_numero])
     cant_dormitorios = models.IntegerField(null=False, blank=False, verbose_name='Cant. de Dormitorios', validators=[validar_numero])
     cant_banos = models.IntegerField(null=False, blank=False, verbose_name='Cant. de Baños', validators=[validar_numero])
-    cochera = models.BooleanField(verbose_name='Cochera', null=False, blank=False, default=False,)
-    cod_referencia = models.IntegerField(null=False, blank=False, verbose_name='Cod. Referencia', validators=[validar_numero])
-    condicion = models.IntegerField(null=False, blank=False, verbose_name='Condicion', validators=[validar_numero])
-    expensas = models.BooleanField(verbose_name='Expensas', null=False, blank=False, default=False,)
+    cochera = models.BooleanField(verbose_name='Cochera', null=True, blank=True, default=False)
+    cod_referencia = models.IntegerField(null=False, blank=False, verbose_name='Cod. Referencia', validators=[validar_codigo])
+    condicion = models.CharField(max_length=100, null=False, blank=False, verbose_name='Condicion', validators=[validar_letras])
+    expensas = models.BooleanField(verbose_name='Expensas', null=True, blank=True, default=False)
     descripcion = models.TextField(null=False, blank=False, verbose_name='Descripcion', validators=[validar_direccion])
-    clave_puerta_ingreso = models.CharField(max_length=100, null=False, blank=False, verbose_name='Clave Puerta Ingreso', validators=[validar_direccion])
-    clave_wifi = models.CharField(max_length=50, null=False, blank=False, verbose_name='Clave Wi-Fi', validators=[validar_direccion])
+    clave_puerta_ingreso = models.CharField(max_length=100, null=False, blank=False, verbose_name='Clave Puerta Ingreso', validators=[validar_codigo])
+    clave_wifi = models.CharField(max_length=50, null=False, blank=False, verbose_name='Clave Wi-Fi', validators=[validar_codigo])
     tipo_servicio = models.CharField(max_length=45, null=False, blank=False, verbose_name='Tipo de Servicio', validators=[validar_letras])
-    id_cliente = models.ForeignKey('Clientes',on_delete=models.CASCADE, verbose_name='Num. Cliente')
+    cliente_id = models.ForeignKey('Clientes',on_delete=models.CASCADE, verbose_name='Num. Cliente', db_column='cliente_id')
     valor_inmueble = models.IntegerField(verbose_name='Valor', null=False, blank=False, validators=[validar_numero])
-    exclusividad = models.BooleanField(verbose_name='Exclusividad', null=False, blank=False, default=False,)
-    estado = models.IntegerField(null=False, default=1, blank=False, verbose_name='Estado', validators=[validar_numero])
+    exclusividad = models.BooleanField(verbose_name='Exclusividad', null=True, blank=True, default=False)
+    estado = models.IntegerField(null=True, default=1, blank=True, verbose_name='Estado')
     # Estado = 1 seria Disponible
     def __str__(self):
         return self.dir_inmueble
@@ -75,7 +81,10 @@ class Inmueble(models.Model):
 
 class Fotos(models.Model):
     image = models.ImageField(upload_to='img/', null=False, blank=False, validators=[validar_imagen])
-    inmueble_id = models.ForeignKey(Inmueble, on_delete=models.SET_NULL, null=True, blank=False)
+    inmueble_id = models.IntegerField(null=False, blank=False, verbose_name='Inmueble Id')
+
+    class Meta:
+        db_table = 'fotos_prop'
 
 class Clientes(models.Model):
     id_cliente = models.AutoField(primary_key=True)

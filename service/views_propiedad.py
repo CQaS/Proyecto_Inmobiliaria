@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.db import connection
+from django.db import connection, IntegrityError
 from .models import *
 import json
 from datetime import date
@@ -39,21 +39,30 @@ def crear_propiedad(req):
         # Convertir a formato JSON
         clientes = json.dumps(lista, default=serialize_date)
 
-    except Exception as e:
+    except IntegrityError as e:
         ERR = 'Algo fallo, intenta nuevamente o ponte en contacto con Admin'
         print("Error:", e)
      
     inmueble_form = InmuebleForm(req.POST or None, req.FILES or None)
     if inmueble_form.is_valid():
         try:
-            #inmueble_form.save()
+            I = inmueble_form.save()
+            ultimo_id = I.id_inmueble
 
-            images = req.FILES.getlist('images')
-            # for image in images:
-            #     F = Fotos.objects.create(
-            #         image = image,
-            #         inmueble_id = 5
-            #     )
+            images = req.FILES.getlist('imgs')
+            for image in images:
+                print(image)
+                try:
+                    foto = Fotos.objects.create(
+                        image=image, 
+                        inmueble_id=ultimo_id
+                    )
+                    
+                except IntegrityError as e:                    
+                    print(f"Error al crear la foto: {e}")
+                    
+                except Exception as e:
+                    print(f"Error inesperado: {e}")
 
             print('Inmueble creado, OK')
             return redirect('crear_propiedad')
@@ -62,7 +71,6 @@ def crear_propiedad(req):
             error_message = f"Error al guardar el Inmueble: {str(e)}"
             ERR = error_message
             print(f"error: {error_message}")
-            return redirect('crear_propiedad')
     else:
         for field_name, error_msgs in inmueble_form.errors.items():
             for error_msg in error_msgs:
@@ -93,7 +101,7 @@ def editar_propiedad(req, id_inmueble):
 
         #print(clientes)
 
-    except Exception as e:
+    except IntegrityError as e:
         ERR = 'Algo fallo, intenta nuevamente o ponte en contanto con Admin'
         print("Error:", e)
 
@@ -151,7 +159,7 @@ def buscar_por(req):
 
         #print(R)
 
-    except Exception as e:
+    except IntegrityError as e:
         print("Error:", e) """
         return HttpResponse('POST')
     else:
