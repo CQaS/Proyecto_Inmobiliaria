@@ -68,8 +68,7 @@
     font-size: 1.5rem;
 }
 
-label,
-.eleccion {
+label, .eleccion {
     font-size: 16px;
     display: flex;
     vertical-align: middle;
@@ -82,8 +81,7 @@ label,
 
 
 
-input,
-select {
+input, select {
     font-size: 16px;
     display: flex;
     vertical-align: middle;
@@ -100,6 +98,7 @@ input[type="checkbox"] {
     height: 15px;
     background: white;
     border-radius: 3px;
+    display: block;
 }
 
 input:checked::before {
