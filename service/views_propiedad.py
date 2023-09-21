@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from django.db import connection, IntegrityError
 from .models import *
-import json
 from datetime import date
 from .forms import InmuebleForm
 from django.http import HttpResponse
+import json
+import uuid
+import os
 
 #query = "SELECT * FROM Inmuebles i JOIN Propietarios p ON i.prop_Id = p.id_Prop WHERE (SELECT COUNT(c.id_Cont) AS contID FROM Contratos c WHERE c.inm_Id = i.id_Inm AND ((c.fecha_In BETWEEN @inicio AND @fin) OR (c.fecha_fin BETWEEN @inicio AND @fin) OR (c.fecha_In < @inicio AND c.fecha_fin > @fin))) = 0 AND i.estado = 1 AND i.disponible = 1" % (fecha_inicio, fecha_fin)
 
@@ -51,8 +53,12 @@ def crear_propiedad(req):
 
             images = req.FILES.getlist('imgs')
             for image in images:
-                print(image)
                 try:
+                    # Genera un nuevo nombre de archivo (por ejemplo, usando un UUID)
+                    new_filename = f"{uuid.uuid4().hex}{os.path.splitext(image.name)[1]}"
+
+                    # Asigna el nuevo nombre al archivo
+                    image.name = new_filename
                     foto = Fotos.objects.create(
                         image=image, 
                         inmueble_id=ultimo_id

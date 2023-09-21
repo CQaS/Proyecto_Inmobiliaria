@@ -63,7 +63,7 @@ class Inmueble(models.Model):
     descripcion = models.TextField(null=False, blank=False, verbose_name='Descripcion', validators=[validar_direccion])
     clave_puerta_ingreso = models.CharField(max_length=100, null=False, blank=False, verbose_name='Clave Puerta Ingreso', validators=[validar_codigo])
     clave_wifi = models.CharField(max_length=50, null=False, blank=False, verbose_name='Clave Wi-Fi', validators=[validar_codigo])
-    tipo_servicio = models.CharField(max_length=45, null=False, blank=False, verbose_name='Tipo de Servicio', validators=[validar_letras])
+    tipo_servicio = models.CharField(max_length=45, null=True, blank=True, default='SD', verbose_name='Tipo de Servicio', validators=[validar_letras])
     cliente_id = models.ForeignKey('Clientes',on_delete=models.CASCADE, verbose_name='Num. Cliente', db_column='cliente_id')
     valor_inmueble = models.IntegerField(verbose_name='Valor', null=False, blank=False, validators=[validar_numero])
     exclusividad = models.BooleanField(verbose_name='Exclusividad', null=True, blank=True, default=False)
