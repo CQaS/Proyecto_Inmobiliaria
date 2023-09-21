@@ -1,5 +1,5 @@
 from django.urls import path
-from service import views_propiedad, views_cliente, views_empleado
+from service import views_propiedad, views_cliente, views_empleado, views_contrato
 from django.conf import settings
 from django.contrib.staticfiles.urls import static
 
@@ -23,10 +23,10 @@ urlpatterns = [
     path('empleado/editar/<int:id_empleado>', views_empleado.editar_empleado, name="editar_empleado"),
     path('empleado/eliminar/<int:id_empleado>', views_empleado.eliminar_empleado, name="eliminar_empleado"),
     ##### FIN RUTAS EMPLEADOS #####
-    ##### RUTAS CONTATOS #####
-    #path('empleado', views_contrato.index_contrato, name="index_contrato"),
-    #path('contrato/crear', views_contrato.crear_contrato, name="crear_contrato"),
-    ##### FIN RUTAS CONTATOS #####
+    ##### RUTAS CONTRATOS #####
+    path('contrato/<int:id_cliente>/<int:id_propietario>/', views_contrato.index_contrato, name="index_contrato"),
+    path('contrato/crear', views_contrato.crear_contrato, name="crear_contrato"),
+    ##### FIN RUTAS CONTRATOS #####
     
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  
