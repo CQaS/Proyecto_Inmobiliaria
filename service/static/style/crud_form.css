@@ -33,11 +33,13 @@
     margin: 150px 50px 50px 280px;
     /*arriba-der-abajo-izq*/
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
     flex-wrap: wrap;
     border: 2px solid white;
     border-radius: 5px 50px;
-    width: 650px;
+    width: 750px;
     height: 1250px;
     background-color: rgb(51, 51, 51, 0.302);
 }
@@ -68,7 +70,7 @@
     font-size: 1.5rem;
 }
 
-label, .eleccion {
+/* label {
     font-size: 16px;
     display: flex;
     vertical-align: middle;
@@ -76,10 +78,8 @@ label, .eleccion {
     margin-top: 20px;
     padding: 12px;
     border-radius: 10px;
-    float: left;
+    float: left;    
 }
-
-
 
 input, select {
     font-size: 16px;
@@ -90,27 +90,42 @@ input, select {
     padding: 10px;
     border-radius: 10px;
     float: right;
+} */
+select, .eleccion {
+    display: inline-block;
+    justify-content: center;
+    vertical-align: middle;
+    font-size: 16px; 
+    margin-top: 20px;
+    padding: 2px;
+    border-radius: 10px; 
+    
+}
+.eleccion-cbox, .servicios {
+    font-size: 16px;
+    margin-top: 10px;
+    padding: 2px;
+    border-radius: 10px;  
 }
 
-input[type="checkbox"] {
-    appearance: none;
-    width: 15px;
-    height: 15px;
-    background: white;
-    border-radius: 3px;
-    display: block;
+.servicios {
+    display: inline-block;
+    justify-content: space-around;
+    align-items: center;
 }
 
-input:checked::before {
-    content: "✅";
-    font-size: 11px;
-    width: 100%;
-    height: 100%;
-    background-size: 100%; 
-    display: block;
+input [type="checkbox"]{
+    font-size: 16px;
+    display: flex;
+    vertical-align: middle;
+    align-items: right;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    float: right;
 }
-
-input[type="submit"] {
+ 
+input[type="submit"]{
     width: 60%;
     margin: auto;
     border: solid thin #222;
@@ -135,4 +150,4 @@ input[type="submit"]:hover {
 
     /* CONTAINER CRUD CLIENTE*/
 
-}
+} 

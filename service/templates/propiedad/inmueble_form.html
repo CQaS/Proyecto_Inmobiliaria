@@ -66,6 +66,7 @@
       <option value="Alquiler permanente">Alquiler Permante</option>
       <option value="Venta">Venta</option>
     </select>
+    <br>
 
     <span class="eleccion">Tipo Propiedad</span>
     <select id="tipo_inmueble" name="tipo_inmueble">
@@ -73,12 +74,7 @@
       <option value="Dpto">Dpto</option>
     </select>
 
-    <span class="eleccion">Cochera</span>
-    <input type="checkbox" id="cochera" name="cochera" value="true">
-
-    <span class="eleccion">Exclusividad</span>
-    <input type="checkbox" id="exclusividad" name="exclusividad" value="true">
-
+    
     <span class="eleccion">Condicion</span>
     <select id="condicion" name="condicion">
       <option value="Muy buena">Muy Buena</option>
@@ -86,23 +82,30 @@
       <option value="Regular">Regular</option>
       <option value="Mala">Mala</option>
     </select>
+    <br><br>
 
-    <span class="eleccion">Expensas</span>
+    <span class="eleccion-cbox">Cochera</span>
+    <input type="checkbox" id="cochera" name="cochera" value="true">
+
+    <span class="eleccion-cbox">Exclusividad</span>
+    <input type="checkbox" id="exclusividad" name="exclusividad" value="true">
+
+    <span class="eleccion-cbox">Expensas</span>
     <input type="checkbox" id="expensas" name="expensas" value="true">
 
-    <br>
-    <span class="eleccion">Servicios</span><br>
+    <br><br>
+    <span class="eleccion-cbox">Servicios</span><br>
     <input type="checkbox" id="tipo_servicio" name="tipo_servicio" value="WI-FI">
-    <label for="wifi">WI-FI</label><br>
+    <label class="servicios" for="wifi">WI-FI</label><br>
 
     <input type="checkbox" id="tipo_servicio" name="tipo_servicio" value="Ropa de cama">
-    <label for="ropa_cama">Ropa de Cama</label><br>
+    <label class="servicios" for="ropa_cama">Ropa de Cama</label><br>
 
     <input type="checkbox" id="tipo_servicio" name="tipo_servicio" value="Piscinas">
-    <label for="piscinas">Piscinas</label><br>
+    <label class="servicios" for="piscinas">Piscinas</label><br>
 
     <input type="checkbox" id="tipo_servicio" name="tipo_servicio" value="Mucama">
-    <label for="mucama">Mucama</label><br>
+    <label class="servicios" for="mucama">Mucama</label><br>
 
     <span>Selecciones Imagenes</span>
     <input type="file" id="imgs" name="imgs" multiple>
