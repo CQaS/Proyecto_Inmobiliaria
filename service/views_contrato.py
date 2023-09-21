@@ -1,11 +1,20 @@
 from pathlib import Path
 from docxtpl import DocxTemplate
 from django.shortcuts import render,redirect
+from .models import Clientes, Inmueble
 
 def index_contrato(req, id_cliente, id_propietario):
-    return render(req, "Contrato/index.html")
+    cliente = Clientes.objects.get(id_cliente=id_cliente)
+    inmueble = Inmueble.objects.get(id_propietario=id_propietario)
 
-def crear_contrato (req):
+    context={
+        "cliente": cliente,
+        "inmueble": inmueble
+    }
+
+    return render(req, "contrato/index.html", context)
+
+def crear_contrato(req):
     doc_Path = Path(__file__).parent #ruta del proyecto
     doc_Arch = doc_Path / 'contrato_plantilla.docx' #ruta del archivo DOCX Plantilla
     doc = DocxTemplate(doc_Arch)
@@ -15,7 +24,7 @@ def crear_contrato (req):
 
     
     context = {
-        "nom_propietario": propietario,
+        """ "nom_propietario": propietario,
         "nom_cliente": cliente,
         "rg_cliente ": rg_cliente,
         "dni_cliente": dni_cliente,
@@ -43,7 +52,7 @@ def crear_contrato (req):
         "datos_envio": datos_envio,
         "saldo_pendiente": saldo_pendiente,
         "habitac_maxima": habitac_maxima,
-        "fecha_contrato": fecha_contrato,
+        "fecha_contrato": fecha_contrato, """
         }
 
     doc.render(context)
