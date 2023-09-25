@@ -90,9 +90,12 @@
       </ul>
     </div>
     <div class="social-icons">
-      <a href="https://es-la.facebook.com/" target="_blank"><i class="fa-brands fa-facebook fa-xl" style="color: #1877f2;"></i></a>
-      <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram fa-xl" style="color: #c7018c;"></i></a>
-      <a href="https://www.whatsapp.com/coronavirus/get-started?lang=es_LA" target="_blank"><i class="fa-brands fa-whatsapp fa-xl" style="color: #1bd741;"></i></a>
+      <a href="https://es-la.facebook.com/" target="_blank"><i class="fa-brands fa-facebook fa-xl"
+          style="color: #1877f2;"></i></a>
+      <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram fa-xl"
+          style="color: #c7018c;"></i></a>
+      <a href="https://www.whatsapp.com/coronavirus/get-started?lang=es_LA" target="_blank"><i
+          class="fa-brands fa-whatsapp fa-xl" style="color: #1bd741;"></i></a>
     </div>
     <div class="copy">
       <h3>SVD Inside Copyright</h3>
@@ -103,15 +106,44 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- <script src="{% static '/assets/js/main.js' %}"></script> -->
   <script src="{% static '/assets/js/language.js' %}"></script>
-  
+
   <!-- Script alert  -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <script>
-        $(".close").click(function () {
-            $(this).parent().fadeOut();
-        });
-    </script>
+  <script>
+    $(".close").click(function () {
+      $(this).parent().fadeOut();
+    });
+  </script>
+  <script>
+    $(() => {
+      Buscar();
+      $("#contrato_nombre_cliente").keyup(() => {
+        Buscar();
+      });
+    });
+
+    const Buscar = () => {
+      let Name = $.trim($("#contrato_nombre_cliente").val())
+      if (Name !== null && Name !== "" && Name.length !== 0) {
+
+        let url = `/cliente/json_Inq/${Name}`
+
+        $.get(url).done((res) => {
+          console.log(res)
+
+          let select = $("#lista_dinamica")
+          select.find("option").remove().end()
+
+          $.each(res, (i, R) => {
+            console.log(R.fields)
+
+            select.append($("<option>").val(R.fields.dni_cliente).text(R.fields.nom_cliente))
+          })
+        })
+      }
+    }
+  </script>
 </body>
 
 </html>

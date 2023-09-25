@@ -1,31 +1,35 @@
-from django.shortcuts import render, redirect
-from django.db import connection, IntegrityError
-from .models import *
-from datetime import date
-from .forms import InmuebleForm
-from django.http import HttpResponse
 import json
 import uuid
 import os
+from datetime import date
+from django.shortcuts import render, redirect
+from django.db import connection, IntegrityError
+from django.http import HttpResponse
+from .forms import InmuebleForm
+from .models import *
 
-#query = "SELECT * FROM Inmuebles i JOIN Propietarios p ON i.prop_Id = p.id_Prop WHERE (SELECT COUNT(c.id_Cont) AS contID FROM Contratos c WHERE c.inm_Id = i.id_Inm AND ((c.fecha_In BETWEEN @inicio AND @fin) OR (c.fecha_fin BETWEEN @inicio AND @fin) OR (c.fecha_In < @inicio AND c.fecha_fin > @fin))) = 0 AND i.estado = 1 AND i.disponible = 1" % (fecha_inicio, fecha_fin)
+# query = "SELECT * FROM Inmuebles i JOIN Propietarios p ON i.prop_Id = p.id_Prop WHERE (SELECT COUNT(c.id_Cont) AS contID FROM Contratos c WHERE c.inm_Id = i.id_Inm AND ((c.fecha_In BETWEEN @inicio AND @fin) OR (c.fecha_fin BETWEEN @inicio AND @fin) OR (c.fecha_In < @inicio AND c.fecha_fin > @fin))) = 0 AND i.estado = 1 AND i.disponible = 1" % (fecha_inicio, fecha_fin)
 
-#cursor.execute(query)
+# cursor.execute(query)
+
 
 def serialize_date(obj):
-        if isinstance(obj, date):
-            return obj.strftime('%Y-%m-%d')
-        raise TypeError("Type not serializable")
+    if isinstance(obj, date):
+        return obj.strftime('%Y-%m-%d')
+    raise TypeError("Type not serializable")
+
 
 def index_propiedad(req):
     list = Inmueble.objects.all()
     return render(req, 'propiedad/index.html')
 
+
 def crear_propiedad(req):
     ERR = ''
     try:
         with connection.cursor() as cursor:
-            cursor.execute("select * from clientes where categoria = 'Propietario'")
+            cursor.execute(
+                "select * from clientes where categoria = 'Propietario'")
             columns = [col[0] for col in cursor.description]
             res = cursor.fetchall()
 
@@ -44,7 +48,7 @@ def crear_propiedad(req):
     except IntegrityError as e:
         ERR = 'Algo fallo, intenta nuevamente o ponte en contacto con Admin'
         print("Error:", e)
-     
+
     inmueble_form = InmuebleForm(req.POST or None, req.FILES or None)
     if inmueble_form.is_valid():
         try:
@@ -60,19 +64,19 @@ def crear_propiedad(req):
                     # Asigna el nuevo nombre al archivo
                     image.name = new_filename
                     foto = Fotos.objects.create(
-                        image=image, 
+                        image=image,
                         inmueble_id=ultimo_id
                     )
-                    
-                except IntegrityError as e:                    
+
+                except IntegrityError as e:
                     print(f"Error al crear la foto: {e}")
-                    
+
                 except Exception as e:
                     print(f"Error inesperado: {e}")
 
             print('Inmueble creado, OK')
             return redirect('crear_propiedad')
-        
+
         except Exception as e:
             error_message = f"Error al guardar el Inmueble: {str(e)}"
             ERR = error_message
@@ -82,14 +86,16 @@ def crear_propiedad(req):
             for error_msg in error_msgs:
                 ERR = 'Algun campo contiene Errores'
                 print(f"Error en el campo '{field_name}': {error_msg}")
-    
-    return render(req, 'propiedad/inmueble_form.html', {'inmueble_form':inmueble_form, 'clientes':lista, 'error':ERR})
+
+    return render(req, 'propiedad/inmueble_form.html', {'inmueble_form': inmueble_form, 'clientes': lista, 'error': ERR})
+
 
 def editar_propiedad(req, id_inmueble):
     ERR = ''
     try:
         with connection.cursor() as cursor:
-            cursor.execute("select * from clientes where categoria = 'Propietario'")
+            cursor.execute(
+                "select * from clientes where categoria = 'Propietario'")
             columns = [col[0] for col in cursor.description]
             res = cursor.fetchall()
 
@@ -105,21 +111,21 @@ def editar_propiedad(req, id_inmueble):
         # Convertir a formato JSON
         clientes = json.dumps(lista, default=serialize_date)
 
-        #print(clientes)
+        # print(clientes)
 
     except IntegrityError as e:
         ERR = 'Algo fallo, intenta nuevamente o ponte en contanto con Admin'
         print("Error:", e)
 
-     
     inmueble = Inmueble.objects.get(id_inmueble=id_inmueble)
-    formulario = InmuebleForm(req.POST or None, req.FILES or None, instance=inmueble)
+    formulario = InmuebleForm(
+        req.POST or None, req.FILES or None, instance=inmueble)
     if formulario.is_valid() and req.POST:
         try:
             formulario.save()
             print('Inmueble, OK')
             return redirect('editar_propiedad')
-        
+
         except Exception as e:
             error_message = f"Error al guardar el Inmueble: {str(e)}"
             ERR = error_message
@@ -130,21 +136,24 @@ def editar_propiedad(req, id_inmueble):
             for error_msg in error_msgs:
                 ERR = 'Algun campo contiene Errores'
                 print(f"Error en el campo '{field_name}': {error_msg}")
-    
-    return render(req, 'propiedad/editar.html', {'formulario':formulario, 'clientes':lista, 'error':ERR})
+
+    return render(req, 'propiedad/editar.html', {'formulario': formulario, 'clientes': lista, 'error': ERR})
+
 
 def eliminar_propiedad(req, id_inmueble):
     inmueble = Inmueble.objects.get(id_inmueble=id_inmueble)
     inmueble.delete()
     return redirect('index_propiedad')
 
+
 def buscar_por(req):
     if req.method == 'POST':
         print(req.POST['origen'])
-        #query = 
-        """SELECT * FROM clientes WHERE id_cliente = {0} AND pais_cliente = '{1}'""".format('4', 'algo')
-            #print(query)
-            #cursor.execute(query)
+        # query =
+        """SELECT * FROM clientes WHERE id_cliente = {0} AND pais_cliente = '{1}'""".format(
+            '4', 'algo')
+        # print(query)
+        # cursor.execute(query)
         """ try:
         with connection.cursor() as cursor:
             cursor.execute("select * from clientes")
@@ -171,4 +180,3 @@ def buscar_por(req):
     else:
         print('GET ')
         return HttpResponse('GET')
-    
