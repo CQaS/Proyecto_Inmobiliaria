@@ -5,7 +5,7 @@ from docxtpl import DocxTemplate
 """ from num2words import num2words """
 from django.shortcuts import render, redirect
 from django.db import connection, IntegrityError
-from .models import Clientes, Inmueble
+from .models import *
 
 
 def serialize_date(obj):
@@ -16,35 +16,35 @@ def serialize_date(obj):
 
 def index_contrato(req, id_inmueble):
 
-    query = f"SELECT i.*, c.nom_cliente FROM inmueble i JOIN clientes c ON i.cliente_id = c.id_cliente WHERE i.id_inmueble = {id_inmueble}"
+    R = buscarProp_ID(id_inmueble)
+    res = R['res']
+    columns = R['columns']
+    ERR = R['ERR']
 
-    ERR = ''
-    try:
-        with connection.cursor() as cursor:
-            cursor.execute(query)
-            columns = [col[0] for col in cursor.description]
-            res = cursor.fetchall()
+    # Convertir los resultados a una lista de diccionarios
+    lista = []
+    for row in res:
+        row_dict = {}
+        for i, value in enumerate(row):
+            column_name = columns[i]
+            row_dict[column_name] = value
+        lista.append(row_dict)
 
-        # Convertir los resultados a una lista de diccionarios
-        lista = []
-        for row in res:
-            row_dict = {}
-            for i, value in enumerate(row):
-                column_name = columns[i]
-                row_dict[column_name] = value
-            lista.append(row_dict)
-
-        # Convertir a formato JSON
-        res_JSON = json.dumps(lista, default=serialize_date)
-
-    except IntegrityError as e:
-        ERR = 'Algo fallo, intenta nuevamente o ponte en contacto con Admin'
-        print("Error:", e)
+    # Convertir a formato JSON
+    res_JSON = json.dumps(lista, default=serialize_date)
 
     print(lista)
     context = {
-        'inmuebles': lista,
-        'error': ERR
+        'error': ERR,
+        "nom_propietario": lista[0]['nom_cliente'],
+        "cod_referencia": lista[0]['cod_referencia'],
+        "dir_inmueble": lista[0]['dir_inmueble'],
+        "ciudad_inmueble": lista[0]['dir_inmueble'],
+        "pass_hall1": lista[0]['clave_puerta_ingreso'],
+        "pass_hall2": lista[0]['clave_puerta_ingreso'],
+        "pass_wifi": lista[0]['clave_wifi'],
+        "num_apto": lista[0]['cod_referencia'],
+        "valor_inmueble": lista[0]['valor_inmueble'],
     }
 
     return render(req, "contrato/contrato_form.html", context)
@@ -64,7 +64,7 @@ def crear_contrato(req):
         "ciudad_cliente": ciudad_cliente,
         "tel_cliente": tel_cliente,
         "email_cliente": email_cliente,
-        "nombre_inmueble": nombre_inmueble,
+        "cod_inmueble": nombre_inmueble,
         "dir_inmueble": dir_inmueble,
         "ciudad_inmueble": ciudad_inmueble,
         "pass_hall1": pass_hall1,

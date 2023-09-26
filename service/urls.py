@@ -23,6 +23,8 @@ urlpatterns = [
          views_cliente.eliminar_cliente, name="eliminar_cliente"),
     path('cliente/json_Inq/<str:Name>', views_cliente.JSONclientes_Inq,
          name="JSON_clientes_Inq"),
+    path('cliente/json_dni_Inq/<int:dni>', views_cliente.JSONclientes_dni_Inq,
+         name="JSON_clientes_dni_Inq"),
     path('cliente/json_Prop/<str:Name>', views_cliente.JSONclientes_Prop,
          name="JSON_clientes_Prop"),
     ##### FIN RUTAS CLIENTES #####

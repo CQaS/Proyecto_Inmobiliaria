@@ -13,6 +13,12 @@ def JSONclientes_Inq(request, Name):
     return HttpResponse(serialize('json', list), 'application/json')
 
 
+def JSONclientes_dni_Inq(request, dni):
+    list = Clientes.objects.filter(
+        categoria='Inquilino', dni_cliente__icontains=dni)
+    return HttpResponse(serialize('json', list), 'application/json')
+
+
 def JSONclientes_Prop(request, Name):
     list = Clientes.objects.filter(
         categoria='Propietario', nom_cliente__icontains=Name)

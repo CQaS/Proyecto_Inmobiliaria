@@ -1,29 +1,56 @@
+// Obtén la fecha actual en el formato YYYY-MM-DD
+var fechaActual = new Date().toISOString().split("T")[0]
 
-    $(() => {
-      Buscar();
-      $("#contrato_nombre_cliente").keyup(() => {
-        Buscar();
-      });
-    });
+// Establece la fecha actual como el valor mínimo
+document.getElementById("fecha_ing").setAttribute("min", fechaActual)
 
-    const Buscar = () => {
-      let Name = $.trim($("#contrato_nombre_cliente").val())
-      if (Name !== null && Name !== "" && Name.length !== 0) {
+$(() => {
+  Buscar()
+  $("#contrato_nombre_cliente").keyup(() => {
+    Buscar()
+  })
+})
 
-        let url = `/cliente/json_Inq/${Name}`
+const Buscar = () => {
 
-        $.get(url).done((res) => {
-          console.log(res)
+  let Name = $.trim($("#contrato_nombre_cliente").val())
+  if (Name !== null && Name !== "" && Name.length !== 0) {
 
-          let select = $("#lista_dinamica")
-          select.find("option").remove().end()
+    let url = `/cliente/json_Inq/${Name}`
 
-          $.each(res, (i, R) => {
-            console.log(R.fields)
+    $.get(url).done((res) => {
 
-            select.append($("<option>").val(R.fields.dni_cliente).text(R.fields.nom_cliente))
-          })
-        })
-      }
-    }
-  
+      let select = $("#lista_dinamica")
+      select.find("option").remove().end()
+
+      $.each(res, (i, R) => {
+        console.log(i)
+        console.log(R.fields)
+
+        select.append($("<option>").val('').text('Seleccionar'))
+        select.append($("<option>").val(R.fields.dni_cliente).text(R.fields.nom_cliente))
+      })
+    })
+  }
+}
+
+const seleccionaCliente = () => {
+
+  let nom_cliente = document.getElementById('nom_cliente')
+
+  let lista_dinamica = document.getElementById("lista_dinamica")
+  dni_Inq = lista_dinamica.options[lista_dinamica.selectedIndex].value
+  console.log(dni_Inq)
+
+  let url = `/cliente/json_dni_Inq/${dni_Inq}`
+
+  $.get(url).done((res) => {
+
+    $.each(res, (i, R) => {
+      console.log(R.fields)
+
+      nom_cliente.value = R.fields.nom_cliente
+
+    })
+  })
+}
