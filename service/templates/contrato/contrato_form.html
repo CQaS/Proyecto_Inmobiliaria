@@ -252,7 +252,8 @@
 </style>
 <div class="formbold-main-wrapper">
   <div class="formbold-form-wrapper">
-    <form action="#" method="POST">
+    <form action="{% url 'crear_empleado' %}" id="formulario_contrato" method="POST">
+      {% csrf_token %}
       <div class="formbold-steps">
         <ul>
           <li class="inmueble_1 active">
@@ -270,6 +271,7 @@
         </ul>
       </div>
 
+      <!-- form INMUEBLE -->
       <div class="form_1 active">
         <div class="formbold-input-flex">
           <div>
@@ -284,14 +286,14 @@
           </div>
           <div>
             <label for="dir_inmueble" class="formbold-form-label"> Direccion </label>
-            <input type="text" name="dir_inmueble" value="{{ dir_inmueble }}" id=" dir_inmueble"
+            <input type="text" name="dir_inmueble" value="{{ dir_inmueble }}" id="dir_inmueble"
               class="formbold-form-input" />
           </div>
         </div>
         <div class="formbold-input-flex">
           <div>
             <label for="ciudad_inmueble" class="formbold-form-label"> Ciudad </label>
-            <input type="text" name="ciudad_inmueble" value="{{ ciudad_inmueble }}" id=" ciudad_inmueble"
+            <input type="text" name="ciudad_inmueble" value="{{ ciudad_inmueble }}" id="ciudad_inmueble"
               class="formbold-form-input" />
           </div>
           <div>
@@ -300,7 +302,7 @@
           </div>
           <div>
             <label for="habitac_maxima" class="formbold-form-label"> Pessoas max </label>
-            <input type="number" name="habitac_maxima" value="{{ habitac_maxima }}" id=" habitac_maxima"
+            <input type="number" name="habitac_maxima" value="{{ habitac_maxima }}" id="habitac_maxima"
               class="formbold-form-input" />
           </div>
         </div>
@@ -308,30 +310,30 @@
         <div class="formbold-input-flex">
           <div>
             <label for="pass_hall1" class="formbold-form-label"> Senha hall </label>
-            <input type="text" name="pass_hall1" value="{{ pass_hall1 }}" id=" pass_hall1"
+            <input type="text" name="pass_hall1" value="{{ pass_hall1 }}" id="pass_hall1"
               class="formbold-form-input" />
           </div>
           <div>
             <label for="pass_hall2" class="formbold-form-label"> Senha hall 2 </label>
-            <input type="text" name="pass_hall2" value="{{ pass_hall2 }}" id=" pass_hall2"
+            <input type="text" name="pass_hall2" value="{{ pass_hall2 }}" id="pass_hall2"
               class="formbold-form-input" />
           </div>
           <div>
             <label for="pass_wifi" class="formbold-form-label">Senha Wi-Fi </label>
-            <input type="text" name="pass_wifi" value="{{ pass_wifi }}" id=" pass_wifi" class="formbold-form-input" />
+            <input type="text" name="pass_wifi" value="{{ pass_wifi }}" id="pass_wifi" class="formbold-form-input" />
           </div>
         </div>
 
         <div class="formbold-input-flex">
           <div>
             <label for="valor_inmueble" class="formbold-form-label"> Valor </label>
-            <input type="number" name="valor_inmueble" value="{{ valor_inmueble }}" id=" valor_inmueble"
+            <input type="number" name="valor_inmueble" value="{{ valor_inmueble }}" id="valor_inmueble"
               class="formbold-form-input" />
           </div>
         </div>
         <hr>
       </div>
-
+      <!-- form CLIENTE -->
       <div class="form_2">
         <div class="formbold-input-flex">
           <div>
@@ -388,7 +390,7 @@
         </div>
         <hr>
       </div>
-
+      <!-- form FECHAS Y CONFIRMACION -->
       <div class="form_3">
         <div class="formbold-input-flex">
           <div>
@@ -460,7 +462,7 @@
               </svg>
               Cancelar!
             </a>
-            <button type="submit" class="formbold-confirm-btn active">
+            <button type="submit" class="formbold-confirm-btn active" id="crear_contrato">
               <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="11" cy="11" r="10.5" fill="white" stroke="#DDE3EC" />
                 <g clip-path="url(#clip0_1667_1314)">
@@ -493,74 +495,5 @@
     </form>
   </div>
 </div>
-<script>
-  const inmueble_1 = document.querySelector('.inmueble_1')
-  const inquilino_2 = document.querySelector('.inquilino_2')
-  const confirmar_3 = document.querySelector('.confirmar_3')
-
-  const form_1 = document.querySelector('.form_1')
-  const form_2 = document.querySelector('.form_2')
-  const form_3 = document.querySelector('.form_3')
-
-  const btn_volver_1 = document.querySelector('.btn_volver_1')
-  const btn_volver_2 = document.querySelector('.btn_volver_2')
-  const btn_siguiente = document.querySelector('.btn_siguiente')
-
-  btn_siguiente.addEventListener("click", function (event) {
-    event.preventDefault()
-    if (inmueble_1.className == 'inmueble_1 active') {
-      event.preventDefault()
-
-      inmueble_1.classList.remove('active')
-      inquilino_2.classList.add('active')
-
-      form_1.classList.remove('active')
-      form_2.classList.add('active')
-
-      btn_volver_1.classList.add('active')
-      btn_volver_1.addEventListener("click", function (event) {
-        event.preventDefault()
-
-        inmueble_1.classList.add('active')
-        inquilino_2.classList.remove('active')
-
-        form_1.classList.add('active')
-        form_2.classList.remove('active')
-
-        btn_volver_1.classList.remove('active')
-
-      })
-
-    } else if (inquilino_2.className == 'inquilino_2 active') {
-      event.preventDefault()
-
-      inquilino_2.classList.remove('active')
-      confirmar_3.classList.add('active')
-
-      form_2.classList.remove('active')
-      form_3.classList.add('active')
-
-      btn_volver_1.classList.remove('active')
-      btn_siguiente.style.display = 'none'
-
-      btn_volver_2.classList.add('active')
-      btn_volver_2.addEventListener("click", function (event) {
-        event.preventDefault()
-
-        inquilino_2.classList.add('active')
-        confirmar_3.classList.remove('active')
-
-        form_2.classList.add('active')
-        form_3.classList.remove('active')
-        btn_siguiente.textContent = 'Siguiente'
-
-        btn_volver_2.classList.remove('active')
-        btn_volver_1.classList.add('active')
-
-        btn_siguiente.style.display = ''
-      })
-    }
-  })
-</script>
 
 {% endblock%}
