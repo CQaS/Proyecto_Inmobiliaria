@@ -21,19 +21,26 @@
   </button>
 </div>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  @import url('https://fonts.cdnfonts.com/css/orator-std');
 
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Orator Std', sans-serif;
   }
 
+  :root {
+			--color1: rgb(183, 146, 91);   /*Color principal de la pagina*/
+      
+		}
+
   body {
-    font-family: "Inter", sans-serif;
+    background: white;
   }
 
   .formbold-main-wrapper {
+    background: white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -68,7 +75,7 @@
     font-weight: 500;
     font-size: 16px;
     line-height: 24px;
-    color: #536387;
+    color: var(--color2);
   }
 
   .formbold-steps li span {
@@ -82,16 +89,16 @@
     font-weight: 500;
     font-size: 16px;
     line-height: 24px;
-    color: #536387;
+    color: white;
   }
 
   .formbold-steps li.active {
     color: #07074D;
-    ;
+    
   }
 
   .formbold-steps li.active span {
-    background: #6A64F1;
+    background:  rgb(183, 146, 91);
     color: #FFFFFF;
   }
 
@@ -154,12 +161,12 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    background: #FFFFFF;
+    background: var(--color1);
     border: 0.5px solid #DDE3EC;
     border-radius: 5px;
     font-size: 16px;
     line-height: 24px;
-    color: #536387;
+    color:white;
     cursor: pointer;
     padding: 10px 20px;
     transition: all .3s ease-in-out;
@@ -170,7 +177,7 @@
   }
 
   .formbold-confirm-btn.active {
-    background: #6A64F1;
+    background: var(--color1);
     color: #FFFFFF;
   }
 
@@ -203,7 +210,7 @@
     padding: 10px 25px;
     border: none;
     font-weight: 500;
-    background-color: #64e1f1;
+    background-color: var(--color1);
     color: white;
     cursor: pointer;
     display: none;
@@ -222,7 +229,7 @@
     padding: 10px 25px;
     border: none;
     font-weight: 500;
-    background-color: #64e1f1;
+    background-color: var(--color1);
     color: white;
     cursor: pointer;
     display: none;
@@ -241,7 +248,7 @@
     padding: 10px 25px;
     border: none;
     font-weight: 500;
-    background-color: #6A64F1;
+    background-color: var(--color1);
     color: white;
     cursor: pointer;
   }

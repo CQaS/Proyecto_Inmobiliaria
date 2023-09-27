@@ -1,28 +1,31 @@
    
-		@import url('https://fonts.googleapis.com/css?family=Montserrat|Montserrat+Alternates|Poppins&display=swap');
+		@import url('https://fonts.cdnfonts.com/css/orator-std');
+
+
 	
 		/* ESTILOS GENERALES*/
 		*{
 			margin: 0;
 			padding: 0;
 			box-sizing: border-box;
-			font-family: 'Montserrat Alternates', sans-serif;
+			font-family: 'Orator Std', sans-serif;
+                                                
 		}
 		
 	
 		:root {
-			--color1:#283645 ;   /*Color principal de la pagina*/
+			--color1: rgb(183, 146, 91);   /*Color principal de la pagina*/
 		}
 	
 		body{
 			/*background: url(/static/assets/presentacion.jpg);
 			background-size: 100vw 100vh;
 			background-repeat: no-repeat;*/
-			background:rgb(79, 216, 216)
+			background: white;
 		}
 	
 		a {
-			color: white;
+			color: grey;
 			text-decoration: none;
 			font-size: 15px;
 			text-decoration: none;
@@ -37,7 +40,7 @@
 	
 		/*ESTILO ENCABEZADO Y MENU */
 		.header{
-			background-color: rgb(4, 49, 49);
+			background-color: white;
 			width: 100%;
 			height: 100px;
 			position: fixed;
@@ -136,7 +139,7 @@
 		.cont-menu{
 			width: 100%;
 			max-width: 250px;
-			background: rgb(4, 49, 49);
+			background: rgb(183, 146, 91);
 			height: 100vh;
 			position: relative;
 			transition: all 500ms ease;
@@ -152,13 +155,13 @@
 			display: block;
 			text-decoration: none;
 			padding: 20px;
-			color: #c7c7c7;
+			color: black;
 			border-left: 5px solid transparent;
 			transition: all 400ms ease;
 		}
 		.cont-menu nav a:hover{
 			border-left: 5px solid #c7c7c7;
-			background: rgb(4, 49, 49);
+			background: white;
 		}
 		.cont-menu label{
 			position: absolute;
