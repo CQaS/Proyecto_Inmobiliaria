@@ -7,6 +7,7 @@ from django.db import connection, IntegrityError
 
 pattern_Nombre = r'^[A-Z]*[a-z]{2,}[a-zA-Z ]*$'
 pattern_Direccion = r'^[A-Z][a-zA-Z0-9 ]*$'
+pattern_Datos_envio = r'^[A-Z][a-zA-ZñÑáÁéÉíÍúÚóÓ0-9,.:;\- ]*$'
 pattern_soloNumeros = r'^[0-9][0-9]*$'
 pattern_cod_ = r'^[0-9][0-9-]*$'
 pattern_soloLetras = r'^[A-Z][a-zA-Z ]*$'
@@ -16,6 +17,12 @@ def validar_nombre(value):
     if not re.match(pattern_Nombre, value):
         raise ValidationError(
             'El valor debe comenzar con una letra Mayuscula y un minimo de dos letras')
+
+
+def validar_Datos_envio(value):
+    if not re.match(pattern_Datos_envio, value):
+        raise ValidationError(
+            'El valor de Datos de envio no valido')
 
 
 def validar_direccion(value):
@@ -58,6 +65,10 @@ class Inmueble(models.Model):
     id_inmueble = models.AutoField(primary_key=True)
     dir_inmueble = models.CharField(
         max_length=100, null=False, blank=False, verbose_name='Direccion', validators=[validar_direccion])
+    ciudad_inmueble = models.CharField(
+        max_length=100, null=False, blank=False, verbose_name='Ciudad', validators=[validar_direccion])
+    num_apto = models.IntegerField(
+        null=False, blank=False, verbose_name='Apto', validators=[validar_numero])
     tipo_inmueble = models.CharField(max_length=25, null=False, blank=False,
                                      verbose_name='Tipo de Propiedad', validators=[validar_letras])
     tipo_operacion = models.CharField(
@@ -86,6 +97,8 @@ class Inmueble(models.Model):
         null=False, blank=False, verbose_name='Descripcion', validators=[validar_direccion])
     clave_puerta_ingreso = models.CharField(
         max_length=100, null=False, blank=False, verbose_name='Clave Puerta Ingreso', validators=[validar_codigo])
+    clave_puerta_ingreso2 = models.CharField(
+        max_length=100, null=False, blank=False, verbose_name='Clave Puerta Ingreso 2', validators=[validar_codigo])
     clave_wifi = models.CharField(max_length=50, null=False, blank=False,
                                   verbose_name='Clave Wi-Fi', validators=[validar_codigo])
     tipo_servicio = models.CharField(max_length=45, null=True, blank=True,
@@ -96,6 +109,8 @@ class Inmueble(models.Model):
         verbose_name='Valor', null=False, blank=False, validators=[validar_numero])
     exclusividad = models.BooleanField(
         verbose_name='Exclusividad', null=True, blank=True, default=False)
+    habitac_maxima = models.IntegerField(
+        verbose_name='Hab. max.', null=False, blank=False, validators=[validar_numero])
     estado = models.IntegerField(
         null=True, default=1, blank=True, verbose_name='Estado')
     # Estado = 1 seria Disponible
@@ -127,6 +142,8 @@ class Clientes(models.Model):
                                    verbose_name='Nombre de Cliente', validators=[validar_nombre])
     dni_cliente = models.IntegerField(
         verbose_name='Dni de Cliente', null=False, blank=False, validators=[validar_numero])
+    rg_cliente = models.CharField(max_length=100,
+                                  verbose_name='RG Cliente', null=False, blank=False, validators=[validar_direccion])
     dir_cliente = models.CharField(max_length=100, verbose_name='Direccion de Cliente',
                                    null=False, blank=False, validators=[validar_direccion])
     tel_cliente = models.BigIntegerField(
@@ -177,8 +194,43 @@ class Empleados(models.Model):
         db_table = 'empleados'
 
 
+class Contrato(models.Model):
+    id_contrato = models.AutoField(primary_key=True)
+    tipo_operacion = models.CharField(
+        max_length=45, null=True, blank=True, verbose_name='Tipo operacion', default='S/D')
+    fecha_contrato = models.DateField(
+        auto_now_add=True, null=False, blank=False, verbose_name='Fecha de Contrato')
+    fecha_ing = models.DateField(
+        null=False, blank=False, verbose_name='Fecha de Ingreso')
+    fecha_salida = models.DateField(
+        null=False, blank=False, verbose_name='Fecha de Salida')
+    cant_dias = models.IntegerField(
+        null=False, blank=False, verbose_name='Cant. de Dias', validators=[validar_numero])
+    cliente_id = models.IntegerField(
+        null=False, blank=False, verbose_name='Cliente id')
+    valor_total = models.IntegerField(
+        null=False, blank=False, verbose_name='Valor Total', validators=[validar_numero])
+    monto_reserva = models.IntegerField(
+        null=False, blank=False, verbose_name='Monto reserva', validators=[validar_numero])
+    fecha_reserva = models.DateField(
+        null=False, blank=False, verbose_name='Fecha de Reserva')
+    datos_envio = models.CharField(max_length=250, null=False, blank=False,
+                                   verbose_name='Datos de envio', validators=[validar_Datos_envio])
+    inmueble_id = models.IntegerField(
+        null=False, blank=False, verbose_name='Inmueble id')
+
+    def __str__(self):
+        return self.valor_total
+
+    def delete(self, using=None, keep_parents=False):
+        super().delete()
+
+    class Meta:
+        db_table = 'contrato'
+
+
 def buscarProp_ID(id_inmueble):
-    query = f"SELECT i.*, c.nom_cliente FROM inmueble i JOIN clientes c ON i.cliente_id = c.id_cliente WHERE i.id_inmueble = {id_inmueble}"
+    query = f"SELECT i.*, c.nom_cliente, c.id_cliente FROM inmueble i JOIN clientes c ON i.cliente_id = c.id_cliente WHERE i.id_inmueble = {id_inmueble}"
 
     ERR = ''
     try:

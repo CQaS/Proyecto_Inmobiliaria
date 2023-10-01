@@ -23,7 +23,7 @@
 
 <div class="formbold-main-wrapper">
   <div class="formbold-form-wrapper">
-    <form action="{% url 'crear_empleado' %}" id="formulario_contrato" method="POST">
+    <form action="{% url 'crear_contrato' %}" id="formulario_contrato" method="POST">
       {% csrf_token %}
       <div class="formbold-steps">
         <ul>
@@ -44,6 +44,7 @@
 
       <!-- form INMUEBLE -->
       <div class="form_1 active">
+        <input type="hidden" name="id_inmueble" value="{{ id_inmueble }}">
         <div class="formbold-input-flex">
           <div>
             <label for="nom_propietario" class="formbold-form-label"> Propietario </label>
@@ -52,8 +53,8 @@
           </div>
           <div>
             <label for="cod_referencia" class="formbold-form-label"> Cod. Referecia </label>
-            <input type="text" name="cod_referencia" value="{{ cod_referencia }}" placeholder="cod_referencia"
-              id="cod_referencia" class="formbold-form-input" />
+            <input type="text" name="cod_referencia" value="{{ cod_referencia }}" id="cod_referencia"
+              class="formbold-form-input" />
           </div>
           <div>
             <label for="dir_inmueble" class="formbold-form-label"> Direccion </label>
@@ -81,13 +82,11 @@
         <div class="formbold-input-flex">
           <div>
             <label for="pass_hall1" class="formbold-form-label"> Senha hall </label>
-            <input type="text" name="pass_hall1" value="{{ pass_hall1 }}" id="pass_hall1"
-              class="formbold-form-input" />
+            <input type="text" name="pass_hall1" value="{{ pass_hall1 }}" id="pass_hall1" class="formbold-form-input" />
           </div>
           <div>
             <label for="pass_hall2" class="formbold-form-label"> Senha hall 2 </label>
-            <input type="text" name="pass_hall2" value="{{ pass_hall2 }}" id="pass_hall2"
-              class="formbold-form-input" />
+            <input type="text" name="pass_hall2" value="{{ pass_hall2 }}" id="pass_hall2" class="formbold-form-input" />
           </div>
           <div>
             <label for="pass_wifi" class="formbold-form-label">Senha Wi-Fi </label>
@@ -106,6 +105,7 @@
       </div>
       <!-- form CLIENTE -->
       <div class="form_2">
+        <input type="hidden" name="id_cliente" value="{{ id_cliente }}" id="id_cliente">
         <div class="formbold-input-flex">
           <div>
             <input id="contrato_nombre_cliente" type="text" placeholder="Buscar Cliente" class="formbold-form-input">
@@ -135,6 +135,11 @@
 
         <div class="formbold-input-flex">
           <div>
+            <label for="dir_cliente" class="formbold-form-label"> Direccion cliente </label>
+            <input type="text" name="dir_cliente" value="{{ dir_cliente }}" id="dir_cliente"
+              class="formbold-form-input" />
+          </div>
+          <div>
             <label for="ciudad_cliente" class="formbold-form-label"> Ciudad cliente </label>
             <input type="text" name="ciudad_cliente" value="{{ ciudad_cliente }}" id="ciudad_cliente"
               class="formbold-form-input" />
@@ -144,20 +149,15 @@
             <input type="tel" name="tel_cliente" value="{{ tel_cliente }}" id="tel_cliente"
               class="formbold-form-input" />
           </div>
+
+        </div>
+
+        <div class="formbold-input-flex">
           <div>
             <label for="email_cliente" class="formbold-form-label"> E-mail cliente </label>
             <input type="tel" name="email_cliente" value="{{ email_cliente }}" id="email_cliente"
               class="formbold-form-input" />
           </div>
-        </div>
-
-        <div class="formbold-input-flex">
-          <div>
-            <label for="dir_cliente" class="formbold-form-label"> Direccion cliente </label>
-            <input type="text" name="dir_cliente" value="{{ dir_cliente }}" id="dir_cliente"
-              class="formbold-form-input" />
-          </div>
-
         </div>
         <hr>
       </div>
@@ -166,45 +166,39 @@
         <div class="formbold-input-flex">
           <div>
             <label for="fecha_ing" class="formbold-form-label"> Fecha ing </label>
-            <input type="date" name="fecha_ing" value="{{ fecha_ing }}" id="fecha_ing" class="formbold-form-input" />
+            <input type="date" name="fecha_ing" value="" id="fecha_ing" class="formbold-form-input" />
           </div>
           <div>
             <label for="fecha_salida" class="formbold-form-label"> Fecha salida </label>
-            <input type="date" name="fecha_salida" value="{{ fecha_salida }}" id="fecha_salida"
-              class="formbold-form-input" />
+            <input type="date" name="fecha_salida" value="" id="fecha_salida" class="formbold-form-input" />
           </div>
           <div>
             <label for="cant_dias" class="formbold-form-label"> Cant dias </label>
-            <input type="number" name="cant_dias" value="{{ cant_dias }}" id="cant_dias" class="formbold-form-input" />
+            <input type="number" name="cant_dias" id="cant_dias" class="formbold-form-input" readonly />
           </div>
         </div>
         <div class="formbold-input-flex">
           <div>
+            <label for="valor_total" class="formbold-form-label"> Taxa de limpeza</label>
+            <input type="number" name="taxa_limpeza" id="taxa_limpeza" class="formbold-form-input" value="170" />
+          </div>
+          <div>
             <label for="valor_total" class="formbold-form-label"> Valor total </label>
-            <input type="number" name="valor_total" value="{{ valor_total }}" id="valor_total"
-              class="formbold-form-input" />
+            <input type="number" name="valor_total" id="valor_total" class="formbold-form-input" />
           </div>
           <div>
             <label for="monto_reserva" class="formbold-form-label"> Monto reserva </label>
-            <input type="number" name="monto_reserva" value="{{ monto_reserva }}" id="monto_reserva"
-              class="formbold-form-input" />
-          </div>
-          <div>
-            <label for="fecha_reserva" class="formbold-form-label"> Fecha reserva </label>
-            <input type="date" name="fecha_reserva" value="{{ fecha_reserva }}" id="fecha_reserva"
-              class="formbold-form-input" />
+            <input type="number" name="monto_reserva" id="monto_reserva" class="formbold-form-input" value="0" />
           </div>
         </div>
         <div class="formbold-input-flex">
           <div>
-            <label for="datos_envio" class="formbold-form-label"> Datos envio </label>
-            <input type="text" name="datos_envio" value="{{ datos_envio }}" id="datos_envio"
-              class="formbold-form-input" />
+            <label for="saldo_pendiente" class="formbold-form-label"> Saldo pendiente </label>
+            <input type="number" name="saldo_pendiente" id="saldo_pendiente" class="formbold-form-input" />
           </div>
           <div>
-            <label for="saldo_pendiente" class="formbold-form-label"> Saldo pendiente </label>
-            <input type="number" name="saldo_pendiente" value="{{ saldo_pendiente }}" id="saldo_pendiente"
-              class="formbold-form-input" />
+            <label for="datos_envio" class="formbold-form-label"> Datos envio </label>
+            <input type="text" name="datos_envio" id="datos_envio" class="formbold-form-input" />
           </div>
         </div>
         <hr>
