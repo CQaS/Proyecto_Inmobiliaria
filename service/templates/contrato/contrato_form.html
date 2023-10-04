@@ -2,6 +2,7 @@
 
 
 <!--Muestra si algun campo tiene error-->
+{% if error != '' %}
 <div class="danger alert">
   <div class="content">
     <div class="icon">
@@ -20,6 +21,7 @@
     </svg>
   </button>
 </div>
+{% endif %}
 
 <div class="formbold-main-wrapper">
   <div class="formbold-form-wrapper">

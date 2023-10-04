@@ -2,6 +2,7 @@
 
 
 <!--Muestra si algun campo tiene error-->
+{% if error != '' %}
 <div class="danger alert">
   <div class="content">
       <div class="icon">
@@ -21,6 +22,7 @@
       </svg>
   </button>
 </div>
+{% endif %}
 
 <div class="container-form-cliente">
   <form action="{% url 'crear_cliente' %}" id="formulario" method="POST">

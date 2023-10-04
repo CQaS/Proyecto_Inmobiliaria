@@ -5,9 +5,6 @@
 {% block content %}
 
 
-<script src="http://translate.google.com/translate_a/element.js?cb=loadGoogleTranslate"></script>
-<div id="myid">Choose Language</div>
-
 <!--Filtro de propiedades -->
 <div class="search-bar">
   <h3>Buscar por:</h3>
@@ -20,7 +17,6 @@
           <option value="Alquiler-permanente">Alquiler Permante</option>
           <option value="Venta">Venta</option>
         </select>
-     
   </div>
   
   <div class="search-input">   
@@ -85,32 +81,15 @@
 
 <!--quienes somos-->
 
-<section class="box">
-  <div class="about">
-    <div class="titulo-about">
-      <h3>QUIENES SOMOS</h3>
-    </div>
-    <p>Loren30
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, quibusdam! Saepe natus deleniti recusandae eum
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod? Eius deleniti doloremque iure nemo repell
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius quas nobis repellat delectus voluptatum? Quaerat,
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam quod nobis aperiam voluptatum deleniti repellat
-      sint
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam doloremque quibusdam deleniti nemo voluptatum
-      perferendis molest
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam quae doloremque eaque repellendus nobis debitis
-    </p>
-  </div>
+<!--<section>
 
-
-  <!-- Formulario de contacto -->
+  Formulario de contacto
   <div class="container-form">
     <div class="titulo-form">
       <h3>CONTACTO</h3>
     </div>
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
-      <!--{{ form.as_p }}-->
       {% for f in form %}
       <label>{{f.label}}</label>
       <input type="{{ f.field.widget.input_type }}" class="" name="{{ f.name }}" id="" placeholder="{{ f.label }}"
@@ -118,10 +97,10 @@
       <br>
       {% endfor %}
       <input type="submit" value="Send" id="send" class="form_enviar">
-    </form>
+    </form> 
 
-  </div>
-</section>
+
+</section>-->
 
 
 
