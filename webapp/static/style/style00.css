@@ -245,7 +245,7 @@ ul {
 .home-section{
   position: relative;
   background: white;
-  height: 100vh;
+  height: 20vh; /*100vh*/
   left: 260px;
   width: calc(100% - 260px);
   transition: all 0.5s ease;
@@ -254,6 +254,7 @@ ul {
 .sidebar.close ~ .home-section{
   left: 78px;
   width: calc(100% - 78px);
+  height: 30px;
 }
 .home-content{
   display: flex;
@@ -273,8 +274,15 @@ ul {
   font-size: 26px;
   font-weight: 600;
 }
-
-	
+/****foto de fondo******/
+.container-fondo{
+  height: 450px;
+}
+.img-fondo {
+  width: 46px;
+  height: 46px;
+}	
+/**********/
 
 	
 /*Filtro de propiedades*/
