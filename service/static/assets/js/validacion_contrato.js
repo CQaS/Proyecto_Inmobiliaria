@@ -22,6 +22,13 @@ let dir_cliente = document.getElementById('dir_cliente')
 let id_cliente = document.getElementById('id_cliente')
 
 /* fechas CONTRATO */
+
+let datos_envio = document.getElementById('datos_envio')
+let cant_dias = document.getElementById('cant_dias')
+let taxa_limpeza = document.getElementById('taxa_limpeza')
+let valor_total = document.getElementById('valor_total')
+let saldo_pendiente = document.getElementById('saldo_pendiente')
+
 // Obtén la fecha actual en el formato YYYY-MM-DD
 let fechaActual = new Date().toISOString().split("T")[0]
 
@@ -135,14 +142,13 @@ const seleccionaCliente = () => {
 
   let lista_dinamica = document.getElementById("lista_dinamica")
   dni_Inq = lista_dinamica.options[lista_dinamica.selectedIndex].value
-  console.log(dni_Inq)
 
   let url = `/cliente/json_dni_Inq/${dni_Inq}`
 
   $.get(url).done((res) => {
 
     $.each(res, (i, R) => {
-      console.log(R.fields)
+      console.log(R)
 
       nom_cliente.value = R.fields.nom_cliente
       rg_cliente.value = R.fields.rg_cliente
@@ -151,7 +157,7 @@ const seleccionaCliente = () => {
       tel_cliente.value = R.fields.tel_cliente
       email_cliente.value = R.fields.email_cliente
       dir_cliente.value = R.fields.dir_cliente
-      id_cliente.value = R.fields.dni_cliente
+      id_cliente.value = R.pk
     })
   })
 }
@@ -197,6 +203,10 @@ crear_contrato.addEventListener("click", (e) => {
 
   const mail = (DATO) => {
     return DATO.value.match(pattern_mail)
+  }
+
+  const d_envio = (DATO) => {
+    return DATO.value.match(pattern_datos_envio)
   }
 
   /* VALIDACIONES INMUEBLE */
@@ -298,6 +308,31 @@ crear_contrato.addEventListener("click", (e) => {
     return
   }
 
+  if (d_envio(datos_envio) == null || datos_envio.value.length < 3) {
+    _alerta('DAtos de Envio no validos!')
+    return
+  }
+
+  if (parseFloat(cant_dias.value) < 0 || cant_dias.value === '' || isNaN(cant_dias.value)) {
+    _alerta("Cantidad de Dias necesaria")
+    return
+  }
+
+  if (parseFloat(taxa_limpeza.value) < 0 || taxa_limpeza.value === '' || isNaN(taxa_limpeza.value)) {
+    _alerta("Taxa de Limpeza necesaria")
+    return
+  }
+
+  if (parseFloat(valor_total.value) < 0 || valor_total.value === '' || isNaN(valor_total.value)) {
+    _alerta("Valor Total necesaria")
+    return
+  }
+
+  if (parseFloat(saldo_pendiente.value) < 0 || saldo_pendiente.value === '' || isNaN(saldo_pendiente.value)) {
+    _alerta("Valor Total necesaria")
+    return
+  }
+
   /* FIN VALIDACIONES FECHAS/CONFIRMACION */
 
   // SI ESTA TODO BIEN SE ENVIA EL FORMULARIO...
@@ -305,7 +340,7 @@ crear_contrato.addEventListener("click", (e) => {
 
 })
 
-/* VALIDACIONES FECHAS/CONFIRMACION */
+/* CAMBIOS EN FECHAS */
 
 let fechaSeleccionada = 0
 
@@ -348,4 +383,4 @@ document.getElementById('taxa_limpeza').addEventListener('keyup', () => {
     Number(document.getElementById('monto_reserva').value)
 })
 
-/* FIN VALIDACIONES FECHAS/CONFIRMACION */
+/* FIN VALIDACIONES FECHAS/CONFIRMACION docx2pdf */

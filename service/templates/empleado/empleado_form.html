@@ -22,6 +22,7 @@
   </button>
 </div>
 {% endif %}
+
 <div class="formbold-main-wrapper">
   <div class="formbold-form-wrapper">
     <form action="{% url 'crear_empleado' %}" id="formulario_empleado" class="formulario" method="POST">
@@ -39,52 +40,49 @@
       <div class="form_1 active">
 
         <!-- Validamos maxlength, autofoco required-->
-        {% set vueltas = 1 %} 
-        {% for e in empleados %} {% if e.name != 'nom_puesto' %}
-        {% if vueltas == 1 or vueltas == 4 %}
-          <div class="formbold-input-flex">
-        {% endif %}
-          <div>
-            <label for="{{e.label}}" class="formbold-form-label"> {{e.label}} </label>
-            <input type="{{ e.field.widget.input_type }}" name="{{ e.name }}" value="{{ nom_propietario }}" id="{{ e.name }}"
-              class="formbold-form-input" readonly />
-          </div>
-        {% if vueltas == 1 or vueltas == 4 %}
-          </div>
-        {% endif %}
-        
-        {% endif %} {% endfor %} 
 
-        <span class="eleccion">Puesto Empleado</span>
-        <select id="puesto" name="puesto" required>
-          <option value="Maestranza">Maestranza</option>
-          <option value="Jardineria">Jardineria</option>
-          <option value="Piletero">Piletero</option>
-          <option value="Administracion">Administracion</option>
-        </select>
+        <div class="formbold-input-flex">
+          <div>
+            <label for="nom_empleado" class="formbold-form-label"> Nombre de Empleado </label>
+            <input type="text" name="nom_empleado" id="nom_empleado" class="formbold-form-input"
+              value="{{ empleados.nom_empleado }}" />
+          </div>
+          <div>
+            <label for="dni_empleado" class="formbold-form-label"> Dni </label>
+            <input type="number" name="dni_empleado" id="dni_empleado" class="formbold-form-input"
+              value="{{ empleados.dni_empleado}}" />
+          </div>
+          <div>
+            <label for="tel_empleado" class="formbold-form-label"> Telefono </label>
+            <input type="number" name="tel_empleado" id="tel_empleado" class="formbold-form-input"
+              value="{{ empleados.tel_empleado }}" />
+          </div>
+        </div>
+        <div class="formbold-input-flex">
+          <div>
+            <label for="dir_empleado" class="formbold-form-label"> Direccion </label>
+            <input type="text" name="dir_empleado" id="dir_empleado" class="formbold-form-input"
+              value="{{ empleados.dir_empleado }}" />
+          </div>
+          <div>
+            <label for="email_empleado" class="formbold-form-label"> E-mail </label>
+            <input type="email" name="email_empleado" id="email_empleado" class="formbold-form-input"
+              value="{{ empleados.email_empleado}}" />
+          </div>
+          <div>
+            <label class="formbold-form-label">Puesto Empleado</label>
+            <select id="nom_puesto" name="nom_puesto" class="formbold-form-input" style="margin-top: 0;" required>
+              <option value="Maestranza">Maestranza</option>
+              <option value="Jardineria">Jardineria</option>
+              <option value="Piletero">Piletero</option>
+              <option value="Administracion">Administracion</option>
+            </select>
+          </div>
+        </div>
         <br>
 
         <div>
-          <button class="btn_volver_2">
-            Atras
-          </button>
-          <a href="#" class="formbold-confirm-btn">
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="11" cy="11" r="10.5" fill="white" stroke="#DDE3EC" />
-              <g clip-path="url(#clip0_1667_1314)">
-                <path
-                  d="M9.83343 12.8509L15.1954 7.48828L16.0208 8.31311L9.83343 14.5005L6.12109 10.7882L6.94593 9.96336L9.83343 12.8509Z"
-                  fill="#536387" />
-              </g>
-              <defs>
-                <clipPath id="clip0_1667_1314">
-                  <rect width="14" height="14" fill="white" transform="translate(4 4)" />
-                </clipPath>
-              </defs>
-            </svg>
-            Cancelar!
-          </a>
-          <button type="submit" class="formbold-confirm-btn active" id="crear_contrato">
+          <button type="submit" class="formbold-confirm-btn active" id="crear_empleado">
             <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="11" cy="11" r="10.5" fill="white" stroke="#DDE3EC" />
               <g clip-path="url(#clip0_1667_1314)">
@@ -102,17 +100,6 @@
           </button>
         </div>
       </div>
-      <hr>
-  </div>
-
-  <div class="formbold-form-btn-wrapper">
-    <button class="btn_volver_1">
-      Atras
-    </button>
-
-    <button class="btn_siguiente">
-      Siguiente
-    </button>
   </div>
   </form>
 </div>
