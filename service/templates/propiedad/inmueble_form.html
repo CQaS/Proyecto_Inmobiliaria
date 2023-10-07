@@ -1,117 +1,310 @@
 {% extends 'layouts/base00.html' %} {% load static %} {% block content %}
 
 
-
-<div class="container-form-inmuebles">
-  <!--Muestra si algun campo tiene error-->
-  {% if error != '' %}
-  <div class="danger alert">
-    <div class="content">
-      <div class="icon">
-        <svg height="50" viewBox="0 0 512 512" width="50" xmlns="http://www.w3.org/2000/svg">
-          <path fill="#fff"
-            d="M449.07,399.08,278.64,82.58c-12.08-22.44-44.26-22.44-56.35,0L51.87,399.08A32,32,0,0,0,80,446.25H420.89A32,32,0,0,0,449.07,399.08Zm-198.6-1.83a20,20,0,1,1,20-20A20,20,0,0,1,250.47,397.25ZM272.19,196.1l-5.74,122a16,16,0,0,1-32,0l-5.74-121.95v0a21.73,21.73,0,0,1,21.5-22.69h.21a21.74,21.74,0,0,1,21.73,22.7Z" />
-        </svg>
-      </div>
-      <p>{{ error }}</p>
-    </div>
-    <button class="close">
-      <svg height="18px" id="Layer_1" style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512"
-        width="18px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <path fill="#69727D"
-          d="M437.5,386.6L306.9,256l130.6-130.6c14.1-14.1,14.1-36.8,0-50.9c-14.1-14.1-36.8-14.1-50.9,0L256,205.1L125.4,74.5  c-14.1-14.1-36.8-14.1-50.9,0c-14.1,14.1-14.1,36.8,0,50.9L205.1,256L74.5,386.6c-14.1,14.1-14.1,36.8,0,50.9  c14.1,14.1,36.8,14.1,50.9,0L256,306.9l130.6,130.6c14.1,14.1,36.8,14.1,50.9,0C451.5,423.4,451.5,400.6,437.5,386.6z" />
+<!--Muestra si algun campo tiene error-->
+{% if error != '' %}
+<div class="danger alert">
+  <div class="content">
+    <div class="icon">
+      <svg height="50" viewBox="0 0 512 512" width="50" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#fff"
+          d="M449.07,399.08,278.64,82.58c-12.08-22.44-44.26-22.44-56.35,0L51.87,399.08A32,32,0,0,0,80,446.25H420.89A32,32,0,0,0,449.07,399.08Zm-198.6-1.83a20,20,0,1,1,20-20A20,20,0,0,1,250.47,397.25ZM272.19,196.1l-5.74,122a16,16,0,0,1-32,0l-5.74-121.95v0a21.73,21.73,0,0,1,21.5-22.69h.21a21.74,21.74,0,0,1,21.73,22.7Z" />
       </svg>
+    </div>
+    <p>{{ error }}</p>
+  </div>
+  <button class="close">
+    <svg height="18px" id="Layer_1" style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512"
+      width="18px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <path fill="#69727D"
+        d="M437.5,386.6L306.9,256l130.6-130.6c14.1-14.1,14.1-36.8,0-50.9c-14.1-14.1-36.8-14.1-50.9,0L256,205.1L125.4,74.5  c-14.1-14.1-36.8-14.1-50.9,0c-14.1,14.1-14.1,36.8,0,50.9L205.1,256L74.5,386.6c-14.1,14.1-14.1,36.8,0,50.9  c14.1,14.1,36.8,14.1,50.9,0L256,306.9l130.6,130.6c14.1,14.1,36.8,14.1,50.9,0C451.5,423.4,451.5,400.6,437.5,386.6z" />
+    </svg>
+  </button>
+</div>
+{% endif %}
+
+<div class="formbold-main-wrapper">
+  <div class="formbold-form-wrapper">
+    <form action="{% url 'crear_propiedad' %}" id="formulario_inmueble" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      
+      <div class="formbold-steps">
+        <ul>
+          <li class="inmueble_1 active">
+            <span>1</span>
+            Alta Inmueble
+          </li>
+
+          <li class="inquilino_2">
+            <span>2</span>
+
+          </li>
+          <li class="confirmar_3">
+            <span>3</span>
+          </li>
+        </ul>
+      </div>
+
+
+      <!-- PRIMER HOJA -->
+      <div class="form_1 active">
+
+        <!-- Validamos maxlength, autofoco required-->
+        <!-- pantalla 1 linea 1-3 cajas-->
+        <div class="formbold-input-flex">
+          <div>
+            <label for="dir_inmueble" class="formbold-form-label"> Dirección de Inmueble </label>
+            <input type="text" name="dir_inmueble" id="dir_inmueble" class="formbold-form-input"
+              value="{{ inmueble.dir_inmueble }}" />
+          </div>
+
+          <div>
+            <label for="ciudad_inmueble" class="formbold-form-label"> Ciudad del Inmueble </label>
+            <input type="text" name="ciudad_inmueble" id="ciudad_inmueble" class="formbold-form-input"
+              value="{{ inmueble.ciudad_inmueble }}" />
+          </div>
+
+          <div>
+            <label for="num_apto" class="formbold-form-label"> Número Apto. </label>
+            <input type="number" name="num_apto" id="num_apto" class="formbold-form-input"
+              value="{{ inmueble.num_apto}}" />
+          </div>
+        </div>
+        <!-- pantalla 1 linea 2-3 cajas-->
+        <div class="formbold-input-flex">
+          <div>
+            <label for="sup_total" class="formbold-form-label"> Sup. Total </label>
+            <input type="number" name="sup_total" id="sup_total" class="formbold-form-input"
+              value="{{ inmueble.sup_total }}" />
+          </div>
+
+          <div>
+            <label for="sup_cubierta" class="formbold-form-label"> Sup. Cubierta </label>
+            <input type="number" name="sup_cubierta" id="sup_cubiertal" class="formbold-form-input"
+              value="{{ inmueble.sup_cubierta }}" />
+          </div>
+
+          <div>
+            <label for="sup_semicub" class="formbold-form-label"> Sup. Semi Cubierta </label>
+            <input type="number" name="sup_semicub" id="sup_semicub" class="formbold-form-input"
+              value="{{ inmueble.sup_semicub}}" />
+          </div>
+        </div>
+        <!-- pantalla 1 linea 3-3 cajas-->
+        <div class="formbold-input-flex">
+          <div>
+            <label for="cant_plantas" class="formbold-form-label"> Cantidad de Plantas </label>
+            <input type="number" name="cant_plantas" id="cant_plantas" class="formbold-form-input"
+              value="{{ inmueble.cant_plantas }}" />
+          </div>
+
+          <div>
+            <label for="cant_domirtorios" class="formbold-form-label"> Cantidad Dormitorios </label>
+            <input type="number" name="cant_domirtorios" id="cant_domirtorios" class="formbold-form-input"
+              value="{{ inmueble.cant_domirtorios }}" />
+          </div>
+
+          <div>
+            <label for="cant_banos" class="formbold-form-label"> Cantidad de Baños </label>
+            <input type="number" name="cant_banos" id="cant_banos" class="formbold-form-input"
+              value="{{ inmueble.cant_banos }}" />
+          </div>
+        </div>
+        <hr>
+      </div>
+
+      < class="form_2">
+        <!-- pantalla 2 linea 1-3 cajas-->
+        <div class="formbold-input-flex">
+          <div>
+            <label for="cod_referencia" class="formbold-form-label"> Cód. Referencia </label>
+            <input type="number" name="cod_referencia" id="cod_referencia" class="formbold-form-input"
+              value="{{ inmueble.cod_referencia }}" />
+          </div>
+          <div>
+            <label for="descripcion" class="formbold-form-label"> Descripción </label>
+            <input type="text" name="descripcion" id="descripcion" class="formbold-form-input"
+              value="{{ inmueble.descripcion }}" />
+          </div>
+
+          <div>
+            <label for="clave_puerta_ingreso" class="formbold-form-label"> Clave Puerta de Ingreso </label>
+            <input type="text" name="clave_puerta_ingreso" id="clave_puerta_ingreso" class="formbold-form-input"
+              value="{{ inmueble.clave_puerta_ingreso }}" />
+          </div>
+        </div>
+        <!-- pantalla 1 linea 2-3 cajas-->
+        <div class="formbold-input-flex">
+          <div>
+            <label for="clave_puerta_ingreso2" class="formbold-form-label"> Clave Ingreso 2 </label>
+            <input type="text" name="clave_puerta_ingreso2" id="clave_puerta_ingreso2" class="formbold-form-input"
+              value="{{ inmueble.clave_puerta_ingreso2 }}" />
+          </div>
+
+          <div>
+            <label for="clave_wifi" class="formbold-form-label"> Clave WI-FI </label>
+            <input type="text" name="clave_wifi" id="clave_wifi" class="formbold-form-input"
+              value="{{ inmueble.clave_wifi }}" />
+          </div>
+
+          <div>
+            <label for="valor_inmueble" class="formbold-form-label"> Valor </label>
+            <input type="number" name="valor_inmueble" id="valor_inmueble" class="formbold-form-input"
+              value="{{ inmueble.valor_inmueble }}" />
+          </div>
+        </div>
+
+        
+        <!-- pantalla 2 linea 3-3 cajas-->
+        <div class="formbold-input-flex">
+          <div>
+            <label for="habitac_maxima" class="formbold-form-label"> Capacidad Máxima </label>
+            <input type="number" name="habitac_maxima" id="habitac_maxima" class="formbold-form-input"
+              value="{{ inmueble.habitac_maxima }}" />
+          </div>
+
+          <div>
+            <label class="formbold-form-label">Selecciona Cliente/Propiestario</label>
+            <select id="cliente_id" name="cliente_id" class="formbold-form-input" style="margin-top: 0;" required>
+              <option value="">Selecciona</option>
+              {% for c in clientes %}
+              <option value="{{ c.id_cliente }}">{{ c.nom_cliente }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        
+        <div>
+          <label class="formbold-form-label">Tipo Operación</label>
+          <select id="tipo_operacion" name="tipo_operacion" class="formbold-form-input" style="margin-top: 0;" required>
+            <option value="Alquiler temporario">Alquiler Temporario</option>
+            <option value="Alquiler permanente">Alquiler Permante</option>
+            <option value="Venta">Venta</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form_3">
+        <!-- pantalla 3 linea 1-3 cajas-->
+        <div class="formbold-input-flex">
+          <div>
+            <label class="formbold-form-label">Tipo Propiedad</label>
+            <select id="tipo_immueble" name="tipo_immueble" class="formbold-form-input" style="margin-top: 0;" required>
+              <option value="Casa">Casa</option>
+              <option value="Dpto">Dpto</option>
+              <option value="Local">Local</option>
+            </select>
+          </div>
+
+        <div>
+          <label class="formbold-form-label">Condición</label>
+          <select id="condicion" name="condicion" class="formbold-form-input" style="margin-top: 0;" required>
+            <option value="Muy buena">Muy Buena</option>
+            <option value="Buena">Buena</option>
+            <option value="Regular">Regular</option>
+            <option value="Mala">Mala</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="formbold-input-flex">
+        <div>
+          <label class="formbold-form-label">Cochera</label>
+          <input type="checkbox" id="cochera" name="cochera" value="true">
+        </div>
+       
+        <div>
+          <label class="formbold-form-label">Exclusividad</label>
+          <input type="checkbox" id="exclusividad" name="exclusividad" value="true">
+        </div>
+
+        <div>
+          <label class="formbold-form-label">Expensas</label>
+          <input type="checkbox" id="expensas" name="expensas" value="true">
+        </div>
+      </div>
+
+      <label class="formbold-form-label">Servicios</label>
+
+      <div class="formbold-input-flex">
+        <div>
+          <input type="checkbox" id="tipo_servicio" name="tipo_servicio" value="WI-FI">
+          <label class="servicios" for="wifi">WI-FI</label>
+        </div>
+
+        <div>
+          <input type="checkbox" id="tipo_servicio" name="tipo_servicio" value="Ropa de cama">
+          <label class="servicios" for="ropa_cama">Ropa de Cama</label>
+        </div>
+
+        <div>
+          <input type="checkbox" id="tipo_servicio" name="tipo_servicio" value="Piscinas">
+          <label class="servicios" for="piscinas">Piscinas</label>
+        </div>
+
+        <div>
+          <input type="checkbox" id="tipo_servicio" name="tipo_servicio" value="Mucama">
+          <label class="servicios" for="mucama">Mucama</label>
+        </div>
+      </div>
+
+
+      <div class="formbold-input-flex">
+        <label>Selecciones Imagenes</label>
+        <input type="file" id="imgs" name="imgs" multiple>
+      </div>
+      </divc>
+      <div>
+        <button class="btn_volver_2">
+          Atras
+        </button>
+        <a href="#" class="formbold-confirm-btn">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="10.5" fill="white" stroke="#DDE3EC" />
+            <g clip-path="url(#clip0_1667_1314)">
+              <path
+                d="M9.83343 12.8509L15.1954 7.48828L16.0208 8.31311L9.83343 14.5005L6.12109 10.7882L6.94593 9.96336L9.83343 12.8509Z"
+                fill="#536387" />
+            </g>
+            <defs>
+              <clipPath id="clip0_1667_1314">
+                <rect width="14" height="14" fill="white" transform="translate(4 4)" />
+              </clipPath>
+            </defs>
+          </svg>
+          Cancelar!
+        </a>
+        <button type="submit" class="formbold-confirm-btn active" id="crear_contrato">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="10.5" fill="white" stroke="#DDE3EC" />
+            <g clip-path="url(#clip0_1667_1314)">
+              <path
+                d="M9.83343 12.8509L15.1954 7.48828L16.0208 8.31311L9.83343 14.5005L6.12109 10.7882L6.94593 9.96336L9.83343 12.8509Z"
+                fill="#536387" />
+            </g>
+            <defs>
+              <clipPath id="clip0_1667_1314">
+                <rect width="14" height="14" fill="white" transform="translate(4 4)" />
+              </clipPath>
+            </defs>
+          </svg>
+          Confirmar Inmueble?
+        </button>
+      </div>
+
+      <hr>
+  </div>
+
+  <div class="formbold-form-btn-wrapper">
+    <button class="btn_volver_1">
+      Atras
+    </button>
+
+    <button class="btn_siguiente">
+      Siguiente
     </button>
   </div>
-  {% endif %}
-  <form action="{% url 'crear_propiedad' %}" id="formulario_inmueble" class="formulario" method="POST"
-    enctype="multipart/form-data">
-    {% csrf_token %}
-
-    <h2 class="create-contact">INMUEBLES</h2>
-    <div class="iconos">
-      <div class="border-icon">
-        <a href=""><i class="fa-solid fa-plus" style="color: #edeff3"></i></a>
-      </div>
-      <div class="border-icon">
-        <a href=""><i class="fa-solid fa-pen" style="color: #edeff3"></i></a>
-      </div>
-      <div class="border-icon">
-        <a href=""><i class="fa-solid fa-trash" style="color: #edeff3"></i></a>
-      </div>
-    </div>
-
-    <!-- Validamos maxlength, autofoco required-->
-    {% for i in inmueble_form %}
-    {% if i.name != 'tipo_operacion' and i.name != 'cochera' and i.name != 'exclusividad' and i.name != 'expensas' and i.name != 'tipo_inmueble' and i.name != 'condicion' and i.name != 'tipo_servicio' and i.name != 'cliente_id' and i.name != 'estado' %}
-    <label>{{i.label}}</label>
-    <input type="{{ i.field.widget.input_type }}" id="{{ i.name }}" name="{{ i.name }}" maxlength="70"
-      placeholder="{{ i.label }}" autofocus required value="{{ i.value | default:'' }}">
-    <br>
-    {% endif %}
-    {% endfor %}
-
-      
-    <span class="eleccion">Selecciona Cliente/propietario</span>
-    <select name="cliente_id" id="cliente_id">
-      <option value="">Selecciona</option>
-      {% for c in clientes %}
-      <option value="{{ c.id_cliente }}">{{ c.nom_cliente }}</option>
-      {% endfor %}
-    </select>
-
-    <span class="eleccion">Tipo Operacion</span>
-    <select id="tipo_operacion" name="tipo_operacion">
-      <option value="Alquiler temporario">Alquiler Temporario</option>
-      <option value="Alquiler permanente">Alquiler Permante</option>
-      <option value="Venta">Venta</option>
-    </select>
-    <br>
-
-    <span class="eleccion">Tipo Propiedad</span>
-    <select id="tipo_inmueble" name="tipo_inmueble">
-      <option value="Casa">Casa</option>
-      <option value="Dpto">Dpto</option>
-    </select>
-
-    
-    <span class="eleccion">Condicion</span>
-    <select id="condicion" name="condicion">
-      <option value="Muy buena">Muy Buena</option>
-      <option value="Buena">Buena</option>
-      <option value="Regular">Regular</option>
-      <option value="Mala">Mala</option>
-    </select>
-    <br><br>
-
-    <span class="eleccion-cbox">Cochera</span>
-    <input type="checkbox" id="cochera" name="cochera" value="true">
-
-    <span class="eleccion-cbox">Exclusividad</span>
-    <input type="checkbox" id="exclusividad" name="exclusividad" value="true">
-
-    <span class="eleccion-cbox">Expensas</span>
-    <input type="checkbox" id="expensas" name="expensas" value="true">
-
-    <br><br>
-    <span class="eleccion-cbox">Servicios</span><br>
-    <input type="checkbox" id="tipo_servicio" name="tipo_servicio" value="WI-FI">
-    <label class="servicios" for="wifi">WI-FI</label><br>
-
-    <input type="checkbox" id="tipo_servicio" name="tipo_servicio" value="Ropa de cama">
-    <label class="servicios" for="ropa_cama">Ropa de Cama</label><br>
-
-    <input type="checkbox" id="tipo_servicio" name="tipo_servicio" value="Piscinas">
-    <label class="servicios" for="piscinas">Piscinas</label><br>
-
-    <input type="checkbox" id="tipo_servicio" name="tipo_servicio" value="Mucama">
-    <label class="servicios" for="mucama">Mucama</label><br>
-
-    <span>Selecciones Imagenes</span>
-    <input type="file" id="imgs" name="imgs" multiple>
-
-    <input type="submit" value="crear" id="send" class="form_enviar">
   </form>
+  </div>
 </div>
 <script src="{% static '/assets/js/validacion_inmueble.js' %}"></script>
 

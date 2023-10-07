@@ -24,46 +24,118 @@
 </div>
 {% endif %}
 
-<div class="container-form-cliente">
-  <form action="{% url 'crear_cliente' %}" id="formulario" method="POST">
+<div class="formbold-main-wrapper">
+  <div class="formbold-form-wrapper">
+  <form action="{% url 'crear_cliente' %}" id="formulario_cliente" class="formulario" method="POST">
     {% csrf_token %}
+    <div class="formbold-steps">
+      <ul>
+        <li class="inmueble_1 active">
+          <span>C</span>
+          Alta Cliente
+        </li>
+      </ul>
+    </div>
+    <!-- form Cliente -->
+    <div class="form_1 active">
 
-    <h2 class="create-contact">CLIENTES</h2>
-    <div class="iconos">
-      <div class="border-icon">
-        <a href=""><i class="fa-solid fa-plus" style="color: #edeff3"></i></a>
+
+    
+    <!-- Validamos maxlength, autofoco required-->
+    <div class="formbold-input-flex">
+      <div>
+        <label for="nom_cliente" class="formbold-form-label"> Nombre de Cliente </label>
+        <input type="text" name="nom_cliente" id="nom_cliente" class="formbold-form-input"
+          value="{{ clientes.nom_cliente }}" />
       </div>
-      <div class="border-icon">
-        <a href=""><i class="fa-solid fa-pen" style="color: #edeff3"></i></a>
+    </div>
+    
+    <div class="formbold-input-flex">
+      <div>
+        <label for="dir_cliente" class="formbold-form-label"> Dirección </label>
+        <input type="text" name="dir_cliente" id="dir_cliente" class="formbold-form-input"
+          value="{{ clientes.dir_cliente }}" />
       </div>
-      <div class="border-icon">
-        <a href=""><i class="fa-solid fa-trash" style="color: #edeff3"></i></a>
+
+      <div>
+        <label for="dni_cliente" class="formbold-form-label"> DNI </label>
+        <input type="number" name="dni_cliente" id="dni_cliente" class="formbold-form-input"
+          value="{{ clientes.dni_cliente}}" />
+      </div>
+
+      <div>
+        <label for="rg_cliente" class="formbold-form-label"> RG </label>
+        <input type="number" name="rg_cliente" id="rg_cliente" class="formbold-form-input"
+          value="{{ clientes.rg_cliente}}" />
       </div>
     </div>
 
-    <!-- Validamos maxlength, autofoco required-->
-    {% for c in clientes %} {% if c.name != 'categoria' %}
-    <label>{{c.label}}</label>
-    <input
-      type="{{ c.field.widget.input_type }}"
-      id="{{ c.name }}"
-      name="{{ c.name }}"
-      maxlength="70"
-      placeholder="{{ c.label }}"
-      autofocus
-      required
-      value="{{ c.value | default:'' }}">
-    <br>
-    {% endif %} {% endfor %}
-    <span class="eleccion">Categoria Cliente</span>
-    <select id="categoria" name="categoria" required>
-      <option value="Propietario">Propietario</option>
-      <option value="Locatario">Locatario</option>
-    </select>
+    <div class="formbold-input-flex">
+      <div>
+        <label for="tel_cliente" class="formbold-form-label"> Telefono </label>
+        <input type="number" name="tel_cliente" id="tel_cliente" class="formbold-form-input"
+          value="{{ clientes.tel_cliente }}" />
+      </div>
+    
+      <div>
+        <label for="email_cliente" class="formbold-form-label"> E-mail </label>
+        <input type="email" name="email_cliente" id="email_cliente" class="formbold-form-input"
+          value="{{ clientes.email_cliente}}" />
+      </div>
 
-    <input type="submit" value="Send" id="send" class="form_enviar">
-  </form>
+      <div>
+        <label for="ciudad_cliente" class="formbold-form-label"> Ciudad </label>
+        <input type="text" name="ciudad_cliente" id="ciudad_cliente" class="formbold-form-input"
+          value="{{ clientes.ciudad_cliente}}" />
+      </div>
+
+    </div>
+    <div class="formbold-input-flex">
+      <div>
+        <label for="pais_cliente" class="formbold-form-label"> Pais </label>
+        <input type="text" name="pais_cliente" id="pais_cliente" class="formbold-form-input"
+          value="{{ clientes.pais_cliente}}" />
+      </div>
+
+      <div>
+        <label for="fechnac" class="formbold-form-label"> Fecha Nacimiento>
+        <input type="date" name="fechnac" id="fechnac" class="formbold-form-input"
+          value="{{ clientes.fechnac}}" />
+      </div>
+
+      <div>
+        <label class="formbold-form-label">Categoría Cliente</label>
+        <select id="categoria" name="categoria" class="formbold-form-input" style="margin-top: 0;" required>
+          <option value="Propietario">Propietario</option>
+          <option value="Locatario">Locatario</option>
+        </select> 
+      </div>
+    </div>
+    <br>
+
+    <div>
+      <button type="submit" class="formbold-confirm-btn active" id="crear_empleado">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="10.5" fill="white" stroke="#DDE3EC" />
+          <g clip-path="url(#clip0_1667_1314)">
+            <path
+              d="M9.83343 12.8509L15.1954 7.48828L16.0208 8.31311L9.83343 14.5005L6.12109 10.7882L6.94593 9.96336L9.83343 12.8509Z"
+              fill="#536387" />
+          </g>
+          <defs>
+            <clipPath id="clip0_1667_1314">
+              <rect width="14" height="14" fill="white" transform="translate(4 4)" />
+            </clipPath>
+          </defs>
+        </svg>
+        Confirmar Cliente?
+      </button>
+    </div>
+  </div>
 </div>
+</form>
+</div>
+    
 <script src="{% static '/assets/js/validacion_cliente.js' %}"></script>
 
 {% endblock%}
