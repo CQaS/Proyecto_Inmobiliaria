@@ -38,8 +38,8 @@ let f_sal = document.getElementById("fecha_salida")
 f_in.setAttribute("min", fechaActual)
 f_sal.setAttribute("min", fechaActual)
 
-const inmueble_1 = document.querySelector('.inmueble_1')
-const inquilino_2 = document.querySelector('.inquilino_2')
+const parte_1 = document.querySelector('.parte_1')
+const parte_2 = document.querySelector('.parte_2')
 const confirmar_3 = document.querySelector('.confirmar_3')
 
 const form_1 = document.querySelector('.form_1')
@@ -52,11 +52,11 @@ const btn_siguiente = document.querySelector('.btn_siguiente')
 
 btn_siguiente.addEventListener("click", function (event) {
   event.preventDefault()
-  if (inmueble_1.className == 'inmueble_1 active') {
+  if (parte_1.className == 'parte_1 active') {
     event.preventDefault()
 
-    inmueble_1.classList.remove('active')
-    inquilino_2.classList.add('active')
+    parte_1.classList.remove('active')
+    parte_2.classList.add('active')
 
     form_1.classList.remove('active')
     form_2.classList.add('active')
@@ -65,8 +65,8 @@ btn_siguiente.addEventListener("click", function (event) {
     btn_volver_1.addEventListener("click", function (event) {
       event.preventDefault()
 
-      inmueble_1.classList.add('active')
-      inquilino_2.classList.remove('active')
+      parte_1.classList.add('active')
+      parte_2.classList.remove('active')
 
       form_1.classList.add('active')
       form_2.classList.remove('active')
@@ -75,10 +75,10 @@ btn_siguiente.addEventListener("click", function (event) {
 
     })
 
-  } else if (inquilino_2.className == 'inquilino_2 active') {
+  } else if (parte_2.className == 'parte_2 active') {
     event.preventDefault()
 
-    inquilino_2.classList.remove('active')
+    parte_2.classList.remove('active')
     confirmar_3.classList.add('active')
 
     form_2.classList.remove('active')
@@ -91,7 +91,7 @@ btn_siguiente.addEventListener("click", function (event) {
     btn_volver_2.addEventListener("click", function (event) {
       event.preventDefault()
 
-      inquilino_2.classList.add('active')
+      parte_2.classList.add('active')
       confirmar_3.classList.remove('active')
 
       form_2.classList.add('active')
@@ -167,12 +167,12 @@ const seleccionaCliente = () => {
 const crear_contrato = document.getElementById('crear_contrato')
 const formulario_contrato = document.getElementById('formulario_contrato')
 
-const pattern_letras_espacios = /^[A-Z][a-zA-Z ]*$/
-const pattern_letras_numero_espacios = /^[A-Z][a-zA-Z0-9 ]*$/
+const pattern_letras_espacios2 = /^[A-Z][a-zA-Z ]*$/
+const pattern_letras_numero_espacios2 = /^[A-Z][a-zA-Z0-9 ]*$/
 const pattern_datos_envio = /^[A-Z][a-zA-ZñÑáÁéÉíÍúÚóÓ0-9,.:;\- ]*$/
-const pattern_solo_numeros = /^[0-9][0-9-]*$/
+const pattern_solo_numeros1 = /^[0-9][0-9-]*$/
 const pattern_solo_numeros2 = /^[0-9][0-9#]*$/
-const pattern_mail = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
+const pattern_mail2 = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
 
 crear_contrato.addEventListener("click", (e) => {
   e.preventDefault()
@@ -186,15 +186,15 @@ crear_contrato.addEventListener("click", (e) => {
   }
 
   const letra_y_espacios = (DATO) => {
-    return DATO.value.match(pattern_letras_espacios)
+    return DATO.value.match(pattern_letras_espacios2)
   }
 
   const letras_numero_espacios = (DATO) => {
-    return DATO.value.match(pattern_letras_numero_espacios)
+    return DATO.value.match(pattern_letras_numero_espacios2)
   }
 
   const solo_numeros = (DATO) => {
-    return DATO.value.match(pattern_solo_numeros)
+    return DATO.value.match(pattern_solo_numeros1)
   }
 
   const solo_numeros2 = (DATO) => {
@@ -202,7 +202,7 @@ crear_contrato.addEventListener("click", (e) => {
   }
 
   const mail = (DATO) => {
-    return DATO.value.match(pattern_mail)
+    return DATO.value.match(pattern_mail2)
   }
 
   const d_envio = (DATO) => {

@@ -14,7 +14,7 @@ const i_cod_referencia = document.getElementById("cod_referencia")
 const i_condicion = document.getElementById("condicion")
 const i_descripcion = document.getElementById("descripcion")
 const i_valorinmueble = document.getElementById("valor_inmueble")
-const i_idcliente = document.getElementById("cliente_id")
+const i_idcliente = document.getElementById("cliente_id_")
 const imgs = document.getElementById('imgs')
 const tipo_servicio = document.getElementsByName('tipo_servicio')
 
@@ -137,7 +137,6 @@ send.addEventListener("click", (e) => {
     }
 
     if (i_idcliente.value == '') {
-        i_idcliente.focus()
         _alerta('Selecciona un Cliente')
         return
     }
@@ -180,4 +179,74 @@ send.addEventListener("click", (e) => {
 
     // SI ESTA TODO BIEN SE ENVIA EL FORMULARIO...
     formulario.submit()
+})
+
+/* formulario tri-partido */
+
+const parte_1 = document.querySelector('.parte_1')
+const parte_2 = document.querySelector('.parte_2')
+const confirmar_3 = document.querySelector('.confirmar_3')
+
+const form_1 = document.querySelector('.form_1')
+const form_2 = document.querySelector('.form_2')
+const form_3 = document.querySelector('.form_3')
+
+const btn_volver_1 = document.querySelector('.btn_volver_1')
+const btn_volver_2 = document.querySelector('.btn_volver_2')
+const btn_siguiente = document.querySelector('.btn_siguiente')
+
+btn_siguiente.addEventListener("click", function (event) {
+    event.preventDefault()
+    if (parte_1.className == 'parte_1 active') {
+        event.preventDefault()
+
+        parte_1.classList.remove('active')
+        parte_2.classList.add('active')
+
+        form_1.classList.remove('active')
+        form_2.classList.add('active')
+
+        btn_volver_1.classList.add('active')
+        btn_volver_1.addEventListener("click", function (event) {
+            event.preventDefault()
+
+            parte_1.classList.add('active')
+            parte_2.classList.remove('active')
+
+            form_1.classList.add('active')
+            form_2.classList.remove('active')
+
+            btn_volver_1.classList.remove('active')
+
+        })
+
+    } else if (parte_2.className == 'parte_2 active') {
+        event.preventDefault()
+
+        parte_2.classList.remove('active')
+        confirmar_3.classList.add('active')
+
+        form_2.classList.remove('active')
+        form_3.classList.add('active')
+
+        btn_volver_1.classList.remove('active')
+        btn_siguiente.style.display = 'none'
+
+        btn_volver_2.classList.add('active')
+        btn_volver_2.addEventListener("click", function (event) {
+            event.preventDefault()
+
+            parte_2.classList.add('active')
+            confirmar_3.classList.remove('active')
+
+            form_2.classList.add('active')
+            form_3.classList.remove('active')
+            btn_siguiente.textContent = 'Siguiente'
+
+            btn_volver_2.classList.remove('active')
+            btn_volver_1.classList.add('active')
+
+            btn_siguiente.style.display = ''
+        })
+    }
 })

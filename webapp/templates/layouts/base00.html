@@ -14,82 +14,84 @@
   <!-- css ALERT formulario  -->
   <link rel="stylesheet" href="{% static '/style/alert_form.css' %}">
 
-  
+
   <!-- Boxiocns CDN Link -->
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
   <!-- FONT AWESOME -->
   <script src="https://kit.fontawesome.com/3a34f10376.js" crossorigin="anonymous"></script>
   <!--FONT-->
   <link href="https://fonts.cdnfonts.com/css/orator-std" rel="stylesheet">
-                
+  <!-- Script alert  -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
   <title>MEC Imóveis</title>
 </head>
 
 <body>
-    <section class="sidebar close">
-      <div class="logo-details">
-        <img src="{% static '/assets/logo_blanco.jpg' %}" alt="logo">
-      </div>
-      <ul class="nav-links">
-        <li>
+  <section class="sidebar close">
+    <div class="logo-details">
+      <img src="{% static '/assets/logo_blanco.jpg' %}" alt="logo">
+    </div>
+    <ul class="nav-links">
+      <li>
+        <a href="#">
+          <i class='bx bx-grid-alt'></i>
+          <span class="link_name">Home</span>
+        </a>
+      </li>
+      <li>
+        <div class="iocn-link">
           <a href="#">
-            <i class='bx bx-grid-alt'></i>
-            <span class="link_name">Home</span>
+            <i class='bx bx-filter'></i>
+            <span class="link_name">Category</span>
           </a>
-        </li>
-        <li>
-          <div class="iocn-link">
-            <a href="#">
-              <i class='bx bx-filter'></i>
-              <span class="link_name">Category</span>
-            </a>
-            <i class='bx bxs-chevron-down arrow'></i>
-          </div>
-          <ul class="sub-menu">
-            <li><a class="link_name" href="#">Category</a></li>
-            <li><a href="#">Alquiler Temporario</a></li>
-            <li><a href="#">Alquiler Permanente</a></li>
-            <li><a href="#">Venta</a></li>
-          </ul>
-        </li>
-        <li>
-        <li>
+          <i class='bx bxs-chevron-down arrow'></i>
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" href="#">Category</a></li>
+          <li><a href="#">Alquiler Temporario</a></li>
+          <li><a href="#">Alquiler Permanente</a></li>
+          <li><a href="#">Venta</a></li>
+        </ul>
+      </li>
+      <li>
+      <li>
+        <a href="#">
+          <i class='bx bx-user-pin'></i>
+          <span class="link_name">Nosotros</span>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-mail-send'></i>
+          <span class="link_name">Contacto</span>
+        </a>
+      </li>
+      <li>
+        <div class="iocn-link">
           <a href="#">
-            <i class='bx bx-user-pin'></i>
-            <span class="link_name">Nosotros</span>
+            <i class='bx bx-cog'></i>
+            <span class="link_name">Servicios</span>
           </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-mail-send'></i> 
-            <span class="link_name">Contacto</span>
-          </a>
-        </li>
-        <li>
-          <div class="iocn-link">
-            <a href="#">
-              <i class='bx bx-cog'></i>
-              <span class="link_name">Servicios</span>
-            </a>
-            <i class='bx bxs-chevron-down arrow'></i>
-          </div>
-          <ul class="sub-menu">
-            <li><a class="link_name" href="#">Servicios</a></li>
-            <li><a href="{% url 'crear_cliente' %}">Clientes</a></li>
-            <li><a href="{% url 'crear_propiedad' %}">Inmuebles</a></li>
-            <li><a href="{% url 'crear_contrato' %}">Contratos</a></li>
-            <li><a href="{% url 'crear_empleado' %}">Empleados</a></li>
-            <li><a href="#">Informes</a></li>
-          </ul>
-        </li>
-      </ul>
-    </section>
-    <section class="home-section">
-      <div class="home-content">
-        <i class='bx bx-menu'></i>
-        <span class="text">MEC Inmoves</span>
-      </div>
-    </section>
+          <i class='bx bxs-chevron-down arrow'></i>
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" href="#">Servicios</a></li>
+          <li><a href="{% url 'crear_cliente' %}">Clientes</a></li>
+          <li><a href="{% url 'crear_propiedad' %}">Inmuebles</a></li>
+          <li><a href="{% url 'crear_contrato' %}">Contratos</a></li>
+          <li><a href="{% url 'crear_empleado' %}">Empleados</a></li>
+          <li><a href="#">Informes</a></li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+  <section class="home-section">
+    <div class="home-content">
+      <i class='bx bx-menu'></i>
+      <span class="text">MEC Inmoves</span>
+    </div>
+  </section>
 
   <main>
 
@@ -99,66 +101,67 @@
   </main>
 
   <!-- Footer Links -->
-<footer>
-  <div class="container">
-    <div class="sec-quicklink">
-      <h2>About Us</h2>
-      <p>Dedicamo-nos a fazer os seus sonhos realidade, com o nosso atendimento personalizado na área    imobiliária.
-        Nosso aprimoramento e inovação são contínuos, proporcionando um atendimento de excelência aos nossos clientes.
-        Temos  aluguel de temporada, administração de imóveis, locação anual, vendas e permutas em Bombinhas e região.<br>
-        Nós vamos esperar por você!<br>
-        María Eugenia Cáceres<br>
-        CRECI 1111
-      </p>
+  <footer>
+    <div class="container">
+      <div class="sec-quicklink">
+        <h2>About Us</h2>
+        <p>Dedicamo-nos a fazer os seus sonhos realidade, com o nosso atendimento personalizado na área imobiliária.
+          Nosso aprimoramento e inovação são contínuos, proporcionando um atendimento de excelência aos nossos clientes.
+          Temos aluguel de temporada, administração de imóveis, locação anual, vendas e permutas em Bombinhas e
+          região.<br>
+          Nós vamos esperar por você!<br>
+          María Eugenia Cáceres<br>
+          CRECI 1111
+        </p>
 
 
-      <ul class="sci">
-        <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
-        <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-        <li><a href="#"><i class="fa-brands fa-whatsapp"></i></a></li>
-      </ul>
+        <ul class="sci">
+          <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+          <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+          <li><a href="#"><i class="fa-brands fa-whatsapp"></i></a></li>
+        </ul>
+      </div>
+
+      <div class="sec-quicklink">
+        <h2>Contact Us</h2>
+        <ul class="info">
+          <li>
+            <span><i class="fa-solid fa-phone"></i></span>
+            <p><a href="tel:+12345678900">+1 234 567 8900</a></p>
+            <span><i class="fa-solid fa-envelope"></i></span>
+            <p><a href="mailto:mec@gmail.com">mec@gmail.com</a></p>
+          </li>
+        </ul>
+      </div>
+      <div class="sec-quicklink">
+        <h2>Contact</h2>
+        <form action="https://formsubmit.co/dalilahubalde@gmail.com" class="form" method="POST">
+          <!-- <form action="https://formsubmit.co/9ec76a5d36afc60db58eda0b46ef40ce" class="form"  method="POST"></form> -->
+          <label for="" class="form_label">Nombre y Apellido</label>
+          <input type="text" class="form_input" name="name" required>
+          <br>
+          <label for="" class="form_label">Correo Electrónico</label>
+          <input type="email" id="correoelectronico" class="form_input" name="email" required>
+          <br>
+          <label for="" class="form_label">Teléfono</label>
+          <input type="tel" class="form_input" name="tel" required>
+          <br>
+          <label for="" class="form_label">Mensaje</label>
+          <!-- <input type="textarea" class="form_input" name="textarea"> -->
+          <textarea name="mensaje" id="mensaje" cols="30" rows="10"></textarea>
+          <br>
+
+          <input type="submit" value="Enviar formulario" class="form_enviar">
+          <!--Esto es para que no se vea la confirmacion del envio del formulario-->
+          <input type="hidden" name="_next" value="http://localhost:127.0.0.1:5500/">
+          <input type="hidden" name="_captcha" value="false">
+        </form>
+      </div>
     </div>
-
-    <div class="sec-quicklink">
-      <h2>Contact Us</h2>
-      <ul class="info">
-        <li>
-          <span><i class="fa-solid fa-phone"></i></span>
-          <p><a href="tel:+12345678900">+1 234 567 8900</a></p>
-          <span><i class="fa-solid fa-envelope"></i></span>
-          <p><a href="mailto:mec@gmail.com">mec@gmail.com</a></p>
-        </li>
-      </ul>
-    </div>
-    <div class="sec-quicklink">
-      <h2>Contact</h2>
-      <form action="https://formsubmit.co/dalilahubalde@gmail.com" class="form" method="POST">
-        <!-- <form action="https://formsubmit.co/9ec76a5d36afc60db58eda0b46ef40ce" class="form"  method="POST"></form> -->
-        <label for="" class="form_label">Nombre y Apellido</label>
-        <input type="text" class="form_input" name="name" required>
-        <br>
-        <label for="" class="form_label">Correo Electrónico</label>
-        <input type="email" id="correoelectronico" class="form_input" name="email" required>
-        <br>
-        <label for="" class="form_label">Teléfono</label>
-        <input type="tel" class="form_input" name="tel" required>
-        <br>
-        <label for="" class="form_label">Mensaje</label>
-        <!-- <input type="textarea" class="form_input" name="textarea"> -->
-        <textarea name="mensaje" id="mensaje" cols="30" rows="10"></textarea>
-        <br>
-
-        <input type="submit" value="Enviar formulario" class="form_enviar">
-        <!--Esto es para que no se vea la confirmacion del envio del formulario-->
-        <input type="hidden" name="_next" value="http://localhost:127.0.0.1:5500/">
-        <input type="hidden" name="_captcha" value="false">
-      </form>
-    </div>
+  </footer>
+  <div class="copyrightText">
+    <p>SVD INSIDE copyright 2023</p>
   </div>
-</footer>
-<div class="copyrightText">
-  <p>SVD INSIDE copyright 2023</p>
-</div>
   <!-- Scroll Reveal -->
   <script src="https://unpkg.com/scrollreveal"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -167,8 +170,6 @@
 
   <script src="{% static '/assets/js/script_main.js' %}"></script>
 
-  <!-- Script alert  -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <!-- Este script pertenece a las alertas -->
   <script>
     $(".close").click(function () {
@@ -176,8 +177,6 @@
     });
   </script>
 
-  <!-- Validacion de Contratos -->
-  <script src="{% static '/assets/js/validacion_contrato.js' %}"></script>
 </body>
 
 </html>

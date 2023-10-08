@@ -29,11 +29,11 @@
       {% csrf_token %}
       <div class="formbold-steps">
         <ul>
-          <li class="inmueble_1 active">
+          <li class="parte_1 active">
             <span>1</span>
             Inmueble
           </li>
-          <li class="inquilino_2">
+          <li class="parte_2">
             <span>2</span>
             Inquilino
           </li>
@@ -262,5 +262,7 @@
     </form>
   </div>
 </div>
+<!-- Validacion de Contratos -->
+<script src="{% static '/assets/js/validacion_contrato.js' %}"></script>
 
 {% endblock%}

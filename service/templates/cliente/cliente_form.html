@@ -5,135 +5,134 @@
 {% if error != '' %}
 <div class="danger alert">
   <div class="content">
-      <div class="icon">
-          <svg height="50" viewBox="0 0 512 512" width="50" xmlns="http://www.w3.org/2000/svg">
-              <path fill="#fff"
-                  d="M449.07,399.08,278.64,82.58c-12.08-22.44-44.26-22.44-56.35,0L51.87,399.08A32,32,0,0,0,80,446.25H420.89A32,32,0,0,0,449.07,399.08Zm-198.6-1.83a20,20,0,1,1,20-20A20,20,0,0,1,250.47,397.25ZM272.19,196.1l-5.74,122a16,16,0,0,1-32,0l-5.74-121.95v0a21.73,21.73,0,0,1,21.5-22.69h.21a21.74,21.74,0,0,1,21.73,22.7Z" />
-          </svg>
-      </div>
-      <p>{{ error }}</p>
+    <div class="icon">
+      <svg height="50" viewBox="0 0 512 512" width="50" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#fff"
+          d="M449.07,399.08,278.64,82.58c-12.08-22.44-44.26-22.44-56.35,0L51.87,399.08A32,32,0,0,0,80,446.25H420.89A32,32,0,0,0,449.07,399.08Zm-198.6-1.83a20,20,0,1,1,20-20A20,20,0,0,1,250.47,397.25ZM272.19,196.1l-5.74,122a16,16,0,0,1-32,0l-5.74-121.95v0a21.73,21.73,0,0,1,21.5-22.69h.21a21.74,21.74,0,0,1,21.73,22.7Z" />
+      </svg>
+    </div>
+    <p>{{ error }}</p>
   </div>
   <button class="close">
-      <svg height="18px" id="Layer_1" style="enable-background:new 0 0 512 512;" version="1.1"
-          viewBox="0 0 512 512" width="18px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink">
-          <path fill="#69727D"
-              d="M437.5,386.6L306.9,256l130.6-130.6c14.1-14.1,14.1-36.8,0-50.9c-14.1-14.1-36.8-14.1-50.9,0L256,205.1L125.4,74.5  c-14.1-14.1-36.8-14.1-50.9,0c-14.1,14.1-14.1,36.8,0,50.9L205.1,256L74.5,386.6c-14.1,14.1-14.1,36.8,0,50.9  c14.1,14.1,36.8,14.1,50.9,0L256,306.9l130.6,130.6c14.1,14.1,36.8,14.1,50.9,0C451.5,423.4,451.5,400.6,437.5,386.6z" />
-      </svg>
+    <svg height="18px" id="Layer_1" style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512"
+      width="18px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <path fill="#69727D"
+        d="M437.5,386.6L306.9,256l130.6-130.6c14.1-14.1,14.1-36.8,0-50.9c-14.1-14.1-36.8-14.1-50.9,0L256,205.1L125.4,74.5  c-14.1-14.1-36.8-14.1-50.9,0c-14.1,14.1-14.1,36.8,0,50.9L205.1,256L74.5,386.6c-14.1,14.1-14.1,36.8,0,50.9  c14.1,14.1,36.8,14.1,50.9,0L256,306.9l130.6,130.6c14.1,14.1,36.8,14.1,50.9,0C451.5,423.4,451.5,400.6,437.5,386.6z" />
+    </svg>
   </button>
 </div>
 {% endif %}
 
 <div class="formbold-main-wrapper">
   <div class="formbold-form-wrapper">
-  <form action="{% url 'crear_cliente' %}" id="formulario_cliente" class="formulario" method="POST">
-    {% csrf_token %}
-    <div class="formbold-steps">
-      <ul>
-        <li class="inmueble_1 active">
-          <span>C</span>
-          Alta Cliente
-        </li>
-      </ul>
-    </div>
-    <!-- form Cliente -->
-    <div class="form_1 active">
-    
-    <!-- Validamos maxlength, autofoco required-->
-    <div class="formbold-input-flex">
-      <div>
-        <label for="nom_cliente" class="formbold-form-label"> Nombre de Cliente </label>
-        <input type="text" name="nom_cliente" id="nom_cliente" class="formbold-form-input"
-          value="{{ clientes.nom_cliente }}" />
+    <form action="{% url 'crear_cliente' %}" id="formulario_cliente" class="formulario" method="POST">
+      {% csrf_token %}
+      <div class="formbold-steps">
+        <ul>
+          <li class="parte_1 active">
+            <span>C</span>
+            Alta Cliente
+          </li>
+        </ul>
       </div>
-    </div>
-    
-    <div class="formbold-input-flex">
-      <div>
-        <label for="dir_cliente" class="formbold-form-label"> Dirección </label>
-        <input type="text" name="dir_cliente" id="dir_cliente" class="formbold-form-input"
-          value="{{ clientes.dir_cliente }}" />
-      </div>
+      <!-- form Cliente -->
+      <div class="form_1 active">
 
-      <div>
-        <label for="dni_cliente" class="formbold-form-label"> DNI </label>
-        <input type="number" name="dni_cliente" id="dni_cliente" class="formbold-form-input"
-          value="{{ clientes.dni_cliente}}" />
-      </div>
+        <!-- Validamos maxlength, autofoco required-->
+        <div class="formbold-input-flex">
+          <div>
+            <label for="nom_cliente" class="formbold-form-label"> Nombre de Cliente </label>
+            <input type="text" name="nom_cliente" id="nom_cliente" class="formbold-form-input"
+              value="{{ clientes.nom_cliente }}" />
+          </div>
+        </div>
 
-      <div>
-        <label for="rg_cliente" class="formbold-form-label"> RG </label>
-        <input type="number" name="rg_cliente" id="rg_cliente" class="formbold-form-input"
-          value="{{ clientes.rg_cliente}}" />
-      </div>
-    </div>
+        <div class="formbold-input-flex">
+          <div>
+            <label for="dir_cliente" class="formbold-form-label"> Dirección </label>
+            <input type="text" name="dir_cliente" id="dir_cliente" class="formbold-form-input"
+              value="{{ clientes.dir_cliente }}" />
+          </div>
 
-    <div class="formbold-input-flex">
-      <div>
-        <label for="tel_cliente" class="formbold-form-label"> Telefono </label>
-        <input type="number" name="tel_cliente" id="tel_cliente" class="formbold-form-input"
-          value="{{ clientes.tel_cliente }}" />
-      </div>
-    
-      <div>
-        <label for="email_cliente" class="formbold-form-label"> E-mail </label>
-        <input type="email" name="email_cliente" id="email_cliente" class="formbold-form-input"
-          value="{{ clientes.email_cliente}}" />
-      </div>
+          <div>
+            <label for="dni_cliente" class="formbold-form-label"> DNI </label>
+            <input type="number" name="dni_cliente" id="dni_cliente" class="formbold-form-input"
+              value="{{ clientes.dni_cliente}}" />
+          </div>
 
-      <div>
-        <label for="ciudad_cliente" class="formbold-form-label"> Ciudad </label>
-        <input type="text" name="ciudad_cliente" id="ciudad_cliente" class="formbold-form-input"
-          value="{{ clientes.ciudad_cliente}}" />
-      </div>
+          <div>
+            <label for="rg_cliente" class="formbold-form-label"> RG </label>
+            <input type="number" name="rg_cliente" id="rg_cliente" class="formbold-form-input"
+              value="{{ clientes.rg_cliente}}" />
+          </div>
+        </div>
 
-    </div>
-    <div class="formbold-input-flex">
-      <div>
-        <label for="pais_cliente" class="formbold-form-label"> Pais </label>
-        <input type="text" name="pais_cliente" id="pais_cliente" class="formbold-form-input"
-          value="{{ clientes.pais_cliente}}" />
-      </div>
+        <div class="formbold-input-flex">
+          <div>
+            <label for="tel_cliente" class="formbold-form-label"> Telefono </label>
+            <input type="number" name="tel_cliente" id="tel_cliente" class="formbold-form-input"
+              value="{{ clientes.tel_cliente }}" />
+          </div>
 
-      <div>
-        <label for="fechnac" class="formbold-form-label"> Fecha Nacimiento>
-        <input type="date" name="fechnac" id="fechnac" class="formbold-form-input"
-          value="{{ clientes.fechnac}}" />
-      </div>
+          <div>
+            <label for="email_cliente" class="formbold-form-label"> E-mail </label>
+            <input type="email" name="email_cliente" id="email_cliente" class="formbold-form-input"
+              value="{{ clientes.email_cliente}}" />
+          </div>
 
-      <div>
-        <label class="formbold-form-label">Categoría Cliente</label>
-        <select id="categoria" name="categoria" class="formbold-form-input" style="margin-top: 0;" required>
-          <option value="Propietario">Propietario</option>
-          <option value="Locatario">Locatario</option>
-        </select> 
-      </div>
-    </div>
-    <br>
+          <div>
+            <label for="ciudad_cliente" class="formbold-form-label"> Ciudad </label>
+            <input type="text" name="ciudad_cliente" id="ciudad_cliente" class="formbold-form-input"
+              value="{{ clientes.ciudad_cliente}}" />
+          </div>
 
-    <div>
-      <button type="submit" class="formbold-confirm-btn active" id="crear_empleado">
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="11" cy="11" r="10.5" fill="white" stroke="#DDE3EC" />
-          <g clip-path="url(#clip0_1667_1314)">
-            <path
-              d="M9.83343 12.8509L15.1954 7.48828L16.0208 8.31311L9.83343 14.5005L6.12109 10.7882L6.94593 9.96336L9.83343 12.8509Z"
-              fill="#536387" />
-          </g>
-          <defs>
-            <clipPath id="clip0_1667_1314">
-              <rect width="14" height="14" fill="white" transform="translate(4 4)" />
-            </clipPath>
-          </defs>
-        </svg>
-        Confirmar Cliente?
-      </button>
-    </div>
+        </div>
+        <div class="formbold-input-flex">
+          <div>
+            <label for="pais_cliente" class="formbold-form-label"> Pais </label>
+            <input type="text" name="pais_cliente" id="pais_cliente" class="formbold-form-input"
+              value="{{ clientes.pais_cliente}}" />
+          </div>
+
+          <div>
+            <label for="fechnac" class="formbold-form-label"> Fecha Nacimiento>
+              <input type="date" name="fechnac" id="fechnac" class="formbold-form-input"
+                value="{{ clientes.fechnac}}" />
+          </div>
+
+          <div>
+            <label class="formbold-form-label">Categoría Cliente</label>
+            <select id="categoria" name="categoria" class="formbold-form-input" style="margin-top: 0;" required>
+              <option value="Propietario">Propietario</option>
+              <option value="Locatario">Locatario</option>
+            </select>
+          </div>
+        </div>
+        <br>
+
+        <div>
+          <button type="submit" class="formbold-confirm-btn active" id="crear_empleado">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="11" cy="11" r="10.5" fill="white" stroke="#DDE3EC" />
+              <g clip-path="url(#clip0_1667_1314)">
+                <path
+                  d="M9.83343 12.8509L15.1954 7.48828L16.0208 8.31311L9.83343 14.5005L6.12109 10.7882L6.94593 9.96336L9.83343 12.8509Z"
+                  fill="#536387" />
+              </g>
+              <defs>
+                <clipPath id="clip0_1667_1314">
+                  <rect width="14" height="14" fill="white" transform="translate(4 4)" />
+                </clipPath>
+              </defs>
+            </svg>
+            Confirmar Cliente?
+          </button>
+        </div>
+      </div>
   </div>
+  </form>
 </div>
-</form>
-</div>
-    
+
 <script src="{% static '/assets/js/validacion_cliente.js' %}"></script>
 
 {% endblock%}

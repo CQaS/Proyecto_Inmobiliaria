@@ -27,28 +27,25 @@
   <div class="formbold-form-wrapper">
     <form action="{% url 'crear_propiedad' %}" id="formulario_inmueble" method="POST">
       {% csrf_token %}
-
       <div class="formbold-steps">
         <ul>
-          <li class="inmueble_1 active">
+          <li class="parte_1 active">
             <span>1</span>
             Alta Inmueble
           </li>
-
-          <li class="inquilino_2">
+          <li class="parte_2">
             <span>2</span>
-
+            Alta Inmueble
           </li>
           <li class="confirmar_3">
             <span>3</span>
+            Servicios
           </li>
         </ul>
       </div>
 
-
       <!-- PRIMER HOJA -->
       <div class="form_1 active">
-
         <!-- Validamos maxlength, autofoco required-->
         <!-- pantalla 1 linea 1-3 cajas-->
         <div class="formbold-input-flex">
@@ -57,13 +54,11 @@
             <input type="text" name="dir_inmueble" id="dir_inmueble" class="formbold-form-input"
               value="{{ inmueble.dir_inmueble }}" />
           </div>
-
           <div>
             <label for="ciudad_inmueble" class="formbold-form-label"> Ciudad </label>
             <input type="text" name="ciudad_inmueble" id="ciudad_inmueble" class="formbold-form-input"
               value="{{ inmueble.ciudad_inmueble }}" />
           </div>
-
           <div>
             <label for="num_apto" class="formbold-form-label"> Número Apto. </label>
             <input type="number" name="num_apto" id="num_apto" class="formbold-form-input"
@@ -77,13 +72,11 @@
             <input type="number" name="sup_total" id="sup_total" class="formbold-form-input"
               value="{{ inmueble.sup_total }}" />
           </div>
-
           <div>
             <label for="sup_cubierta" class="formbold-form-label"> Sup. Cubierta </label>
             <input type="number" name="sup_cubierta" id="sup_cubiertal" class="formbold-form-input"
               value="{{ inmueble.sup_cubierta }}" />
           </div>
-
           <div>
             <label for="sup_semicub" class="formbold-form-label"> Sup. Semi Cubierta </label>
             <input type="number" name="sup_semicub" id="sup_semicub" class="formbold-form-input"
@@ -126,34 +119,30 @@
             <input type="text" name="descripcion" id="descripcion" class="formbold-form-input"
               value="{{ inmueble.descripcion }}" />
           </div>
-
           <div>
             <label for="clave_puerta_ingreso" class="formbold-form-label"> Clave Puerta Ingreso </label>
             <input type="text" name="clave_puerta_ingreso" id="clave_puerta_ingreso" class="formbold-form-input"
               value="{{ inmueble.clave_puerta_ingreso }}" />
           </div>
         </div>
-        <!-- pantalla 1 linea 2-3 cajas-->
+        <!-- pantalla 2 linea 2-3 cajas-->
         <div class="formbold-input-flex">
           <div>
             <label for="clave_puerta_ingreso2" class="formbold-form-label"> Clave Ingreso 2 </label>
             <input type="text" name="clave_puerta_ingreso2" id="clave_puerta_ingreso2" class="formbold-form-input"
               value="{{ inmueble.clave_puerta_ingreso2 }}" />
           </div>
-
           <div>
             <label for="clave_wifi" class="formbold-form-label"> Clave WI-FI </label>
             <input type="text" name="clave_wifi" id="clave_wifi" class="formbold-form-input"
               value="{{ inmueble.clave_wifi }}" />
           </div>
-
           <div>
             <label for="valor_inmueble" class="formbold-form-label"> Valor </label>
             <input type="number" name="valor_inmueble" id="valor_inmueble" class="formbold-form-input"
               value="{{ inmueble.valor_inmueble }}" />
           </div>
         </div>
-
 
         <!-- pantalla 2 linea 3-3 cajas-->
         <div class="formbold-input-flex">
@@ -165,7 +154,7 @@
 
           <div>
             <label class="formbold-form-label">Selecciona Cliente/Propietario</label>
-            <select id="cliente_id" name="cliente_id" class="formbold-form-input" style="margin-top: 0;" required>
+            <select id="cliente_id_" name="cliente_id" class="formbold-form-input" style="margin-top: 0;">
               <option value="">Selecciona</option>
               {% for c in clientes %}
               <option value="{{ c.id_cliente }}">{{ c.nom_cliente }}</option>
@@ -208,7 +197,7 @@
             </select>
           </div>
         </div>
-
+        <!-- pantalla 3 linea 2-3 cajas-->
         <div class="formbold-input-flex">
           <div>
             <label class="formbold-form-label">Cochera</label>
@@ -225,9 +214,7 @@
             <input type="checkbox" id="expensas" name="expensas" value="true">
           </div>
         </div>
-
-        <label class="formbold-form-label">Servicios</label>
-
+        <!-- pantalla 3 linea 3-3 cajas-->
         <div class="formbold-input-flex">
           <div>
             <input type="checkbox" id="tipo_servicio" name="tipo_servicio" value="WI-FI">
@@ -249,66 +236,65 @@
             <label class="servicios" for="mucama">Mucama</label>
           </div>
         </div>
-
-
+        <!-- pantalla 3 linea 4-3 cajas-->
         <div class="formbold-input-flex">
           <label>Seleccione Imágenes</label>
           <input type="file" id="imgs" name="imgs" multiple>
         </div>
+
+        <div class="formbold-form-confirm">
+          <div>
+            <button class="btn_volver_2">
+              Atras
+            </button>
+            <a href="{% url 'index' %}" class=" formbold-confirm-btn">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="11" cy="11" r="10.5" fill="white" stroke="#DDE3EC" />
+                <g clip-path="url(#clip0_1667_1314)">
+                  <path
+                    d="M9.83343 12.8509L15.1954 7.48828L16.0208 8.31311L9.83343 14.5005L6.12109 10.7882L6.94593 9.96336L9.83343 12.8509Z"
+                    fill="#536387" />
+                </g>
+                <defs>
+                  <clipPath id="clip0_1667_1314">
+                    <rect width="14" height="14" fill="white" transform="translate(4 4)" />
+                  </clipPath>
+                </defs>
+              </svg>
+              Cancelar!
+            </a>
+            <button type="submit" class="formbold-confirm-btn active" id="send">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="11" cy="11" r="10.5" fill="white" stroke="#DDE3EC" />
+                <g clip-path="url(#clip0_1667_1314)">
+                  <path
+                    d="M9.83343 12.8509L15.1954 7.48828L16.0208 8.31311L9.83343 14.5005L6.12109 10.7882L6.94593 9.96336L9.83343 12.8509Z"
+                    fill="#536387" />
+                </g>
+                <defs>
+                  <clipPath id="clip0_1667_1314">
+                    <rect width="14" height="14" fill="white" transform="translate(4 4)" />
+                  </clipPath>
+                </defs>
+              </svg>
+              Confirmar Inmueble?
+            </button>
+          </div>
+        </div>
+        <hr>
       </div>
 
-      <div>
-        <button class="btn_volver_2">
-          Atras
+      <div class="formbold-form-btn-wrapper">
+        <button class="btn_volver_1">
+          Atrás
         </button>
-        <a href="#" class="formbold-confirm-btn">
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="11" cy="11" r="10.5" fill="white" stroke="#DDE3EC" />
-            <g clip-path="url(#clip0_1667_1314)">
-              <path
-                d="M9.83343 12.8509L15.1954 7.48828L16.0208 8.31311L9.83343 14.5005L6.12109 10.7882L6.94593 9.96336L9.83343 12.8509Z"
-                fill="#536387" />
-            </g>
-            <defs>
-              <clipPath id="clip0_1667_1314">
-                <rect width="14" height="14" fill="white" transform="translate(4 4)" />
-              </clipPath>
-            </defs>
-          </svg>
-          Cancelar!
-        </a>
-        <button type="submit" class="formbold-confirm-btn active" id="crear_propiedad">
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="11" cy="11" r="10.5" fill="white" stroke="#DDE3EC" />
-            <g clip-path="url(#clip0_1667_1314)">
-              <path
-                d="M9.83343 12.8509L15.1954 7.48828L16.0208 8.31311L9.83343 14.5005L6.12109 10.7882L6.94593 9.96336L9.83343 12.8509Z"
-                fill="#536387" />
-            </g>
-            <defs>
-              <clipPath id="clip0_1667_1314">
-                <rect width="14" height="14" fill="white" transform="translate(4 4)" />
-              </clipPath>
-            </defs>
-          </svg>
-          Confirmar Inmueble?
+
+        <button class="btn_siguiente">
+          Siguiente
         </button>
       </div>
-
-      <hr>
+    </form>
   </div>
-
-  <div class="formbold-form-btn-wrapper">
-    <button class="btn_volver_1">
-      Atrás
-    </button>
-
-    <button class="btn_siguiente">
-      Siguiente
-    </button>
-  </div>
-  </form>
-</div>
 </div>
 <script src="{% static '/assets/js/validacion_inmueble.js' %}"></script>
 
