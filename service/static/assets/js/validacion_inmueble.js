@@ -27,7 +27,7 @@ const pattern_mail = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
 
 send.addEventListener("click", (e) => {
     e.preventDefault()
-
+    console.log(i_tipo)
     const _alerta = (texto) => {
         Swal.fire({
             icon: 'error',

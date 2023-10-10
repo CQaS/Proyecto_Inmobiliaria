@@ -75,7 +75,8 @@ def crear_propiedad(req):
                     print(f"Error inesperado: {e}")
 
             print('Inmueble creado, OK')
-            return redirect('crear_propiedad')
+            ERR = "Inmueble creado correctamente"
+            return render(req, 'propiedad/inmueble_form.html', {'clientes': lista, 'error': ERR})
 
         except Exception as e:
             error_message = f"Error al guardar el Inmueble: {str(e)}"

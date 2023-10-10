@@ -6,10 +6,10 @@ from django.core.exceptions import ValidationError
 from django.db import connection, IntegrityError
 
 pattern_Nombre = r'^[A-Z]*[a-z]{2,}[a-zA-Z ]*$'
-pattern_Direccion = r'^[A-Z][a-zA-Z0-9 ]*$'
+pattern_Direccion = r'^[a-zA-Z0-9 ]*$'
 pattern_Datos_envio = r'^[A-Z][a-zA-ZñÑáÁéÉíÍúÚóÓ0-9,.:;\- ]*$'
 pattern_soloNumeros = r'^[0-9][0-9]*$'
-pattern_cod_ = r'^[0-9][0-9-]*$'
+pattern_cod_ = r'^[a-zA-Z0-9-]*$'
 pattern_soloLetras = r'^[A-Z][a-zA-Z ]*$'
 
 
@@ -27,8 +27,7 @@ def validar_Datos_envio(value):
 
 def validar_direccion(value):
     if not re.match(pattern_Direccion, value):
-        raise ValidationError('El valor debe comenzar con una letra Mayuscula')
-
+        raise ValidationError('El valor debe comenzar con una Letra o Numero')
 
 def validar_numero(value):
     value = str(value)
@@ -103,8 +102,7 @@ class Inmueble(models.Model):
                                   verbose_name='Clave Wi-Fi', validators=[validar_codigo])
     tipo_servicio = models.CharField(max_length=45, null=True, blank=True,
                                      default='SD', verbose_name='Tipo de Servicio', validators=[validar_letras])
-    cliente_id = models.ForeignKey(
-        'Clientes', on_delete=models.CASCADE, verbose_name='Num. Cliente', db_column='cliente_id')
+    cliente_id = models.IntegerField(verbose_name='cliente_id', null=False, blank=False)
     valor_inmueble = models.IntegerField(
         verbose_name='Valor', null=False, blank=False, validators=[validar_numero])
     exclusividad = models.BooleanField(

@@ -40,8 +40,9 @@ def crear_empleado(req):
 
         try:
             empleado_form.save()
+            ERR = 'Empleado creado correctamente'
             print('Empleado, OK')
-            return redirect('crear_empleado')
+            return render(req, 'empleado/empleado_form.html', {'error': ERR})
 
         except Exception as e:
             error_message = f"Error al guardar el empleado: {str(e)}"

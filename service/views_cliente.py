@@ -37,8 +37,9 @@ def crear_cliente(req):
         try:
             C = clientes.save()
             print(f'Cliente id: {C.id_cliente}')
+            ERR = "Cliente creado correctamente"
             print('Cliente, OK')
-            return redirect('crear_cliente')
+            return render(req, 'cliente/cliente_form.html', {'error': ERR})
 
         except Exception as e:
             error_message = f"Error al guardar el Cliente: {str(e)}"

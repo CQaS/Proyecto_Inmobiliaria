@@ -8,7 +8,7 @@ const e_mail = document.getElementById('email_empleado')
 const e_puesto = document.getElementById('nom_puesto')
 
 const pattern_letras_espacios = /^[A-Z][a-zA-Z ]*$/
-const pattern_letras_numero_espacios = /^[A-Z][a-zA-Z0-9 ]*$/
+const pattern_letras_numero_espacios = /^[a-zA-Z0-9 ]*$/
 const pattern_solo_numeros = /^[0-9][0-9]*$/
 const pattern_mail = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
 
@@ -49,7 +49,7 @@ crear_empleado.addEventListener("click", (e) => {
         return
     }
 
-    if (solo_numeros(e_dni) == null || e_dni.value.length < 8) {
+    if (solo_numeros(e_dni) == null || e_dni.value.length < 6) {
         _alerta('DNI de Empleado no valido!')
         return
     }
