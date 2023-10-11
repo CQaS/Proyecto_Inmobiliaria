@@ -179,7 +179,7 @@ send.addEventListener("click", (e) => {
     console.log('OKOKOKOKOKOKO')
 
     // SI ESTA TODO BIEN SE ENVIA EL FORMULARIO...
-    //formulario.submit()
+    formulario.submit()
 })
 
 /* formulario tri-partido */

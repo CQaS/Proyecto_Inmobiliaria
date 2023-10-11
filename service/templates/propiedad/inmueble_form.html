@@ -1,6 +1,5 @@
 {% extends 'layouts/base00.html' %} {% load static %} {% block content %}
 
-
 <div class="formbold-main-wrapper">
   <div class="formbold-form-wrapper">
 
@@ -85,17 +84,17 @@
           <div>
             <label for="dir_inmueble" class="formbold-form-label"> Dirección </label>
             <input type="text" name="dir_inmueble" id="dir_inmueble" class="formbold-form-input"
-              value="{{ inmueble.dir_inmueble }}" />
+              value="{{ inmueble.dir_inmueble.value }}" />
           </div>
           <div>
             <label for="ciudad_inmueble" class="formbold-form-label"> Ciudad </label>
             <input type="text" name="ciudad_inmueble" id="ciudad_inmueble" class="formbold-form-input"
-              value="{{ inmueble.ciudad_inmueble }}" />
+              value="{{ inmueble.ciudad_inmueble.value }}" />
           </div>
           <div>
             <label for="num_apto" class="formbold-form-label"> Número Apto. </label>
             <input type="number" name="num_apto" id="num_apto" class="formbold-form-input"
-              value="{{ inmueble.num_apto}}" />
+              value="{{ inmueble.num_apto.value }}" />
           </div>
         </div>
         <!-- pantalla 1 linea 2-3 cajas-->
@@ -103,17 +102,17 @@
           <div>
             <label for="sup_total" class="formbold-form-label"> Sup. Total </label>
             <input type="number" name="sup_total" id="sup_total" class="formbold-form-input"
-              value="{{ inmueble.sup_total }}" />
+              value="{{ inmueble.sup_total.value }}" />
           </div>
           <div>
             <label for="sup_cubierta" class="formbold-form-label"> Sup. Cubierta </label>
             <input type="number" name="sup_cubierta" id="sup_cubierta" class="formbold-form-input"
-              value="{{ inmueble.sup_cubierta }}" />
+              value="{{ inmueble.sup_cubierta.value }}" />
           </div>
           <div>
             <label for="sup_semicub" class="formbold-form-label"> Sup. Semi Cubierta </label>
             <input type="number" name="sup_semicub" id="sup_semicub" class="formbold-form-input"
-              value="{{ inmueble.sup_semicub}}" />
+              value="{{ inmueble.sup_semicub.value }}" />
           </div>
         </div>
         <!-- pantalla 1 linea 3-3 cajas-->
@@ -121,19 +120,19 @@
           <div>
             <label for="cant_plantas" class="formbold-form-label"> Cant. de Plantas </label>
             <input type="number" name="cant_plantas" id="cant_plantas" class="formbold-form-input"
-              value="{{ inmueble.cant_plantas }}" />
+              value="{{ inmueble.cant_plantas.value }}" />
           </div>
 
           <div>
             <label for="cant_dormitorios" class="formbold-form-label"> Cant. Dormitorios </label>
             <input type="number" name="cant_dormitorios" id="cant_dormitorios" class="formbold-form-input"
-              value="{{ inmueble.cant_dormitorios }}" />
+              value="{{ inmueble.cant_dormitorios.value  }}" />
           </div>
 
           <div>
             <label for="cant_banos" class="formbold-form-label"> Cant. de Baños </label>
             <input type="number" name="cant_banos" id="cant_banos" class="formbold-form-input"
-              value="{{ inmueble.cant_banos }}" />
+              value="{{ inmueble.cant_banos.value }}" />
           </div>
         </div>
         <hr>
@@ -144,18 +143,18 @@
         <div class="formbold-input-flex">
           <div>
             <label for="cod_referencia" class="formbold-form-label"> Cód. Referencia </label>
-            <input type="number" name="cod_referencia" id="cod_referencia" class="formbold-form-input"
-              value="{{ inmueble.cod_referencia }}" />
+            <input type="text" name="cod_referencia" id="cod_referencia" class="formbold-form-input"
+              value="{{ inmueble.cod_referencia.value }}" />
           </div>
           <div>
             <label for="descripcion" class="formbold-form-label"> Descripción </label>
             <input type="text" name="descripcion" id="descripcion" class="formbold-form-input"
-              value="{{ inmueble.descripcion }}" />
+              value="{{ inmueble.descripcion.value }}" />
           </div>
           <div>
             <label for="clave_puerta_ingreso" class="formbold-form-label"> Clave Puerta Ingreso </label>
             <input type="text" name="clave_puerta_ingreso" id="clave_puerta_ingreso" class="formbold-form-input"
-              value="{{ inmueble.clave_puerta_ingreso }}" />
+              value="{{ inmueble.clave_puerta_ingreso.value }}" />
           </div>
         </div>
         <!-- pantalla 2 linea 2-3 cajas-->
@@ -163,17 +162,17 @@
           <div>
             <label for="clave_puerta_ingreso2" class="formbold-form-label"> Clave Ingreso 2 </label>
             <input type="text" name="clave_puerta_ingreso2" id="clave_puerta_ingreso2" class="formbold-form-input"
-              value="{{ inmueble.clave_puerta_ingreso2 }}" />
+              value="{{ inmueble.clave_puerta_ingreso2.value }}" />
           </div>
           <div>
             <label for="clave_wifi" class="formbold-form-label"> Clave WI-FI </label>
             <input type="text" name="clave_wifi" id="clave_wifi" class="formbold-form-input"
-              value="{{ inmueble.clave_wifi }}" />
+              value="{{ inmueble.clave_wifi.value }}" />
           </div>
           <div>
             <label for="valor_inmueble" class="formbold-form-label"> Valor </label>
             <input type="number" name="valor_inmueble" id="valor_inmueble" class="formbold-form-input"
-              value="{{ inmueble.valor_inmueble }}" />
+              value="{{ inmueble.valor_inmueble.value }}" />
           </div>
         </div>
 
@@ -182,7 +181,7 @@
           <div>
             <label for="habitac_maxima" class="formbold-form-label"> Capacidad Máxima </label>
             <input type="number" name="habitac_maxima" id="habitac_maxima" class="formbold-form-input"
-              value="{{ inmueble.habitac_maxima }}" />
+              value="{{ inmueble.habitac_maxima.value }}" />
           </div>
 
           <div>

@@ -95,11 +95,19 @@ def crear_propiedad(req):
                 ERR = 'Algun campo contiene Errores'
                 print(f"Error en el campo '{field_name}': {error_msg}")
 
-    context = {
-        'inmueble_form': inmueble_form,
-        'clientes': lista, 'error': ERR,
-        'success': success
-    }
+    if ERR != '':
+        context = {
+            'inmueble': inmueble_form,
+            'clientes': lista,
+            'error': ERR,
+            'success': success
+        }
+    else:
+        context = {
+            'clientes': lista,
+            'error': ERR,
+            'success': success
+        }
     return render(req, 'propiedad/inmueble_form.html', context)
 
 
