@@ -498,7 +498,7 @@
 
 		footer {
 		  position: relative;
-		  width: 70%;
+		  width: 80%;
 		  height: auto;
 		  padding: 50px 100px;
 		  background: #fff;
@@ -506,10 +506,11 @@
 		}
 
 		footer .container {
-		  width: 70%;
+		  width: 90%;
 		  display: grid;
-		  grid-template-columns: 2fr 1fr 2fr;
-		  grid-gap: 50px;
+		  grid-template-columns: 8fr 8fr 2fr;
+		  align-content: center;
+		  grid-gap: 30px;
 		}
 
 		footer .container .sec h2 {
