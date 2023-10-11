@@ -26,6 +26,7 @@ def index_propiedad(req):
 
 def crear_propiedad(req):
     ERR = ''
+    success = ''
     try:
         with connection.cursor() as cursor:
             cursor.execute(
@@ -50,12 +51,13 @@ def crear_propiedad(req):
         print("Error:", e)
 
     inmueble_form = InmuebleForm(req.POST or None, req.FILES or None)
-    if inmueble_form.is_valid():
+    images = req.FILES.getlist('imgs')
+    print(images)
+    if inmueble_form.is_valid() and len(images) > 0:
         try:
             I = inmueble_form.save()
             ultimo_id = I.id_inmueble
 
-            images = req.FILES.getlist('imgs')
             for image in images:
                 try:
                     # Genera un nuevo nombre de archivo (por ejemplo, usando un UUID)
@@ -75,8 +77,13 @@ def crear_propiedad(req):
                     print(f"Error inesperado: {e}")
 
             print('Inmueble creado, OK')
-            ERR = "Inmueble creado correctamente"
-            return render(req, 'propiedad/inmueble_form.html', {'clientes': lista, 'error': ERR})
+            success = "Inmueble creado correctamente"
+            context = {
+                'clientes': lista,
+                'error': ERR,
+                'success': success
+            }
+            return render(req, 'propiedad/inmueble_form.html', context)
 
         except Exception as e:
             error_message = f"Error al guardar el Inmueble: {str(e)}"
@@ -88,7 +95,12 @@ def crear_propiedad(req):
                 ERR = 'Algun campo contiene Errores'
                 print(f"Error en el campo '{field_name}': {error_msg}")
 
-    return render(req, 'propiedad/inmueble_form.html', {'inmueble_form': inmueble_form, 'clientes': lista, 'error': ERR})
+    context = {
+        'inmueble_form': inmueble_form,
+        'clientes': lista, 'error': ERR,
+        'success': success
+    }
+    return render(req, 'propiedad/inmueble_form.html', context)
 
 
 def editar_propiedad(req, id_inmueble):

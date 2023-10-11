@@ -27,7 +27,6 @@ const pattern_mail = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
 
 send.addEventListener("click", (e) => {
     e.preventDefault()
-    console.log(i_tipo)
     const _alerta = (texto) => {
         Swal.fire({
             icon: 'error',
@@ -41,6 +40,7 @@ send.addEventListener("click", (e) => {
     }
 
     const letras_numero_espacios = (DATO) => {
+        console.log(DATO.value)
         return DATO.value.match(pattern_letras_numero_espacios)
     }
 
@@ -120,6 +120,7 @@ send.addEventListener("click", (e) => {
 
     if (cod_ref(i_cod_referencia) == null) {
         i_cod_referencia.focus()
+        console.log(i_cod_referencia.value)
         _alerta('Cod. Referencia del Inmueble no valido!')
         return
     }
@@ -178,7 +179,7 @@ send.addEventListener("click", (e) => {
     console.log('OKOKOKOKOKOKO')
 
     // SI ESTA TODO BIEN SE ENVIA EL FORMULARIO...
-    formulario.submit()
+    //formulario.submit()
 })
 
 /* formulario tri-partido */

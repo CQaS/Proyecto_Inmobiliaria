@@ -20,6 +20,7 @@ def index_contrato(req, id_inmueble):
     res = R['res']
     columns = R['columns']
     ERR = R['ERR']
+    success = ''
 
     # Convertir los resultados a una lista de diccionarios
     lista = []
@@ -37,10 +38,12 @@ def index_contrato(req, id_inmueble):
     if len(lista) == 0:
         context = {
             'error': 'Inmueble no econtrado',
+            'success': success
         }
     else:
         context = {
             'error': ERR,
+            'success': success,
             "id_inmueble": lista[0]['id_inmueble'],
             "nom_propietario": lista[0]['nom_cliente'],
             "cod_referencia": lista[0]['cod_referencia'],
@@ -58,6 +61,9 @@ def index_contrato(req, id_inmueble):
 
 
 def crear_contrato(req):
+
+    ERR = ''
+    success = ''
 
     valor_inmueble_palabras = num2words(
         req.POST['valor_inmueble'], lang='pt_BR')
@@ -151,4 +157,10 @@ def crear_contrato(req):
         print("No tienes permisos para acceder al archivo")
     except Exception as e:
         print(f"Ocurrió un error: {e}")
-    return redirect('index')
+
+    success = 'Contrato creado con Exito!'
+    context = {
+        'error': ERR,
+        'success': success
+    }
+    return render(req, "contrato/contrato_form.html", context)

@@ -32,20 +32,30 @@ def index_cliente(req):
 
 def crear_cliente(req):
     ERR = ''
+    success = ''
+
     clientes = ClienteForm(req.POST or None, req.FILES or None)
     if clientes.is_valid():
         try:
             C = clientes.save()
             print(f'Cliente id: {C.id_cliente}')
-            ERR = "Cliente creado correctamente"
             print('Cliente, OK')
-            return render(req, 'cliente/cliente_form.html', {'error': ERR})
+            success = "Cliente creado correctamente"
+            contexto = {
+                'error': ERR,
+                'success': success
+            }
+            return render(req, 'cliente/cliente_form.html', contexto)
 
         except Exception as e:
             error_message = f"Error al guardar el Cliente: {str(e)}"
             ERR = error_message
             print(f"error: {error_message}")
-            return redirect('crear_cliente')
+            contexto = {
+                'error': ERR,
+                'success': success
+            }
+            return render(req, 'cliente/cliente_form.html', contexto)
 
     else:
         print(clientes.errors)
@@ -54,7 +64,11 @@ def crear_cliente(req):
                 ERR = 'Algun campo contiene Errores'
                 print(f"Error en el campo '{field_name}': {error_msg}")
 
-    return render(req, 'cliente/cliente_form.html', {'clientes': clientes, 'error': ERR})
+    contexto = {
+        'error': ERR,
+        'success': success
+    }
+    return render(req, 'cliente/cliente_form.html', contexto)
 
 
 def editar_cliente(req, id_cliente):

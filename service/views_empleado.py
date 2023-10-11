@@ -13,6 +13,7 @@ def index_empleado(req):
 
 def crear_empleado(req):
     ERR = ''
+    success = ''
     empleado_form = EmpleadoForm(req.POST or None, req.FILES or None)
     if empleado_form.is_valid():
         email_empleado = empleado_form.cleaned_data['email_empleado']
@@ -40,9 +41,13 @@ def crear_empleado(req):
 
         try:
             empleado_form.save()
-            ERR = 'Empleado creado correctamente'
             print('Empleado, OK')
-            return render(req, 'empleado/empleado_form.html', {'error': ERR})
+            success = "Inmueble creado correctamente"
+            contexto = {
+                'error': ERR,
+                'success': success
+            }
+            return render(req, 'empleado/empleado_form.html', contexto)
 
         except Exception as e:
             error_message = f"Error al guardar el empleado: {str(e)}"
@@ -56,7 +61,12 @@ def crear_empleado(req):
                 ERR = 'Algun campo contiene Errores'
                 print(f"Error en el campo '{field_name}': {error_msg}")
 
-    return render(req, 'empleado/empleado_form.html', {'error': ERR})
+    contexto = {
+        'error': ERR,
+        'success': success
+    }
+
+    return render(req, 'empleado/empleado_form.html', contexto)
 
 
 def editar_empleado(req, id_empleado):

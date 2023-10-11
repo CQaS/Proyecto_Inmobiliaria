@@ -10,7 +10,7 @@ pattern_Direccion = r'^[a-zA-Z0-9 ]*$'
 pattern_Datos_envio = r'^[A-Z][a-zA-ZñÑáÁéÉíÍúÚóÓ0-9,.:;\- ]*$'
 pattern_soloNumeros = r'^[0-9][0-9]*$'
 pattern_cod_ = r'^[a-zA-Z0-9-]*$'
-pattern_soloLetras = r'^[A-Z][a-zA-Z ]*$'
+pattern_soloLetras = r'^[A-Z][a-zA-Z- ]*$'
 
 
 def validar_nombre(value):
@@ -28,6 +28,7 @@ def validar_Datos_envio(value):
 def validar_direccion(value):
     if not re.match(pattern_Direccion, value):
         raise ValidationError('El valor debe comenzar con una Letra o Numero')
+
 
 def validar_numero(value):
     value = str(value)
@@ -102,7 +103,8 @@ class Inmueble(models.Model):
                                   verbose_name='Clave Wi-Fi', validators=[validar_codigo])
     tipo_servicio = models.CharField(max_length=45, null=True, blank=True,
                                      default='SD', verbose_name='Tipo de Servicio', validators=[validar_letras])
-    cliente_id = models.IntegerField(verbose_name='cliente_id', null=False, blank=False)
+    cliente_id = models.ForeignKey('Clientes',
+                                   verbose_name='cliente_id', on_delete=models.CASCADE, unique=False, db_column='cliente_id')
     valor_inmueble = models.IntegerField(
         verbose_name='Valor', null=False, blank=False, validators=[validar_numero])
     exclusividad = models.BooleanField(
@@ -126,7 +128,7 @@ class Inmueble(models.Model):
 
 class Fotos(models.Model):
     image = models.ImageField(
-        upload_to='img/', null=False, blank=False, validators=[validar_imagen])
+        upload_to='webapp/static/assets/img/', null=False, blank=False, validators=[validar_imagen])
     inmueble_id = models.IntegerField(
         null=False, blank=False, verbose_name='Inmueble Id')
 
@@ -204,8 +206,8 @@ class Contrato(models.Model):
         null=False, blank=False, verbose_name='Fecha de Salida')
     cant_dias = models.IntegerField(
         null=False, blank=False, verbose_name='Cant. de Dias', validators=[validar_numero])
-    cliente_id = models.IntegerField(
-        null=False, blank=False, verbose_name='Cliente id')
+    cliente_id = models.ForeignKey(
+        'Clientes', on_delete=models.CASCADE, verbose_name='Num. Cliente', db_column='cliente_id', unique=False)
     valor_total = models.IntegerField(
         null=False, blank=False, verbose_name='Valor Total', validators=[validar_numero])
     monto_reserva = models.IntegerField(
@@ -214,8 +216,8 @@ class Contrato(models.Model):
         null=False, blank=False, verbose_name='Fecha de Reserva')
     datos_envio = models.CharField(max_length=250, null=False, blank=False,
                                    verbose_name='Datos de envio', validators=[validar_Datos_envio])
-    inmueble_id = models.IntegerField(
-        null=False, blank=False, verbose_name='Inmueble id')
+    inmueble_id = models.ForeignKey(
+        'Inmueble', unique=False, on_delete=models.CASCADE, verbose_name='Inmueble id', db_column='inmueble_id')
 
     def __str__(self):
         return self.valor_total

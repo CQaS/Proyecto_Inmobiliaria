@@ -1,5 +1,3 @@
-
-
 .alert {
     margin: 30px;
     display: flex;
@@ -60,4 +58,13 @@
 
 .danger .icon {
     background-color: #EC4D2B;
+}
+
+.success {
+    background-color: rgba(62, 189, 97, 0.2);
+    border: 2px solid #3ebd61;
+}
+
+.success .icon {
+    background-color: #3ebd61;
 }
