@@ -221,39 +221,7 @@
 		  transform: translateY(-50%);
 		}
 
-		/* .sidebar .profile-details{
-  position: fixed;
-  bottom: 0;
-  width: 260px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #1d1b31;
-  padding: 12px 0;
-  transition: all 0.5s ease;
-}
-.sidebar.close .profile-details{
-  background: none;
-}
-.sidebar.close .profile-details{
-  width: 78px;
-}
-.sidebar .profile-details .profile-content{
-  display: flex;
-  align-items: center;
-} */
-		/* .sidebar .profile-details img{
-  height: 52px;
-  width: 52px;
-  object-fit: cover;
-  border-radius: 16px;
-  margin: 0 14px 0 12px;
-  background: rgb(183, 146, 91);
-  transition: all 0.5s ease; 
-} */
-		/*.sidebar.close .profile-details img{
-  padding: 10px;
-} */
+
 		.sidebar .profile-details .profile_name,
 		.sidebar .profile-details .job {
 		  color: #fff;
@@ -408,108 +376,23 @@
 
 		}
 
-
-		/* QUIENES SOMOS Y FORMULARIO DE CONTACTO */
-		/* .box {
-			display: flex;
-			justify-content:space-between;
-			flex-wrap: wrap;
-			color: white;
-		  }
-	
-		  .about {
-			margin: 50px 10px 50px 10px; /*arriba-der-abajo-izq*/
-		/*display: flex;
-			justify-content: space-evenly;
-			flex-wrap: wrap;
-			border: 2px solid white;
-			border-radius: 5px 50px;
-			width: 450px;
-			height: 500px;
-			background-color: rgb(51, 51, 51, 0.302);
-			float: left;
-			padding: 10px;
-		  }
-	
-		  .titulo-about {
-			text-align: center;
-			justify-content: center;
-			padding: 10px;
-		} 
-	
-	
-		  /* FORMULARIO DE CONTACTO
-	
-		  .container-form {
-			margin: 50px 10px 50px 10px; /*arriba-der-abajo-izq*/
-		/*display: flex;
-			justify-content: space-evenly;
-			flex-wrap: wrap;
-			border: 2px solid white;
-			border-radius: 5px 50px;
-			width: 450px;
-			height: 500px;
-			background-color: rgb(51, 51, 51, 0.302);
-			float: right;
-		 }
-		
-		 .titulo-form {
-			color: white;
-			text-align: center;
-			justify-content: center;
-			padding: 10px;
-		 } 
-		
-		
-		label, input, select {
-			font-size: 16px;
-			display: inline-block;
-			vertical-align: middle; 
-			align-items: center;
-			margin-top: 20px;
-			padding: 10px;
-			border-radius: 10px;	
-		}
-		
-		input[type="submit"] {
-			width: 60%;
-			margin: auto;
-			border: solid thin #222;
-			padding: .7rem;
-			border-radius: 10px;
-			background-color: white;
-			font-weight: 600;
-			margin-top: 3rem;
-			font-size: 16px;
-			cursor: pointer;
-			color: rgb(51, 51, 51);
-			justify-content: center;
-			align-items: center;
-		}
-		
-		
-		input[type="submit"]:hover {
-			background: rgb(51, 51, 51, 0.302);
-			color: white;
-		} 
-	
-	
 /*FOOTER */
 
 		footer {
-		  position: relative;
+		  position: absolute;
+		  right: 0;
 		  width: 80%;
 		  height: auto;
-		  padding: 50px 100px;
-		  background: #fff;
-		  margin: 0 auto;
+		  padding: 10px 60px 10px 60px;
+		  background: white;
+		  margin: 0 0 0 0;
 		}
 
 		footer .container {
-		  width: 90%;
+		  width: 100%;
 		  display: grid;
-		  grid-template-columns: 8fr 8fr 2fr;
-		  align-content: center;
+		  grid-template-columns: 50% 20% 30%;
+		  justify-content: space-between;
 		  grid-gap: 30px;
 		}
 
@@ -522,17 +405,17 @@
 
 		footer .container .sec p {
 		  color: #555;
-
+		  margin: 0;
 		}
 
 		footer .container .sec-quicklink p {
-		  font-size: 14px;
+		  font-size: 14px;  
 		}
 
 		footer .container .sci {
 		  margin-top: 20px;
 		  display: grid;
-		  grid-template-columns: repeat(4, 50px);
+		  grid-template-columns: repeat(3, 50px);
 		}
 
 		footer .container .sci li {
@@ -543,7 +426,7 @@
 		  display: inline-block;
 		  width: 36px;
 		  height: 36px;
-		  background: #333;
+		  background: rgb(183, 146, 91);
 		  display: grid;
 		  align-content: center;
 		  justify-content: center;
@@ -551,7 +434,7 @@
 		}
 
 		footer .container .sci li a i {
-		  color: #fff;
+		  color: black;
 		  font-size: 20px;
 		}
 
@@ -577,7 +460,7 @@
 
 		footer .container .contact .info li {
 		  display: grid;
-		  grid-template-columns: 150px 1fr;
+		  grid-template-columns: 150px 2fr; 
 		  margin-bottom: 16px;
 		}
 
@@ -591,12 +474,31 @@
 		  text-decoration: none;
 		}
 
+		footer .form_input {
+			width: 215px; 
+		  }
+		  
+
+		footer input[type="submit"]{
+			width: 78%;
+			margin: auto;
+			border: solid thin #222;
+			padding: .7rem;
+			background-color: rgb(183, 146, 91);
+			font-weight: 600;
+			margin-top: 10px;
+			font-size: 14px;
+			cursor: pointer;
+			color: black;
+		}
+
 		.copyrightText {
 		  width: 100%;
 		  background: #fff;
-		  padding: 20px 100px 30px;
+		  margin-top: 15px;
+		  padding: 30px 100px 30px;
 		  text-align: center;
-		  color: #555;
+		  color: rgb(183, 146, 91);;
 		  border: 1px solid rgba(0, 0, 0, 0.15)
 		}
 
