@@ -10,8 +10,8 @@ const c_pais = document.getElementById('pais_cliente')
 const c_fecha = document.getElementById('fechnac')
 const c_categoria = document.getElementById('categoria')
 
-const pattern_letras_espacios = /^[a-zA-Z ]*$/
-const pattern_letras_numero_espacios = /^[a-zA-Z0-9 ]*$/
+const pattern_letras_espacios = /^[a-zA-ZñÑáÁéÉíÍúÚóÓ ]*$/
+const pattern_letras_numero_espacios = /^[a-zA-ZñÑáÁéÉíÍúÚóÓ0-9 ]*$/
 const pattern_solo_numeros = /^[0-9][0-9]*$/
 const pattern_mail = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
 
