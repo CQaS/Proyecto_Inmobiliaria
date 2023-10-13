@@ -49,64 +49,42 @@
   {% endfor %}
 </ul>
 
-<!-- Propiedades destacadas -->
+<!-- Propiedades exclusivos -->
 <section>
-  <div class="flex-exclusivo">
-    <a href="">
-      <div class="flex-item">Exclusivo
+  <ul class="cards">
+    <li class="cards__item">
+      <div class="card">
+        <div class="card__image card__image--fence"></div>
+        <div class="card__content">
+          <div class="card__title">DIRECCION - OPERACION</div>
+          <p class="card__text">TIPO INMUEBLE - CIUDAD </p>
+          <p class="card__text">VALOR</p>
+          <button class="btn btn--block card__btn">Button</button>
+        </div>
       </div>
-    </a>
-    <a href="">
-      <div class="flex-item">Exclusivo
+    </li>
+    <li class="cards__item">
+      <div class="card">
+        <div class="card__image card__image--river"></div>
+        <div class="card__content">
+          <div class="card__title">Flex Grow</div>
+          <p class="card__text">This defines the ability for a flex item to grow if necessary. It accepts a unitless value that serves as a proportion. It dictates what amount of the available space inside the flex container the item should take up.</p>
+          <button class="btn btn--block card__btn">Button</button>
+        </div>
       </div>
-    </a>
-    <a href="">
-      <div class="flex-item">Exclusivo
+    </li>
+    <li class="cards__item">
+      <div class="card">
+        <div class="card__image card__image--record"></div>
+        <div class="card__content">
+          <div class="card__title">Flex Shrink</div>
+          <p class="card__text">This defines the ability for a flex item to shrink if necessary. Negative numbers are invalid.</p>
+          <button class="btn btn--block card__btn">Button</button>
+        </div>
       </div>
-    </a>
-    <a href="">
-      <div class="flex-item">Exclusivo
-      </div>
-    </a>
-    <a href="">
-      <div class="flex-item">Exclusivo
-      </div>
-    </a>
-    <a href="">
-      <div class="flex-item">Exclusivo
-      </div>
-    </a>
-    
-  </div>
-
+    </li>   
+  </ul>
 </section>
-
-
-<!--quienes somos-->
-
-<!--<section>
-
-  Formulario de contacto
-  <div class="container-form">
-    <div class="titulo-form">
-      <h3>CONTACTO</h3>
-    </div>
-    <form method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      {% for f in form %}
-      <label>{{f.label}}</label>
-      <input type="{{ f.field.widget.input_type }}" class="" name="{{ f.name }}" id="" placeholder="{{ f.label }}"
-        value="{{ f.value | default:'' }}">
-      <br>
-      {% endfor %}
-      <input type="submit" value="Send" id="send" class="form_enviar">
-    </form> 
-
-
-</section>-->
-
-
-
 
 
 {% endblock%}
