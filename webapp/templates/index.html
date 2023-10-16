@@ -3,11 +3,16 @@
 {% load static %}
 
 {% block content %}
-<div class="container-fondo">
-  <div class="img-fondo">
-    <img src="{% static '/assets/img/1_.jpeg' %}" alt="">
-  </div>
+<section>
+<div class="slider-frame">
+    <ul>
+        <li><img src="{% static '/assets/img/pexels001.jpeg' %}" alt=""></li>
+        <li><img src="{% static '/assets/img/pexels002.jpeg' %}" alt=""></li>
+        <li><img src="{% static '/assets/img/pexels003.jpeg' %}" alt=""></li>
+        <li><img src="{% static '/assets/img/pexels004.jpeg' %}" alt=""></li>
+    </ul>
 </div>
+    
 <!--Filtro de propiedades -->
 <div class="search-bar">
   <h3>Buscar por:</h3>
@@ -33,14 +38,13 @@
       <option value="Otros">Otros</option>
     </select>
   </div>
-  </form>
 
   <button type="submit" id="buscar">Send</button>
 </div>
-<div id="resultados">
-  <!-- Aquí se mostrarán los resultados de la búsqueda -->
-</div>
-
+<!-- <div id="resultados">
+  Aquí se mostrarán los resultados de la búsqueda 
+</div> -->
+</section>
 
 <h2>Resultados de la Búsqueda:</h2>
 <ul>
@@ -48,6 +52,7 @@
   <li>{{ resultado }}</li>
   {% endfor %}
 </ul>
+
 
 <!-- Propiedades exclusivos -->
 <section>
