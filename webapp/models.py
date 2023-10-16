@@ -25,7 +25,7 @@ def index_():
     try:
         with connection.cursor() as cursor:
             query = """
-                    SELECT * FROM inmueble i JOIN fotos_prop f ON i.id_inmueble = f.inmueble_id WHERE exclusividad = {0} AND estado = {1}
+                    SELECT * FROM inmueble i JOIN fotos_prop f ON i.id_inmueble = f.inmueble_id WHERE exclusividad = {0} AND estado = {1} LIMIT 6
                     """.format('1', '1')
             cursor.execute(query)
             columns = [col[0] for col in cursor.description]

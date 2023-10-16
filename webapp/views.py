@@ -36,17 +36,26 @@ def index(request):
     # Convertir a formato JSON
     json_result = json.dumps(lista, default=serialize_date)
 
-    for item in lista:
-        if 'image' in item:
-            item['image'] = item['image'].replace('webapp/', '')
+    # Crear un conjunto para almacenar los valores únicos de cliente_id
+    valores_unicos = set()
+    resultado = []
 
-    print(lista)
+    for item in lista:
+        idInm = item['id_inmueble']
+        # Verificar si el cliente_id es único
+        if idInm not in valores_unicos:
+            # Quitar la parte "webapp/" del campo 'image'
+            item['image'] = item['image'].replace('webapp/', '')
+            resultado.append(item)
+            valores_unicos.add(idInm)
+
+    print(resultado)
 
     form = ContactForm(request.POST or None, request.FILES or None)
     context = {
         'error': ERR,
         'form': form,
-        'exclusivos_lista': lista
+        'exclusivos_lista': resultado
     }
     return render(request, 'index.html', context)
 
