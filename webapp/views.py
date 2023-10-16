@@ -1,9 +1,9 @@
-from django.shortcuts import render
-from .forms import ContactForm
-from django.db import connection
+from datetime import date
 import json
 import collections
-from datetime import date
+from django.shortcuts import render
+from django.db import connection
+from .forms import ContactForm
 from .models import *
 
 
@@ -12,13 +12,12 @@ def serialize_date(obj):
         return obj.strftime('%Y-%m-%d')
     raise TypeError("Type not serializable")
 
-# Create your views here.
-
 
 def index(request):
     R = index_()
     res = R['res']
     columns = R['columns']
+    ERR = R['err']
 
     if not res:
         print("Tuple is empty")
@@ -26,22 +25,30 @@ def index(request):
         print("Tuple is not empty")
 
     # Convertir los resultados a una lista de diccionarios
-    results_as_dicts = []
+    lista = []
     for row in res:
         row_dict = {}
         for i, value in enumerate(row):
             column_name = columns[i]
             row_dict[column_name] = value
-        results_as_dicts.append(row_dict)
+        lista.append(row_dict)
 
     # Convertir a formato JSON
-    json_result = json.dumps(results_as_dicts, default=serialize_date)
+    json_result = json.dumps(lista, default=serialize_date)
 
-    print(results_as_dicts)
-    print(json_result)
+    for item in lista:
+        if 'image' in item:
+            item['image'] = item['image'].replace('webapp/', '')
+
+    print(lista)
 
     form = ContactForm(request.POST or None, request.FILES or None)
-    return render(request, 'index.html', {'form': form})
+    context = {
+        'error': ERR,
+        'form': form,
+        'exclusivos_lista': lista
+    }
+    return render(request, 'index.html', context)
 
 
 def sevice(request):

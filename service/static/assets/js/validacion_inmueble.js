@@ -19,8 +19,8 @@ const imgs = document.getElementById('imgs')
 const tipo_servicio = document.getElementsByName('tipo_servicio')
 
 
-const pattern_letras_espacios = /^[A-Z][a-zA-Z ]*$/
-const pattern_letras_numero_espacios = /^[A-Z][a-zA-Z0-9 ]*$/
+const pattern_letras_espacios = /^[A-Z][a-zA-ZñÑáÁéÉíÍúÚóÓ ]*$/
+const pattern_letras_numero_espacios = /^[A-Z0-9][a-zA-ZñÑáÁéÉíÍúÚóÓ0-9 ]*$/
 const pattern_solo_numeros = /^[0-9][0-9]*$/
 const pattern_cod_ref = /^[0-9][0-9-]*$/
 const pattern_mail = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/

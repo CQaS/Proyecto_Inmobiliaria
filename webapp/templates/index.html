@@ -3,44 +3,48 @@
 {% load static %}
 
 {% block content %}
-<div class="container-fondo">
-  <div class="img-fondo">
-    <img src="{% static '/assets/img/1_.jpeg' %}" alt="">
-  </div>
+<section>
+<div class="slider-frame">
+    <ul>
+        <li><img src="{% static '/assets/img/pexels001.jpeg' %}" alt=""></li>
+        <li><img src="{% static '/assets/img/pexels002.jpeg' %}" alt=""></li>
+        <li><img src="{% static '/assets/img/pexels003.jpeg' %}" alt=""></li>
+        <li><img src="{% static '/assets/img/pexels004.jpeg' %}" alt=""></li>
+    </ul>
 </div>
+    
 <!--Filtro de propiedades -->
 <div class="search-bar">
   <h3>Buscar por:</h3>
   <div class="search-input">
     <form action="{% url 'buscar_por' %}" method="POST" class="form-destino">
       {% csrf_token %}
-        <select name="por_operacion" id="por_operacion">
-          <option>Tipo de Operacion</option>
-          <option value="Alquiler-temporario">Alquiler Temporario</option>
-          <option value="Alquiler-permanente">Alquiler Permante</option>
-          <option value="Venta">Venta</option>
-        </select>
-  </div>
-  
-  <div class="search-input">   
-      <select name="por_propiedad" id="por_propiedad">
-          <option>Tipo Propiedad</option>
-          <option value="Casa">Casa</option>
-          <option value="Departamento">Departamento</option>
-          <option value="Apart">Apart</option>
-          <option value="Complejo">Complejo</option>
-          <option value="Oficina">Oficina</option>
-          <option value="Otros">Otros</option>
+      <select name="por_operacion" id="por_operacion">
+        <option>Tipo de Operacion</option>
+        <option value="Alquiler-temporario">Alquiler Temporario</option>
+        <option value="Alquiler-permanente">Alquiler Permante</option>
+        <option value="Venta">Venta</option>
       </select>
   </div>
-  </form>
 
-<button type="submit" id="buscar">Send</button>
+  <div class="search-input">
+    <select name="por_propiedad" id="por_propiedad">
+      <option>Tipo Propiedad</option>
+      <option value="Casa">Casa</option>
+      <option value="Departamento">Departamento</option>
+      <option value="Apart">Apart</option>
+      <option value="Complejo">Complejo</option>
+      <option value="Oficina">Oficina</option>
+      <option value="Otros">Otros</option>
+    </select>
+  </div>
+
+  <button type="submit" id="buscar">Send</button>
 </div>
-<div id="resultados">
-<!-- Aquí se mostrarán los resultados de la búsqueda -->
-</div>
-  
+<!-- <div id="resultados">
+  Aquí se mostrarán los resultados de la búsqueda 
+</div> -->
+</section>
 
 <h2>Resultados de la Búsqueda:</h2>
 <ul>
@@ -48,6 +52,7 @@
   <li>{{ resultado }}</li>
   {% endfor %}
 </ul>
+
 
 <!-- Propiedades exclusivos -->
 <section>
@@ -68,7 +73,9 @@
         <div class="card__image" style="background-image: url(https://unsplash.it/800/600?image=11);"></div>
         <div class="card__content">
           <div class="card__title">Flex Grow</div>
-          <p class="card__text">This defines the ability for a flex item to grow if necessary. It accepts a unitless value that serves as a proportion. It dictates what amount of the available space inside the flex container the item should take up.</p>
+          <p class="card__text">This defines the ability for a flex item to grow if necessary. It accepts a unitless
+            value that serves as a proportion. It dictates what amount of the available space inside the flex container
+            the item should take up.</p>
           <button class="btn btn--block card__btn">Button</button>
         </div>
       </div>
@@ -78,11 +85,12 @@
         <div class="card__image" style="background-image: url(https://unsplash.it/800/600?image=39);"></div>
         <div class="card__content">
           <div class="card__title">Flex Shrink</div>
-          <p class="card__text">This defines the ability for a flex item to shrink if necessary. Negative numbers are invalid.</p>
+          <p class="card__text">This defines the ability for a flex item to shrink if necessary. Negative numbers are
+            invalid.</p>
           <button class="btn btn--block card__btn">Button</button>
         </div>
       </div>
-    </li>   
+    </li>
   </ul>
 </section>
 

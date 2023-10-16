@@ -5,12 +5,12 @@ from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.db import connection, IntegrityError
 
-pattern_Nombre = r'^[A-Z]*[a-z]{2,}[a-zA-Z ]*$'
+pattern_Nombre = r'^[A-Z]*[a-z]{2,}[a-zA-ZñÑáÁéÉíÍúÚóÓ ]*$'
 pattern_Direccion = r'^[a-zA-Z0-9 ]*$'
-pattern_Datos_envio = r'^[A-Z][a-zA-ZñÑáÁéÉíÍúÚóÓ0-9,.:;\- ]*$'
+pattern_Datos_envio = r'^[A-Z0-9][a-zA-ZñÑáÁéÉíÍúÚóÓ0-9,.:;\- ]*$'
 pattern_soloNumeros = r'^[0-9][0-9]*$'
 pattern_cod_ = r'^[a-zA-Z0-9-]*$'
-pattern_soloLetras = r'^[A-Z][a-zA-Z- ]*$'
+pattern_soloLetras = r'^[A-Z][a-zñÑáÁéÉíÍúÚóÓA-Z- ]*$'
 
 
 def validar_nombre(value):
@@ -230,7 +230,9 @@ class Contrato(models.Model):
 
 
 def buscarProp_ID(id_inmueble):
-    query = f"SELECT i.*, c.nom_cliente, c.id_cliente FROM inmueble i JOIN clientes c ON i.cliente_id = c.id_cliente WHERE i.id_inmueble = {id_inmueble}"
+    query = """
+        SELECT i.*, c.nom_cliente, c.id_cliente FROM inmueble i JOIN clientes c ON i.cliente_id = c.id_cliente WHERE i.id_inmueble = {0}
+        """.format(id_inmueble)
 
     ERR = ''
     try:

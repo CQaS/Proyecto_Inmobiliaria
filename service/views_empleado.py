@@ -42,7 +42,7 @@ def crear_empleado(req):
         try:
             empleado_form.save()
             print('Empleado, OK')
-            success = "Inmueble creado correctamente"
+            success = "Empleado creado correctamente"
             contexto = {
                 'error': ERR,
                 'success': success

@@ -52,8 +52,13 @@ def crear_propiedad(req):
 
     inmueble_form = InmuebleForm(req.POST or None, req.FILES or None)
     images = req.FILES.getlist('imgs')
-    print(images)
+
     if inmueble_form.is_valid() and len(images) > 0:
+
+        T = req.POST.getlist('tipo_servicio')
+        T_list = ', '.join(T)
+        inmueble_form.instance.tipo_servicio = T_list
+
         try:
             I = inmueble_form.save()
             ultimo_id = I.id_inmueble

@@ -7,8 +7,8 @@ const e_direccion = document.getElementById('dir_empleado')
 const e_mail = document.getElementById('email_empleado')
 const e_puesto = document.getElementById('nom_puesto')
 
-const pattern_letras_espacios = /^[A-Z][a-zA-Z ]*$/
-const pattern_letras_numero_espacios = /^[a-zA-Z0-9 ]*$/
+const pattern_letras_espacios = /^[A-Z][a-zA-ZñÑáÁéÉíÍúÚóÓ ]*$/
+const pattern_letras_numero_espacios = /^[a-zA-ZñÑáÁéÉíÍúÚóÓ0-9 ]*$/
 const pattern_solo_numeros = /^[0-9][0-9]*$/
 const pattern_mail = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
 
