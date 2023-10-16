@@ -57,40 +57,19 @@
 <!-- Propiedades exclusivos -->
 <section>
   <ul class="cards">
+    {% for E in exclusivos_lista %}
     <li class="cards__item">
       <div class="card">
         <div class="card__image" style="background-image: url(https://unsplash.it/800/600?image=82);"></div>
         <div class="card__content">
-          <div class="card__title">DIRECCION - OPERACION</div>
-          <p class="card__text">TIPO INMUEBLE - CIUDAD </p>
-          <p class="card__text">VALOR</p>
-          <button class="btn btn--block card__btn">Button</button>
+          <div class="card__title">{{E.dir_inmueble}} - {{E.tipo_operacion}}</div>
+          <p class="card__text">{{E.tipo.inmueble}} - {{E.ciudad_inmueble}} </p>
+          <p class="card__text">{{E.valor_inmueble}}</p>
+          <button class="btn btn--block card__btn">Mas Info</button>
         </div>
       </div>
     </li>
-    <li class="cards__item">
-      <div class="card">
-        <div class="card__image" style="background-image: url(https://unsplash.it/800/600?image=11);"></div>
-        <div class="card__content">
-          <div class="card__title">Flex Grow</div>
-          <p class="card__text">This defines the ability for a flex item to grow if necessary. It accepts a unitless
-            value that serves as a proportion. It dictates what amount of the available space inside the flex container
-            the item should take up.</p>
-          <button class="btn btn--block card__btn">Button</button>
-        </div>
-      </div>
-    </li>
-    <li class="cards__item">
-      <div class="card">
-        <div class="card__image" style="background-image: url(https://unsplash.it/800/600?image=39);"></div>
-        <div class="card__content">
-          <div class="card__title">Flex Shrink</div>
-          <p class="card__text">This defines the ability for a flex item to shrink if necessary. Negative numbers are
-            invalid.</p>
-          <button class="btn btn--block card__btn">Button</button>
-        </div>
-      </div>
-    </li>
+    {% endfor %}
   </ul>
 </section>
 
