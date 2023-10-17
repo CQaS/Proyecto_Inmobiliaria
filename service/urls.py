@@ -10,9 +10,13 @@ urlpatterns = [
     path('propiedad/crear', views_propiedad.crear_propiedad, name="crear_propiedad"),
     path('propiedad/editar/<int:id_inmueble>',
          views_propiedad.editar_propiedad, name="editar_propiedad"),
+    path('propiedad/detalles/<int:id_inmueble>',
+         views_propiedad.detalles_propiedad, name="detalles_propiedad"),
     path('propiedad/eliminar/<int:id_inmueble>',
          views_propiedad.eliminar_propiedad, name="eliminar_propiedad"),
     path('propiedad/buscar_por', views_propiedad.buscar_por, name="buscar_por"),
+    path('propiedad/propiedad_por_tipo/<str:tipo_o>/<str:tipo_p>',
+         views_propiedad.propiedad_por_tipo, name="propiedad_por_tipo"),
     ##### FIN RUTAS PROPIEDADES #####
     ##### RUTAS CLIENTES #####
     path('cliente', views_cliente.index_cliente, name="index_cliente"),

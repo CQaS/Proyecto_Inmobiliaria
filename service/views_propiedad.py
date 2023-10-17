@@ -4,6 +4,7 @@ import os
 from datetime import date
 from django.shortcuts import render, redirect
 from django.db import connection, IntegrityError
+from django.core.serializers import serialize
 from django.http import HttpResponse
 from .forms import InmuebleForm
 from .models import *
@@ -166,6 +167,15 @@ def editar_propiedad(req, id_inmueble):
     return render(req, 'propiedad/editar.html', {'formulario': formulario, 'clientes': lista, 'error': ERR})
 
 
+def detalles_propiedad(req, id_inmueble):
+    print("Detalles")
+    print(id_inmueble)
+    list = Inmueble.objects.filter(
+        id_inmueble__icontains=id_inmueble)
+    print(list)
+    return redirect('index')
+
+
 def eliminar_propiedad(req, id_inmueble):
     inmueble = Inmueble.objects.get(id_inmueble=id_inmueble)
     inmueble.delete()
@@ -206,3 +216,10 @@ def buscar_por(req):
     else:
         print('GET ')
         return HttpResponse('GET')
+
+
+def propiedad_por_tipo(req, tipo_o, tipo_p):
+    list = Inmueble.objects.filter(
+        tipo_operacion__icontains=tipo_o, tipo_inmueble__icontains=tipo_p)
+    print(list)
+    return HttpResponse(serialize('json', list), 'application/json')

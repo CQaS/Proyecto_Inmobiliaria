@@ -17,14 +17,12 @@
   <div class="search-bar">
     <h3>Buscar por:</h3>
     <div class="search-input">
-      <form action="{% url 'buscar_por' %}" method="POST" class="form-destino">
-        {% csrf_token %}
-        <select name="por_operacion" id="por_operacion">
-          <option>Tipo de Operacion</option>
-          <option value="Alquiler-temporario">Alquiler Temporario</option>
-          <option value="Alquiler-permanente">Alquiler Permante</option>
-          <option value="Venta">Venta</option>
-        </select>
+      <select name="por_operacion" id="por_operacion">
+        <option>Tipo de Operacion</option>
+        <option value="Alquiler temporario">Alquiler Temporario</option>
+        <option value="Alquiler permanente">Alquiler Permanente</option>
+        <option value="Venta">Venta</option>
+      </select>
     </div>
 
     <div class="search-input">
@@ -39,19 +37,12 @@
       </select>
     </div>
 
-    <button type="submit" id="buscar">Send</button>
+    <button type="submit" id="propiedad_por_tipo">Send</button>
   </div>
-  <!-- <div id="resultados">
-  Aquí se mostrarán los resultados de la búsqueda 
-</div> -->
 </section>
 
-<h2>Resultados de la Búsqueda:</h2>
-<ul>
-  {% for resultado in resultados %}
-  <li>{{ resultado }}</li>
-  {% endfor %}
-</ul>
+<!-- Aquí se mostrarán los resultados de la búsqueda -->
+<section id="resultados_por"></section>
 
 
 <!-- Propiedades exclusivos -->
@@ -63,9 +54,9 @@
         <div class="card__image" style="background-image: url({{ E.image }});"></div>
         <div class="card__content">
           <div class="card__title">{{E.dir_inmueble}} - {{E.tipo_operacion}}</div>
-          <p class="card__text">{{E.tipo.inmueble}} - {{E.ciudad_inmueble}} </p>
+          <p class="card__text">{{E.tipo_inmueble}} - {{E.ciudad_inmueble}} </p>
           <p class="card__text">{{E.valor_inmueble}}</p>
-          <button class="btn btn--block card__btn">Mas Info</button>
+          <a href="{% url 'detalles_propiedad' E.id_inmueble %}" class="btn btn--block card__btn">Mas Info</a>
         </div>
       </div>
     </li>
