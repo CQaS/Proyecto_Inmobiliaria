@@ -528,6 +528,19 @@
 		}
 
 		@media (max-width: 991px) {
+			.search-bar {
+				width: 90%; 
+			  }
+			
+			  .search-input {
+				flex-direction: column; 
+				text-align: center;
+			  }
+			
+			  .search-btn {
+				width: 100%; 
+				margin-top: 10px; 
+			  }
 		  footer {
 		    padding: 40px;
 		  }
