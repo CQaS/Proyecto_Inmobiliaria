@@ -321,55 +321,65 @@
 		/*Filtro de propiedades*/
 
 		.search-bar {
-		  flex-direction: row;
+		  position:absolute;
+		  top: 50%;
+  	      left: 50%;
+  		  transform: translate(-50%, -50%);
+          background-color: rgba(255, 255, 255, 0.5);
+          padding: 10px;
+          border-radius: 5px;
+          text-align: center; /* Opcional: para centrar el contenido dentro del .search-bar*/flex-direction: row;
 		  display: flex;
+		  width: 60%;
+		  height: 90px;
 		  justify-content: center;
-		  align-items: center;
-		  background-color: #fff;
-		  padding: 10px;
-		  text-align: center;
-		  margin-top: 15px;
-		  height: 100px;
+		  align-items: center; 
 		}
 
 		.search-bar h3 {
 		  padding: 10px;
-		  margin-top: 15px;
-
 		}
 
 		.search-input {
+		  font-weight: 600;
 		  flex-direction: row;
 		  justify-content: center;
 		  align-items: center;
 		  margin-right: 10px;
 		  margin-top: 5px;
 		  padding: 10px;
-
+		  height: 100%; /* Iguala la altura de los elementos input con el botón */
+		  display: flex;
+		  justify-content: space-between;
+		  align-items: center;
 		}
 
-		/* button { */
-		#buscar {
-		  width: 15%;
-		  border: solid thin #222;
-		  padding: 10px 20px;
+		.search-input select{
+			height: 100%;
+			font-weight: 600;
+			border-radius: 10px;
+		}
+		 
+
+		.search-btn {
+		  width: 70%;
+		  height: 40px;
+		  border: none;
+		  padding: 10px;
 		  border-radius: 10px;
-		  background-color: white;
+		  background-color:rgb(183, 146, 91);
 		  font-weight: 600;
-		  margin-top: 25px;
+		  margin-top: 0px;
 		  font-size: 16px;
 		  cursor: pointer;
 		  color: rgb(51, 51, 51);
-		  flex-direction: row;
-		  justify-content: flex-start;
-		  align-items: flex-start;
+		  text-align: center;
+		  display: flex;
+		  align-items: center;
+		} 
 
-
-		}
-
-		/* button:hover { */
-		#buscar:hover {
-		  background-color: rgb(51, 51, 51);
+		.search-btn:hover {
+		  background-color: rgb(183, 146, 91);
 		  color: white;
 		}
 
@@ -419,6 +429,7 @@
 		  margin-top: 20px;
 		  display: grid;
 		  grid-template-columns: repeat(3, 50px);
+		  border-radius: 5px;
 		}
 
 		footer .container .sci li {
@@ -429,6 +440,7 @@
 		  display: inline-block;
 		  width: 36px;
 		  height: 36px;
+		  border-radius: 5px;
 		  background: rgb(183, 146, 91);
 		  display: grid;
 		  align-content: center;
@@ -440,6 +452,10 @@
 		  color: black;
 		  font-size: 20px;
 		}
+
+		footer .container .sci li a i:hover {
+			color: white;
+		  }
 
 		footer .container .quicklinks {
 		  position: relative;
@@ -479,13 +495,15 @@
 
 		footer .form_input {
 			width: 215px; 
+			border-radius: 5px;
 		  }
 		  
 
 		footer input[type="submit"]{
 			width: 78%;
 			margin: auto;
-			border: solid thin #222;
+			border: none;
+			border-radius: 5px;
 			padding: .7rem;
 			background-color: rgb(183, 146, 91);
 			font-weight: 600;
@@ -493,6 +511,10 @@
 			font-size: 14px;
 			cursor: pointer;
 			color: black;
+		}
+
+		footer input[type="submit"]:hover{
+			color: white;
 		}
 
 		.copyrightText {

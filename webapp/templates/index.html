@@ -3,6 +3,7 @@
 {% load static %}
 
 {% block content %}
+
 <section>
   <div class="slider-frame">
     <ul>
@@ -15,29 +16,48 @@
 
   <!--Filtro de propiedades -->
   <div class="search-bar">
-    <h3>Buscar por:</h3>
+    <h3>Buscar por </h3>
     <div class="search-input">
-      <select name="por_operacion" id="por_operacion">
-        <option>Tipo de Operacion</option>
-        <option value="Alquiler temporario">Alquiler Temporario</option>
-        <option value="Alquiler permanente">Alquiler Permanente</option>
-        <option value="Venta">Venta</option>
-      </select>
-    </div>
 
-    <div class="search-input">
-      <select name="por_propiedad" id="por_propiedad">
-        <option>Tipo Propiedad</option>
-        <option value="Casa">Casa</option>
-        <option value="Departamento">Departamento</option>
-        <option value="Apart">Apart</option>
-        <option value="Complejo">Complejo</option>
-        <option value="Oficina">Oficina</option>
-        <option value="Otros">Otros</option>
-      </select>
-    </div>
+      <div>
+        <select id="tipo_operacion" name="tipo_operacion" class="search-input" style="margin-top: 0;"
+          required>
+          <option value="">Tipo Operación</option>
+          <option value="Alquiler temporario">Alquiler Temporario</option>
+          <option value="Alquiler permanente">Alquiler Permanente</option>
+          <option value="Venta">Venta</option>
+        </select>
+      </div>
+    
+      <div>
+        <select id="tipo_inmueble" name="tipo_inmueble" class="search-input" style="margin-top: 0;" required>
+          <option value="">Tipo Propiedad</option>
+          <option value="Casa">Casa</option>
+          <option value="Departamento">Departamento</option>
+          <option value="Apart">Apart</option>
+          <option value="Complejo">Complejo</option>
+          <option value="Oficina">Oficina</option>
+          <option value="Otros">Otros</option>
+        </select>
+      </div>
 
-    <button type="submit" id="propiedad_por_tipo">Send</button>
+      <button type="submit" class="search-btn active" id="propiedad_por_tipo">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="10.5" fill="white" stroke="#DDE3EC" />
+          <g clip-path="url(#clip0_1667_1314)">
+            <path
+              d="M9.83343 12.8509L15.1954 7.48828L16.0208 8.31311L9.83343 14.5005L6.12109 10.7882L6.94593 9.96336L9.83343 12.8509Z"
+              fill="#536387" />
+          </g>
+          <defs>
+            <clipPath id="clip0_1667_1314">
+              <rect width="14" height="14" fill="white" transform="translate(4 4)" />
+            </clipPath>
+          </defs>
+        </svg>
+            Buscar
+      </button>
+    </div>
   </div>
 </section>
 
