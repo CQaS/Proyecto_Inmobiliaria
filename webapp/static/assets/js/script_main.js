@@ -9,7 +9,7 @@ for (var i = 0; i < arrow.length; i++) {
 let sidebar = document.querySelector(".sidebar")
 let sidebarBtn = document.querySelector(".bx-menu")
 sidebarBtn.addEventListener("click", () => {
-    sidebar.classList.toggle("close")
+    sidebar.classList.toggle("close1")
 })
 
 let propiedad_por_tipo = document.getElementById("propiedad_por_tipo")
