@@ -38,7 +38,7 @@ img {
   display: flex;
   flex-wrap: wrap;
   list-style: none;
-  margin: 220px;
+  margin: 5%;
   padding: 0;
 }
 .cards__item {
@@ -107,3 +107,5 @@ img {
   line-height: 1.5;
   margin-bottom: 1.25rem;
 }
+
+/* ## MAS INFO ## */
