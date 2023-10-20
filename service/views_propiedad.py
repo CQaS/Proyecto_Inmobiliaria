@@ -185,7 +185,7 @@ def detalles_propiedad(req, id_inmueble):
     list = Inmueble.objects.filter(
         id_inmueble__icontains=id_inmueble)
     print(list)
-    return redirect('index')
+    return render(req, 'propiedad/inmueble.html')
 
 
 def eliminar_propiedad(req, id_inmueble):
