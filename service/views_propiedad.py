@@ -182,10 +182,10 @@ def editar_propiedad(req, id_inmueble):
 def detalles_propiedad(req, id_inmueble):
     print("Detalles")
     print(id_inmueble)
-    list = Inmueble.objects.filter(
+    un_detalle = Inmueble.objects.filter(
         id_inmueble__icontains=id_inmueble)
-    print(list)
-    return render(req, 'propiedad/inmueble.html')
+    print(un_detalle)
+    return render(req, 'propiedad/inmueble.html',{'detalle':un_detalle})
 
 
 def eliminar_propiedad(req, id_inmueble):
