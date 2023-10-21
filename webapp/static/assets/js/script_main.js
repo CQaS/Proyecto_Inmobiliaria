@@ -1,5 +1,5 @@
 let arrow = document.querySelectorAll(".arrow")
-for (var i = 0; i < arrow.length; i++) {
+for (let i = 0; i < arrow.length; i++) {
     arrow[i].addEventListener("click", (e) => {
         let arrowParent = e.target.parentElement.parentElement //selecting main parent of arrow
         arrowParent.classList.toggle("showMenu")
@@ -9,38 +9,29 @@ for (var i = 0; i < arrow.length; i++) {
 let sidebar = document.querySelector(".sidebar")
 let sidebarBtn = document.querySelector(".bx-menu")
 sidebarBtn.addEventListener("click", () => {
-    sidebar.classList.toggle("close1")
+    sidebar.classList.toggle("close")
 })
 
 let propiedad_por_tipo = document.getElementById("propiedad_por_tipo")
+let resultados_por = document.getElementById('resultados_por')
 
 propiedad_por_tipo.addEventListener("click", () => {
 
-    if (propiedad_por_tipo) {
-        // Verifica si el elemento <section> existe
+    let h2 = resultados_por.querySelector("h2")
+    h2 ? resultados_por.removeChild(h2) : null
 
-        // Verifica si el elemento <section> tiene hijos
-        if (propiedad_por_tipo.hasChildNodes()) {
-            // Obtén una lista de todas las etiquetas dentro del elemento <section>
-            let etiquetas = propiedad_por_tipo.getElementsByTagName("*");
-            console.log(etiquetas);
-
-            // Itera a través de la lista de etiquetas y elimínalas una por una
-            for (let i = etiquetas.length - 1; i >= 0; i--) {
-                propiedad_por_tipo.removeChild(etiquetas[i]);
-            }
-        }
-    }
+    let ul = resultados_por.querySelector("ul")
+    ul ? resultados_por.removeChild(ul) : null
 
     let por_operacion = document.getElementById("por_operacion")
     let por_propiedad = document.getElementById("por_propiedad")
     tipo_o = por_operacion.options[por_operacion.selectedIndex].value
     tipo_p = por_propiedad.options[por_propiedad.selectedIndex].value
 
-    let resultados_por = document.getElementById('resultados_por')
     let url = `/propiedad/propiedad_por_tipo/${tipo_o}/${tipo_p}`
 
     $.get(url).done((res) => {
+        console.log(res)
 
         if (res !== undefined && res !== null && res.length) {
 
@@ -51,16 +42,15 @@ propiedad_por_tipo.addEventListener("click", () => {
             // Crear un elemento <ul>
             let ulElement = document.createElement('ul')
             ulElement.className = 'cards'
-            resultados_por.appendChild(ulElement);
+            resultados_por.appendChild(ulElement)
 
-            let _cards = document.querySelector('.cards');
+            let _cards = document.querySelector('.cards')
 
             $.each(res, (i, R) => {
-                console.log(R.fotos[0])
                 let url = R.fotos[0].image.replace('webapp/', '')
 
                 // HTML con el bloque completo a agregar
-                var bloqueCARD = `
+                let bloqueCARD = `
                                 <li class="cards__item">
                                     <div class="card">
                                         <div class="card__image" style="background-image: url(${url});"></div>
@@ -77,7 +67,7 @@ propiedad_por_tipo.addEventListener("click", () => {
                                 `;
 
                 // Agregar el bloque HTML al contenido del <ul>
-                _cards.innerHTML += bloqueCARD;
+                _cards.innerHTML += bloqueCARD
 
             })
 

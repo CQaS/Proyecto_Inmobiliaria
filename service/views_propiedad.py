@@ -12,7 +12,7 @@ from .models import *
 
 # query = "SELECT * FROM inmueble i WHERE (SELECT COUNT(c.id_contrato) AS contID FROM contrato c WHERE c.inmueble_id = i.id_inmueble AND ((c.fecha_ing BETWEEN @inicio AND @fin) OR (c.fecha_salida BETWEEN @inicio AND @fin) OR (c.fecha_ing < @inicio AND c.fecha_salida > @fin))) = 0 AND i.estado = 1"
 
-# "SELECT * FROM inmueble i WHERE (SELECT COUNT(c.id_contrato) AS contID FROM contrato c WHERE c.inmueble_id = i.id_inmueble AND ((c.fecha_ing BETWEEN '2023-10-01' AND '2023-10-31') OR (c.fecha_salida BETWEEN '2023-10-01' AND '2023-10-31') OR (c.fecha_ing < '2023-10-01' AND c.fecha_salida > '2023-10-31'))) = 0 AND i.id_inmueble = 10 AND i.estado = 1"
+# "SELECT * FROM inmueble i WHERE (SELECT COUNT(c.id_contrato) AS contID FROM contrato c WHERE c.inmueble_id = i.id_inmueble AND ((c.fecha_ing BETWEEN '2023-10-01' AND '2023-10-31') OR (c.fecha_salida BETWEEN '2023-10-01' AND '2023-10-31') OR (c.fecha_ing > '2023-10-01' AND c.fecha_salida < '2023-10-31'))) = 0 AND i.id_inmueble = 10 AND i.estado = 1"
 
 """ from django.db.models import Q, Count, F
 from .models import Inmueble, Contrato
@@ -194,7 +194,7 @@ def eliminar_propiedad(req, id_inmueble):
     return redirect('index_propiedad')
 
 
-def buscar_por(req):
+def buscar_por_fechas(req):
     if req.method == 'POST':
         print(req.POST['origen'])
         # query =
@@ -231,12 +231,14 @@ def buscar_por(req):
 
 
 def propiedad_por_tipo(req, tipo_o, tipo_p):
+
+    fecha_hoy = date.today()
+    fecha_formateada = fecha_hoy.strftime('%Y-%m-%d')  # fecha de hoy
+
     list = Inmueble.objects.annotate(
         num_contratos=models.Count('contrato', filter=(
-            models.Q(contrato__fecha_ing__range=['2023-10-01', '2023-10-31']) |
-            models.Q(contrato__fecha_salida__range=['2023-10-01', '2023-10-31']) |
-            models.Q(contrato__fecha_ing__lt='2023-10-01',
-                     contrato__fecha_salida__gt='2023-10-31')
+            models.Q(contrato__fecha_ing__gt=fecha_formateada,
+                     contrato__fecha_salida__lt=fecha_formateada)
         ))
     ).filter(num_contratos=0, tipo_operacion__icontains=tipo_o, tipo_inmueble__icontains=tipo_p, estado=1)
 
@@ -269,5 +271,4 @@ def propiedad_por_tipo(req, tipo_o, tipo_p):
 
     # Convertir la lista de datos a JSON
     response_data = json.dumps(data)
-    print(response_data)
     return HttpResponse(response_data, 'application/json')
