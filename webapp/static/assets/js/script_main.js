@@ -1,3 +1,4 @@
+//Menu de index//
 let arrow = document.querySelectorAll(".arrow")
 for (let i = 0; i < arrow.length; i++) {
     arrow[i].addEventListener("click", (e) => {
@@ -12,6 +13,9 @@ sidebarBtn.addEventListener("click", () => {
     sidebar.classList.toggle("close1")
 })
 
+//////////////
+
+//Search de busqueda //
 let propiedad_por_tipo = document.getElementById("propiedad_por_tipo")
 let resultados_por = document.getElementById('resultados_por')
 
