@@ -4,54 +4,167 @@
 
 {% block content %}
 
+<!-- ESTILO PAGINA MAS DETALLES DE INMUEBLE -->
+
 <style>
+.box {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px 10px;
+}
+
+.dir p {
+    grid-column: 1/2;
+    font-size: 30px;
+    line-height: 30px;
+    font-weight: bold;
+    margin: 70px auto auto 300px;
+}
+
+.operacion {
+    grid-column: 1/3;
+    margin: 10px auto auto 300px;
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: bold;
+    background-color: rgb(183, 146, 91);
+    color: white;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.valor {
+    grid-column: 1/3;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 10px auto auto 300px;
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.imagen {
+    grid-column: 1/3;
+    margin: 10px auto auto 300px;
+
+}
+
+.info-basica {
+    grid-column: 1/2;
+    margin: 10px auto auto 300px;
+    font-size: 16px;    
+}
+
+.info-basica label{ 
+    display: block;   
+}
+
+.sup-medidas {
+    grid-column: 2/3;
+    margin: 10px auto auto 300px;
+    font-size: 16px;
+}
+
+
+.sup-medidas label{
+    display: block;   
+}
+
+.descripcion {
+    grid-column: 1/3;
+    margin: 10px auto auto 300px;
+    font-size: 16px;
+}
+
+.servicios {
+    grid-column: 1/3;
+    margin: 10px auto auto 300px;
+    font-size: 16px;
+}
+
+.servicios label{
+    display: block;
+}
+
+.mapa {
+    grid-column: 1/3;
+    margin: 10px auto auto 300px;
     
+}
+
 </style>
 
-<div class="dir">
-    <p>{{ direccion }}</p>  <!-- {{ variable }} -->
+<div class="box">
+    <div class="dir">
+        <p>AVENIDA ROCAMORA Y 25 DE MAYO, ESQUINA</p>  <!-- {{  dir_inmueble  }} -->
+    </div>
+
+    <div class="operacion">
+        <p>ALQUILER TEMPORARIO</p>  <!-- {{ tipo_operacion }} -->
+    </div>
+
+    <div class="valor">
+        <p>U$S 150.000</p>  <!-- {{ valor_inmueble }} -->
+    </div>
+
+    <div class="imagen">
+        <p>CARRUSEL DE FOTOS</p>
+        <ul>
+        <li><img src="" alt=""></li>
+        
+        </ul>
+    </div>
+    <div class="formbold-form-btn-wrapper">
+        <button class="btn_volver_1">
+          Atrás
+        </button>
+
+        <button class="btn_siguiente">
+          Siguiente
+        </button>
+      </div>
+
+    <div class="info-basica">
+        <h3>INFORMACION BASICA</h3>
+        <!-- va una table 2 columnas x 4 filas -->
+        <label for="">Ciudad</label>
+        <label for="">Tipo Inmueble</label>
+        <label for="">Cantidad Plantas</label>
+        <label for="">Cantidad Dormitorios</label>
+        <label for="">Cantidad Baños</label>
+    </div>
+    <div class="sup-medidas">
+        <h3>SUPERFICIES Y MEDIDAS</h3>
+        <label for="">Sup. Total</label>
+        <label for="">Sup. Cubierta</label>
+        <label for="">Sup. Semicubierta</label>
+    </div>
+        
+    
+    <div class="descripcion">
+        <h3>DESCRIPCION</h3>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellat maxime culpa sit est sed quas incidunt sint iste officia quisquam, reiciendis voluptates itaque illo enim? At adipisci distinctio id omnis.</p>
+    </div>
+
+    <div class="servicios">
+        <h3>SERVICIOS</h3>
+        <label for="">Cochera</label>
+        <label for="">Expensas</label>
+        <label for="">Wifi</label>
+        <label for="">Ropa Cama</label>
+        <label for="">Mucama</label>
+        <label for="">Picina</label>
+    </div>
+    <div class="mapa">
+        <h3>UBICACION</h3>
+        <div id="map"></div>
+        <script src="https://www.google.com/maps/@-33.0182225,-58.527254,15z?authuser=0&entry=ttu"></script>
+    </div>
 </div>
-
-<div class="operacion">
-    <p>{{ tipo_operacion }}</p>  <!-- {{ variable }} -->
-</div>
-
-<div class="valor">
-    <p>{{ valor }}</p>  <!-- {{ variable }} -->
-</div>
-
-<div class="imagen">
-
-</div>
-
-<div class="detalles">
-    <!-- va una table 2 columnas x 4 filas -->
-    <table>
-        <tr>
-            <th>titulo 1</th>
-            <th>titulo 2</th>
-        </tr>
-        {% for elemento in lista_elemento %} 
-        <tr>
-            <td>{{ elemento.titulo1 }}</td>
-            <td>{{ elemento.titulo2 }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-</div>
-
-<div class="info_basica">
-    <h3>INFOMACION BASICA</h3>
-    <br>
-    <h3>SUPERFICIES Y MEDIDAS</h3>
-    <br>
-    <h3>DESCRIPCION</h3>
-    <br>
-    <h3>SERVICIOS</h3>
-    <br>
-    <h3>UBICACION</h3>
-
-</div>
-
 {% endblock%}
 
