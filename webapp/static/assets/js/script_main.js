@@ -1,3 +1,4 @@
+//Menu de index//
 let arrow = document.querySelectorAll(".arrow")
 for (let i = 0; i < arrow.length; i++) {
     arrow[i].addEventListener("click", (e) => {
@@ -9,8 +10,10 @@ for (let i = 0; i < arrow.length; i++) {
 let sidebar = document.querySelector(".sidebar")
 let sidebarBtn = document.querySelector(".bx-menu")
 sidebarBtn.addEventListener("click", () => {
-    sidebar.classList.toggle("close")
+    sidebar.classList.toggle("close1")
 })
+
+//////////////
 
 let propiedad_por_tipo = document.getElementById("propiedad_por_tipo")
 let resultados_por = document.getElementById('resultados_por')
