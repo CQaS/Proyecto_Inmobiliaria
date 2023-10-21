@@ -15,6 +15,7 @@ sidebarBtn.addEventListener("click", () => {
 
 //////////////
 
+//Search de busqueda //
 let propiedad_por_tipo = document.getElementById("propiedad_por_tipo")
 let resultados_por = document.getElementById('resultados_por')
 
