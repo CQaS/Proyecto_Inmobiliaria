@@ -180,12 +180,18 @@ def editar_propiedad(req, id_inmueble):
 
 
 def detalles_propiedad(req, id_inmueble):
-    print("Detalles")
-    print(id_inmueble)
     un_detalle = Inmueble.objects.filter(
         id_inmueble__icontains=id_inmueble)
     print(un_detalle)
-    return render(req, 'propiedad/inmueble.html',{'detalle':un_detalle})
+    for d in un_detalle:
+        fotos = Fotos.objects.filter(
+            inmueble_id=d.id_inmueble).values('image', 'inmueble_id')
+
+    for foto in fotos:
+        foto['image'] = foto['image'].replace('webapp', '')
+    print(fotos)
+
+    return render(req, 'propiedad/inmueble.html', {'detalle': un_detalle, 'fotos': fotos})
 
 
 def eliminar_propiedad(req, id_inmueble):
