@@ -98,18 +98,18 @@
 }
 
 </style>
-{{ un_detalle }}
+{% for D in detalle %}
 <div class="box">
     <div class="dir">
-        <p>AVENIDA ROCAMORA Y 25 DE MAYO, ESQUINA</p>  <!-- {{  dir_inmueble  }} -->
+        <p>{{  D.dir_inmueble  }}</p>  
     </div>
 
     <div class="operacion">
-        <p>ALQUILER TEMPORARIO</p>  <!-- {{ tipo_operacion }} -->
+        <p>{{ D.tipo_operacion }}</p>  
     </div>
 
     <div class="valor">
-        <p>U$S 150.000</p>  <!-- {{ valor_inmueble }} -->
+        <p>U$S {{ D.valor_inmueble }}</p>  
     </div>
 
     <div class="imagen">
@@ -119,46 +119,38 @@
         
         </ul>
     </div>
-    <div class="formbold-form-btn-wrapper">
-        <button class="btn_volver_1">
-          Atrás
-        </button>
-
-        <button class="btn_siguiente">
-          Siguiente
-        </button>
-      </div>
+    
 
     <div class="info-basica">
         <h3>INFORMACION BASICA</h3>
         <!-- va una table 2 columnas x 4 filas -->
-        <label for="">Ciudad</label>
-        <label for="">Tipo Inmueble</label>
-        <label for="">Cantidad Plantas</label>
-        <label for="">Cantidad Dormitorios</label>
-        <label for="">Cantidad Baños</label>
+        <label for="">Ciudad: {{ D.ciudad_inmueble }}</label>
+        <label for="">Tipo Inmueble: {{ D.tipo_inmueble }}</label>
+        <label for="">Cantidad Plantas: {{ D.cant_plantas }}</label>
+        <label for="">Cantidad Dormitorios: {{ D.cant_dormitorios }}</label>
+        <label for="">Cantidad Baños: {{ D.cant_banos }}</label>
     </div>
     <div class="sup-medidas">
         <h3>SUPERFICIES Y MEDIDAS</h3>
-        <label for="">Sup. Total</label>
-        <label for="">Sup. Cubierta</label>
-        <label for="">Sup. Semicubierta</label>
+        <label for="">Sup. Total: {{ D.sup_total }}</label>
+        <label for="">Sup. Cubierta: {{ D.sup_cubierta }}</label>
+        <label for="">Sup. Semicubierta: {{ D.sup_semicubierta}}</label>
     </div>
         
     
     <div class="descripcion">
         <h3>DESCRIPCION</h3>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellat maxime culpa sit est sed quas incidunt sint iste officia quisquam, reiciendis voluptates itaque illo enim? At adipisci distinctio id omnis.</p>
+        <p>{{ D.descripcion }}</p>
     </div>
 
     <div class="servicios">
         <h3>SERVICIOS</h3>
-        <label for="">Cochera</label>
-        <label for="">Expensas</label>
+        <label for="">Cochera: {{ D_cochera }}</label>
+        <label for="">Expensas: {{ D.expensas }}</label>
         <label for="">Wifi</label>
-        <label for="">Ropa Cama</label>
+        <label for="">Ropa Cama </label>
         <label for="">Mucama</label>
-        <label for="">Picina</label>
+        <label for="">Piscina</label>
     </div>
     <div class="mapa">
         <h3>UBICACION</h3>
@@ -166,5 +158,6 @@
         <script src="https://www.google.com/maps/@-33.0182225,-58.527254,15z?authuser=0&entry=ttu"></script>
     </div>
 </div>
+{% endfor %}
 {% endblock%}
 
