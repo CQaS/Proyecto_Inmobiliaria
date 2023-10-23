@@ -70,7 +70,9 @@ def crear_propiedad(req):
 
         T = req.POST.getlist('tipo_servicio')
         T_list = ', '.join(T)
-        inmueble_form.instance.tipo_servicio = T_list
+
+        if T_list != '':
+            inmueble_form.instance.tipo_servicio = T_list
 
         try:
             I = inmueble_form.save()
