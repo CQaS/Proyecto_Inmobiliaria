@@ -144,12 +144,10 @@
 
     <div class="servicios">
         <h3>SERVICIOS</h3>
-        <label for="">Cochera: {{ D_cochera }}</label>
+        <label for="">Cochera: {% if D.cochera %}SI{% else %}NO{% endif %}</label>
         <label for="">Expensas: {% if D.expensas %}SI{% else %}NO{% endif %}</label>
-        <label for="">Wifi</label>
-        <label for="">Ropa Cama </label>
-        <label for="">Mucama</label>
-        <label for="">Piscina</label>
+        <label for=""> {{ D.tipo_servicio }} </label>
+        
     </div>
     <div class="mapa">
         <h3>UBICACION</h3>
