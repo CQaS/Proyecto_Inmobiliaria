@@ -110,9 +110,9 @@ body {
 }
 
 .formbold-input-flex>.check input[type="checkbox"]:checked~label {
-  background: #e91e62;
+  background: var(--color1);
   color: #fff;
-  box-shadow: 0 2px 20px #e91e62;
+  box-shadow: 0 2px 20px --color1;
   border-radius: 10px;
   border: 1px solid black;
 }

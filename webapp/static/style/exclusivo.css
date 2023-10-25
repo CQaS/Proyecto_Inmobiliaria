@@ -38,7 +38,7 @@ img {
   display: flex;
   flex-wrap: wrap;
   list-style: none;
-  margin: 5%;
+  margin: 5% auto auto 20%;
   padding: 0;
 }
 .cards__item {
