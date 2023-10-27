@@ -424,6 +424,7 @@ footer {
 	padding: 10px 60px 10px 60px;
 	background: white;
 	margin: 0 0 0 0;
+
 }
 
 footer .container {
@@ -432,6 +433,8 @@ footer .container {
 	grid-template-columns: 50% 20% 30%;
 	justify-content: space-between;
 	grid-gap: 30px;
+	margin-left: -60px;
+	margin-top: 50px;
 }
 
 footer .container .sec h2 {
