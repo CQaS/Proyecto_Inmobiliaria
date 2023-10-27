@@ -17,6 +17,8 @@ const i_valorinmueble = document.getElementById("valor_inmueble")
 const i_idcliente = document.getElementById("cliente_id_")
 const imgs = document.getElementById('imgs')
 const tipo_servicio = document.getElementsByName('tipo_servicio')
+const lati = document.getElementById('lat')
+const long = document.getElementById('lon')
 
 
 const pattern_letras_espacios = /^[A-Z][a-zA-ZñÑáÁéÉíÍúÚóÓ ]*$/
@@ -174,6 +176,11 @@ send.addEventListener("click", (e) => {
         } else {
             console.log(`size ${i} ok`)
         }
+    }
+
+    if (lati.value == '' || long.value == '') {
+        _alerta('Selecciona una Ubicacion en el Mapa')
+        return
     }
 
     console.log('OKOKOKOKOKOKO')

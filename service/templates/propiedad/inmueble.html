@@ -24,8 +24,7 @@
         <div class="atras botones">&#60;</div>
         <div class="adelante botones">&#62;</div>
         <!-- como resolver el link de las imagenes -->
-        <img src=""
-            alt="" class="carruselImagen">
+        <img src="" alt="" class="carruselImagen">
     </div>
 
 
@@ -79,12 +78,13 @@
 
     </div>
 
-    <!-- {-{ puntos|json_script:"puntos_json" }-} -->
 </div>
 
 <script>
     let d_InmuebleOnPin = '{{ D.dir_inmueble }}'
     let inmueble_html = true
+    let l1 = Number({{ D.latitud }})
+    let l2 = Number({{ D.longitud }})
 </script>
 
 {% endfor %}

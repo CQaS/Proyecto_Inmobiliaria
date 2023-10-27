@@ -112,8 +112,9 @@ class Inmueble(models.Model):
     habitac_maxima = models.IntegerField(
         verbose_name='Hab. max.', null=False, blank=False, validators=[validar_numero])
     estado = models.IntegerField(
-        null=True, default=1, blank=True, verbose_name='Estado')
-    # Estado = 1 seria Disponible
+        null=True, default=1, blank=True, verbose_name='Estado')# Estado = 1 seria Disponible
+    latitud = models.DecimalField(verbose_name='Latitud', decimal_places=14, default=0.0, max_digits=16, null=False, blank=False)
+    longitud = models.DecimalField(verbose_name='longitud', decimal_places=14, default=0.0, max_digits=16, null=False, blank=False)
 
     def __str__(self):
         return self.dir_inmueble
