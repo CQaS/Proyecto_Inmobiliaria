@@ -9,8 +9,10 @@ for (let i = 0; i < arrow.length; i++) {
 
 let sidebar = document.querySelector(".sidebar")
 let sidebarBtn = document.querySelector(".bx-menu")
+let cards = document.querySelector(".cards")
 sidebarBtn.addEventListener("click", () => {
     sidebar.classList.toggle("close1")
+    cards.classList.toggle("cards1")
 })
 
 //////////////
