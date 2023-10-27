@@ -38,9 +38,15 @@ img {
   display: flex;
   flex-wrap: wrap;
   list-style: none;
-  margin: 5% auto auto 20%;
+  margin: 5% auto auto;
+  margin-left: 90px;
   padding: 0;
+  
 }
+.cards1 {
+  margin-left: 230px;
+}
+
 .cards__item {
   display: flex;
   padding: 1rem;
