@@ -38,7 +38,7 @@ ul {
 
 /* FIN DE ESTILOS GENERALES*/
 
-
+/* MENU */
 .sidebar {
 	position: fixed;
 	top: 0;
@@ -417,24 +417,34 @@ ul {
 /*FOOTER */
 
 footer {
-	position: absolute;
+	/* position: absolute;
 	right: 0;
 	width: 80%;
 	height: auto;
 	padding: 10px 60px 10px 60px;
 	background: white;
-	margin: 0 0 0 0;
-
+	 */
 }
 
+
+
 footer .container {
-	width: 100%;
+		position: relative;
+		padding: 10px 60px 10px 60px;
+		right: 0;
+	width: 90%;
 	display: grid;
-	grid-template-columns: 50% 20% 30%;
+	grid-template-columns: 40% 25% 35%;
 	justify-content: space-between;
 	grid-gap: 30px;
-	margin-left: -60px;
-	margin-top: 50px;
+	/* margin-left: -60px;
+	margin-top: 50px; */
+	margin-left: 90px;
+	justify-content: center;
+}
+
+footer .container1 {
+	margin-left: 230px;
 }
 
 footer .container .sec h2 {
@@ -442,6 +452,7 @@ footer .container .sec h2 {
 	color: #333;
 	font-weight: 600;
 	margin-bottom: 15px;
+	
 }
 
 footer .container .sec p {
@@ -451,6 +462,7 @@ footer .container .sec p {
 
 footer .container .sec-quicklink p {
 	font-size: 14px;
+	text-align: justify;
 }
 
 footer .container .sci {
@@ -488,6 +500,7 @@ footer .container .sci li a i:hover {
 footer .container .quicklinks {
 	position: relative;
 	font-size: 16px;
+	
 }
 
 footer .container .quicklinks ul li {
@@ -499,26 +512,32 @@ footer .container .quicklinks ul li a {
 	text-decoration: none;
 	margin-bottom: 10px;
 	display: inline-block;
+	
 }
 
 footer .container .contact .info {
 	position: relative;
+	
 }
 
 footer .container .contact .info li {
 	display: grid;
 	grid-template-columns: 150px 2fr;
 	margin-bottom: 16px;
+	
 }
 
 footer .container .contact .info li span {
 	color: #555;
 	font-size: 20px;
+	
+
 }
 
 footer .container .contact .info li a {
 	color: #555;
 	text-decoration: none;
+	
 }
 
 footer .form_input {
@@ -528,7 +547,7 @@ footer .form_input {
 
 
 footer input[type="submit"] {
-	width: 78%;
+	width: 60%;
 	margin: auto;
 	border: none;
 	border-radius: 5px;
@@ -546,13 +565,18 @@ footer input[type="submit"]:hover {
 }
 
 .copyrightText {
-	width: 100%;
+	width: 80%;
 	background: #fff;
 	margin-top: 15px;
 	padding: 30px 100px 30px;
 	text-align: center;
 	color: rgb(183, 146, 91);
-	border: 1px solid rgba(0, 0, 0, 0.15)
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	margin-left: 90px;
+}
+
+.copyrightText1 {
+	margin-left: 230px;
 }
 
 @media (max-width: 991px) {
@@ -648,6 +672,7 @@ footer input[type="submit"]:hover {
 	/* Debe tener un valor mayor que el z-index del loading-spinner */
 	display: none;
 	/* Inicialmente oculto */
+	
 }
 
 .hr_detalle {
@@ -663,6 +688,11 @@ footer input[type="submit"]:hover {
 	grid-template-columns: 80% 20%;
 	justify-content: space-between;
 	grid-gap: 10px;
+	margin-left: 90px;
+}
+
+.box1 {
+	margin-left: 230px;
 }
 
 .dir p {
