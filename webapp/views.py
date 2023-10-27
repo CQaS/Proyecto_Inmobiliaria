@@ -34,7 +34,7 @@ def index(request):
         lista.append(row_dict)
 
     # Convertir a formato JSON
-    json_result = json.dumps(lista, default=serialize_date)
+    #json_result = json.dumps(lista, default=serialize_date)
 
     # Crear un conjunto para almacenar los valores únicos de cliente_id
     valores_unicos = set()
