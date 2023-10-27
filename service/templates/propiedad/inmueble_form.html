@@ -240,45 +240,45 @@
         <div class="formbold-input-flex">
           <div class="check">
             <input type="checkbox" id="cochera" name="cochera" value="true">
-            <label class="servicios">Cochera</label>
+            <label class="">Cochera</label>
           </div>
 
           <div class="check">
             <input type="checkbox" id="exclusividad" name="exclusividad" value="true">
-            <label class="servicios">Exclusividad</label>
+            <label class="">Exclusividad</label>
           </div>
 
           <div class="check">
             <input type="checkbox" id="expensas" name="expensas" value="true">
-            <label class="servicios">Expensas</label>
+            <label class="">Expensas</label>
           </div>
         </div>
         <!-- pantalla 3 linea 3-3 cajas-->
         <div class="formbold-input-flex">
           <div class="check">
             <input type="checkbox" id="tipo_servicio" name="tipo_servicio" value="WI-FI">
-            <label class="servicios" for="wifi">WI-FI</label>
+            <label class="" for="wifi">WI-FI</label>
           </div>
 
           <div class="check">
             <input type="checkbox" id="tipo_servicio" name="tipo_servicio" value="Ropa de cama">
-            <label class="servicios" for="ropa_cama">Ropa/Cama</label>
+            <label class="" for="ropa_cama">Ropa/Cama</label>
           </div>
 
           <div class="check">
             <input type="checkbox" id="tipo_servicio" name="tipo_servicio" value="Piscinas">
-            <label class="servicios" for="piscinas">Piscinas</label>
+            <label class="" for="piscinas">Piscinas</label>
           </div>
 
           <div class="check">
             <input type="checkbox" id="tipo_servicio" name="tipo_servicio" value="Mucama">
-            <label class="servicios" for="mucama">Mucama</label>
+            <label class="" for="mucama">Mucama</label>
           </div>
         </div>
         <div class="formbold-form-confirm"></div>
         <!-- pantalla 3 linea 4-3 cajas-->
         <div class="formbold-input-flex">
-          <label class="servicios">Seleccione Imágenes</label>
+          <label class="">Seleccione Imágenes</label>
           <input type="file" id="imgs" name="imgs" multiple>
         </div>
 
@@ -337,5 +337,8 @@
   </div>
 </div>
 <script src="{% static '/assets/js/validacion_inmueble.js' %}"></script>
+<script>
+  let inmueble_Form = true
+</script>
 
 {% endblock %}

@@ -18,43 +18,43 @@ sidebarBtn.addEventListener("click", () => {
 //Search de busqueda //
 let propiedad_por_tipo = document.getElementById("propiedad_por_tipo")
 let resultados_por = document.getElementById('resultados_por')
+if (propiedad_por_tipo) {
+    propiedad_por_tipo.addEventListener("click", () => {
 
-propiedad_por_tipo.addEventListener("click", () => {
+        let h2 = resultados_por.querySelector("h2")
+        h2 ? resultados_por.removeChild(h2) : null
 
-    let h2 = resultados_por.querySelector("h2")
-    h2 ? resultados_por.removeChild(h2) : null
+        let ul = resultados_por.querySelector("ul")
+        ul ? resultados_por.removeChild(ul) : null
 
-    let ul = resultados_por.querySelector("ul")
-    ul ? resultados_por.removeChild(ul) : null
+        let por_operacion = document.getElementById("por_operacion")
+        let por_propiedad = document.getElementById("por_propiedad")
+        tipo_o = por_operacion.options[por_operacion.selectedIndex].value
+        tipo_p = por_propiedad.options[por_propiedad.selectedIndex].value
 
-    let por_operacion = document.getElementById("por_operacion")
-    let por_propiedad = document.getElementById("por_propiedad")
-    tipo_o = por_operacion.options[por_operacion.selectedIndex].value
-    tipo_p = por_propiedad.options[por_propiedad.selectedIndex].value
+        let url = `/propiedad/propiedad_por_tipo/${tipo_o}/${tipo_p}`
 
-    let url = `/propiedad/propiedad_por_tipo/${tipo_o}/${tipo_p}`
+        $.get(url).done((res) => {
+            console.log(res)
 
-    $.get(url).done((res) => {
-        console.log(res)
+            if (res !== undefined && res !== null && res.length) {
 
-        if (res !== undefined && res !== null && res.length) {
+                let h2Element = document.createElement('h2')
+                h2Element.textContent = 'Resultados de la Búsqueda'
+                resultados_por.appendChild(h2Element)
 
-            let h2Element = document.createElement('h2')
-            h2Element.textContent = 'Resultados de la Búsqueda'
-            resultados_por.appendChild(h2Element)
+                // Crear un elemento <ul>
+                let ulElement = document.createElement('ul')
+                ulElement.className = 'cards'
+                resultados_por.appendChild(ulElement)
 
-            // Crear un elemento <ul>
-            let ulElement = document.createElement('ul')
-            ulElement.className = 'cards'
-            resultados_por.appendChild(ulElement)
+                let _cards = document.querySelector('.cards')
 
-            let _cards = document.querySelector('.cards')
+                $.each(res, (i, R) => {
+                    let url = R.fotos[0].image.replace('webapp/', '')
 
-            $.each(res, (i, R) => {
-                let url = R.fotos[0].image.replace('webapp/', '')
-
-                // HTML con el bloque completo a agregar
-                let bloqueCARD = `
+                    // HTML con el bloque completo a agregar
+                    let bloqueCARD = `
                                 <li class="cards__item">
                                     <div class="card">
                                         <div class="card__image" style="background-image: url(${url});"></div>
@@ -70,19 +70,203 @@ propiedad_por_tipo.addEventListener("click", () => {
                                 </li>
                                 `;
 
-                // Agregar el bloque HTML al contenido del <ul>
-                _cards.innerHTML += bloqueCARD
+                    // Agregar el bloque HTML al contenido del <ul>
+                    _cards.innerHTML += bloqueCARD
 
-            })
+                })
 
-            let hr = document.createElement('hr')
-            resultados_por.appendChild(hr)
+                let hr = document.createElement('hr')
+                resultados_por.appendChild(hr)
+
+            } else {
+
+                let h2Element = document.createElement('h2')
+                h2Element.textContent = 'Sin Resultados de la Búsqueda'
+                resultados_por.appendChild(h2Element)
+            }
+        })
+    })
+
+}
+
+/*                      script detalles de inmuebles y MAPA                 */
+
+let loadingSpinner = document.getElementById("loading-spinner")
+let overlay = document.getElementById("overlay")
+
+let miUbi = L.icon({
+    iconUrl: 'https://png.pngtree.com/png-vector/20230130/ourmid/pngtree-location-home-icon-pin-deal-clipart-png-image_6575743.png',
+
+    iconSize: [44, 46], // size of the icon
+    shadowSize: [50, 64], // size of the shadow
+    iconAnchor: [22, 44], // point of the icon which will correspond to marker's location
+    shadowAnchor: [4, 62], // the same for the shadow
+    popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+})
+
+if (typeof inmueble_html !== "undefined") {
+
+    //Arreglo de imagenes
+    let pictures = [
+        '/static/assets/img/prueba01.jpg',
+        '/static/assets/img/prueba02.jpg',
+        '/static/assets/img/prueba03.jpg',
+        '/static/assets/img/prueba04.jpg',
+        '/static/assets/img/prueba05.jpg',
+        '/static/assets/img/prueba06.jpg',
+        '/static/assets/img/prueba07.jpg'
+    ]
+    let contador = 0
+
+    const carrusel = (contenedor) => {
+        contenedor.addEventListener('click', e => {
+            let atras = contenedor.querySelector('.atras'),
+                adelante = contenedor.querySelector('.adelante'),
+                img = contenedor.querySelector('img'),
+                tgt = e.target //Identificar elemento que hace click
+            console.log(tgt)
+            if (tgt == atras) {
+                if (contador > 0) {
+                    img.src = pictures[contador - 1]
+                    contador--
+                } else {
+                    img.src = pictures[pictures.length - 1]
+                    contador = pictures.length - 1
+                }
+
+            } else if (tgt == adelante) {
+                if (contador < pictures.length - 1) {
+                    img.src = pictures[contador + 1]
+                    contador++
+                } else {
+                    img.src = pictures[0]
+                    contador = 0
+                }
+            }
+
+        })
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        let contenedor = document.querySelector('.carrusel')
+        contenedor ? carrusel(contenedor) : null
+
+        /* codigo del mapa */
+
+        const locationInfo = document.getElementById("location-info")
+        loadingSpinner.style.display = "block"
+        overlay.style.display = "block"
+
+        if ("geolocation" in navigator) {
+
+            new Promise((resolve, reject) => {
+                    navigator.geolocation.getCurrentPosition(resolve, reject)
+                })
+                .then((position) => {
+                    loadingSpinner.style.display = "none"
+                    overlay.style.display = "none"
+
+                    let l1 = position.coords.latitude
+                    let l2 = position.coords.longitude
+                    /* let l1 = {{ l1 }}
+                    let l2 = {{ l2 }} */
+
+                    let map = L.map('map').setView([l1, l2], 16) //centra el mapa
+                    //map.dragging.disable() //oculta la manito sobre el mapa
+
+                    let marker = L.marker([l1, l2], {
+                        icon: miUbi
+                    }).addTo(map) //agrega un marcador con mi ubicacion
+                    marker.bindPopup(d_InmuebleOnPin, {
+                        offset: [3, 45]
+                    })
+                    marker.on('click', () => {
+                        this.openPopup()
+                    })
+
+                    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        maxZoom: 19,
+                        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                    }).addTo(map)
+                    
+                })
+                .catch((error) => {
+                    loadingSpinner.style.display = "none"
+                    overlay.style.display = "none"
+                    console.log("Error al obtener la ubicación: ")
+                })
 
         } else {
-
-            let h2Element = document.createElement('h2')
-            h2Element.textContent = 'Sin Resultados de la Búsqueda'
-            resultados_por.appendChild(h2Element)
+            loadingSpinner.style.display = "none"
+            overlay.style.display = "none"
+            locationInfo.innerHTML = "Geolocalización no está disponible en este navegador."
         }
     })
-})
+} else if (typeof inmueble_Form !== "undefined") {
+
+    document.addEventListener("DOMContentLoaded", () => {
+        let contenedor = document.querySelector('.carrusel')
+        contenedor ? carrusel(contenedor) : null
+
+        /* codigo del mapa */
+
+        const locationInfo = document.getElementById("location-info")
+        loadingSpinner ? loadingSpinner.style.display = "block" : null
+
+        if ("geolocation" in navigator) {
+
+            new Promise((resolve, reject) => {
+                    navigator.geolocation.getCurrentPosition(resolve, reject)
+                })
+                .then((position) => {
+                    loadingSpinner.style.display = "none"
+
+                    let l1 = position.coords.latitude
+                    let l2 = position.coords.longitude
+
+                    let map = L.map('map').setView([l1, l2], 16) //centra el mapa
+
+                    let marker = L.marker([l1, l2], {
+                        icon: miUbi
+                    }).addTo(map) //agrega un marcador con mi ubicacion
+                    marker.bindPopup(d_InmuebleOnPin, {
+                        offset: [3, 45]
+                    })
+                    marker.on('click', () => {
+                        this.openPopup()
+                    })
+
+                    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        maxZoom: 19,
+                        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                    }).addTo(map)
+
+                    /* let puntos = JSON.parse(document.getElementById('puntos_json').textContent)
+
+                    puntos.forEach(P => {
+                        L.marker([P.latitude, P.longitude]).addTo(map)
+                    }) */
+
+                    map.on('click', (e) => {
+                        let popup = L.popup()
+                            .setLatLng([e.latlng.lat, e.latlng.lng])
+                            .setContent('<p>Seleccionaste<br />esta Propiedad!</p>')
+                            .openOn(map)
+                        L.marker([e.latlng.lat, e.latlng.lng]).addTo(map)
+                        console.log(e.latlng)
+                    })
+
+                    // Aquí puedes continuar con el código que depende de la ubicación
+                })
+                .catch((error) => {
+                    loadingSpinner.style.display = "none"
+                    console.log("Error al obtener la ubicación: ")
+                })
+
+        } else {
+            loadingSpinner.style.display = "none"
+            locationInfo.innerHTML = "Geolocalización no está disponible en este navegador."
+        }
+    })
+
+}
