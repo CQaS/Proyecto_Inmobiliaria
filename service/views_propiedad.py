@@ -7,6 +7,7 @@ from django.db import models, connection, IntegrityError
 from django.core import serializers
 from django.core.serializers import serialize
 from django.http import HttpResponse
+from django.http.response import JsonResponse
 from .forms import InmuebleForm
 from .models import *
 
@@ -184,8 +185,9 @@ def editar_propiedad(req, id_inmueble):
 def detalles_propiedad(req, id_inmueble):
     un_detalle = Inmueble.objects.filter(
         id_inmueble__icontains=id_inmueble)
-    print(un_detalle)
+
     for d in un_detalle:
+        print(d.latitud, d.longitud)
         fotos = Fotos.objects.filter(
             inmueble_id=d.id_inmueble).values('image', 'inmueble_id')
 
@@ -280,3 +282,13 @@ def propiedad_por_tipo(req, tipo_o, tipo_p):
     # Convertir la lista de datos a JSON
     response_data = json.dumps(data)
     return HttpResponse(response_data, 'application/json')
+
+
+def reportes(req):
+    return render(req, 'propiedad/reportes.html')
+
+
+def reportes_json(req):
+    inmueble = list(Inmueble.objects.values())
+    data = {'inmueble': inmueble}
+    return JsonResponse(data)

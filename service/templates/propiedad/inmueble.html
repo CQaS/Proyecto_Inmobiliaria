@@ -71,7 +71,7 @@
         <p id="location-info"></p>
 
         <div id="map_container">
-            <div id="map" style="width: 800px; height: 400px;">
+            <div id="map" style="width: 800px; height: 400px; margin-left: 10%;">
             </div>
             <div id="loading-spinner" class="loading-spinner"></div>
         </div>
@@ -83,8 +83,8 @@
 <script>
     let d_InmuebleOnPin = '{{ D.dir_inmueble }}'
     let inmueble_html = true
-    let l1 = Number({{ D.latitud }})
-    let l2 = Number({{ D.longitud }})
+    let l1 = '{{ D.latitud }}'
+    let l2 = '{{ D.longitud }}'
 </script>
 
 {% endfor %}

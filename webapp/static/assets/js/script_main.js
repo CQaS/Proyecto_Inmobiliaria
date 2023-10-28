@@ -10,13 +10,15 @@ for (let i = 0; i < arrow.length; i++) {
 let sidebar = document.querySelector(".sidebar")
 let sidebarBtn = document.querySelector(".bx-menu")
 let cards = document.querySelector(".cards")
-let container = document.querySelector(".container")
+let _container = document.querySelector("._container")
 let box = document.querySelector(".box")
+let tabla = document.querySelector(".tabla")
 sidebarBtn.addEventListener("click", () => {
     sidebar.classList.toggle("close1")
-    cards.classList.toggle("cards1")
-    container.classList.toggle("container1")
-    box.classList.toggle("box1")
+    cards ? cards.classList.toggle("cards1") : null
+    _container ? _container.classList.toggle("_container1") : null
+    box ? box.classList.toggle("box1") : null
+    tabla ? tabla.classList.toggle("tabla1") : null
 })
 
 //////////////
@@ -126,10 +128,11 @@ if (typeof inmueble_html !== "undefined") {
     let contador = 0
 
     const carrusel = (contenedor) => {
+        img = contenedor.querySelector('img')
+        img.src = pictures[0]
         contenedor.addEventListener('click', e => {
             let atras = contenedor.querySelector('.atras'),
                 adelante = contenedor.querySelector('.adelante'),
-                img = contenedor.querySelector('img'),
                 tgt = e.target //Identificar elemento que hace click
             console.log(tgt)
             if (tgt == atras) {

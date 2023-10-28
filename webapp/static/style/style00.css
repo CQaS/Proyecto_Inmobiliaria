@@ -416,22 +416,22 @@ ul {
 
 /*FOOTER */
 
-footer {
-	/* position: absolute;
+/* footer {
+	position: absolute;
 	right: 0;
 	width: 80%;
 	height: auto;
 	padding: 10px 60px 10px 60px;
 	background: white;
-	 */
-}
+	
+} */
 
 
 
-footer .container {
-		position: relative;
-		padding: 10px 60px 10px 60px;
-		right: 0;
+footer ._container {
+	position: relative;
+	padding: 10px 60px 10px 60px;
+	right: 0;
 	width: 90%;
 	display: grid;
 	grid-template-columns: 40% 25% 35%;
@@ -441,42 +441,43 @@ footer .container {
 	margin-top: 50px; */
 	margin-left: 90px;
 	justify-content: center;
+	transition: .5s;
 }
 
-footer .container1 {
+footer ._container1 {
 	margin-left: 230px;
 }
 
-footer .container .sec h2 {
+footer ._container .sec h2 {
 	position: relative;
 	color: #333;
 	font-weight: 600;
 	margin-bottom: 15px;
-	
+
 }
 
-footer .container .sec p {
+footer ._container .sec p {
 	color: #555;
 	margin: 0;
 }
 
-footer .container .sec-quicklink p {
+footer ._container .sec-quicklink p {
 	font-size: 14px;
 	text-align: justify;
 }
 
-footer .container .sci {
+footer ._container .sci {
 	margin-top: 20px;
 	display: grid;
 	grid-template-columns: repeat(3, 50px);
 	border-radius: 5px;
 }
 
-footer .container .sci li {
+footer ._container .sci li {
 	list-style: none;
 }
 
-footer .container .sci li a {
+footer ._container .sci li a {
 	display: inline-block;
 	width: 36px;
 	height: 36px;
@@ -488,56 +489,56 @@ footer .container .sci li a {
 	text-decoration: none;
 }
 
-footer .container .sci li a i {
+footer ._container .sci li a i {
 	color: black;
 	font-size: 20px;
 }
 
-footer .container .sci li a i:hover {
+footer ._container .sci li a i:hover {
 	color: white;
 }
 
-footer .container .quicklinks {
+footer ._container .quicklinks {
 	position: relative;
 	font-size: 16px;
-	
+
 }
 
-footer .container .quicklinks ul li {
+footer ._container .quicklinks ul li {
 	list-style: none;
 }
 
-footer .container .quicklinks ul li a {
+footer ._container .quicklinks ul li a {
 	color: #555;
 	text-decoration: none;
 	margin-bottom: 10px;
 	display: inline-block;
-	
+
 }
 
-footer .container .contact .info {
+footer ._container .contact .info {
 	position: relative;
-	
+
 }
 
-footer .container .contact .info li {
+footer ._container .contact .info li {
 	display: grid;
 	grid-template-columns: 150px 2fr;
 	margin-bottom: 16px;
-	
+
 }
 
-footer .container .contact .info li span {
+footer ._container .contact .info li span {
 	color: #555;
 	font-size: 20px;
-	
+
 
 }
 
-footer .container .contact .info li a {
+footer ._container .contact .info li a {
 	color: #555;
 	text-decoration: none;
-	
+
 }
 
 footer .form_input {
@@ -598,7 +599,7 @@ footer input[type="submit"]:hover {
 		padding: 40px;
 	}
 
-	footer .container {
+	footer ._container {
 		width: 100%;
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
@@ -612,7 +613,7 @@ footer input[type="submit"]:hover {
 
 
 @media (max-width: 768px) {
-	footer .container {
+	footer ._container {
 		width: 100%;
 		display: grid;
 		grid-template-columns: repeat(1, 1fr);
@@ -672,7 +673,7 @@ footer input[type="submit"]:hover {
 	/* Debe tener un valor mayor que el z-index del loading-spinner */
 	display: none;
 	/* Inicialmente oculto */
-	
+
 }
 
 .hr_detalle {
@@ -688,11 +689,20 @@ footer input[type="submit"]:hover {
 	grid-template-columns: 80% 20%;
 	justify-content: space-between;
 	grid-gap: 10px;
-	margin-left: 90px;
+	margin-left: -200px;
+	transition: .5s;
 }
 
 .box1 {
-	margin-left: 230px;
+	margin-left: -36px;
+}
+
+.tabla {
+	transition: .5s;
+}
+
+.tabla1 {
+	margin-left: 14rem;
 }
 
 .dir p {
@@ -712,22 +722,22 @@ footer input[type="submit"]:hover {
 	background-color: rgb(183, 146, 91);
 	color: white;
 	display: flex;
-	align-items: center;
-	width: 100%;
+	justify-content: center;
+	width: 50%;
 	border-radius: 5px;
 }
 
 .valor {
 	grid-column: 1/2;
-	display: inline-block;
-	vertical-align: middle;
+	display: flex;
 	margin: 10px auto auto 300px;
 	font-size: 20px;
 	line-height: 30px;
 	font-weight: bold;
 	border: 1px solid black;
 	border-radius: 5px;
-	width: 100%;
+	width: 50%;
+	justify-content: center;
 }
 
 /* Carrusel de fotos de inmueble  */
@@ -792,11 +802,11 @@ div.carrusel {
 }
 
 .atras {
-	left: 2%;
+	left: 6%;
 }
 
 .adelante {
-	right: 2%;
+	right: 6%;
 }
 
 .info-basica {
@@ -840,7 +850,6 @@ div.carrusel {
 	grid-column: 1/2;
 	margin: 10px auto auto 300px;
 	border: rgb(183, 146, 91);
-	border-radius: 5px solid black;
 	/* height: 50px;
         width: 100%; */
 
@@ -857,11 +866,11 @@ div.carrusel {
 	}
 }
 
-#map_container {
+#map__container {
 	position: relative;
 }
 
-#map_container .loading-spinner {
+#map__container .loading-spinner {
 	border: 4px solid rgba(255, 255, 255, 0.3);
 	border-top: 4px solid #3498db;
 	border-radius: 50%;
