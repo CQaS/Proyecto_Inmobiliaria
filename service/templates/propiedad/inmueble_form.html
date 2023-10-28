@@ -59,6 +59,8 @@
 
     <form action="{% url 'crear_propiedad' %}" id="formulario_inmueble" method="POST" enctype="multipart/form-data">
       {% csrf_token %}
+      <input type="hidden" name="latitud" id="lat" value="">
+      <input type="hidden" name="longitud" id="lon" value="">
       <div class="formbold-steps">
         <ul>
           <li class="parte_1 active">
@@ -282,6 +284,16 @@
           <input type="file" id="imgs" name="imgs" multiple>
         </div>
 
+        <div class="formbold-input-flex">
+          <p id="location-info"></p>
+
+          <div id="map_container">
+            <div id="map" style="width: 550px; height: 400px;">
+            </div>
+            <div id="loading-spinner" class="loading-spinner"></div>
+          </div>
+        </div>
+
         <div class="formbold-form-confirm">
           <div>
             <button class="btn_volver_2">
@@ -337,6 +349,9 @@
   </div>
 </div>
 <script src="{% static '/assets/js/validacion_inmueble.js' %}"></script>
+
+<!-- {-{ puntos|json_script:"puntos_json" }-} -->
+
 <script>
   let inmueble_Form = true
 </script>
