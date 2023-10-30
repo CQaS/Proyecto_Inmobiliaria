@@ -334,6 +334,8 @@ const listInmuebles = async () => {
     }
 }
 
-window.addEventListener("load", async () => {
-    await initDataTable()
-})
+if (!inmueble_Form) {
+    window.addEventListener("load", async () => {
+        await initDataTable()
+    })
+}
