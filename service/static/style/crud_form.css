@@ -1,5 +1,3 @@
-
-
 /* CONTAINER CRUD CLIENTE*/
 .container-form-cliente {
     margin: 150px 50px 50px 280px;
@@ -91,21 +89,24 @@ input, select {
     border-radius: 10px;
     float: right;
 } */
-select, .eleccion {
+select,
+.eleccion {
     display: inline-block;
     justify-content: center;
     vertical-align: middle;
-    font-size: 16px; 
+    font-size: 16px;
     margin-top: 20px;
     padding: 2px;
-    border-radius: 10px; 
-    
+    border-radius: 10px;
+
 }
-.eleccion-cbox, .servicios {
+
+.eleccion-cbox,
+.servicios {
     font-size: 16px;
     margin-top: 10px;
     padding: 2px;
-    border-radius: 10px;  
+    border-radius: 10px;
 }
 
 .servicios {
@@ -114,7 +115,7 @@ select, .eleccion {
     align-items: center;
 }
 
-input [type="checkbox"]{
+input [type="checkbox"] {
     font-size: 16px;
     display: flex;
     vertical-align: middle;
@@ -124,8 +125,8 @@ input [type="checkbox"]{
     border-radius: 10px;
     float: right;
 }
- 
-input[type="submit"]{
+
+input[type="submit"] {
     width: 60%;
     margin: auto;
     border: solid thin #222;
@@ -150,4 +151,4 @@ input[type="submit"]:hover {
 
     /* CONTAINER CRUD CLIENTE*/
 
-} 
+}

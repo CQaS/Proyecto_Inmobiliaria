@@ -18,6 +18,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -moz-font-feature-settings: "liga" on;
 } */
+
 img {
   height: auto;
   max-width: 100%;
@@ -75,10 +76,18 @@ img {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  transition: .5s;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 50px 50px rgba(0, 0, 0, .5);
 }
 
 .card:hover .card__image {
   filter: contrast(100%);
+  opacity: 0.7;
+  transform: translateY(-5px);
 }
 
 .card__content {
@@ -98,6 +107,7 @@ img {
   overflow: hidden;
   position: relative;
   transition: filter 0.5s cubic-bezier(0.43, 0.41, 0.22, 0.91);
+  transition: .5s;
 }
 
 .card__image::before {
@@ -125,6 +135,15 @@ img {
   font-size: 0.875rem;
   line-height: 1.5;
   margin-bottom: 1.25rem;
+}
+
+.card__btn {
+  transition: .5s;
+}
+
+.card__btn:hover {
+  color: azure;
+  background: coral;
 }
 
 /* ## MAS INFO ## */

@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<section>
+<section style="margin-top: -5%;">
   <div class="slider-frame">
     <ul>
       <li><img src="{% static '/assets/img/pexels001.jpeg' %}" alt=""></li>
@@ -20,15 +20,14 @@
     <div class="search-input">
 
       <div>
-        <select id="por_operacion" name="por_operacion" class="search-input" style="margin-top: 0;"
-          required>
+        <select id="por_operacion" name="por_operacion" class="search-input" style="margin-top: 0;" required>
           <option value="">Tipo Operación</option>
           <option value="Alquiler temporario">Alquiler Temporario</option>
           <option value="Alquiler permanente">Alquiler Permanente</option>
           <option value="Venta">Venta</option>
         </select>
       </div>
-    
+
       <div>
         <select id="por_propiedad" name="por_propiedad" class="search-input" style="margin-top: 0;" required>
           <option value="">Tipo Propiedad</option>

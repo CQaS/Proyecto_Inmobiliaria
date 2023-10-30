@@ -16,8 +16,12 @@ html {
 }
 
 body {
-	/* overflow: hidden;  */
+	overflow-x: hidden;
 	background-color: white;
+}
+
+main {
+	padding-top: 5%;
 }
 
 a {
@@ -30,10 +34,12 @@ a {
 	/*Color principal de la pagina*/
 }
 
-
-
 ul {
 	list-style: none;
+}
+
+#resultados_por {
+	transition: .5s;
 }
 
 /* FIN DE ESTILOS GENERALES*/
@@ -358,6 +364,7 @@ ul {
 	height: 90px;
 	justify-content: center;
 	align-items: center;
+	transition: .5s;
 }
 
 .search-bar h3 {
@@ -470,7 +477,7 @@ footer ._container .sci {
 	margin-top: 20px;
 	display: grid;
 	grid-template-columns: repeat(3, 50px);
-	border-radius: 5px;
+	border-radius: 50%;
 }
 
 footer ._container .sci li {
@@ -481,7 +488,7 @@ footer ._container .sci li a {
 	display: inline-block;
 	width: 36px;
 	height: 36px;
-	border-radius: 5px;
+	border-radius: 50%;
 	background: rgb(183, 146, 91);
 	display: grid;
 	align-content: center;
@@ -492,6 +499,7 @@ footer ._container .sci li a {
 footer ._container .sci li a i {
 	color: black;
 	font-size: 20px;
+	transition: .5s;
 }
 
 footer ._container .sci li a i:hover {
@@ -566,10 +574,11 @@ footer input[type="submit"]:hover {
 }
 
 .copyrightText {
-	width: 80%;
+	width: 92%;
 	background: #fff;
 	margin-top: 15px;
-	padding: 30px 100px 30px;
+	margin-bottom: 15px;
+	padding: 15px 100px 15px;
 	text-align: center;
 	color: rgb(183, 146, 91);
 	border: 1px solid rgba(0, 0, 0, 0.15);
@@ -577,7 +586,8 @@ footer input[type="submit"]:hover {
 }
 
 .copyrightText1 {
-	margin-left: 230px;
+	width: 81%;
+	margin-left: 240px;
 }
 
 @media (max-width: 991px) {
