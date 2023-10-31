@@ -10,9 +10,19 @@ for (let i = 0; i < arrow.length; i++) {
 let sidebar = document.querySelector(".sidebar")
 let sidebarBtn = document.querySelector(".bx-menu")
 let cards = document.querySelector(".cards")
+let _container = document.querySelector("._container")
+let box = document.querySelector(".box")
+let tabla = document.querySelector(".tabla")
+let _resultados_por = document.getElementById("resultados_por")
+let copyrightText = document.querySelector(".copyrightText")
 sidebarBtn.addEventListener("click", () => {
     sidebar.classList.toggle("close1")
-    cards.classList.toggle("cards1")
+    cards ? cards.classList.toggle("cards1") : null
+    _container ? _container.classList.toggle("_container1") : null
+    box ? box.classList.toggle("box1") : null
+    tabla ? tabla.classList.toggle("tabla1") : null
+    copyrightText ? copyrightText.classList.toggle("copyrightText1") : null
+    _resultados_por ? _resultados_por.classList.toggle("cards1") : null
 })
 
 //////////////
@@ -107,6 +117,7 @@ let miUbi = L.icon({
 })
 
 if (typeof inmueble_html !== "undefined") {
+    console.log('Detalles')
 
     //Arreglo de imagenes
     let pictures = [
@@ -121,10 +132,11 @@ if (typeof inmueble_html !== "undefined") {
     let contador = 0
 
     const carrusel = (contenedor) => {
+        img = contenedor.querySelector('img')
+        img.src = pictures[0]
         contenedor.addEventListener('click', e => {
             let atras = contenedor.querySelector('.atras'),
                 adelante = contenedor.querySelector('.adelante'),
-                img = contenedor.querySelector('img'),
                 tgt = e.target //Identificar elemento que hace click
             console.log(tgt)
             if (tgt == atras) {
@@ -155,56 +167,27 @@ if (typeof inmueble_html !== "undefined") {
 
         /* codigo del mapa */
 
-        const locationInfo = document.getElementById("location-info")
-        loadingSpinner.style.display = "block"
-        overlay.style.display = "block"
+        let map = L.map('map').setView([l1, l2], 16) //centra el mapa
+        //map.dragging.disable() //oculta la manito sobre el mapa
 
-        if ("geolocation" in navigator) {
+        let marker = L.marker([l1, l2], {
+            icon: miUbi
+        }).addTo(map) //agrega un marcador con mi ubicacion
+        marker.bindPopup(d_InmuebleOnPin, {
+            offset: [3, 45]
+        })
+        marker.on('click', () => {
+            this.openPopup()
+        })
 
-            new Promise((resolve, reject) => {
-                    navigator.geolocation.getCurrentPosition(resolve, reject)
-                })
-                .then((position) => {
-                    loadingSpinner.style.display = "none"
-                    overlay.style.display = "none"
-
-                    let l1 = position.coords.latitude
-                    let l2 = position.coords.longitude
-                    /* let l1 = {{ l1 }}
-                    let l2 = {{ l2 }} */
-
-                    let map = L.map('map').setView([l1, l2], 16) //centra el mapa
-                    //map.dragging.disable() //oculta la manito sobre el mapa
-
-                    let marker = L.marker([l1, l2], {
-                        icon: miUbi
-                    }).addTo(map) //agrega un marcador con mi ubicacion
-                    marker.bindPopup(d_InmuebleOnPin, {
-                        offset: [3, 45]
-                    })
-                    marker.on('click', () => {
-                        this.openPopup()
-                    })
-
-                    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                        maxZoom: 19,
-                        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                    }).addTo(map)
-                    
-                })
-                .catch((error) => {
-                    loadingSpinner.style.display = "none"
-                    overlay.style.display = "none"
-                    console.log("Error al obtener la ubicación: ")
-                })
-
-        } else {
-            loadingSpinner.style.display = "none"
-            overlay.style.display = "none"
-            locationInfo.innerHTML = "Geolocalización no está disponible en este navegador."
-        }
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map)
     })
+
 } else if (typeof inmueble_Form !== "undefined") {
+    console.log('FORM')
 
     document.addEventListener("DOMContentLoaded", () => {
         let contenedor = document.querySelector('.carrusel')
@@ -231,7 +214,7 @@ if (typeof inmueble_html !== "undefined") {
                     let marker = L.marker([l1, l2], {
                         icon: miUbi
                     }).addTo(map) //agrega un marcador con mi ubicacion
-                    marker.bindPopup(d_InmuebleOnPin, {
+                    marker.bindPopup('Aqui!', {
                         offset: [3, 45]
                     })
                     marker.on('click', () => {
@@ -249,20 +232,33 @@ if (typeof inmueble_html !== "undefined") {
                         L.marker([P.latitude, P.longitude]).addTo(map)
                     }) */
 
+                    let lat = document.getElementById('lat')
+                    let lon = document.getElementById('lon')
+                    let marca = null
+
                     map.on('click', (e) => {
-                        let popup = L.popup()
+                        let popup = L.popup({
+                                offset: [0, -20]
+                            })
                             .setLatLng([e.latlng.lat, e.latlng.lng])
                             .setContent('<p>Seleccionaste<br />esta Propiedad!</p>')
                             .openOn(map)
-                        L.marker([e.latlng.lat, e.latlng.lng]).addTo(map)
+
+                        marca ? map.removeLayer(marca) : null
+
+                        marca = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map)
+
+                        lat.value = e.latlng.lat
+                        lon.value = e.latlng.lng
+
                         console.log(e.latlng)
                     })
 
                     // Aquí puedes continuar con el código que depende de la ubicación
                 })
-                .catch((error) => {
+                .catch((e) => {
                     loadingSpinner.style.display = "none"
-                    console.log("Error al obtener la ubicación: ")
+                    console.log(`Error al obtener la ubicación: ${e}`)
                 })
 
         } else {

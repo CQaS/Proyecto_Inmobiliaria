@@ -18,11 +18,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -moz-font-feature-settings: "liga" on;
 } */
+
 img {
   height: auto;
   max-width: 100%;
   vertical-align: middle;
 }
+
 .btn {
   background-color: white;
   border: 1px solid #cccccc;
@@ -30,19 +32,22 @@ img {
   padding: 0.5rem;
   text-transform: lowercase;
 }
+
 .btn--block {
   display: block;
   width: 100%;
 }
+
 .cards {
   display: flex;
   flex-wrap: wrap;
   list-style: none;
   margin: 5% auto auto;
-  margin-left: 90px;
   padding: 0;
-  
+  margin-left: 90px;
+  transition: .5s;
 }
+
 .cards1 {
   margin-left: 230px;
 }
@@ -51,16 +56,19 @@ img {
   display: flex;
   padding: 1rem;
 }
+
 @media (min-width: 40rem) {
   .cards__item {
     width: 50%;
   }
 }
+
 @media (min-width: 56rem) {
   .cards__item {
     width: 33.3333%;
   }
 }
+
 .card {
   background-color: white;
   border-radius: 0.25rem;
@@ -68,16 +76,27 @@ img {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  transition: .5s;
 }
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 50px 50px rgba(0, 0, 0, .5);
+}
+
 .card:hover .card__image {
   filter: contrast(100%);
+  opacity: 0.7;
+  transform: translateY(-5px);
 }
+
 .card__content {
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
   padding: 1rem;
 }
+
 .card__image {
   background-position: center center;
   background-repeat: no-repeat;
@@ -88,12 +107,15 @@ img {
   overflow: hidden;
   position: relative;
   transition: filter 0.5s cubic-bezier(0.43, 0.41, 0.22, 0.91);
+  transition: .5s;
 }
+
 .card__image::before {
   content: "";
   display: block;
   padding-top: 56.25%;
 }
+
 @media (min-width: 40rem) {
   .card__image::before {
     padding-top: 66.6%;
@@ -107,11 +129,21 @@ img {
   letter-spacing: 2px;
   text-transform: uppercase;
 }
+
 .card__text {
   flex: 1 1 auto;
   font-size: 0.875rem;
   line-height: 1.5;
   margin-bottom: 1.25rem;
+}
+
+.card__btn {
+  transition: .5s;
+}
+
+.card__btn:hover {
+  color: azure;
+  background: coral;
 }
 
 /* ## MAS INFO ## */

@@ -88,9 +88,24 @@
           <li><a class="link_name" href="#">Servicios</a></li>
           <li><a href="{% url 'crear_cliente' %}">Clientes</a></li>
           <li><a href="{% url 'crear_propiedad' %}">Inmuebles</a></li>
-          <li><a href="{% url 'crear_contrato' %}">Contratos</a></li>
+          <li><a href="#">Contratos</a></li>
           <li><a href="{% url 'crear_empleado' %}">Empleados</a></li>
-          <li><a href="#">Reportes</a></li>
+          <li><a href="{% url 'reportes' %}">Reportes</a></li>
+        </ul>
+      </li>
+      <li>
+        <div class="iocn-link">
+          <a href="#">
+            <i class='bx bx-globe'></i>
+            <span class="link_name">Traductor</span>
+          </a>
+          <i class='bx bxs-chevron-down arrow'></i>
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" href="#">Traductor</a></li>
+          <li><a href="#">Portugues</a></li>
+          <li><a href="#">Español</a></li>
+          <li><a href="#">Ingles</a></li>
         </ul>
       </li>
     </ul>
@@ -111,7 +126,7 @@
 
   <!-- Footer Links -->
   <footer>
-    <div class="container">
+    <div class="_container">
       <div class="sec-quicklink">
         <h2>About Us</h2>
         <p>Dedicamo-nos a fazer os seus sonhos realidade, com o nosso atendimento personalizado na área imobiliária.

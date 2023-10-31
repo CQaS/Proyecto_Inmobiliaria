@@ -18,6 +18,10 @@ urlpatterns = [
          views_propiedad.buscar_por_fechas, name="buscar_por_fechas"),
     path('propiedad/propiedad_por_tipo/<str:tipo_o>/<str:tipo_p>',
          views_propiedad.propiedad_por_tipo, name="propiedad_por_tipo"),
+    path('propiedad/reportes',
+         views_propiedad.reportes, name="reportes"),
+    path('propiedad/reportes_json',
+         views_propiedad.reportes_json, name="reportes_json"),
     ##### FIN RUTAS PROPIEDADES #####
     ##### RUTAS CLIENTES #####
     path('cliente', views_cliente.index_cliente, name="index_cliente"),

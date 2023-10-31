@@ -24,8 +24,7 @@
         <div class="atras botones">&#60;</div>
         <div class="adelante botones">&#62;</div>
         <!-- como resolver el link de las imagenes -->
-        <img src=""
-            alt="" class="carruselImagen">
+        <img src="" alt="" class="carruselImagen">
     </div>
 
 
@@ -42,11 +41,11 @@
 
     <div class="sup-medidas">
         <h3>SUPERFIC"IES Y ADICIONALES</h3>
-        <hr class="hr_detalle">
+        <hr>
 
         <label for="">Sup. Total: {{ D.sup_total }}</label>
         <label for="">Sup. Cubierta: {{ D.sup_cubierta }}</label>
-        <label for="">Sup. Semicubierta: {{ D.sup_semicubierta}}</label>
+        <label for="">Sup. Semicubierta: {{ D.sup_semicub}}</label>
         <label for="">Cochera: {% if D.cochera %}SI{% else %}NO{% endif %}</label>
         <label for="">Expensas: {% if D.expensas %}SI{% else %}NO{% endif %}</label>
     </div>
@@ -72,19 +71,20 @@
         <p id="location-info"></p>
 
         <div id="map_container">
-            <div id="map" style="width: 800px; height: 400px;">
+            <div id="map" style="width: 800px; height: 400px; margin-left: 10%;">
             </div>
             <div id="loading-spinner" class="loading-spinner"></div>
         </div>
 
     </div>
 
-    <!-- {-{ puntos|json_script:"puntos_json" }-} -->
 </div>
 
 <script>
     let d_InmuebleOnPin = '{{ D.dir_inmueble }}'
     let inmueble_html = true
+    let l1 = '{{ D.latitud }}'
+    let l2 = '{{ D.longitud }}'
 </script>
 
 {% endfor %}

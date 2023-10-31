@@ -1,23 +1,16 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Figtree', sans-serif;
-}
-
 body {
     height: 180vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #df0e0e ;
+    background-color: #df0e0e;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     color: #fff;
 }
 
-.container-form {
+._container-form {
     width: 90%;
     height: 90vh;
     display: flex;
@@ -105,10 +98,10 @@ body {
 .form_legend {
     display: flex;
     border-radius: 5px;
-    margin: 20px; 
+    margin: 20px;
     padding: 10px;
-    justify-content: space-around;   
-} 
+    justify-content: space-around;
+}
 
 .checkbox {
     display: flex;
@@ -116,4 +109,3 @@ body {
     justify-content: space-around;
 
 }
-

@@ -1,16 +1,9 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Figtree', sans-serif;
-}
-
 body {
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #df0e0e ;
+    background-color: #df0e0e;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -22,7 +15,7 @@ body {
     height: 100vh;
     display: flex;
     justify-content: space-around;
-    transition:  all .5s ease-out;
+    transition: all .5s ease-out;
 }
 
 .welcome-back {
