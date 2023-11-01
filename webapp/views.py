@@ -1,8 +1,9 @@
 from datetime import date
 import json
 import collections
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.db import connection
+from django.core.mail import send_mail
 from .forms import ContactForm
 from .models import *
 
@@ -34,7 +35,7 @@ def index(request):
         lista.append(row_dict)
 
     # Convertir a formato JSON
-    #json_result = json.dumps(lista, default=serialize_date)
+    # json_result = json.dumps(lista, default=serialize_date)
 
     # Crear un conjunto para almacenar los valores únicos de cliente_id
     valores_unicos = set()
@@ -62,3 +63,23 @@ def index(request):
 
 def sevice(request):
     return render(request, 'login.html')
+
+
+def msg(req):
+    print(req.POST)
+
+    if req.method == 'POST':
+        nombre = req.POST['nombre']
+        email = req.POST['email']
+        tel = req.POST['tel']
+        mensaje = req.POST['mensaje']
+        msg = f'{nombre} {email} {tel} {mensaje}'
+
+        send_mail(
+            'Contacto - Inmobiliaria',  # Titulo
+            msg,  # mensaje
+            'settings.EMAIL_HOST_USER',
+            ['cqasss@gmail.com'],
+            fail_silently=False
+        )
+    return redirect('index')

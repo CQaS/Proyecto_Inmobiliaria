@@ -1,5 +1,6 @@
 /* cdn Fonts Import Link */
-@import url('https://fonts.cdnfonts.com/css/orator-std');
+/* @import url('https://fonts.cdnfonts.com/css/orator-std'); */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
 /* @import url('https://fonts.cdnfonts.com/css/georgia-western'); */
 
 /* ESTILOS GENERALES*/
@@ -7,7 +8,7 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	font-family: 'Orator Std', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	/* font-family: 'Georgia Western', sans-serif; */
 }
 
@@ -26,6 +27,18 @@ main {
 
 a {
 	text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin-top: 0;
+	margin-bottom: .5rem;
+	font-weight: 500;
+	line-height: 1.2;
 }
 
 
@@ -368,6 +381,8 @@ ul {
 }
 
 .search-bar h3 {
+	font-weight: 400;
+	font-size: 25px;
 	padding: 10px;
 }
 
@@ -423,15 +438,15 @@ ul {
 
 /*FOOTER */
 
-/* footer {
-	position: absolute;
+footer {
+	/* position: absolute;
 	right: 0;
 	width: 80%;
 	height: auto;
 	padding: 10px 60px 10px 60px;
-	background: white;
-	
-} */
+	background: white; */
+	margin-top: 25px;
+}
 
 
 
@@ -471,6 +486,7 @@ footer ._container .sec p {
 footer ._container .sec-quicklink p {
 	font-size: 14px;
 	text-align: justify;
+	line-height: 1.3rem;
 }
 
 footer ._container .sci {
@@ -550,10 +566,33 @@ footer ._container .contact .info li a {
 }
 
 footer .form_input {
-	width: 215px;
-	border-radius: 5px;
+	/* width: 215px;
+	border-radius: 5px; */
+	display: block;
+	width: 100%;
+	padding: .375rem .75rem;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #212529;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #ced4da;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	border-radius: .375rem;
+	transition: border-color .15s ease-in-out,
+		box-shadow .15s ease-in-out;
 }
 
+footer .form_input:focus {
+	color: #212529;
+	background-color: #fff;
+	border-color: #86b7fe;
+	outline: 0;
+	box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, .25)
+}
 
 footer input[type="submit"] {
 	width: 60%;
@@ -562,15 +601,17 @@ footer input[type="submit"] {
 	border-radius: 5px;
 	padding: .7rem;
 	background-color: rgb(183, 146, 91);
-	font-weight: 600;
+	font-weight: 500;
 	margin-top: 10px;
 	font-size: 14px;
 	cursor: pointer;
 	color: black;
+	transition: .5s;
 }
 
 footer input[type="submit"]:hover {
 	color: white;
+	box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, .25)
 }
 
 .copyrightText {
@@ -826,6 +867,7 @@ div.carrusel {
 }
 
 .info-basica label {
+	padding: 5px;
 	display: block;
 }
 
@@ -837,6 +879,7 @@ div.carrusel {
 
 
 .sup-medidas label {
+	padding: 5px;
 	display: block;
 }
 
@@ -846,6 +889,10 @@ div.carrusel {
 	font-size: 16px;
 }
 
+.descripcion p {
+	padding: 5px;
+}
+
 .servicios {
 	grid-column: 1/1;
 	margin: 10px auto auto 300px;
@@ -853,6 +900,7 @@ div.carrusel {
 }
 
 .servicios label {
+	padding: 5px;
 	display: block;
 }
 
