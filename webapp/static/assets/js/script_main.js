@@ -7,6 +7,11 @@ for (let i = 0; i < arrow.length; i++) {
     })
 }
 
+const pattern_letras_espacios = /^[A-Z][a-zA-ZñÑáÁéÉíÍúÚóÓ ]*$/
+const pattern_letras_numero_espacios = /^[a-zA-ZñÑáÁéÉíÍúÚóÓ0-9 ]*$/
+const pattern_solo_numeros = /^[0-9][0-9]*$/
+const pattern_mail_m = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
+
 let sidebar = document.querySelector(".sidebar")
 let sidebarBtn = document.querySelector(".bx-menu")
 let cards = document.querySelector(".cards")
@@ -268,3 +273,45 @@ if (typeof inmueble_html !== "undefined") {
     })
 
 }
+
+/* SEND E-MAIL */
+
+const btn_msg = document.getElementById('btn_msg')
+const formulario_msg = document.getElementById('formulario_msg')
+const email = document.getElementById('email')
+const tel = document.getElementById('tel')
+const nombre = document.getElementById('nombre')
+const mensaje = document.getElementById('mensaje')
+
+btn_msg.addEventListener("click", (e) => {
+    e.preventDefault()
+
+    const _alerta = (texto) => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Alerta',
+            text: `${texto}`
+        })
+    }
+
+    if (nombre.value == "") {
+        _alerta('Ingresa tu Nombre')
+        return
+    }
+    if (email.value == "") {
+        _alerta('Ingresa tu E-mail')
+        return
+    }
+    if (tel.value == "") {
+        _alerta('Ingresa tu Telefono')
+        return
+    }
+
+    if (mensaje.value == "") {
+        _alerta('Ingresa tu Mensaje')
+        return
+    }
+
+    // SI ESTA TODO BIEN SE ENVIA EL FORMULARIO...
+    formulario_msg.submit()
+})
