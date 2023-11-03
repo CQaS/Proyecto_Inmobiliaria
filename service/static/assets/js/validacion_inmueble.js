@@ -20,11 +20,6 @@ const tipo_servicio = document.getElementsByName('tipo_servicio')
 const lati = document.getElementById('lat')
 const long = document.getElementById('lon')
 
-
-const pattern_letras_espacios = /^[A-Z][a-zA-ZñÑáÁéÉíÍúÚóÓ ]*$/
-const pattern_letras_numero_espacios = /^[A-Z0-9][a-zA-ZñÑáÁéÉíÍúÚóÓ0-9 ]*$/
-const pattern_solo_numeros = /^[0-9][0-9]*$/
-const pattern_cod_ref = /^[0-9][0-9-]*$/
 const pattern_mail = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
 
 if (send) {
@@ -274,6 +269,8 @@ const dataTableOptions = {
     "language": {
         "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
     },
+    scrollX: "2000px",
+    lengthMenu: [5, 10, 20, 50, 100],
     columnDefs: [{
             className: "centered",
             targets: [0, 1, 2, 3, 4, 5, 6]
@@ -285,6 +282,10 @@ const dataTableOptions = {
         {
             searchable: false,
             targets: [0, 5, 6]
+        },
+        {
+            width: '20%',
+            targets: [0]
         }
     ],
     pageLength: 10,

@@ -1,6 +1,7 @@
 from datetime import date
 import json
 import collections
+from decouple import config
 from django.shortcuts import render, redirect
 from django.db import connection
 from django.core.mail import send_mail
@@ -61,8 +62,15 @@ def index(request):
     return render(request, 'index.html', context)
 
 
-def sevice(request):
-    return render(request, 'login.html')
+def login(req):
+    print(req.POST)
+
+    if req.method == 'POST':
+        nombre = req.POST['usuario']
+        email = req.POST['password']
+        msg = f'{nombre} {email}'
+        print(msg)
+    return redirect('index')
 
 
 def msg(req):
@@ -79,7 +87,7 @@ def msg(req):
             'Contacto - Inmobiliaria',  # Titulo
             msg,  # mensaje
             'settings.EMAIL_HOST_USER',
-            ['cqasss@gmail.com'],
+            [config('EMAIL_HOST_USER')],
             fail_silently=False
         )
     return redirect('index')

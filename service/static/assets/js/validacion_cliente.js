@@ -1,4 +1,4 @@
-const send = document.getElementById('send')
+const crear_cliente = document.getElementById('crear_cliente')
 const formulario = document.getElementById('formulario')
 const c_nombre = document.getElementById('nom_cliente')
 const c_direccion = document.getElementById('dir_cliente')
@@ -10,12 +10,12 @@ const c_pais = document.getElementById('pais_cliente')
 const c_fecha = document.getElementById('fechnac')
 const c_categoria = document.getElementById('categoria')
 
-const pattern_letras_espacios = /^[a-zA-ZñÑáÁéÉíÍúÚóÓ ]*$/
-const pattern_letras_numero_espacios = /^[a-zA-ZñÑáÁéÉíÍúÚóÓ0-9 ]*$/
-const pattern_solo_numeros = /^[0-9][0-9]*$/
-const pattern_mail = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
+const pattern_letras_espacios_ = /^[a-zA-ZñÑáÁéÉíÍúÚóÓ ]*$/
+const pattern_letras_numero_espacios_ = /^[a-zA-ZñÑáÁéÉíÍúÚóÓ0-9 ]*$/
+const pattern_solo_numeros_ = /^[0-9][0-9]*$/
+const pattern_mail_ = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
 
-send.addEventListener("click", (e) => {
+crear_cliente.addEventListener("click", (e) => {
     e.preventDefault()
 
     const _alerta = (texto) => {
@@ -27,19 +27,19 @@ send.addEventListener("click", (e) => {
     }
 
     const letra_y_espacios = (DATO) => {
-        return DATO.value.match(pattern_letras_espacios)
+        return DATO.value.match(pattern_letras_espacios_)
     }
 
     const letras_numero_espacios = (DATO) => {
-        return DATO.value.match(pattern_letras_numero_espacios)
+        return DATO.value.match(pattern_letras_numero_espacios_)
     }
 
     const solo_numeros = (DATO) => {
-        return DATO.value.match(pattern_solo_numeros)
+        return DATO.value.match(pattern_solo_numeros_)
     }
 
     const mail = (DATO) => {
-        return DATO.value.match(pattern_mail)
+        return DATO.value.match(pattern_mail_)
     }
 
     if (letra_y_espacios(c_nombre) == null || c_nombre.value.length < 3) {

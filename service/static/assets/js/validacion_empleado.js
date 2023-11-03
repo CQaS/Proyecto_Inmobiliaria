@@ -7,10 +7,10 @@ const e_direccion = document.getElementById('dir_empleado')
 const e_mail = document.getElementById('email_empleado')
 const e_puesto = document.getElementById('nom_puesto')
 
-const pattern_letras_espacios = /^[A-Z][a-zA-ZñÑáÁéÉíÍúÚóÓ ]*$/
-const pattern_letras_numero_espacios = /^[a-zA-ZñÑáÁéÉíÍúÚóÓ0-9 ]*$/
-const pattern_solo_numeros = /^[0-9][0-9]*$/
-const pattern_mail = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
+const pattern_letras_espacios_ = /^[A-Z][a-zA-ZñÑáÁéÉíÍúÚóÓ ]*$/
+const pattern_letras_numero_espacios_ = /^[a-zA-ZñÑáÁéÉíÍúÚóÓ0-9 ]*$/
+const pattern_solo_numeros_ = /^[0-9][0-9]*$/
+const pattern_mail_ = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
 
 crear_empleado.addEventListener("click", (e) => {
     e.preventDefault()
@@ -24,19 +24,19 @@ crear_empleado.addEventListener("click", (e) => {
     }
 
     const letra_y_espacios = (DATO) => {
-        return DATO.value.match(pattern_letras_espacios)
+        return DATO.value.match(pattern_letras_espacios_)
     }
 
     const letras_numero_espacios = (DATO) => {
-        return DATO.value.match(pattern_letras_numero_espacios)
+        return DATO.value.match(pattern_letras_numero_espacios_)
     }
 
     const solo_numeros = (DATO) => {
-        return DATO.value.match(pattern_solo_numeros)
+        return DATO.value.match(pattern_solo_numeros_)
     }
 
     const mail = (DATO) => {
-        return DATO.value.match(pattern_mail)
+        return DATO.value.match(pattern_mail_)
     }
 
     if (letra_y_espacios(e_nombre) == null || e_nombre.value.length < 3) {
