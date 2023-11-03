@@ -86,13 +86,13 @@ if (send) {
             return
         }
 
-        if (solo_numeros(i_supcubierta) == null || Number(i_supcubierta.value) <= 0) {
+        if (solo_numeros(i_supcubierta) == null || Number(i_supcubierta.value) < 0) {
             i_supsemicubierta.focus()
             _alerta('Superficie Cubierta de Inmueble no valido!')
             return
         }
 
-        if (solo_numeros(i_supsemicubierta) == null || Number(i_supsemicubierta.value) <= 0) {
+        if (solo_numeros(i_supsemicubierta) == null || Number(i_supsemicubierta.value) < 0) {
             i_supsemicubierta.focus()
             _alerta('Superficie Semi Cubierta de Inmueble no valido!')
             return

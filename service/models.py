@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 from django.db import connection, IntegrityError
 
 pattern_Nombre = r'^[A-Z]*[a-z]{2,}[a-zA-ZñÑáÁéÉíÍúÚóÓ ]*$'
-pattern_Direccion = r'^[a-zA-Z0-9 ]*$'
+pattern_Direccion = r'^[a-zA-ZñÑáÁéÉíÍúÚóÓ0-9 ]*$'
 pattern_Datos_envio = r'^[A-Z0-9][a-zA-ZñÑáÁéÉíÍúÚóÓ0-9,.:;\- ]*$'
 pattern_soloNumeros = r'^[0-9][0-9]*$'
 pattern_cod_ = r'^[a-zA-Z0-9-]*$'
