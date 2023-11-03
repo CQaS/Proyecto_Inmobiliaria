@@ -14,6 +14,7 @@
   <!-- css ALERT formulario  -->
   <link rel="stylesheet" href="{% static '/style/alert_form.css' %}">
   <link rel="stylesheet" href="{% static '/style/exclusivo.css' %}">
+  <link rel="stylesheet" href="{% static '/style/modal.css' %}">
 
   <!-- Boxiocns CDN Link -->
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -108,6 +109,12 @@
           <li><a href="#">Ingles</a></li>
         </ul>
       </li>
+      <li>
+        <a href="#modal-opened" id="modal-closed">
+          <i class='bx bx-log-in'></i>
+          <span class="link_name">Login</span>
+        </a>
+      </li>
     </ul>
   </section>
   <section class="home-section">
@@ -156,7 +163,7 @@
         </ul>
       </div>
       <div class="sec-quicklink">
-        <h2>Contact</h2>
+        <h2>Contact </h2>
         <form action="{% url 'msg' %}" class="form" id="formulario_msg" method="POST">
 
           {% csrf_token %}
@@ -172,16 +179,41 @@
           <br>
 
           <input type="submit" id="btn_msg" value="Enviar formulario" class="form_enviar">
-          <!--Esto es para que no se vea la confirmacion del envio del formulario-->
-          <!-- <input type="hidden" name="_next" value="http://localhost:127.0.0.1:8000/">
-          <input type="hidden" name="_captcha" value="false"> -->
         </form>
       </div>
     </div>
     <div class="copyrightText">
       <p>SVD INSIDE copyright 2023</p>
     </div>
+
+    <!-- 
+    MODAL
+     -->
+
+    <div class="modal-container" id="modal-opened">
+      <div class="modal">
+
+        <div class="sec-quicklink">
+          <h2>INGRESO </h2>
+          <form action="{% url 'login' %}" class="form" id="form_login" method="POST">
+            {% csrf_token %}
+
+            <input type="text" class="form_input" id="usuario" name="usuario" placeholder="Usuario" required>
+            <br>
+            <input type="password" class="form_input" id="password" name="password" placeholder="Password" required>
+            <br>
+
+            <input type="submit" id="btn_login" value="Ingresar" class="form_enviar">
+          </form>
+        </div>
+
+        <a href="#modal-closed" class="link-2"></a>
+
+      </div>
+    </div>
   </footer>
+
+
 
   <!-- Scroll Reveal -->
   <script src="https://unpkg.com/scrollreveal"></script>

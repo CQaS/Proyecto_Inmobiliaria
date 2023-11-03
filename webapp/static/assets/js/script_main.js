@@ -58,6 +58,8 @@ if (propiedad_por_tipo) {
 
                 let h2Element = document.createElement('h2')
                 h2Element.textContent = 'Resultados de la Búsqueda'
+                h2Element.style.marginLeft = '8%'
+
                 resultados_por.appendChild(h2Element)
 
                 // Crear un elemento <ul>

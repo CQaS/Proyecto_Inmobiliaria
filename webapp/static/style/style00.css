@@ -143,10 +143,16 @@ ul {
 	min-width: 78px;
 	text-align: center;
 	line-height: 50px;
-	color: black;
-	font-size: 20px;
+	/* color: black;
+	 */
+	font-size: 30px;
 	cursor: pointer;
 	transition: all 0.3s ease;
+}
+
+.sidebar .nav-links li i:hover {
+	transform: scale(1.2);
+	box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
 }
 
 .sidebar .nav-links li.showMenu i.arrow {
