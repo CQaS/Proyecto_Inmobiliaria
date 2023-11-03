@@ -11,6 +11,7 @@ const pattern_letras_espacios = /^[A-Z][a-zA-ZñÑáÁéÉíÍúÚóÓ ]*$/
 const pattern_letras_numero_espacios = /^[a-zA-ZñÑáÁéÉíÍúÚóÓ0-9 ]*$/
 const pattern_solo_numeros = /^[0-9][0-9]*$/
 const pattern_mail_m = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
+const pattern_cod_ref = '^[a-zA-Z0-9-]*$'
 
 let sidebar = document.querySelector(".sidebar")
 let sidebarBtn = document.querySelector(".bx-menu")
@@ -206,6 +207,7 @@ if (typeof inmueble_html !== "undefined") {
         loadingSpinner ? loadingSpinner.style.display = "block" : null
 
         if ("geolocation" in navigator) {
+            console.log('Geolocalización OK')
 
             new Promise((resolve, reject) => {
                     navigator.geolocation.getCurrentPosition(resolve, reject)
@@ -271,6 +273,7 @@ if (typeof inmueble_html !== "undefined") {
         } else {
             loadingSpinner.style.display = "none"
             locationInfo.innerHTML = "Geolocalización no está disponible en este navegador."
+            console.log('Error en Geolocalización')
         }
     })
 
