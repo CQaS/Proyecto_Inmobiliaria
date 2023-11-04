@@ -36,6 +36,10 @@ img {
 .btn--block {
   display: block;
   width: 100%;
+  border-radius: 5px;
+  background: rgb(183, 146, 91);
+  color: black;
+  text-align: center;
 }
 
 .cards {
@@ -143,7 +147,7 @@ img {
 
 .card__btn:hover {
   color: azure;
-  background: coral;
+  background: rgb(183, 146, 91);
 }
 
 /* ## MAS INFO ## */
