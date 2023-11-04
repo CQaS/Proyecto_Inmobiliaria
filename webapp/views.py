@@ -1,10 +1,11 @@
 from datetime import date
-import json
-import collections
 from decouple import config
+from django.http.response import JsonResponse
+from django.core.exceptions import ValidationError
+from django.http import HttpResponseServerError
 from django.shortcuts import render, redirect
-from django.db import connection
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
 from .forms import ContactForm
 from .models import *
 
@@ -74,20 +75,38 @@ def login(req):
 
 
 def msg(req):
-    print(req.POST)
+    try:
+        print(req.POST)
 
-    if req.method == 'POST':
-        nombre = req.POST['nombre']
-        email = req.POST['email']
-        tel = req.POST['tel']
-        mensaje = req.POST['mensaje']
-        msg = f'{nombre} {email} {tel} {mensaje}'
+        if req.method == 'POST':
+            nombre = req.POST['nombre']
+            email = req.POST['email']
+            tel = req.POST['tel']
+            mensaje = req.POST['mensaje']
 
-        send_mail(
-            'Contacto - Inmobiliaria',  # Titulo
-            msg,  # mensaje
-            'settings.EMAIL_HOST_USER',
-            [config('EMAIL_HOST_USER')],
-            fail_silently=False
-        )
-    return redirect('index')
+            # Crear un objeto EmailMessage
+            subject = 'E-mail del Cliente {nombre}'.format(nombre=nombre)
+            context = {
+                'nombre': nombre,
+                'email': email,
+                'tel': tel,
+                'mensaje': mensaje
+            }
+            print(context)
+            message = render_to_string('email_template.html', context)
+            email = EmailMessage(subject, message, email, [
+                config('EMAIL_HOST_USER')])
+            email.content_subtype = "html"  # Establecer el contenido como HTML
+
+            # Enviar el correo electrónico
+            email.send()
+            return JsonResponse({'success': True})
+
+    except ValidationError as e:
+        print(e)
+        # Maneja las excepciones de validación, si ocurren
+        return JsonResponse({'error': False})
+    except Exception as e:
+        print(e)
+        return JsonResponse({'error': False})
+    # return redirect('index')

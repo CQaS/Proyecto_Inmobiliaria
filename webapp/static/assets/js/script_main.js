@@ -313,5 +313,34 @@ btn_msg.addEventListener("click", (e) => {
     }
 
     // SI ESTA TODO BIEN SE ENVIA EL FORMULARIO...
-    formulario_msg.submit()
+
+    // Obtener el token CSRF del formulario
+    let csrfToken = $("input[name='csrfmiddlewaretoken']").val()
+    if (!csrfToken) {
+        console.log("No se pudo obtener el token CSRF.")
+        return
+    }
+
+    // Agregar el token CSRF a los datos de la solicitud
+    let formData = ''
+    formData += "&csrfmiddlewaretoken=" + csrfToken + "&nombre=" + nombre.value + "&email=" + email.value + "&tel=" + tel.value + "&mensaje=" + mensaje.value
+
+    $.ajax({
+        type: "POST",
+        url: "msg",
+        data: formData,
+        success: (res) => {
+            // Limpiar los campos del formulario
+            $("#nombre").val("")
+            $("#tel").val("")
+            $("#email").val("")
+            $("#mensaje").val("")
+            console.log(res)
+            _alerta("E-mail de Contacto enviado exitosamente!")
+        },
+        error: (res) => {
+            console.log(res)
+            _alerta("¡Hubo un error al enviar el E-mail de Contacto!")
+        }
+    })
 })
