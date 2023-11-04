@@ -11,12 +11,18 @@ pattern_Datos_envio = r'^[A-Z0-9][a-zA-ZñÑáÁéÉíÍúÚóÓ0-9,.:;\- ]*$'
 pattern_soloNumeros = r'^[0-9][0-9]*$'
 pattern_cod_ = r'^[a-zA-Z0-9-]*$'
 pattern_soloLetras = r'^[A-Z][a-zñÑáÁéÉíÍúÚóÓA-Z- ]*$'
+pattern_num_apto = '^[a-zA-Z0-9 ]*$'
 
 
 def validar_nombre(value):
     if not re.match(pattern_Nombre, value):
         raise ValidationError(
             'El valor debe comenzar con una letra Mayuscula y un minimo de dos letras')
+
+def validar_num_apto(value):
+    if not re.match(pattern_num_apto, value):
+        raise ValidationError(
+            'El valor debe comenzar con una letras o numeros')
 
 
 def validar_Datos_envio(value):
@@ -68,7 +74,7 @@ class Inmueble(models.Model):
     ciudad_inmueble = models.CharField(
         max_length=100, null=False, blank=False, verbose_name='Ciudad', validators=[validar_direccion])
     num_apto = models.IntegerField(
-        null=False, blank=False, verbose_name='Apto', validators=[validar_numero])
+        null=False, blank=False, verbose_name='Apto', validators=[validar_num_apto])
     tipo_inmueble = models.CharField(max_length=25, null=False, blank=False,
                                      verbose_name='Tipo de Propiedad', validators=[validar_letras])
     tipo_operacion = models.CharField(

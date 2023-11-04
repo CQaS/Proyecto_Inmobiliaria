@@ -70,7 +70,7 @@
         <hr class="hr_detalle"><br>
         <p id="location-info"></p>
 
-        <div id="map_container">
+        <div id="map_container" style="width: 100%;">
             <div id="map" style="width: 800px; height: 400px; margin-left: 10%;">
             </div>
             <div id="loading-spinner" class="loading-spinner"></div>
@@ -85,6 +85,9 @@
     let inmueble_html = true
     let l1 = '{{ D.latitud }}'
     let l2 = '{{ D.longitud }}'
+
+    //Arreglo de imagenes
+    let pictures = {{ fotos|safe }}
 </script>
 
 {% endfor %}

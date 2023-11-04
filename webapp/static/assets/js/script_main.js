@@ -11,7 +11,8 @@ const pattern_letras_espacios = /^[A-Z][a-zA-ZñÑáÁéÉíÍúÚóÓ ]*$/
 const pattern_letras_numero_espacios = /^[a-zA-ZñÑáÁéÉíÍúÚóÓ0-9 ]*$/
 const pattern_solo_numeros = /^[0-9][0-9]*$/
 const pattern_mail_m = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
-const pattern_cod_ref = '^[a-zA-Z0-9-]*$'
+const pattern_cod_ref = /^[a-zA-Z0-9-]*$/
+const pattern_num_apto = /^[a-zA-Z0-9 ]*$/
 
 let sidebar = document.querySelector(".sidebar")
 let sidebarBtn = document.querySelector(".bx-menu")
@@ -127,26 +128,20 @@ let miUbi = L.icon({
 if (typeof inmueble_html !== "undefined") {
     console.log('Detalles')
 
-    //Arreglo de imagenes
-    let pictures = [
-        '/static/assets/img/prueba01.jpg',
-        '/static/assets/img/prueba02.jpg',
-        '/static/assets/img/prueba03.jpg',
-        '/static/assets/img/prueba04.jpg',
-        '/static/assets/img/prueba05.jpg',
-        '/static/assets/img/prueba06.jpg',
-        '/static/assets/img/prueba07.jpg'
-    ]
     let contador = 0
 
     const carrusel = (contenedor) => {
+
         img = contenedor.querySelector('img')
-        img.src = pictures[0]
+        img.src = pictures[Math.floor(Math.random() * pictures.length)]
+
         contenedor.addEventListener('click', e => {
+
             let atras = contenedor.querySelector('.atras'),
                 adelante = contenedor.querySelector('.adelante'),
                 tgt = e.target //Identificar elemento que hace click
             console.log(tgt)
+
             if (tgt == atras) {
                 if (contador > 0) {
                     img.src = pictures[contador - 1]
