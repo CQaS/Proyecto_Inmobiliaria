@@ -14,6 +14,7 @@ const i_cod_referencia = document.getElementById("cod_referencia")
 const i_condicion = document.getElementById("condicion")
 const i_descripcion = document.getElementById("descripcion")
 const i_valorinmueble = document.getElementById("valor_inmueble")
+const i_num_apto = document.getElementById("num_apto")
 const i_idcliente = document.getElementById("cliente_id_")
 const imgs = document.getElementById('imgs')
 const tipo_servicio = document.getElementsByName('tipo_servicio')
@@ -49,11 +50,21 @@ if (send) {
         const cod_ref = (DATO) => {
             return DATO.value.match(pattern_cod_ref)
         }
+        
+        const num_apto = (DATO) => {
+            return DATO.value.match(pattern_num_apto)
+        }
 
 
         if (letras_numero_espacios(i_direccion) == null || i_direccion.value.length < 3) {
             i_direccion.focus()
             _alerta('Direccion del Inmueble solo letras/números y comenzar con MAYUSCULAS!')
+            return
+        }
+        
+        if (num_apto(i_num_apto) == null) {
+            i_direccion.focus()
+            _alerta('Num apto del Inmueble solo letras/números!')
             return
         }
 

@@ -258,22 +258,22 @@
         <!-- pantalla 3 linea 3-3 cajas-->
         <div class="formbold-input-flex">
           <div class="check">
-            <input type="checkbox" id="tipo_servicio" name="tipo_servicio" value="WI-FI">
+            <input type="checkbox" name="tipo_servicio" value="WI-FI">
             <label class="" for="wifi">WI-FI</label>
           </div>
 
           <div class="check">
-            <input type="checkbox" id="tipo_servicio" name="tipo_servicio" value="Ropa de cama">
+            <input type="checkbox" name="tipo_servicio" value="Ropa de cama">
             <label class="" for="ropa_cama">Ropa/Cama</label>
           </div>
 
           <div class="check">
-            <input type="checkbox" id="tipo_servicio" name="tipo_servicio" value="Piscinas">
+            <input type="checkbox" name="tipo_servicio" value="Piscinas">
             <label class="" for="piscinas">Piscinas</label>
           </div>
 
           <div class="check">
-            <input type="checkbox" id="tipo_servicio" name="tipo_servicio" value="Mucama">
+            <input type="checkbox" name="tipo_servicio" value="Mucama">
             <label class="" for="mucama">Mucama</label>
           </div>
         </div>
@@ -284,11 +284,11 @@
           <input type="file" id="imgs" name="imgs" multiple>
         </div>
 
-        <div class="formbold-input-flex">
+        <div class="formbold-input-flex" style="margin-left: -50px; position: sticky;">
           <p id="location-info"></p>
 
-          <div id="map_container">
-            <div id="map" style="width: 550px; height: 400px;">
+          <div id="map_container" style="width: 100%;">
+            <div id="map" style="width: 800px; height: 400px;">
             </div>
             <div id="loading-spinner" class="loading-spinner"></div>
           </div>
