@@ -1,5 +1,5 @@
 const crear_cliente = document.getElementById('crear_cliente')
-const formulario = document.getElementById('formulario')
+const formulario = document.getElementById('formulario_cliente')
 const c_nombre = document.getElementById('nom_cliente')
 const c_direccion = document.getElementById('dir_cliente')
 const c_dni = document.getElementById('dni_cliente')
