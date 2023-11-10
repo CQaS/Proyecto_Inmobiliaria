@@ -135,7 +135,7 @@ ul {
 }
 
 .sidebar.close1 .nav-links li .iocn-link {
-	display: block
+	display: block;
 }
 
 .sidebar .nav-links li i {
@@ -151,7 +151,8 @@ ul {
 
 .sidebar .nav-links li i:hover {
 	transform: scale(1.2);
-	box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+	/* box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25); */
+	color: white;
 }
 
 .sidebar .nav-links li.showMenu i.arrow {
