@@ -109,19 +109,19 @@ if (send) {
             return
         }
 
-        if (solo_numeros(i_cantplantas) == null || Number(i_cantplantas.value) <= 0) {
+        if (solo_numeros(i_cantplantas) == null || Number(i_cantplantas.value) < 0) {
             i_cantplantas.focus()
             _alerta('Cantidad de Plantas de Inmueble no valido!')
             return
         }
 
-        if (solo_numeros(i_cantdormitorios) == null || Number(i_cantdormitorios.value) <= 0) {
+        if (solo_numeros(i_cantdormitorios) == null || Number(i_cantdormitorios.value) < 0) {
             i_cantdormitorios.focus()
             _alerta('Cantidad de dormitorios de Inmueble no valido!')
             return
         }
 
-        if (solo_numeros(i_cantbanos) == null || Number(i_cantbanos.value) <= 0) {
+        if (solo_numeros(i_cantbanos) == null || Number(i_cantbanos.value) < 0) {
             i_cantbanos.focus()
             _alerta('Cantidad de baños del Inmueble no valido!')
             return
