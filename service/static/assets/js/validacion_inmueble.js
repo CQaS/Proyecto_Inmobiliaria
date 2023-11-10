@@ -63,7 +63,8 @@ if (send) {
         }
         
         if (num_apto(i_num_apto) == null) {
-            i_direccion.focus()
+            i_num_apto.value = "0"; // Establecer el valor predeterminado como "0"
+            i_num_apto.focus()
             _alerta('Num apto del Inmueble solo letras/números!')
             return
         }
@@ -98,30 +99,35 @@ if (send) {
         }
 
         if (solo_numeros(i_supcubierta) == null || Number(i_supcubierta.value) < 0) {
-            i_supsemicubierta.focus()
+            i_supcubierta.value = "0"; // Establecer el valor predeterminado como "0"
+            i_supcubierta.focus()
             _alerta('Superficie Cubierta de Inmueble no valido!')
             return
         }
 
         if (solo_numeros(i_supsemicubierta) == null || Number(i_supsemicubierta.value) < 0) {
+            i_supsemicubierta.value = "0"; // Establecer el valor predeterminado como "0"
             i_supsemicubierta.focus()
             _alerta('Superficie Semi Cubierta de Inmueble no valido!')
             return
         }
 
         if (solo_numeros(i_cantplantas) == null || Number(i_cantplantas.value) < 0) {
+            i_cantplantas.value = "0"; // Establecer el valor predeterminado como "0"
             i_cantplantas.focus()
             _alerta('Cantidad de Plantas de Inmueble no valido!')
             return
         }
 
         if (solo_numeros(i_cantdormitorios) == null || Number(i_cantdormitorios.value) < 0) {
+            i_cantdormitorios.value = "0"; // Establecer el valor predeterminado como "0"
             i_cantdormitorios.focus()
             _alerta('Cantidad de dormitorios de Inmueble no valido!')
             return
         }
 
         if (solo_numeros(i_cantbanos) == null || Number(i_cantbanos.value) < 0) {
+            i_cantbanos.value = "0"; // Establecer el valor predeterminado como "0"
             i_cantbanos.focus()
             _alerta('Cantidad de baños del Inmueble no valido!')
             return
