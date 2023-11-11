@@ -149,8 +149,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MIGRATION_MODULES = {
     'webapp': None,
     'service': None,
-    'admin': None,
-    'contenttypes': None,
-    'auth': None,
-    'sessions': None,
+
 }

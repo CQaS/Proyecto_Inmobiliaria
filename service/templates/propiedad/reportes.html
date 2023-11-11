@@ -6,9 +6,44 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <!-- DataTable.js -->
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" />
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+
+
+<!-- formulario para buscar por fecha  -->
+<style>
+    
+    .fecha {
+       display: grid;
+       grid-template-columns: 15% 15%;
+       grid-gap: 15px;
+       justify-content: center;
+       border-radius: 5px;
+       height: 15px;
+    }
+
+    .titulo {
+        display: flex;
+        justify-content: center;
+        font-size: 14px;
+    }
+    .fecha input:nth-child(4) {
+        margin-left: 20px;
+    }
+
+
+    
+
+</style>
+<div class="fecha">
+    <label class="titulo" for="">Fecha Ingreso</label>
+    <label class="titulo" for="">Fecha Salida</label>
+    <input type="date" name="f_ini" id="f_ini" class="search-input">
+
+    <input type="date" name="f_fin" id="f_fin" class="search-input">
+</div>
+
 
 <div class="tabla">
     <div class="container mt-4">
@@ -21,12 +56,12 @@
                         </caption>
                         <thead>
                             <tr>
-                                <th class="centered">#</th>
+                                <th class="centered">Cod. Referencia</th>
                                 <th class="centered">Direccion</th>
                                 <th class="centered">Tipo Inmueble</th>
                                 <th class="centered">Valor Inmueble</th>
                                 <th class="centered">Cant. Personas</th>
-                                <th class="centered">Cant. Plantas</th>
+                                <th class="centered">Servicios</th>
                                 <th class="centered"></th>
                             </tr>
                         </thead>
@@ -43,9 +78,14 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
 </script>
+
 <!-- DataTable.js -->
-<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+
+<!-- <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script> -->
 <script>
     let inmueble_Form = false
 </script>

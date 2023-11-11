@@ -96,7 +96,7 @@
           <div>
             <label for="num_apto" class="formbold-form-label"> Número Apto. </label>
             <input type="number" name="num_apto" id="num_apto" class="formbold-form-input"
-              value="{{ inmueble.num_apto.value }}" />
+              value="{{ inmueble.num_apto.value | default:'0' }}" />
           </div>
         </div>
         <!-- pantalla 1 linea 2-3 cajas-->
