@@ -53,6 +53,12 @@ if (propiedad_por_tipo) {
 
         let url = `/propiedad/propiedad_por_tipo/${tipo_o}/${tipo_p}`
 
+        /* let f_ini = document.getElementById("f_ini").value
+        let f_fin = document.getElementById("f_fin").value
+
+        console.log(f_ini, f_fin)
+        let url2 = `/propiedad/buscar_por_fechas/${f_ini}/${f_fin}` */
+
         $.get(url).done((res) => {
             console.log(res)
 

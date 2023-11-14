@@ -4,13 +4,17 @@ from .forms import *
 from .models import *
 from django.db import connection
 from django.shortcuts import render, redirect
+# LOGIN
+from django.contrib.auth.decorators import login_required
 
 
+@login_required(login_url='/#modal-opened')
 def index_empleado(req):
     list = Empleados.objects.all()
     return render(req, 'empleado/index.html', {'list': list})
 
 
+@login_required(login_url='/#modal-opened')
 def crear_empleado(req):
     ERR = ''
     success = ''
@@ -69,6 +73,7 @@ def crear_empleado(req):
     return render(req, 'empleado/empleado_form.html', contexto)
 
 
+@login_required(login_url='/#modal-opened')
 def editar_empleado(req, id_empleado):
     ERR = ''
     empleado = Empleados.objects.get(id_empleado=id_empleado)
@@ -95,6 +100,7 @@ def editar_empleado(req, id_empleado):
     return render(req, 'empleado/empleado_form.html', {'formulario': formulario, 'error': ERR})
 
 
+@login_required(login_url='/#modal-opened')
 def eliminar_empleado(req, id_empleado):
     empleado = Empleados.objects.get(id_empleado=id_empleado)
     empleado.delete()

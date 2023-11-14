@@ -6,6 +6,7 @@ from django.http import HttpResponseServerError
 from django.shortcuts import render, redirect
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
+from django.contrib.auth import logout
 from .forms import ContactForm
 from .models import *
 
@@ -63,17 +64,6 @@ def index(request):
     return render(request, 'index.html', context)
 
 
-def login(req):
-    print(req.POST)
-
-    if req.method == 'POST':
-        nombre = req.POST['usuario']
-        email = req.POST['password']
-        msg = f'{nombre} {email}'
-        print(msg)
-    return redirect('index')
-
-
 def msg(req):
     try:
         print(req.POST)
@@ -110,3 +100,19 @@ def msg(req):
         print(e)
         return JsonResponse({'error': False})
     # return redirect('index')
+
+
+def login(req):
+    print(req.POST)
+
+    if req.method == 'POST':
+        nombre = req.POST['usuario']
+        email = req.POST['password']
+        msg = f'{nombre} {email}'
+        print(msg)
+    return redirect('index')
+
+
+def salir(req):
+    logout(req)
+    return redirect('index')

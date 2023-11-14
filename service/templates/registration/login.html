@@ -1,0 +1,43 @@
+{% extends 'layouts/base00.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+<h3>LOGIN</h3>
+<div class="container">
+    {% if form.errors %}
+    <div class="btn btn-danger">
+        LOGIN ERROR!!!!
+        <h3>{{ form.errors }}</h3>
+    </div>
+    {% endif %}
+    <form action="/accounts/login/" method="post">
+        {% csrf_token %}
+
+        <fieldset class="mb-3 row">
+            <legend class="col-form-legend col-4">Username</legend>
+            <div class="col-8">
+                <input type="text" name="username" id="">
+            </div>
+        </fieldset>
+        <fieldset class="mb-3 row">
+            <legend class="col-form-legend col-4">Password</legend>
+            <div class="col-8">
+                <input type="password" name="password" id="">
+            </div>
+        </fieldset>
+        <!-- <div>
+            {{ form.username }}
+        </div>
+        <div>
+            {{ form.password }}
+        </div> -->
+        <button type=" submit" class="btn btn-primary">ENTRAR</button>
+    </form>
+</div>
+
+{% endblock %}

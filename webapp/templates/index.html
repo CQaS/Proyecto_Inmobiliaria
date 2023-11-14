@@ -20,6 +20,7 @@
     <div class="search-input">
 
       <div>
+        <!-- <input type="date" name="f_ini" id="f_ini" class="search-input" style="margin-top: 0;"> -->
         <select id="por_operacion" name="por_operacion" class="search-input" style="margin-top: 0;" required>
           <option value="">Tipo Operación</option>
           <option value="Alquiler temporario">Alquiler Temporario</option>
@@ -29,6 +30,7 @@
       </div>
 
       <div>
+        <!-- <input type="date" name="f_fin" id="f_fin" class="search-input" style="margin-top: 0;"> -->
         <select id="por_propiedad" name="por_propiedad" class="search-input" style="margin-top: 0;" required>
           <option value="">Tipo Propiedad</option>
           <option value="Casa">Casa</option>
@@ -76,7 +78,8 @@
           <div class="card__title">{{E.dir_inmueble}} - {{E.tipo_operacion}}</div>
           <p class="card__text">{{E.tipo_inmueble}} - {{E.ciudad_inmueble}} </p>
           <p class="card__text">{{E.valor_inmueble}}</p>
-          <a href="{% url 'detalles_propiedad' E.id_inmueble %}" class="btn btn--block card__btn" style="text-transform: capitalize">Mas Info</a>
+          <a href="{% url 'detalles_propiedad' E.id_inmueble %}" class="btn btn--block card__btn"
+            style="text-transform: capitalize">Mas Info</a>
         </div>
       </div>
     </li>

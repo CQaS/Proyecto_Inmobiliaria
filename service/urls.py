@@ -14,7 +14,7 @@ urlpatterns = [
          views_propiedad.detalles_propiedad, name="detalles_propiedad"),
     path('propiedad/eliminar/<int:id_inmueble>',
          views_propiedad.eliminar_propiedad, name="eliminar_propiedad"),
-    path('propiedad/buscar_por_fechas',
+    path('propiedad/buscar_por_fechas/<str:f_ini>/<str:f_fin>',
          views_propiedad.buscar_por_fechas, name="buscar_por_fechas"),
     path('propiedad/propiedad_por_tipo/<str:tipo_o>/<str:tipo_p>',
          views_propiedad.propiedad_por_tipo, name="propiedad_por_tipo"),

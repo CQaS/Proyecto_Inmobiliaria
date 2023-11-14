@@ -4,27 +4,19 @@ import os
 from datetime import date
 from django.shortcuts import render, redirect
 from django.db import models, connection, IntegrityError
+from django.db.models import Count, Q
 from django.core import serializers
 from django.core.serializers import serialize
 from django.http import HttpResponse
 from django.http.response import JsonResponse
+# LOGIN
+from django.contrib.auth.decorators import login_required
 from .forms import InmuebleForm
 from .models import *
 
 # query = "SELECT * FROM inmueble i WHERE (SELECT COUNT(c.id_contrato) AS contID FROM contrato c WHERE c.inmueble_id = i.id_inmueble AND ((c.fecha_ing BETWEEN @inicio AND @fin) OR (c.fecha_salida BETWEEN @inicio AND @fin) OR (c.fecha_ing < @inicio AND c.fecha_salida > @fin))) = 0 AND i.estado = 1"
 
 # "SELECT * FROM inmueble i WHERE (SELECT COUNT(c.id_contrato) AS contID FROM contrato c WHERE c.inmueble_id = i.id_inmueble AND ((c.fecha_ing BETWEEN '2023-10-01' AND '2023-10-31') OR (c.fecha_salida BETWEEN '2023-10-01' AND '2023-10-31') OR (c.fecha_ing > '2023-10-01' AND c.fecha_salida < '2023-10-31'))) = 0 AND i.id_inmueble = 10 AND i.estado = 1"
-
-""" from django.db.models import Q, Count, F
-from .models import Inmueble, Contrato
-
-resultado = Inmueble.objects.annotate(
-    num_contratos=Count('contrato', filter=(
-        Q(contrato__fecha_ing__range=['2023-10-01', '2023-10-31']) |
-        Q(contrato__fecha_salida__range=['2023-10-01', '2023-10-31']) |
-        Q(contrato__fecha_ing__lt='2023-10-01', contrato__fecha_salida__gt='2023-10-31')
-    ))
-).filter(num_contratos=0, id_inmueble=10, estado=1) """
 
 
 def serialize_date(obj):
@@ -33,11 +25,13 @@ def serialize_date(obj):
     raise TypeError("Type not serializable")
 
 
+@login_required(login_url='/#modal-opened')
 def index_propiedad(req):
     list = Inmueble.objects.all()
     return render(req, 'propiedad/index.html')
 
 
+@login_required(login_url='/#modal-opened')
 def crear_propiedad(req):
     ERR = ''
     success = ''
@@ -132,6 +126,7 @@ def crear_propiedad(req):
     return render(req, 'propiedad/inmueble_form.html', context)
 
 
+@login_required(login_url='/#modal-opened')
 def editar_propiedad(req, id_inmueble):
     ERR = ''
     try:
@@ -200,46 +195,56 @@ def detalles_propiedad(req, id_inmueble):
     return render(req, 'propiedad/inmueble.html', {'detalle': un_detalle, 'fotos': list_fotos})
 
 
+@login_required(login_url='/#modal-opened')
 def eliminar_propiedad(req, id_inmueble):
     inmueble = Inmueble.objects.get(id_inmueble=id_inmueble)
     inmueble.delete()
     return redirect('index_propiedad')
 
 
-def buscar_por_fechas(req):
-    if req.method == 'POST':
-        print(req.POST['origen'])
-        # query =
-        """SELECT * FROM clientes WHERE id_cliente = {0} AND pais_cliente = '{1}'""".format(
-            '4', 'algo')
-        # print(query)
-        # cursor.execute(query)
-        """ try:
-        with connection.cursor() as cursor:
-            cursor.execute("select * from clientes")
-            columns = [col[0] for col in cursor.description]
-            res = cursor.fetchall()
+@login_required(login_url='/#modal-opened')
+def buscar_por_fechas(req, f_ini, f_fin):
+    try:
+        print(f_ini, f_fin)
 
-        # Convertir los resultados a una lista de diccionarios
-        lista = []
-        for row in res:
-            row_dict = {}
-            for i, value in enumerate(row):
-                column_name = columns[i]
-                row_dict[column_name] = value
-            lista.append(row_dict)
+        list = Inmueble.objects.annotate(
+            num_contratos=Count('contrato', filter=Q(
+                contrato__fecha_ing__range=[f_ini, f_fin]) |
+                Q(contrato__fecha_salida__range=[f_ini, f_fin]) |
+                Q(contrato__fecha_ing__gt=f_ini,
+                  contrato__fecha_salida__lt=f_fin)
+            )
+        ).filter(num_contratos=0, estado=1)
 
-        # Convertir a formato JSON
-        R = json.dumps(lista, default=serialize_date)
+        data = []
 
-        #print(R)
+        for inmueble in list:
+            fotos = Fotos.objects.filter(
+                inmueble_id=inmueble.id_inmueble).values('image', 'inmueble_id')
 
-    except IntegrityError as e:
-        print("Error:", e) """
-        return HttpResponse('POST')
-    else:
-        print('GET ')
-        return HttpResponse('GET')
+            # Convierte el QuerySet en una lista de diccionarios
+            fotos_data = [{'image': foto['image'],
+                           'inmueble_id': foto['inmueble_id']} for foto in fotos]
+
+            # Convierte la lista en formato JSON
+            response_data = json.dumps(fotos_data)
+
+            # Serializar los objetos Inmueble y Fotos a formato JSON
+            inmueble_json = serializers.serialize('json', [inmueble])
+
+            # Convertir JSON a diccionarios
+            inmueble_data = json.loads(inmueble_json)[0]['fields']
+
+            data.append({
+                'inmueble': inmueble_data,
+                'fotos': fotos_data
+            })
+
+        # Convertir la lista de datos a JSON
+        response_data = json.dumps(data)
+        return HttpResponse(response_data, 'application/json')
+    except Exception as e:
+        print(e)
 
 
 def propiedad_por_tipo(req, tipo_o, tipo_p):
@@ -286,10 +291,12 @@ def propiedad_por_tipo(req, tipo_o, tipo_p):
     return HttpResponse(response_data, 'application/json')
 
 
+@login_required(login_url='/#modal-opened')
 def reportes(req):
     return render(req, 'propiedad/reportes.html')
 
 
+@login_required(login_url='/#modal-opened')
 def reportes_json(req):
     inmueble = list(Inmueble.objects.values())
     data = {'inmueble': inmueble}

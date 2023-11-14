@@ -91,6 +91,9 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+            'sql_mode': 'traditional',
+        },
         'NAME': 'inmobiliaria',
         'USER': 'root',
         'PASSWORD': '',
@@ -151,3 +154,7 @@ MIGRATION_MODULES = {
     'service': None,
 
 }
+
+# LOGIN
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'

@@ -3,6 +3,8 @@ from datetime import date
 from django.shortcuts import render, redirect
 from django.core.serializers import serialize
 from django.http import HttpResponse
+# LOGIN
+from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import *
 
@@ -25,11 +27,13 @@ def JSONclientes_Prop(request, Name):
     return HttpResponse(serialize('json', list), 'application/json')
 
 
+@login_required(login_url='/#modal-opened')
 def index_cliente(req):
     list = Clientes.objects.all()
     return render(req, 'cliente/index.html', {'list': list})
 
 
+@login_required(login_url='/#modal-opened')
 def crear_cliente(req):
     ERR = ''
     success = ''
@@ -71,6 +75,7 @@ def crear_cliente(req):
     return render(req, 'cliente/cliente_form.html', contexto)
 
 
+@login_required(login_url='/#modal-opened')
 def editar_cliente(req, id_cliente):
     ERR = ''
     cliente = Clientes.objects.get(id_cliente=id_cliente)
@@ -98,6 +103,7 @@ def editar_cliente(req, id_cliente):
     return render(req, 'cliente/editar.html', {'formulario': formulario, 'error': ERR})
 
 
+@login_required(login_url='/#modal-opened')
 def eliminar_cliente(req, id_cliente):
     cliente = Clientes.objects.get(id_cliente=id_cliente)
     cliente.delete()

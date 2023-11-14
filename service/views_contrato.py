@@ -5,6 +5,8 @@ from docxtpl import DocxTemplate
 from num2words import num2words
 from django.shortcuts import render, redirect
 from django.db import connection, IntegrityError
+# LOGIN
+from django.contrib.auth.decorators import login_required
 from .models import *
 
 
@@ -14,6 +16,7 @@ def serialize_date(obj):
     raise TypeError("Type not serializable")
 
 
+@login_required(login_url='/#modal-opened')
 def index_contrato(req, id_inmueble):
 
     R = buscarProp_ID(id_inmueble)
@@ -60,6 +63,7 @@ def index_contrato(req, id_inmueble):
     return render(req, "contrato/contrato_form.html", context)
 
 
+@login_required(login_url='/#modal-opened')
 def crear_contrato(req):
 
     ERR = ''
