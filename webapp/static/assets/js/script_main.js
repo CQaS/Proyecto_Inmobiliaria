@@ -174,25 +174,30 @@ if (typeof inmueble_html !== "undefined") {
         let contenedor = document.querySelector('.carrusel')
         contenedor ? carrusel(contenedor) : null
 
-        /* codigo del mapa */
+        /* codigo del mapa */        
+        
+        console.log(encodeURIComponent(direccion))
+        
+        // Utiliza el servicio de geocodificación de OpenStreetMap (Nominatim)
+        fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(direccion))
+        .then(response => response.json())
+        .then(data => {
+            if (data.length > 0) {
 
-        let map = L.map('map').setView([l1, l2], 16) //centra el mapa
-        //map.dragging.disable() //oculta la manito sobre el mapa
+                    let map = L.map('map').setView([data[0].lat, data[0].lon], 14); // Inicializa el mapa en un punto central
 
-        let marker = L.marker([l1, l2], {
-            icon: miUbi
-        }).addTo(map) //agrega un marcador con mi ubicacion
-        marker.bindPopup(d_InmuebleOnPin, {
-            offset: [3, 45]
-        })
-        marker.on('click', () => {
-            this.openPopup()
-        })
-
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map)
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    }).addTo(map);
+                    
+                    let lat = data[0].lat;
+                    let lon = data[0].lon;
+                    map.setView([lat, lon], 14);
+                    L.marker([lat, lon]).addTo(map)
+                        .bindPopup(direccion)
+                        .openPopup();
+                }
+            });
     })
 
 } else if (typeof inmueble_Form !== "undefined") {
