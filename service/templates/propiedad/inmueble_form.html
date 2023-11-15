@@ -109,12 +109,12 @@
           <div>
             <label for="sup_cubierta" class="formbold-form-label"> Sup. Cubierta </label>
             <input type="number" name="sup_cubierta" id="sup_cubierta" class="formbold-form-input"
-              value="{{ inmueble.sup_cubierta.value }}" />
+              value="{{ inmueble.sup_cubierta.value | default:'0'}}" />
           </div>
           <div>
             <label for="sup_semicub" class="formbold-form-label"> Sup. Semi Cubierta </label>
             <input type="number" name="sup_semicub" id="sup_semicub" class="formbold-form-input"
-              value="{{ inmueble.sup_semicub.value }}" />
+              value="{{ inmueble.sup_semicub.value | default:'0' }}" />
           </div>
         </div>
         <!-- pantalla 1 linea 3-3 cajas-->
@@ -122,19 +122,19 @@
           <div>
             <label for="cant_plantas" class="formbold-form-label"> Cant. de Plantas </label>
             <input type="number" name="cant_plantas" id="cant_plantas" class="formbold-form-input"
-              value="{{ inmueble.cant_plantas.value }}" />
+              value="{{ inmueble.cant_plantas.value | default:'0'}}" />
           </div>
 
           <div>
             <label for="cant_dormitorios" class="formbold-form-label"> Cant. Dormitorios </label>
             <input type="number" name="cant_dormitorios" id="cant_dormitorios" class="formbold-form-input"
-              value="{{ inmueble.cant_dormitorios.value  }}" />
+              value="{{ inmueble.cant_dormitorios.value | default:'0' }}" />
           </div>
 
           <div>
             <label for="cant_banos" class="formbold-form-label"> Cant. de Baños </label>
             <input type="number" name="cant_banos" id="cant_banos" class="formbold-form-input"
-              value="{{ inmueble.cant_banos.value }}" />
+              value="{{ inmueble.cant_banos.value | default:'0' }}" />
           </div>
         </div>
         <hr>
@@ -156,7 +156,7 @@
           <div>
             <label for="clave_puerta_ingreso" class="formbold-form-label"> Clave Puerta Ingreso </label>
             <input type="text" name="clave_puerta_ingreso" id="clave_puerta_ingreso" class="formbold-form-input"
-              value="{{ inmueble.clave_puerta_ingreso.value }}" />
+              value="{{ inmueble.clave_puerta_ingreso.value | default:'0'}}" />
           </div>
         </div>
         <!-- pantalla 2 linea 2-3 cajas-->
@@ -164,12 +164,12 @@
           <div>
             <label for="clave_puerta_ingreso2" class="formbold-form-label"> Clave Ingreso 2 </label>
             <input type="text" name="clave_puerta_ingreso2" id="clave_puerta_ingreso2" class="formbold-form-input"
-              value="{{ inmueble.clave_puerta_ingreso2.value }}" />
+              value="{{ inmueble.clave_puerta_ingreso2.value | default:'0'}}" />
           </div>
           <div>
             <label for="clave_wifi" class="formbold-form-label"> Clave WI-FI </label>
             <input type="text" name="clave_wifi" id="clave_wifi" class="formbold-form-input"
-              value="{{ inmueble.clave_wifi.value }}" />
+              value="{{ inmueble.clave_wifi.value | default:'0' }}" />
           </div>
           <div>
             <label for="valor_inmueble" class="formbold-form-label"> Valor </label>
@@ -183,7 +183,7 @@
           <div>
             <label for="habitac_maxima" class="formbold-form-label"> Capacidad Máxima </label>
             <input type="number" name="habitac_maxima" id="habitac_maxima" class="formbold-form-input"
-              value="{{ inmueble.habitac_maxima.value }}" />
+              value="{{ inmueble.habitac_maxima.value | default:'0' }}" />
           </div>
 
           <div>
