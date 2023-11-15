@@ -191,12 +191,12 @@ if (send) {
             }
         }
 
-        if (lati.value == '' || long.value == '') {
-            _alerta('Selecciona una Ubicacion en el Mapa')
-            return
-        }
+        // if (lati.value == '' || long.value == '') {
+        //     _alerta('Selecciona una Ubicacion en el Mapa')
+        //     return
+        // }
 
-        console.log('OKOKOKOKOKOKO')
+        // console.log('OKOKOKOKOKOKO')
 
         // SI ESTA TODO BIEN SE ENVIA EL FORMULARIO...
         formulario.submit()
