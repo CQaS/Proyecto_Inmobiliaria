@@ -196,7 +196,7 @@ if (send) {
         //     return
         // }
 
-        // console.log('OKOKOKOKOKOKO')
+        console.log('OK Inmueble FORM')
 
         // SI ESTA TODO BIEN SE ENVIA EL FORMULARIO...
         formulario.submit()

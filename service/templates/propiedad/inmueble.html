@@ -81,41 +81,17 @@
             <div id="map" style="width: 800px; height: 400px; margin-left: 10%;">
             </div>
             <div id="loading-spinner" class="loading-spinner"></div>
-        </div> 
-    
-
+        </div>
     </div>
     
 </div>
 
 
 <script>
-    var map = L.map('map'); //.setView([-33.01028, -58.51417], 14); // Inicializa el mapa en un punto central
-
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
-
-function buscarDireccion() {
-    var direccion = '{{ D.dir_inmueble }}'; 
-    var ciudad = '{{ D.ciudad_inmueble }}';
-    // Utiliza el servicio de geocodificación de OpenStreetMap (Nominatim)
-    fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(direccion,ciudad)) 
-        .then(response => response.json())
-        .then(data => {
-            if (data.length > 0) {
-                var lat = data[0].lat;
-                var lon = data[0].lon;
-                map.setView([lat, lon], 14);
-                L.marker([lat, lon]).addTo(map)
-                    .bindPopup(direccion, ciudad)                
-                    .openPopup();
-            }
-        });
-}
-buscarDireccion();
-
+    let inmueble_html = true
     let pictures = {{ fotos|safe }}
+    let direccion = '{{ D.dir_inmueble }}';
+    let ciudad = '{{ D.ciudad_inmueble }}';
 </script>
 
 

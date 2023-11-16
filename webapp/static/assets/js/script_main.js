@@ -176,38 +176,52 @@ if (typeof inmueble_html !== "undefined") {
 
         /* codigo del mapa */        
         
-        console.log(encodeURIComponent(direccion))
+        let direccionYciudad = direccion + ' ' + ciudad 
+        console.log(encodeURIComponent(direccionYciudad))
         
         // Utiliza el servicio de geocodificación de OpenStreetMap (Nominatim)
-        fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(direccion))
+        fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(direccionYciudad))
         .then(response => response.json())
         .then(data => {
             if (data.length > 0) {
 
-                    let map = L.map('map').setView([data[0].lat, data[0].lon], 14); // Inicializa el mapa en un punto central
+                    let map = L.map('map').setView([data[0].lat, data[0].lon], 14) // Inicializa el mapa en un punto central
 
                     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    }).addTo(map);
+                    }).addTo(map)
                     
-                    let lat = data[0].lat;
-                    let lon = data[0].lon;
-                    map.setView([lat, lon], 14);
+                    let lat = data[0].lat
+                    let lon = data[0].lon
+                    map.setView([lat, lon], 14)
                     L.marker([lat, lon]).addTo(map)
                         .bindPopup(direccion)
-                        .openPopup();
+                        .openPopup()
+                }else{
+
+                    let l1 = -27.15982337628752
+                    let l2 = -48.5075014570202
+
+                    let map = L.map('map').setView([l1, l2], 10) // Inicializa el mapa en un punto central por defecto
+
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    }).addTo(map)
                 }
-            });
+            })
     })
 
 } else if (typeof inmueble_Form !== "undefined") {
     console.log('FORM')
 
-    document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById('lat').value = -27.15982337628752
+    document.getElementById('lon').value = -48.5075014570202
+
+    /* document.addEventListener("DOMContentLoaded", () => {
         let contenedor = document.querySelector('.carrusel')
         contenedor ? carrusel(contenedor) : null
 
-        /* codigo del mapa */
+        codigo del mapa
 
         const locationInfo = document.getElementById("location-info")
         loadingSpinner ? loadingSpinner.style.display = "block" : null
@@ -224,11 +238,11 @@ if (typeof inmueble_html !== "undefined") {
                     let l1 = position.coords.latitude
                     let l2 = position.coords.longitude
 
-                    let map = L.map('map').setView([l1, l2], 16) //centra el mapa
+                    let map = L.map('map').setView([l1, l2], 16) 
 
                     let marker = L.marker([l1, l2], {
                         icon: miUbi
-                    }).addTo(map) //agrega un marcador con mi ubicacion
+                    }).addTo(map) 
                     marker.bindPopup('Aqui!', {
                         offset: [3, 45]
                     })
@@ -240,12 +254,6 @@ if (typeof inmueble_html !== "undefined") {
                         maxZoom: 19,
                         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                     }).addTo(map)
-
-                    /* let puntos = JSON.parse(document.getElementById('puntos_json').textContent)
-
-                    puntos.forEach(P => {
-                        L.marker([P.latitude, P.longitude]).addTo(map)
-                    }) */
 
                     let lat = document.getElementById('lat')
                     let lon = document.getElementById('lon')
@@ -269,7 +277,6 @@ if (typeof inmueble_html !== "undefined") {
                         console.log(e.latlng)
                     })
 
-                    // Aquí puedes continuar con el código que depende de la ubicación
                 })
                 .catch((e) => {
                     loadingSpinner.style.display = "none"
@@ -281,7 +288,7 @@ if (typeof inmueble_html !== "undefined") {
             locationInfo.innerHTML = "Geolocalización no está disponible en este navegador."
             console.log('Error en Geolocalización')
         }
-    })
+    }) */
 
 }
 
