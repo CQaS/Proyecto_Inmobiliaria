@@ -446,6 +446,18 @@ ul {
 	text-align: center;
 }
 
+section .titulo {
+	height: 25px;
+	width: 100%;
+}
+section h4 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 24px;
+	font-weight: bold;
+	margin-top: 15px;
+}
 
 /*FOOTER */
 

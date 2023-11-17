@@ -23,21 +23,28 @@
        height: 15px;
     }
 
-    .titulo {
+    h4 {
         display: flex;
         justify-content: center;
-        font-size: 14px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    label {
+        display: flex;
+        justify-content: center;
+        font-size: 16px;
+        font-weight: bold;
+
     }
     .fecha input:nth-child(4) {
         margin-left: 20px;
     }
 
-
-    
-
 </style>
+<h4>Consulta Disponibilidad</h4>
 <div class="fecha">
-    <label class="titulo" for="">Fecha Ingreso</label>
+    
+    <label class="titulo" for="">Fecha Inicio</label>
     <label class="titulo" for="">Fecha Salida</label>
     <input type="date" name="f_ini" id="f_ini" class="search-input">
 
@@ -56,13 +63,14 @@
                         </caption>
                         <thead>
                             <tr>
-                                <th class="centered">Cod. Referencia</th>
+                                <th class="centered">Nº</th>
+                                <th class="centered">Cod. Ref.</th>
                                 <th class="centered">Direccion</th>
                                 <th class="centered">Tipo Inmueble</th>
                                 <th class="centered">Valor Inmueble</th>
-                                <th class="centered">Cant. Personas</th>
+                                <th class="centered">Cant. Pers</th>
                                 <th class="centered">Servicios</th>
-                                <th class="centered"></th>
+                                <th class="centered">Cant. Plantas</th>
                             </tr>
                         </thead>
                         <tbody id="tableBody_reportes"></tbody>

@@ -80,7 +80,6 @@
 
       <!-- PRIMER HOJA -->
       <div class="form_1 active">
-        <!-- Validamos maxlength, autofoco required-->
         <!-- pantalla 1 linea 1-3 cajas-->
         <div class="formbold-input-flex">
           <div>
@@ -89,9 +88,9 @@
               value="{{ inmueble.dir_inmueble.value }}" />
           </div>
           <div>
-            <label for="ciudad_inmueble" class="formbold-form-label"> Ciudad </label>
-            <input type="text" name="ciudad_inmueble" id="ciudad_inmueble" class="formbold-form-input"
-              value="{{ inmueble.ciudad_inmueble.value }}" />
+            <label for="bloco_inmueble" class="formbold-form-label"> Bloco </label>
+            <input type="text" name="bloco_inmueble" id="bloco_inmueble" class="formbold-form-input"
+              value="{{ inmueble.bloco_inmueble.value }}" />
           </div>
           <div>
             <label for="num_apto" class="formbold-form-label"> Número Apto. </label>
@@ -102,9 +101,28 @@
         <!-- pantalla 1 linea 2-3 cajas-->
         <div class="formbold-input-flex">
           <div>
+            <label for="cod_referencia" class="formbold-form-label"> Cód. Referencia </label>
+            <input type="text" name="cod_referencia" id="cod_referencia" class="formbold-form-input"
+              value="{{ inmueble.cod_referencia.value }}" />
+          </div>
+          <div>
+            <label for="barrio_inmueble" class="formbold-form-label"> Barrio </label>
+            <input type="text" name="barrio_inmueble" id="bloco_inmueble" class="formbold-form-input"
+              value="{{ inmueble.barrio_inmueble.value }}" />
+          </div>
+          <div>
+            <label for="ciudad_inmueble" class="formbold-form-label"> Ciudad </label>
+            <input type="text" name="ciudad_inmueble" id="ciudad_inmueble" class="formbold-form-input"
+              value="{{ inmueble.ciudad_inmueble.value }}" />
+          </div>
+        </div>
+        
+          <!-- pantalla 1 linea 3-3 cajas-->
+        <div class="formbold-input-flex">
+          <div>
             <label for="sup_total" class="formbold-form-label"> Sup. Total </label>
             <input type="number" name="sup_total" id="sup_total" class="formbold-form-input"
-              value="{{ inmueble.sup_total.value }}" />
+              value="{{ inmueble.sup_total.value | default:'0' }}" />
           </div>
           <div>
             <label for="sup_cubierta" class="formbold-form-label"> Sup. Cubierta </label>
@@ -117,10 +135,15 @@
               value="{{ inmueble.sup_semicub.value | default:'0' }}" />
           </div>
         </div>
-        <!-- pantalla 1 linea 3-3 cajas-->
+        <hr>
+      </div>
+        
+       <!-- SEGUNDA HOJA -->
+      <div class="form_2">
+        <!-- pantalla 2 linea 1-3 cajas-->
         <div class="formbold-input-flex">
           <div>
-            <label for="cant_plantas" class="formbold-form-label"> Cant. de Plantas </label>
+            <label for="cant_plantas" class="formbold-form-label"> Cant. Plantas </label>
             <input type="number" name="cant_plantas" id="cant_plantas" class="formbold-form-input"
               value="{{ inmueble.cant_plantas.value | default:'0'}}" />
           </div>
@@ -132,35 +155,44 @@
           </div>
 
           <div>
-            <label for="cant_banos" class="formbold-form-label"> Cant. de Baños </label>
+            <label for="cant_banos" class="formbold-form-label"> Cant. Baños </label>
             <input type="number" name="cant_banos" id="cant_banos" class="formbold-form-input"
               value="{{ inmueble.cant_banos.value | default:'0' }}" />
           </div>
-        </div>
-        <hr>
-      </div>
 
-      <div class="form_2">
-        <!-- pantalla 2 linea 1-3 cajas-->
-        <div class="formbold-input-flex">
           <div>
-            <label for="cod_referencia" class="formbold-form-label"> Cód. Referencia </label>
-            <input type="text" name="cod_referencia" id="cod_referencia" class="formbold-form-input"
-              value="{{ inmueble.cod_referencia.value }}" />
+            <label for="habitac_maxima" class="formbold-form-label"> Cap. Máxima </label>
+            <input type="number" name="habitac_maxima" id="habitac_maxima" class="formbold-form-input"
+              value="{{ inmueble.habitac_maxima.value | default:'0' }}" />
           </div>
+        </div>
+        
+        <!-- pantalla 2 linea 2-3 cajas-->
+        <div class="formbold-input-flex">  
           <div>
             <label for="descripcion" class="formbold-form-label"> Descripción </label>
             <input type="text" name="descripcion" id="descripcion" class="formbold-form-input"
               value="{{ inmueble.descripcion.value }}" />
+          </div>      
+          <div>
+            <label for="valor_inmueble" class="formbold-form-label"> Valor </label>
+            <input type="number" name="valor_inmueble" id="valor_inmueble" class="formbold-form-input"
+              value="{{ inmueble.valor_inmueble.value }}" />
           </div>
           <div>
-            <label for="clave_puerta_ingreso" class="formbold-form-label"> Clave Puerta Ingreso </label>
+            <label for="nombre_red" class="formbold-form-label"> Nombre Red</label>
+            <input type="text" name="nombre_red" id="nombre_red" class="formbold-form-input"
+              value="{{ inmueble.nombre_red.value }}" />
+          </div>
+        </div>
+
+        <!-- pantalla 2 linea 3-3 cajas-->
+        <div class="formbold-input-flex">
+          <div>
+            <label for="clave_puerta_ingreso" class="formbold-form-label"> Clave Ingreso 1 </label>
             <input type="text" name="clave_puerta_ingreso" id="clave_puerta_ingreso" class="formbold-form-input"
               value="{{ inmueble.clave_puerta_ingreso.value | default:'0'}}" />
           </div>
-        </div>
-        <!-- pantalla 2 linea 2-3 cajas-->
-        <div class="formbold-input-flex">
           <div>
             <label for="clave_puerta_ingreso2" class="formbold-form-label"> Clave Ingreso 2 </label>
             <input type="text" name="clave_puerta_ingreso2" id="clave_puerta_ingreso2" class="formbold-form-input"
@@ -171,21 +203,13 @@
             <input type="text" name="clave_wifi" id="clave_wifi" class="formbold-form-input"
               value="{{ inmueble.clave_wifi.value | default:'0' }}" />
           </div>
-          <div>
-            <label for="valor_inmueble" class="formbold-form-label"> Valor </label>
-            <input type="number" name="valor_inmueble" id="valor_inmueble" class="formbold-form-input"
-              value="{{ inmueble.valor_inmueble.value }}" />
-          </div>
         </div>
-
-        <!-- pantalla 2 linea 3-3 cajas-->
+        <hr>
+      </div>
+      <!-- TERCER HOJA -->
+      <div class="form_3">
+        <!-- pantalla 3 linea 1-5 cajas-->
         <div class="formbold-input-flex">
-          <div>
-            <label for="habitac_maxima" class="formbold-form-label"> Capacidad Máxima </label>
-            <input type="number" name="habitac_maxima" id="habitac_maxima" class="formbold-form-input"
-              value="{{ inmueble.habitac_maxima.value | default:'0' }}" />
-          </div>
-
           <div>
             <label class="formbold-form-label">Cliente/Propietario</label>
             <select id="cliente_id_" name="cliente_id" class="formbold-form-input" style="margin-top: 0;">
@@ -207,11 +231,7 @@
             </select>
           </div>
         </div>
-        <hr>
-      </div>
-
-      <div class="form_3">
-        <!-- pantalla 3 linea 1-3 cajas-->
+        <!-- pantalla 3 linea 2-5 cajas-->
         <div class="formbold-input-flex">
           <div>
             <label class="formbold-form-label">Tipo Propiedad</label>
@@ -221,6 +241,9 @@
               <option value="Departamento">Departamento</option>
               <option value="Apart">Apart</option>
               <option value="Complejo">Complejo</option>
+              <option value="Oficina">Posadas</option>
+              <option value="Oficina">Cobertura</option>
+              <option value="Oficina">Terreno</option>
               <option value="Oficina">Oficina</option>
               <option value="Otros">Otros</option>
             </select>
@@ -238,11 +261,16 @@
           </div>
         </div>
         <div class="formbold-form-confirm"></div>
-        <!-- pantalla 3 linea 2-3 cajas-->
+        <!-- pantalla 3 linea 3-5 cajas-->
         <div class="formbold-input-flex">
           <div class="check">
             <input type="checkbox" id="cochera" name="cochera" value="true">
             <label class="">Cochera</label>
+          </div>
+
+          <div class="check">
+            <input type="checkbox" id="cochera_rotativa" name="cochera_rotativa" value="true">
+            <label class="">Cochera Rotativa</label>
           </div>
 
           <div class="check">
@@ -255,7 +283,7 @@
             <label class="">Expensas</label>
           </div>
         </div>
-        <!-- pantalla 3 linea 3-3 cajas-->
+        <!-- pantalla 3 linea 4-5 cajas-->
         <div class="formbold-input-flex">
           <div class="check">
             <input type="checkbox" name="tipo_servicio" value="WI-FI">
@@ -278,7 +306,7 @@
           </div>
         </div>
         <div class="formbold-form-confirm"></div>
-        <!-- pantalla 3 linea 4-3 cajas-->
+        <!-- pantalla 3 linea 5-5 cajas-->
         <div class="formbold-input-flex">
           <label class="">Seleccione Imágenes</label>
           <input type="file" id="imgs" name="imgs" multiple>

@@ -2,6 +2,7 @@ const send = document.getElementById('send')
 const formulario = document.getElementById('formulario_inmueble')
 
 const i_direccion = document.getElementById("dir_inmueble")
+//const i_bloco = document.getElementById("bloco_inmueble")
 const i_tipo = document.getElementById("tipo_inmueble")
 const i_operacion = document.getElementById("tipo_operacion")
 const i_suptotal = document.getElementById("sup_total")
@@ -61,6 +62,12 @@ if (send) {
             _alerta('Direccion del Inmueble solo letras/números y comenzar con MAYUSCULAS!')
             return
         }
+
+        // if (letras_numero_espacios(i_bloco) == null || i_bloco.value.length < 3) {
+        //     i_bloco.focus()
+        //     _alerta('Bloco del Inmueble solo letras/números y comenzar con MAYUSCULAS!')
+        //     return
+        // }
         
         if (num_apto(i_num_apto) == null) {
             i_num_apto.value = "0"; // Establecer el valor predeterminado como "0"
@@ -92,7 +99,8 @@ if (send) {
             return
         }
 
-        if (solo_numeros(i_suptotal) == null || Number(i_suptotal.value) <= 0) {
+        if (solo_numeros(i_suptotal) == null || Number(i_suptotal.value) < 0) {
+            i_suptotal.value = "0"; // Establecer el valor predeterminado como "0"
             i_suptotal.focus()
             _alerta('Superficie Total de Inmueble no valido!')
             return
@@ -290,7 +298,7 @@ const dataTableOptions = {
     lengthMenu: [5, 10, 20, 50, 100],
     columnDefs: [{
             className: "centered",
-            targets: [0, 1, 2, 3, 4, 5, 6]
+            targets: [0, 1, 2, 3, 4, 5, 6, 7, 8]
         },
         {
             orderable: false,
@@ -301,7 +309,7 @@ const dataTableOptions = {
             targets: [0, 5, 6]
         },
         {
-            width: '20%',
+            width: '10%',
             targets: [0]
         }
     ],
@@ -332,17 +340,19 @@ const listInmuebles = async () => {
             content += `
                 <tr>
                     <td>${i + 1}</td>
+                    <td>${p.cod_referencia}</td>
                     <td>${p.dir_inmueble}</td>
                     <td>${p.tipo_inmueble}</td>
                     <td>${p.valor_inmueble}</td>
                     <td>${p.habitac_maxima}</td>
+                    <td>${p.tipo_servicio}</td>
                     <td>${p.cant_plantas >= 2 
                         ? "<i class='fa-solid fa-check' style='color: green;'></i>" 
                         : "<i class='fa-solid fa-xmark' style='color: red;'></i>"}
                     </td>
                     <td>
-                        <button class='btn btn-sm btn-primary'><i class='fa-solid fa-pencil'></i></button>
-                        <button class='btn btn-sm btn-danger'><i class='fa-solid fa-trash-can'></i></button>
+                        <button class='btn btn-sm'><i class='fa-solid fa-pencil'></i></button>
+                        <button class='btn btn-sm'><i class='fa-solid fa-trash-can'></i></button>
                     </td>
                 </tr>`;
         })
