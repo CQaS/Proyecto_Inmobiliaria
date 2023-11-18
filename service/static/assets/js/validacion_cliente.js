@@ -18,14 +18,6 @@ const pattern_mail_ = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
 crear_cliente.addEventListener("click", (e) => {
     e.preventDefault()
 
-    const _alerta = (texto) => {
-        Swal.fire({
-            icon: 'error',
-            title: 'Alerta',
-            text: `${texto}`
-        })
-    }
-
     const letra_y_espacios = (DATO) => {
         return DATO.value.match(pattern_letras_espacios_)
     }

@@ -65,8 +65,14 @@ class Inmueble(models.Model):
     id_inmueble = models.AutoField(primary_key=True)
     dir_inmueble = models.CharField(
         max_length=100, null=False, blank=False, verbose_name='Direccion', validators=[validar_direccion])
+    barrio_inmueble = models.CharField(
+        max_length=100, null=False, blank=False, verbose_name='Barrio', validators=[validar_direccion])
+    bloco_inmueble = models.CharField(
+        max_length=100, null=False, blank=False, verbose_name='Bloco', validators=[validar_direccion])
     ciudad_inmueble = models.CharField(
         max_length=100, null=False, blank=False, verbose_name='Ciudad', validators=[validar_direccion])
+    nombre_red = models.CharField(
+        max_length=100, null=False, blank=False, verbose_name='Red WiFi', validators=[validar_direccion])
     num_apto = models.IntegerField(
         null=False, blank=False, verbose_name='Apto')
     tipo_inmueble = models.CharField(max_length=25, null=False, blank=False,
@@ -100,7 +106,7 @@ class Inmueble(models.Model):
     clave_puerta_ingreso2 = models.CharField(
         max_length=100, null=False, blank=False, verbose_name='Clave Puerta Ingreso 2', validators=[validar_codigo])
     clave_wifi = models.CharField(max_length=50, null=False, blank=False,
-                                  verbose_name='Clave Wi-Fi', validators=[validar_codigo])
+                                  verbose_name='Clave Wi-Fi')
     tipo_servicio = models.CharField(max_length=45, null=True, blank=True,
                                      default='SD', verbose_name='Tipo de Servicio', validators=[validar_letras])
     cliente_id = models.ForeignKey('Clientes',

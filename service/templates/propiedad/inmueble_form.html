@@ -107,7 +107,7 @@
           </div>
           <div>
             <label for="barrio_inmueble" class="formbold-form-label"> Barrio </label>
-            <input type="text" name="barrio_inmueble" id="bloco_inmueble" class="formbold-form-input"
+            <input type="text" name="barrio_inmueble" id="barrio_inmueble" class="formbold-form-input"
               value="{{ inmueble.barrio_inmueble.value }}" />
           </div>
           <div>
@@ -116,8 +116,8 @@
               value="{{ inmueble.ciudad_inmueble.value }}" />
           </div>
         </div>
-        
-          <!-- pantalla 1 linea 3-3 cajas-->
+
+        <!-- pantalla 1 linea 3-3 cajas-->
         <div class="formbold-input-flex">
           <div>
             <label for="sup_total" class="formbold-form-label"> Sup. Total </label>
@@ -137,8 +137,8 @@
         </div>
         <hr>
       </div>
-        
-       <!-- SEGUNDA HOJA -->
+
+      <!-- SEGUNDA HOJA -->
       <div class="form_2">
         <!-- pantalla 2 linea 1-3 cajas-->
         <div class="formbold-input-flex">
@@ -166,14 +166,14 @@
               value="{{ inmueble.habitac_maxima.value | default:'0' }}" />
           </div>
         </div>
-        
+
         <!-- pantalla 2 linea 2-3 cajas-->
-        <div class="formbold-input-flex">  
+        <div class="formbold-input-flex">
           <div>
             <label for="descripcion" class="formbold-form-label"> Descripción </label>
             <input type="text" name="descripcion" id="descripcion" class="formbold-form-input"
               value="{{ inmueble.descripcion.value }}" />
-          </div>      
+          </div>
           <div>
             <label for="valor_inmueble" class="formbold-form-label"> Valor </label>
             <input type="number" name="valor_inmueble" id="valor_inmueble" class="formbold-form-input"

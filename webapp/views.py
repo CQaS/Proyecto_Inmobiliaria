@@ -53,13 +53,14 @@ def index(request):
             resultado.append(item)
             valores_unicos.add(idInm)
 
-    print(resultado)
+    print(len(resultado))
 
     form = ContactForm(request.POST or None, request.FILES or None)
     context = {
         'error': ERR,
         'form': form,
-        'exclusivos_lista': resultado
+        'exclusivos_lista': resultado,
+        'total_exclusivos': len(resultado),
     }
     return render(request, 'index.html', context)
 

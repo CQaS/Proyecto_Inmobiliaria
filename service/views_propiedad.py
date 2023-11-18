@@ -252,12 +252,29 @@ def propiedad_por_tipo(req, tipo_o, tipo_p):
     fecha_hoy = date.today()
     fecha_formateada = fecha_hoy.strftime('%Y-%m-%d')  # fecha de hoy
 
-    list = Inmueble.objects.annotate(
-        num_contratos=models.Count('contrato', filter=(
-            models.Q(contrato__fecha_ing__gt=fecha_formateada,
-                     contrato__fecha_salida__lt=fecha_formateada)
-        ))
-    ).filter(num_contratos=0, tipo_operacion__icontains=tipo_o, tipo_inmueble__icontains=tipo_p, estado=1)
+    if tipo_o == 'false':
+        list = Inmueble.objects.annotate(
+            num_contratos=models.Count('contrato', filter=(
+                models.Q(contrato__fecha_ing__gt=fecha_formateada,
+                         contrato__fecha_salida__lt=fecha_formateada)
+            ))
+        ).filter(num_contratos=0, tipo_inmueble__icontains=tipo_p, estado=1)
+
+    elif tipo_p == 'false':
+        list = Inmueble.objects.annotate(
+            num_contratos=models.Count('contrato', filter=(
+                models.Q(contrato__fecha_ing__gt=fecha_formateada,
+                         contrato__fecha_salida__lt=fecha_formateada)
+            ))
+        ).filter(num_contratos=0, tipo_operacion__icontains=tipo_o, tipo_inmueble__icontains=tipo_p, estado=1)
+
+    else:
+        list = Inmueble.objects.annotate(
+            num_contratos=models.Count('contrato', filter=(
+                models.Q(contrato__fecha_ing__gt=fecha_formateada,
+                         contrato__fecha_salida__lt=fecha_formateada)
+            ))
+        ).filter(num_contratos=0, tipo_operacion__icontains=tipo_o, tipo_inmueble__icontains=tipo_p, estado=1)
 
     # list = Inmueble.objects.filter(
     #   tipo_operacion__icontains=tipo_o, tipo_inmueble__icontains=tipo_p)

@@ -2,7 +2,10 @@ const send = document.getElementById('send')
 const formulario = document.getElementById('formulario_inmueble')
 
 const i_direccion = document.getElementById("dir_inmueble")
-//const i_bloco = document.getElementById("bloco_inmueble")
+const i_bloco = document.getElementById("bloco_inmueble")
+const i_ciudad = document.getElementById("ciudad_inmueble")
+const i_barrio = document.getElementById("barrio_inmueble")
+const i_red = document.getElementById("nombre_red")
 const i_tipo = document.getElementById("tipo_inmueble")
 const i_operacion = document.getElementById("tipo_operacion")
 const i_suptotal = document.getElementById("sup_total")
@@ -11,7 +14,7 @@ const i_supsemicubierta = document.getElementById("sup_semicub")
 const i_cantplantas = document.getElementById("cant_plantas")
 const i_cantdormitorios = document.getElementById("cant_dormitorios")
 const i_cantbanos = document.getElementById("cant_banos")
-// const i_cod_referencia = document.getElementById("cod_referencia")
+const i_cod_referencia = document.getElementById("cod_referencia")
 const i_condicion = document.getElementById("condicion")
 const i_descripcion = document.getElementById("descripcion")
 const i_valorinmueble = document.getElementById("valor_inmueble")
@@ -27,13 +30,6 @@ const pattern_mail = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
 if (send) {
     send.addEventListener("click", (e) => {
         e.preventDefault()
-        const _alerta = (texto) => {
-            Swal.fire({
-                icon: 'error',
-                title: 'Alerta',
-                text: `${texto}`
-            })
-        }
 
         const letra_y_espacios = (DATO) => {
             return DATO.value.match(pattern_letras_espacios)
@@ -51,7 +47,7 @@ if (send) {
         const cod_ref = (DATO) => {
             return DATO.value.match(pattern_cod_ref)
         }
-        
+
         const num_apto = (DATO) => {
             return DATO.value.match(pattern_num_apto)
         }
@@ -59,16 +55,28 @@ if (send) {
 
         if (letras_numero_espacios(i_direccion) == null || i_direccion.value.length < 3) {
             i_direccion.focus()
+            _alerta('Barrio del Inmueble solo letras/números y comenzar con MAYUSCULAS!')
+            return
+        }
+
+        if (letras_numero_espacios(i_barrio) == null || i_barrio.value.length < 3) {
+            i_barrio.focus()
             _alerta('Direccion del Inmueble solo letras/números y comenzar con MAYUSCULAS!')
             return
         }
 
-        // if (letras_numero_espacios(i_bloco) == null || i_bloco.value.length < 3) {
-        //     i_bloco.focus()
-        //     _alerta('Bloco del Inmueble solo letras/números y comenzar con MAYUSCULAS!')
-        //     return
-        // }
-        
+        if (letras_numero_espacios(i_ciudad) == null || i_ciudad.value.length < 3) {
+            i_ciudad.focus()
+            _alerta('Ciudad del Inmueble solo letras/números y comenzar con MAYUSCULAS!')
+            return
+        }
+
+        if (letras_numero_espacios(i_red) == null || i_red.value.length < 3) {
+            i_red.focus()
+            _alerta('Nombre Red Wifi solo letras/números!')
+            return
+        }
+
         if (num_apto(i_num_apto) == null) {
             i_num_apto.value = "0"; // Establecer el valor predeterminado como "0"
             i_num_apto.focus()
@@ -100,7 +108,6 @@ if (send) {
         }
 
         if (solo_numeros(i_suptotal) == null || Number(i_suptotal.value) < 0) {
-            i_suptotal.value = "0"; // Establecer el valor predeterminado como "0"
             i_suptotal.focus()
             _alerta('Superficie Total de Inmueble no valido!')
             return
@@ -141,12 +148,12 @@ if (send) {
             return
         }
 
-        // if (cod_ref(i_cod_referencia) == null) {
-        //     i_cod_referencia.focus()
-        //     console.log(i_cod_referencia.value)
-        //     _alerta('Cod. Referencia del Inmueble no valido!')
-        //     return
-        // }
+        if (cod_ref(i_cod_referencia) == null) {
+            i_cod_referencia.focus()
+            console.log(i_cod_referencia.value)
+            _alerta('Cod. Referencia del Inmueble no valido!')
+            return
+        }
 
         if (i_condicion.value == 'Selecciona') {
             i_condicion.focus()
@@ -362,7 +369,7 @@ const listInmuebles = async () => {
     }
 }
 
-if (!inmueble_Form) {
+if (typeof inmueble_Form == "undefined") {
     window.addEventListener("load", async () => {
         await initDataTable()
     })
