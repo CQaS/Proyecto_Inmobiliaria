@@ -11,7 +11,7 @@ const i_supsemicubierta = document.getElementById("sup_semicub")
 const i_cantplantas = document.getElementById("cant_plantas")
 const i_cantdormitorios = document.getElementById("cant_dormitorios")
 const i_cantbanos = document.getElementById("cant_banos")
-const i_cod_referencia = document.getElementById("cod_referencia")
+// const i_cod_referencia = document.getElementById("cod_referencia")
 const i_condicion = document.getElementById("condicion")
 const i_descripcion = document.getElementById("descripcion")
 const i_valorinmueble = document.getElementById("valor_inmueble")
@@ -141,12 +141,12 @@ if (send) {
             return
         }
 
-        if (cod_ref(i_cod_referencia) == null) {
-            i_cod_referencia.focus()
-            console.log(i_cod_referencia.value)
-            _alerta('Cod. Referencia del Inmueble no valido!')
-            return
-        }
+        // if (cod_ref(i_cod_referencia) == null) {
+        //     i_cod_referencia.focus()
+        //     console.log(i_cod_referencia.value)
+        //     _alerta('Cod. Referencia del Inmueble no valido!')
+        //     return
+        // }
 
         if (i_condicion.value == 'Selecciona') {
             i_condicion.focus()

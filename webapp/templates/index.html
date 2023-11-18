@@ -81,7 +81,7 @@
         <div class="card__content">
           <div class="card__title">{{E.dir_inmueble}} - {{E.tipo_operacion}}</div>
           <p class="card__text">{{E.tipo_inmueble}} - {{E.ciudad_inmueble}} </p>
-          <p class="card__text">{{E.valor_inmueble}}</p>
+          <p class="card__text">R$ {{E.valor_inmueble}}</p>
           <a href="{% url 'detalles_propiedad' E.id_inmueble %}" class="btn btn--block card__btn"
             style="text-transform: capitalize">Mas Info</a>
         </div>
