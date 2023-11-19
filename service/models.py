@@ -93,6 +93,8 @@ class Inmueble(models.Model):
         null=False, blank=False, verbose_name='Cant. de Baños', validators=[validar_numero])
     cochera = models.BooleanField(
         verbose_name='Cochera', null=True, blank=True, default=False)
+    cochera_rotativa = models.BooleanField(
+        verbose_name='Cochera Rotativa', null=True, blank=True, default=False)
     cod_referencia = models.CharField(max_length=100,
                                       null=False, blank=False, verbose_name='Cod. Referencia', validators=[validar_codigo])
     condicion = models.CharField(max_length=100, null=False, blank=False,

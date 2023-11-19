@@ -55,6 +55,7 @@
       </button>
     </div>
     {% endif %}
+
     <form action="{% url 'crear_contrato' %}" id="formulario_contrato" method="POST">
       {% csrf_token %}
       <div class="formbold-steps">
@@ -76,13 +77,16 @@
 
       <!-- form INMUEBLE -->
       <div class="form_1 active">
-        <input type="hidden" name="id_inmueble" value="{{ id_inmueble }}">
+        <input type="hidden" name="id_inmueble" id="id_inmueble" value="{{ id_inmueble }}">
         <div class="formbold-input-flex">
-          
+
           <div>
             <label for="cod_referencia" class="formbold-form-label"> Cod. Referecia </label>
             <input type="text" name="cod_referencia" value="{{ cod_referencia }}" id="cod_referencia"
-              class="formbold-form-input" />
+              class="formbold-form-input" {% if codRef %}style="width: 90%;" {% endif %} />
+            {% if codRef %}
+            <i class='bx bx-search-alt codRef' id="codRef"></i>
+            {% endif %}
           </div>
           <div>
             <label for="nom_propietario" class="formbold-form-label"> Propietario </label>

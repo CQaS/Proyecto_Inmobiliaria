@@ -1,4 +1,11 @@
-formbold-main-wrapper {
+.codRef {
+  cursor: pointer;
+  font-size: 30px;
+  position: absolute;
+  margin-top: 10px;
+}
+
+.formbold-main-wrapper {
   background: white;
   display: flex;
   align-items: center;

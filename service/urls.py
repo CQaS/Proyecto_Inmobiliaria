@@ -46,8 +46,12 @@ urlpatterns = [
          views_empleado.eliminar_empleado, name="eliminar_empleado"),
     ##### FIN RUTAS EMPLEADOS #####
     ##### RUTAS CONTRATOS #####
+    path('contrato/',
+         views_contrato.contrato_codRef, name="contrato_codRef"),
+    path('contrato/codRef/<str:codRef>',
+         views_contrato.contrato_codRef2, name="contrato_codRef2"),
     path('contrato/<int:id_inmueble>/',
-         views_contrato.index_contrato, name="index_contrato"),
+         views_contrato.contrato_idInmueble, name="contrato_idInmueble"),
     path('contrato/crear', views_contrato.crear_contrato, name="crear_contrato"),
     ##### FIN RUTAS CONTRATOS #####
 

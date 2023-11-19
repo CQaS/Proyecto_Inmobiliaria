@@ -5,6 +5,8 @@ from docxtpl import DocxTemplate
 from num2words import num2words
 from django.shortcuts import render, redirect
 from django.db import connection, IntegrityError
+from django.core.serializers import serialize
+from django.http import HttpResponse
 # LOGIN
 from django.contrib.auth.decorators import login_required
 from .models import *
@@ -17,7 +19,30 @@ def serialize_date(obj):
 
 
 @login_required(login_url='/#modal-opened')
-def index_contrato(req, id_inmueble):
+def contrato_codRef(req):
+    context = {
+        'codRef': True,
+        'error': '',
+        'success': '',
+    }
+    return render(req, "contrato/contrato_form.html", context)
+
+
+@login_required(login_url='/#modal-opened')
+def contrato_codRef2(req, codRef):
+    try:
+        R = Inmueble.objects.prefetch_related(
+            'cliente_id').get(cod_referencia=codRef)
+        nombre_cliente = R.cliente_id.nom_cliente
+        print(nombre_cliente)
+        return HttpResponse(serialize('json', [R,]), 'application/json')
+
+    except Inmueble.DoesNotExist:
+        return HttpResponse(status=200, content='null')
+
+
+@login_required(login_url='/#modal-opened')
+def contrato_idInmueble(req, id_inmueble):
 
     R = buscarProp_ID(id_inmueble)
     res = R['res']

@@ -138,6 +138,46 @@ const Buscar = () => {
   }
 }
 
+const codRef = document.getElementById('codRef')
+
+if (codRef) {
+  codRef.addEventListener('click', () => {
+
+    let cod_referencia = document.getElementById("cod_referencia").value
+
+    if (!cod_referencia) {
+      _alerta("Cod. Ref invalido")
+      return
+    }
+
+    let url = `/contrato/codRef/${cod_referencia}`
+    $.get(url).done((res) => {
+      console.log(res)
+      if (res != 'null') {
+
+        $.each(res, (i, R) => {
+
+          console.log(R)
+          dir_inmueble.value = R.fields.dir_inmueble
+          ciudad_inmueble.value = R.fields.ciudad_inmueble
+          num_apto.value = R.fields.num_apto
+          habitac_maxima.value = R.fields.habitac_maxima
+          pass_hall1.value = R.fields.clave_puerta_ingreso
+          pass_hall2.value = R.fields.clave_puerta_ingreso2
+          pass_wifi.value = R.fields.clave_wifi
+          valor_inmueble.value = R.fields.valor_inmueble
+          id_inmueble.value = R.pk
+        })
+
+      } else {
+        _alerta('Cod. Ref invalido')
+      }
+
+    })
+
+  })
+}
+
 const seleccionaCliente = () => {
 
   let lista_dinamica = document.getElementById("lista_dinamica")
