@@ -253,6 +253,7 @@ def propiedad_por_tipo(req, tipo_o, tipo_p):
     fecha_formateada = fecha_hoy.strftime('%Y-%m-%d')  # fecha de hoy
 
     if tipo_o == 'false':
+        print('Tipo P')
         list = Inmueble.objects.annotate(
             num_contratos=models.Count('contrato', filter=(
                 models.Q(contrato__fecha_ing__gt=fecha_formateada,
@@ -261,14 +262,16 @@ def propiedad_por_tipo(req, tipo_o, tipo_p):
         ).filter(num_contratos=0, tipo_inmueble__icontains=tipo_p, estado=1)
 
     elif tipo_p == 'false':
+        print('Tipo O')
         list = Inmueble.objects.annotate(
             num_contratos=models.Count('contrato', filter=(
                 models.Q(contrato__fecha_ing__gt=fecha_formateada,
                          contrato__fecha_salida__lt=fecha_formateada)
             ))
-        ).filter(num_contratos=0, tipo_operacion__icontains=tipo_o, tipo_inmueble__icontains=tipo_p, estado=1)
+        ).filter(num_contratos=0, tipo_operacion__icontains=tipo_o, estado=1)
 
     else:
+        print('Topo O P')
         list = Inmueble.objects.annotate(
             num_contratos=models.Count('contrato', filter=(
                 models.Q(contrato__fecha_ing__gt=fecha_formateada,
