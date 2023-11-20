@@ -152,12 +152,14 @@ if (codRef) {
 
     let url = `/contrato/codRef/${cod_referencia}`
     $.get(url).done((res) => {
-      console.log(res)
+
       if (res != 'null') {
 
-        $.each(res, (i, R) => {
+        nom_propietario.value = res[0].nombre_cliente
 
-          console.log(R)
+        resJSON = JSON.parse(res[0].inm)
+        $.each(resJSON, (i, R) => {
+
           dir_inmueble.value = R.fields.dir_inmueble
           ciudad_inmueble.value = R.fields.ciudad_inmueble
           num_apto.value = R.fields.num_apto

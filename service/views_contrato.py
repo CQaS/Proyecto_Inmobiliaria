@@ -34,8 +34,15 @@ def contrato_codRef2(req, codRef):
         R = Inmueble.objects.prefetch_related(
             'cliente_id').get(cod_referencia=codRef)
         nombre_cliente = R.cliente_id.nom_cliente
-        print(nombre_cliente)
-        return HttpResponse(serialize('json', [R,]), 'application/json')
+        inm = serialize('json', [R,])
+        data = {
+            'inm': inm,
+            'nombre_cliente': nombre_cliente
+        }
+        D = []
+        D.append(data)
+
+        return HttpResponse(json.dumps(D), 'application/json')
 
     except Inmueble.DoesNotExist:
         return HttpResponse(status=200, content='null')

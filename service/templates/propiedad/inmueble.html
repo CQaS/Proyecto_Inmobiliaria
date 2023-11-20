@@ -16,7 +16,8 @@
 
 <div class="box">
     <div class="dir">
-        <p>{{  D.dir_inmueble  }}</p>
+        <p class="contratar">{{  D.dir_inmueble  }} | <a href="{% url 'contrato_idInmueble' D.id_inmueble %}">Contratar</a></p>
+        
     </div>
 
     <div class="operacion">
