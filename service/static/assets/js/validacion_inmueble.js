@@ -300,12 +300,14 @@ let dataTableIsInitialized = false
 const dataTableOptions = {
     "language": {
         "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+        
+
     },
     scrollX: "2000px",
     lengthMenu: [5, 10, 20, 50, 100],
     columnDefs: [{
             className: "centered",
-            targets: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+            targets: [0, 1, 2, 3, 4, 5, 6]
         },
         {
             orderable: false,
@@ -346,17 +348,13 @@ const listInmuebles = async () => {
         data.inmueble.forEach((p, i) => {
             content += `
                 <tr>
-                    <td>${i + 1}</td>
                     <td>${p.cod_referencia}</td>
                     <td>${p.dir_inmueble}</td>
                     <td>${p.tipo_inmueble}</td>
                     <td>${p.valor_inmueble}</td>
                     <td>${p.habitac_maxima}</td>
                     <td>${p.tipo_servicio}</td>
-                    <td>${p.cant_plantas >= 2 
-                        ? "<i class='fa-solid fa-check' style='color: green;'></i>" 
-                        : "<i class='fa-solid fa-xmark' style='color: red;'></i>"}
-                    </td>
+                    
                     <td>
                         <button class='btn btn-sm'><i class='fa-solid fa-pencil'></i></button>
                         <button class='btn btn-sm'><i class='fa-solid fa-trash-can'></i></button>
