@@ -1,0 +1,89 @@
+{% extends 'layouts/base00.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
+
+<style>
+
+#calendar {
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+</style>
+
+
+<h1>Reservas</h1>
+<input type="text" class="form_input" id="" name="" placeholder="Nº Referencia" required><br>
+<input type="text" class="form_input" id=""  name="" placeholder="Direccion Inmueble" required><br>
+<button type="button"><i class="fa-solid fa-rotate-right fa-spin"></i> Sincronizar</button>
+
+
+<div id='calendar'></div>
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/main.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            timeZone: 'UTC',
+            initialView: 'multiMonth', // Cambiado a 'multiMonth'
+            views: {
+                multiMonth: {
+                duration: { months: 12 },   // Muestra 12 meses (un año)
+                }
+            },
+            selectable: true,
+            select: function(info) {
+                // Al seleccionar una fecha, se pregunta si es reserva propia o de terceros
+                var isOwnEvent = true; // Por defecto, es reserva propia
+                var userInput = prompt('¿Es una reserva de terceros? (S/N)'); // Se solicita información
+
+                if (userInput !== null) {
+                    userInput = userInput.toLowerCase();
+                    isOwnEvent = userInput !== 's' && userInput !== 'S' && userInput !== 'yes';
+                }
+
+                var eventColor = isOwnEvent ? 'red' : 'green'; // Cambio de color según el tipo de reserva
+
+                calendar.addEvent({
+                    title: isOwnEvent ? 'Nueva Reserva Propia' : 'Nueva Reserva de Terceros',
+                    start: info.startStr,
+                    end: info.endStr,
+                    color: eventColor, // Color según el tipo de reserva
+                    allDay: true // O false si la reserva tiene una hora específica
+                    // Puedes agregar más propiedades al evento según tus necesidades
+                });
+            },
+            // events: [// Ejemplo de eventos existentes con diferentes colores
+            //     {
+            //         title: 'Reserva Propia',
+            //         start: '2023-11-23',
+            //         color: 'red', // Color para representar la reserva propia
+            //         allDay: true
+            //     },
+            //     {
+            //         title: 'Reserva de Terceros',
+            //         start: '2023-11-24',
+            //         color: 'green', // Color para representar la reserva de terceros
+            //         allDay: true
+            //     }
+            // ],
+            eventClick: function(info) {
+                // Al hacer clic en un evento, se pregunta si se desea eliminar
+                if (confirm('¿Estás seguro de eliminar esta reserva?')) {
+                    info.event.remove();
+                }
+            }
+        });
+
+        calendar.render();
+    });
+
+</script>
+
+{% endblock%}
