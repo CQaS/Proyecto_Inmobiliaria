@@ -117,3 +117,7 @@ def login(req):
 def salir(req):
     logout(req)
     return redirect('index')
+
+
+def notFound(req):
+    return render(req, '404.html')

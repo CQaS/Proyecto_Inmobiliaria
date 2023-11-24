@@ -2,12 +2,12 @@ import json
 import uuid
 import os
 from datetime import date
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.db import models, connection, IntegrityError
 from django.db.models import Count, Q
 from django.core import serializers
 from django.core.serializers import serialize
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.http.response import JsonResponse
 # LOGIN
 from django.contrib.auth.decorators import login_required
@@ -127,9 +127,12 @@ def crear_propiedad(req):
 
 
 @login_required(login_url='/#modal-opened')
-def editar_propiedad(req, id_inmueble):
+def editar_propiedad(req, id_inmueble=None):
     ERR = ''
+    success = ''
     try:
+        inmueble = Inmueble.objects.get(id_inmueble=id_inmueble)
+
         with connection.cursor() as cursor:
             cursor.execute(
                 "select * from clientes where categoria = 'Propietario'")
@@ -148,33 +151,82 @@ def editar_propiedad(req, id_inmueble):
         # Convertir a formato JSON
         clientes = json.dumps(lista, default=serialize_date)
 
-        # print(clientes)
+    except Inmueble.DoesNotExist:
+        print("NO ENCONTRADO")
+        return redirect('404')
 
     except IntegrityError as e:
-        ERR = 'Algo fallo, intenta nuevamente o ponte en contanto con Admin'
+        ERR = 'Algo fallo, intenta nuevamente o ponte en contacto con Admin'
         print("Error:", e)
 
-    inmueble = Inmueble.objects.get(id_inmueble=id_inmueble)
-    formulario = InmuebleForm(
+    inmueble_form = InmuebleForm(
         req.POST or None, req.FILES or None, instance=inmueble)
-    if formulario.is_valid() and req.POST:
+    # images = req.FILES.getlist('imgs')
+
+    if inmueble_form.is_valid():
+
+        T = req.POST.getlist('tipo_servicio')
+        T_list = ', '.join(T)
+
+        if T_list != '':
+            inmueble_form.instance.tipo_servicio = T_list
+
         try:
-            formulario.save()
-            print('Inmueble, OK')
-            return redirect('editar_propiedad')
+            I = inmueble_form.save()
+            """ ultimo_id = I.id_inmueble
+
+            for image in images:
+                try:
+                    # Genera un nuevo nombre de archivo (por ejemplo, usando un UUID)
+                    new_filename = f"{uuid.uuid4().hex}{os.path.splitext(image.name)[1]}"
+
+                    # Asigna el nuevo nombre al archivo
+                    image.name = new_filename
+                    foto = Fotos.objects.create(
+                        image=image,
+                        inmueble_id=ultimo_id
+                    )
+
+                except IntegrityError as e:
+                    print(f"Error al crear la foto: {e}")
+
+                except Exception as e:
+                    print(f"Error inesperado: {e}") """
+
+            print('Inmueble Editado, OK')
+            success = "Inmueble Editado correctamente"
+            context = {
+                'clientes': lista,
+                'error': ERR,
+                'success': success
+            }
+            return render(req, 'propiedad/inmueble_form.html', context)
 
         except Exception as e:
             error_message = f"Error al guardar el Inmueble: {str(e)}"
             ERR = error_message
             print(f"error: {error_message}")
-            return redirect('editar_propiedad')
     else:
-        for field_name, error_msgs in formulario.errors.items():
+        for field_name, error_msgs in inmueble_form.errors.items():
             for error_msg in error_msgs:
                 ERR = 'Algun campo contiene Errores'
                 print(f"Error en el campo '{field_name}': {error_msg}")
 
-    return render(req, 'propiedad/editar.html', {'formulario': formulario, 'clientes': lista, 'error': ERR})
+    if ERR != '':
+        context = {
+            'inmueble': inmueble_form,
+            'clientes': lista,
+            'error': ERR,
+            'success': success
+        }
+    else:
+        context = {
+            'inedit': inmueble,
+            'clientes': lista,
+            'error': ERR,
+            'success': success
+        }
+    return render(req, 'propiedad/inmueble_form.html', context)
 
 
 def detalles_propiedad(req, id_inmueble):

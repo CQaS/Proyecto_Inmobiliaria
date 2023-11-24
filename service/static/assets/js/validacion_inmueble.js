@@ -178,33 +178,36 @@ if (send) {
             return
         }
 
-        //uploadImg.files: FileList
-        for (let i = 0; i < imgs.files.length; i++) {
-            let f = imgs.files[i]
+        if (inedit) {
+            //uploadImg.files: FileList
+            for (let i = 0; i < imgs.files.length; i++) {
+                let f = imgs.files[i]
 
-            // Verificar extensión del archivo
-            let filePath = f.name
-            let allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i
+                // Verificar extensión del archivo
+                let filePath = f.name
+                let allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i
 
-            if (!allowedExtensions.exec(filePath)) {
-                console.log(`foto Nro:${i} no Valida!`)
-                _alerta(`foto Nro:${i} no Valida!`)
-                return
-            } else {
-                console.log(`ext Nro:${i} ok`)
-            }
+                if (!allowedExtensions.exec(filePath)) {
+                    console.log(`foto Nro:${i} no Valida!`)
+                    _alerta(`foto Nro:${i} no Valida!`)
+                    return
+                } else {
+                    console.log(`ext Nro:${i} ok`)
+                }
 
-            //Verificar tamaño del archivo(máximo 2 MB) 2w
-            const maxSize = 2 * 1024 * 1024 // 2MB en bytes
+                //Verificar tamaño del archivo(máximo 2 MB) 2w
+                const maxSize = 2 * 1024 * 1024 // 2MB en bytes
 
-            if (f.size > maxSize) {
-                console.log(`Por favor, Foto Nro:${i} que no excedan los 2MB.`)
-                _alerta(`foto Nro:${i} no Valida!`)
-                return
-            } else {
-                console.log(`size ${i} ok`)
+                if (f.size > maxSize) {
+                    console.log(`Por favor, Foto Nro:${i} que no excedan los 2MB.`)
+                    _alerta(`foto Nro:${i} no Valida!`)
+                    return
+                } else {
+                    console.log(`size ${i} ok`)
+                }
             }
         }
+
 
         // if (lati.value == '' || long.value == '') {
         //     _alerta('Selecciona una Ubicacion en el Mapa')
