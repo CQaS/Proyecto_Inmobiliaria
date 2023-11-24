@@ -22,23 +22,24 @@
       <div>
         <!-- <input type="date" name="f_ini" id="f_ini" class="search-input" style="margin-top: 0;"> -->
         <select id="por_operacion" name="por_operacion" class="search-input" style="margin-top: 0;" required>
-          <option value="">Tipo Operación</option>
-          <option value="Alquiler temporario">Alquiler Temporario</option>
-          <option value="Alquiler permanente">Alquiler Permanente</option>
-          <option value="Venta">Venta</option>
+          <option value="">Tipo de Operação</option>
+          <option value="Alquiler temporario">Aluguel de Temporada</option>
+          <option value="Alquiler permanente">Aluguel Anual</option>
+          <option value="Venta">Venda</option>
         </select>
       </div>
 
       <div>
         <!-- <input type="date" name="f_fin" id="f_fin" class="search-input" style="margin-top: 0;"> -->
         <select id="por_propiedad" name="por_propiedad" class="search-input" style="margin-top: 0;" required>
-          <option value="">Tipo Propiedad</option>
+          <option value="">Tipo do Imóvel</option>
           <option value="Casa">Casa</option>
-          <option value="Departamento">Departamento</option>
-          <option value="Apart">Apart</option>
-          <option value="Complejo">Complejo</option>
-          <option value="Oficina">Oficina</option>
-          <option value="Otros">Otros</option>
+          <option value="Departamento">Apartamento</option>
+          <option value="Apart">Local</option>
+          <option value="Complejo">Complexo</option>
+          <option value="Oficina">Escritorio</option>
+          <option value="Oficina">Terreno</option>
+          <option value="Otros">Outros</option>
         </select>
       </div>
 
@@ -70,7 +71,7 @@
 <!-- Propiedades exclusivos -->
 <section>
   <div class="titulo">
-    <h4>Propiedades Exclusivas ({{ total_exclusivos }})</h4>
+    <h4>Propriedades Exclusivas ({{ total_exclusivos }})</h4>
   </div>
 
   <ul class="cards">

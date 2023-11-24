@@ -1,7 +1,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="pt">
 
 <head>
   <meta charset="UTF-8">
@@ -35,7 +35,14 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
-  <title>MEC Imóveis</title>
+  <title>Imóveis MEC</title>
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'pt', includedLanguages: 'es,en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, gaTrack: true}, 'google_translate_element');
+            }
+    </script>
+    
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
 
 <body>
@@ -60,22 +67,22 @@
         </div>
         <ul class="sub-menu">
           <li><a class="link_name" href="#">Categoria</a></li>
-          <li><a href="#">Alquiler Temporario</a></li>
-          <li><a href="#">Alquiler Permanente</a></li>
-          <li><a href="#">Venta</a></li>
+          <li><a href="#">Aluguel de Temporada</a></li>
+          <li><a href="#">Aluguel Anual</a></li>
+          <li><a href="#">Venda</a></li>
         </ul>
       </li>
       <li>
       <li>
         <a href="#">
           <i class='bx bx-user-pin'></i>
-          <span class="link_name">Nosotros</span>
+          <span class="link_name">Quem Somos</span>
         </a>
       </li>
       <li>
         <a href="#">
           <i class='bx bx-mail-send'></i>
-          <span class="link_name">Contacto</span>
+          <span class="link_name">Contactos</span>
         </a>
       </li>
       {% if user.is_authenticated %}
@@ -83,22 +90,22 @@
         <div class="iocn-link">
           <a href="#">
             <i class='bx bx-cog'></i>
-            <span class="link_name">Servicios</span>
+            <span class="link_name">Serviços </span>
           </a>
           <i class='bx bxs-chevron-down arrow'></i>
         </div>
         <ul class="sub-menu">
-          <li><a class="link_name" href="#">Servicios</a></li>
+          <li><a class="link_name" href="#">Serviços</a></li>
           <li><a href="{% url 'crear_cliente' %}">Clientes</a></li>
-          <li><a href="{% url 'crear_propiedad' %}">Inmuebles</a></li>
-          <li><a href="{% url 'crear_propiedad' %}">Disponible</a></li>
+          <li><a href="{% url 'crear_propiedad' %}">Imovel</a></li>
+          <li><a href="{% url 'crear_propiedad' %}">Disponível</a></li>
           <li><a href="{% url 'contrato_codRef' %}">Contratos</a></li>
-          <li><a href="{% url 'crear_empleado' %}">Empleados</a></li>
-          <li><a href="{% url 'reportes' %}">Reportes</a></li>
+          <li><a href="{% url 'crear_empleado' %}">Empregados</a></li>
+          <li><a href="{% url 'reportes' %}">Repórter</a></li>
         </ul>
       </li>
       {% endif %}
-      <li>
+      <!-- <li>
         <div class="iocn-link">
           <a href="#">
             <i class='bx bx-globe'></i>
@@ -108,16 +115,16 @@
         </div>
         <ul class="sub-menu">
           <li><a class="link_name" href="#">Traductor</a></li>
-          <li><a href="#">Portugues</a></li>
-          <li><a href="#">Español</a></li>
-          <li><a href="#">Ingles</a></li>
-        </ul>
-      </li>
+          <li><a href="google_translate_element">Português</a></li>
+          <li><a href="google_translate_element">Espanhol</a></li>
+          <li><a href="google_translate_element">Inglês</a></li>
+        </ul> 
+      </li> -->
       {% if user.is_authenticated %}
       <li>
         <a href="{% url 'salir' %}" id="">
           <i class='bx bx-log-out'></i>
-          <span class="link_name">Salir</span>
+          <span class="link_name">Sair</span>
         </a>
       </li>
       {% else %}
@@ -133,8 +140,10 @@
   <section class="home-section">
     <div class="home-content">
       <i class='bx bx-menu'></i>
-      <span class="text">MEC Imóveis</span>
+      <span class="text">Imóveis MEC</span>
+      <div id="google_translate_element" class="google"></div>
     </div>
+   
   </section>
 
   <main>
@@ -148,7 +157,7 @@
   <footer>
     <div class="_container">
       <div class="sec-quicklink">
-        <h2>About Us</h2>
+        <h2>Quem Somos</h2>
         <p>Dedicamo-nos a fazer os seus sonhos realidade, com o nosso atendimento personalizado na área imobiliária.
           Nosso aprimoramento e inovação são contínuos, proporcionando um atendimento de excelência aos nossos clientes.
           Temos aluguel de temporada, administração de imóveis, locação anual, vendas e permutas em Bombinhas e

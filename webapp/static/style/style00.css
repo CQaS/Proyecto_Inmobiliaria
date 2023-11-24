@@ -285,16 +285,24 @@ ul {
 }
 
 .home-content {
+	position: relative;
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
 	margin-left: 15px;
-
-
 }
+
+.google {
+	position: absolute;
+    top: 20px; /* Ajusta este valor para cambiar la distancia desde la parte superior */
+    right: 20px; /* Ajusta este valor para cambiar la distancia desde la derecha */
+    z-index: 9999; /* Asegura que esté por encima de otros elementos si es necesario */
+}	
 
 .home-section .home-content .bx-menu,
 .home-section .home-content .text {
+	
+
 	color: rgb(183, 146, 91);
 	font-size: 35px;
 	margin-top: 15px;
