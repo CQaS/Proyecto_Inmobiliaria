@@ -82,7 +82,7 @@
       <li>
         <a href="#">
           <i class='bx bx-mail-send'></i>
-          <span class="link_name">Contactos</span>
+          <span class="link_name">Contatos</span>
         </a>
       </li>
       {% if user.is_authenticated %}
@@ -176,7 +176,7 @@
       </div>
 
       <div class="sec-quicklink">
-        <h2>Contact Us</h2>
+        <h2>Entre em Contato</h2>
         <ul class="info">
           <li>
             <span><i class="fa-solid fa-phone"></i> +1 234 567 8900</span><br>
@@ -185,16 +185,16 @@
         </ul>
       </div>
       <div class="sec-quicklink">
-        <h2>Contact </h2>
+        <h2>Contato </h2>
         <form action="{% url 'msg' %}" class="form" id="formulario_msg" method="POST">
           {% csrf_token %}
-          <input type="text" class="form_input" id="nombre" name="nombre" placeholder="Nombre y Apellido" required>
+          <input type="text" class="form_input" id="nombre" name="nombre" placeholder="Nome e Sobrenome" required>
           <br>
-          <input type="email" id="email" class="form_input" name="email" placeholder="Correo Electrónico" required>
+          <input type="email" id="email" class="form_input" name="email" placeholder="e-mail" required>
           <br>
-          <input type="tel" class="form_input" id="tel" name="tel" placeholder="Teléfono" required>
+          <input type="tel" class="form_input" id="tel" name="tel" placeholder="Telefone" required>
           <br>
-          <textarea name="mensaje" class="form_input" id="mensaje" cols="25" rows="3" placeholder="Mensaje"
+          <textarea name="mensaje" class="form_input" id="mensaje" cols="25" rows="3" placeholder="Mensagem"
             required></textarea>
           <br>
           <input type="submit" id="btn_msg" value="Enviar formulario" class="form_enviar">
