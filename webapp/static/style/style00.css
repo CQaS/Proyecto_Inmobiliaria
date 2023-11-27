@@ -1029,8 +1029,8 @@ div.carrusel {
 	display: inline-block;
 	/* background: #424242; */
 	padding: 15px 30px;
-	color: #555;
-	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+	color: black;
+	/* text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5); */
 	border-radius: 30px;
 	font-size: 20px;
 	font-weight: 400;
@@ -1039,8 +1039,7 @@ div.carrusel {
 	overflow: hidden;
 }
 
-.contratar:hover {
-	background: #e91e63;
+/* .contratar:hover {
 	color: white;
-	box-shadow: 0 2px 20px #e91e63;
-}
+	box-shadow: 0 2px 20px rgb(183, 146, 91);;
+} */
