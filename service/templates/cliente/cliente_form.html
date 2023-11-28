@@ -77,7 +77,7 @@
           <!-- Validamos maxlength, autofoco required-->
           <div class="formbold-input-flex">
             <div>
-              <label for="nom_cliente" class="formbold-form-label"> Nombre de Cliente </label>
+              <label for="nom_cliente" class="formbold-form-label"> Nome de Cliente </label>
               <input type="text" name="nom_cliente" id="nom_cliente" class="formbold-form-input" {% if cliedit %}
                 value="{{ cliedit.nom_cliente }}" {% else %} value="{{ clientes.nom_cliente.value }}" {% endif %} />
             </div>
@@ -85,7 +85,7 @@
 
           <div class="formbold-input-flex">
             <div>
-              <label for="dir_cliente" class="formbold-form-label"> Dirección </label>
+              <label for="dir_cliente" class="formbold-form-label"> Direção </label>
               <input type="text" name="dir_cliente" id="dir_cliente" class="formbold-form-input" {% if cliedit %}
                 value="{{ cliedit.dir_cliente }}" {% else %} value="{{ clientes.dir_cliente.value }}" {% endif %} />
             </div>
@@ -117,7 +117,7 @@
             </div>
 
             <div>
-              <label for="ciudad_cliente" class="formbold-form-label"> Ciudad </label>
+              <label for="ciudad_cliente" class="formbold-form-label"> Cidade </label>
               <input type="text" name="ciudad_cliente" id="ciudad_cliente" class="formbold-form-input" {% if cliedit %}
                 value="{{ cliedit.ciudad_cliente }}" {% else %} value="{{ clientes.ciudad_cliente.value }}"
                 {% endif %} />
@@ -132,7 +132,7 @@
             </div>
 
             <div>
-              <label for="fechnac" class="formbold-form-label"> Fecha Nacimiento {{cliedit.fechnac}} </label>
+              <label for="fechnac" class="formbold-form-label"> Data Nascimento {{cliedit.fechnac}} </label>
               <input type="date" name="fechnac" id="fechnac" class="formbold-form-input" {% if cliedit %}
                 value="{{ cliedit.fechnac }}" {% else %} value="{{ clientes.fechnac.value }}" {% endif %} />
             </div>

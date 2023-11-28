@@ -43,36 +43,36 @@
 
 
     <div class="info-basica">
-        <h3>INFORMACION BASICA</h3>
+        <h3>INFORMAÇÃO BASICA</h3>
         <hr class="hr_detalle">
         <!-- va una table 2 columnas x 4 filas -->
-        <label for="">Ciudad: {{ D.ciudad_inmueble }}</label>
-        <label for="">Tipo Inmueble: {{ D.tipo_inmueble }}</label>
-        <label for="">Cantidad Plantas: {{ D.cant_plantas }}</label>
-        <label for="">Cantidad Dormitorios: {{ D.cant_dormitorios }}</label>
-        <label for="">Cantidad Baños: {{ D.cant_banos }}</label>
+        <label for="">Cidade: {{ D.ciudad_inmueble }}</label>
+        <label for="">Tipo Imóvel: {{ D.tipo_inmueble }}</label>
+        <label for="">Quantidade Plantas: {{ D.cant_plantas }}</label>
+        <label for="">Quantidade Quartos: {{ D.cant_dormitorios }}</label>
+        <label for="">Cantidad Banheiros: {{ D.cant_banos }}</label>
     </div>
 
     <div class="sup-medidas">
-        <h3>SUPERFICIES Y ADICIONALES</h3>
+        <h3>SUPERFICIES E ADICIONAIS</h3>
         <hr class="hr_detalle">
 
         <label for="">Sup. Total: {{ D.sup_total }}</label>
-        <label for="">Sup. Cubierta: {{ D.sup_cubierta }}</label>
-        <label for="">Sup. Semicubierta: {{ D.sup_semicub}}</label>
-        <label for="">Cochera: {% if D.cochera %}SI{% else %}NO{% endif %}</label>
+        <label for="">Sup. Coberta: {{ D.sup_cubierta }}</label>
+        <label for="">Sup. Semicoberta: {{ D.sup_semicub}}</label>
+        <label for="">Garagem: {% if D.cochera %}SI{% else %}NO{% endif %}</label>
         <label for="">Expensas: {% if D.expensas %}SI{% else %}NO{% endif %}</label>
     </div>
 
 
     <div class="descripcion">
-        <h3>DESCRIPCION</h3>
+        <h3>DESCRIPÇÃO</h3>
         <hr class="hr_detalle">
         <p>{{ D.descripcion }}</p>
     </div>
 
     <div class="servicios">
-        <h3>SERVICIOS</h3>
+        <h3>SERVIÇOS</h3>
         <hr class="hr_detalle">
         <label for=""> {{ D.tipo_servicio }} </label>
 
@@ -80,7 +80,7 @@
 
 
     <div class="mapa">
-        <h3>UBICACION</h3>
+        <h3>LOCALIZAÇÃO</h3>
         <hr class="hr_detalle"><br>
         <p id="location-info"></p>
 

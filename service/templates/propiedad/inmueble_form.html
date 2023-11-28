@@ -88,7 +88,7 @@
         <!-- pantalla 1 linea 1-3 cajas-->
         <div class="formbold-input-flex">
           <div>
-            <label for="dir_inmueble" class="formbold-form-label"> Dirección </label>
+            <label for="dir_inmueble" class="formbold-form-label"> Direção </label>
             <input type="text" name="dir_inmueble" id="dir_inmueble" class="formbold-form-input"
               {% if inedit %} value="{{ inedit.dir_inmueble }}" {% else %} value="{{ inmueble.dir_inmueble.value }}" {% endif %} />
           </div>
@@ -99,7 +99,7 @@
               {% endif %} />
           </div>
           <div>
-            <label for="num_apto" class="formbold-form-label"> Número Apto. </label>
+            <label for="num_apto" class="formbold-form-label"> Num. Apto. </label>
             <input type="number" name="num_apto" id="num_apto" class="formbold-form-input"
               {% if inedit %} value="{{ inedit.num_apto}}" {% else %} 
               value="{{ inmueble.num_apto.value | default:'0' }}" {% endif %}/>
@@ -108,7 +108,7 @@
         <!-- pantalla 1 linea 2-3 cajas-->
         <div class="formbold-input-flex">
           <div>
-            <label for="cod_referencia" class="formbold-form-label"> Cód. Referencia </label>
+            <label for="cod_referencia" class="formbold-form-label"> Cód. Referência </label>
             <input type="text" name="cod_referencia" id="cod_referencia" class="formbold-form-input"
               {% if inedit %} value="{{ inedit.cod_referencia }}" {% else %} 
               value="{{ inmueble.cod_referencia.value }}" {% endif %}/>
@@ -119,7 +119,7 @@
               {% if inedit %} value="{{ inedit.barrio_inmueble }}" {% else %}   value="{{ inmueble.barrio_inmueble.value }}" {% endif %}/>
           </div>
           <div>
-            <label for="ciudad_inmueble" class="formbold-form-label"> Ciudad </label>
+            <label for="ciudad_inmueble" class="formbold-form-label"> Cidade </label>
             <input type="text" name="ciudad_inmueble" id="ciudad_inmueble" class="formbold-form-input"
               {% if inedit %} value="{{ inedit.ciudad_inmueble }}" {% else %}   value="{{ inmueble.ciudad_inmueble.value }}" {% endif %}/>
           </div>
@@ -133,12 +133,12 @@
               {% if inedit %} value="{{ inedit.sup_total }}" {% else %}   value="{{ inmueble.sup_total.value | default:'0' }}" {% endif %}/>
           </div>
           <div>
-            <label for="sup_cubierta" class="formbold-form-label"> Sup. Cubierta </label>
+            <label for="sup_cubierta" class="formbold-form-label"> Sup. Coberta </label>
             <input type="number" name="sup_cubierta" id="sup_cubierta" class="formbold-form-input"
               {% if inedit %} value="{{ inedit.sup_cubierta}}" {% else %}   value="{{ inmueble.sup_cubierta.value | default:'0'}}" {% endif %}/>
           </div>
           <div>
-            <label for="sup_semicub" class="formbold-form-label"> Sup. Semi Cubierta </label>
+            <label for="sup_semicub" class="formbold-form-label"> Sup. Semi Coberta </label>
             <input type="number" name="sup_semicub" id="sup_semicub" class="formbold-form-input"
               {% if inedit %} value="{{ inedit.sup_semicub }}" {% else %} 
               value="{{ inmueble.sup_semicub.value | default:'0' }}" {% endif %}/>
@@ -152,19 +152,19 @@
         <!-- pantalla 2 linea 1-3 cajas-->
         <div class="formbold-input-flex">
           <div>
-            <label for="cant_plantas" class="formbold-form-label"> Cant. Plantas </label>
+            <label for="cant_plantas" class="formbold-form-label"> Quant. Plantas </label>
             <input type="number" name="cant_plantas" id="cant_plantas" class="formbold-form-input"
               {% if inedit %} value="{{ inedit.cant_plantas }}" {% else %}   value="{{ inmueble.cant_plantas.value | default:'0'}}" {% endif %}/>
           </div>
 
           <div>
-            <label for="cant_dormitorios" class="formbold-form-label"> Cant. Dormitorios </label>
+            <label for="cant_dormitorios" class="formbold-form-label"> Quant. Quartos </label>
             <input type="number" name="cant_dormitorios" id="cant_dormitorios" class="formbold-form-input"
               {% if inedit %} value="{{ inedit.cant_dormitorios }}" {% else %}   value="{{ inmueble.cant_dormitorios.value | default:'0' }}" {% endif %}/>
           </div>
 
           <div>
-            <label for="cant_banos" class="formbold-form-label"> Cant. Baños </label>
+            <label for="cant_banos" class="formbold-form-label"> Quant. Banheiros </label>
             <input type="number" name="cant_banos" id="cant_banos" class="formbold-form-input"
               {% if inedit %} value="{{ inedit.cant_banos }}" {% else %}  value="{{ inmueble.cant_banos.value | default:'0' }}" {% endif %} />
           </div>
@@ -179,7 +179,7 @@
         <!-- pantalla 2 linea 2-3 cajas-->
         <div class="formbold-input-flex">
           <div>
-            <label for="descripcion" class="formbold-form-label"> Descripción </label>
+            <label for="descripcion" class="formbold-form-label"> Descrição </label>
             <input type="text" name="descripcion" id="descripcion" class="formbold-form-input"
               {% if inedit %} value="{{ inedit.descripcion }}" {% else %}   value="{{ inmueble.descripcion.value }}" {% endif %}/>
           </div>
@@ -189,7 +189,7 @@
               {% if inedit %} value="{{ inedit.valor_inmueble }}" {% else %}   value="{{ inmueble.valor_inmueble.value }}" {% endif %}/>
           </div>
           <div>
-            <label for="nombre_red" class="formbold-form-label"> Nombre Red</label>
+            <label for="nombre_red" class="formbold-form-label"> Nome Rede</label>
             <input type="text" name="nombre_red" id="nombre_red" class="formbold-form-input"
               {% if inedit %} value="{{ inedit.nombre_red}}" {% else %}  value="{{ inmueble.nombre_red.value }}" {% endif %}/>
           </div>
@@ -198,17 +198,17 @@
         <!-- pantalla 2 linea 3-3 cajas-->
         <div class="formbold-input-flex">
           <div>
-            <label for="clave_puerta_ingreso" class="formbold-form-label"> Clave Ingreso 1 </label>
+            <label for="clave_puerta_ingreso" class="formbold-form-label"> Senha Ingreso 1 </label>
             <input type="text" name="clave_puerta_ingreso" id="clave_puerta_ingreso" class="formbold-form-input"
               {% if inedit %} value="{{ inedit.clave_puerta_ingreso }}" {% else %}   value="{{ inmueble.clave_puerta_ingreso.value | default:'0'}}" {% endif %}/>
           </div>
           <div>
-            <label for="clave_puerta_ingreso2" class="formbold-form-label"> Clave Ingreso 2 </label>
+            <label for="clave_puerta_ingreso2" class="formbold-form-label"> Senha Ingreso 2 </label>
             <input type="text" name="clave_puerta_ingreso2" id="clave_puerta_ingreso2" class="formbold-form-input"
               {% if inedit %} value="{{ inedit.clave_puerta_ingreso2 }}" {% else %}   value="{{ inmueble.clave_puerta_ingreso2.value | default:'0'}}" {% endif %}/>
           </div>
           <div>
-            <label for="clave_wifi" class="formbold-form-label"> Clave WI-FI </label>
+            <label for="clave_wifi" class="formbold-form-label"> Senha WI-FI </label>
             <input type="text" name="clave_wifi" id="clave_wifi" class="formbold-form-input"
               {% if inedit %} value="{{ inedit.clave_wifi }}" {% else %}   value="{{ inmueble.clave_wifi.value }}" {% endif %}/>
           </div>
@@ -220,7 +220,7 @@
         <!-- pantalla 3 linea 1-5 cajas-->
         <div class="formbold-input-flex">
           <div>
-            <label class="formbold-form-label">Cliente/Propietario</label>
+            <label class="formbold-form-label">Cliente/Proprietario</label>
             <select id="cliente_id_" name="cliente_id" class="formbold-form-input" style="margin-top: 0;">
               <option value="">Selecciona</option>
               {% for c in clientes %}
@@ -234,43 +234,43 @@
           </div>
 
           <div>
-            <label class="formbold-form-label">Tipo Operación</label>
+            <label class="formbold-form-label">Tipo Operação</label>
             <select id="tipo_operacion" name="tipo_operacion" class="formbold-form-input" style="margin-top: 0;"
               required>
               <option value="{{ inedit.tipo_operacion }}" selected>{{ inedit.tipo_operacion }}</option>
-              <option value="">Selecciona</option>
-              <option value="Alquiler temporario">Alquiler Temporario</option>
-              <option value="Alquiler permanente">Alquiler Permanente</option>
-              <option value="Venta">Venta</option>
+              <option value="">Selecione</option>
+              <option value="Alquiler temporario">Aluguer Temporário</option>
+              <option value="Alquiler permanente">Aluguer Anual</option>
+              <option value="Venta">Venda</option>
             </select>
           </div>
         </div>
         <!-- pantalla 3 linea 2-5 cajas-->
         <div class="formbold-input-flex">
           <div>
-            <label class="formbold-form-label">Tipo Propiedad</label>
+            <label class="formbold-form-label">Tipo Propriedad</label>
             <select id="tipo_inmueble" name="tipo_inmueble" class="formbold-form-input" style="margin-top: 0;" required>
               <option value="{{ inedit.tipo_inmueble }}" selected>{{ inedit.tipo_inmueble }}</option>
-              <option value="">Selecciona</option>
+              <option value="">Selecione</option>
               <option value="Casa">Casa</option>
-              <option value="Departamento">Departamento</option>
+              <option value="Departamento">Apartamento</option>
               <option value="Apart">Apart</option>
-              <option value="Complejo">Complejo</option>
+              <option value="Complejo">Complexo</option>
               <option value="Oficina">Posadas</option>
               <option value="Oficina">Cobertura</option>
               <option value="Oficina">Terreno</option>
-              <option value="Oficina">Oficina</option>
+              <option value="Oficina">Escritório</option>
               <option value="Otros">Otros</option>
             </select>
           </div>
 
           <div>
-            <label class="formbold-form-label">Condición</label>
+            <label class="formbold-form-label">Condição</label>
             <select id="condicion" name="condicion" class="formbold-form-input" style="margin-top: 0;" required>
               <option value="{{ inedit.condicion }}" selected>{{ inedit.condicion }}</option>
-              <option value="">Selecciona</option>
-              <option value="Muy buena">Muy Buena</option>
-              <option value="Buena">Buena</option>
+              <option value="">Selecione</option>
+              <option value="Muy buena">Muito Bom</option>
+              <option value="Buena">Bom</option>
               <option value="Regular">Regular</option>
               <option value="Mala">Mala</option>
             </select>
@@ -281,19 +281,19 @@
         <div class="formbold-input-flex">
           <div class="check">
             <input type="checkbox" id="cochera" name="cochera" value="true" {% if inedit.cochera %} checked {% endif %}>
-            <label class="">Cochera</label>
+            <label class="">Garagem</label>
           </div>
 
           <div class="check">
             <input type="checkbox" id="cochera_rotativa" name="cochera_rotativa" value="true"
               {% if inedit.cochera_rotativa %} checked {% endif %}>
-            <label class="">Cochera Rotativa</label>
+            <label class="">Garagem Rotativa</label>
           </div>
 
           <div class="check">
             <input type="checkbox" id="exclusividad" name="exclusividad" value="true" {% if inedit.exclusividad %}
               checked {% endif %}>
-            <label class="">Exclusividad</label>
+            <label class="">Exclusividade</label>
           </div>
 
           <div class="check">
@@ -311,7 +311,7 @@
 
           <div class="check">
             <input type="checkbox" name="tipo_servicio" value="Ropa de cama">
-            <label class="" for="ropa_cama">Ropa/Cama</label>
+            <label class="" for="ropa_cama">Roupa/Cama</label>
           </div>
 
           <div class="check">
@@ -321,13 +321,13 @@
 
           <div class="check">
             <input type="checkbox" name="tipo_servicio" value="Mucama">
-            <label class="" for="mucama">Mucama</label>
+            <label class="" for="mucama">Faxina</label>
           </div>
         </div>
         <div class="formbold-form-confirm"></div>
         <!-- pantalla 3 linea 5-5 cajas-->
         <div class="formbold-input-flex">
-          <label class="">Seleccione Imágenes</label>
+          <label class="">Selecione Imagens</label>
           <input type="file" id="imgs" name="imgs" multiple>
         </div>
 
