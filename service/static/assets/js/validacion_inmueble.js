@@ -55,13 +55,13 @@ if (send) {
 
         if (letras_numero_espacios(i_direccion) == null || i_direccion.value.length < 3) {
             i_direccion.focus()
-            _alerta('Barrio del Inmueble solo letras/números y comenzar con MAYUSCULAS!')
+            _alerta('Direccion del Inmueble solo letras/números y comenzar con MAYUSCULAS!')
             return
         }
 
         if (letras_numero_espacios(i_barrio) == null || i_barrio.value.length < 3) {
             i_barrio.focus()
-            _alerta('Direccion del Inmueble solo letras/números y comenzar con MAYUSCULAS!')
+            _alerta('Barrio del Inmueble solo letras/números y comenzar con MAYUSCULAS!')
             return
         }
 
@@ -178,7 +178,7 @@ if (send) {
             return
         }
 
-        if (inedit) {
+        if (!inedit) {
             //uploadImg.files: FileList
             for (let i = 0; i < imgs.files.length; i++) {
                 let f = imgs.files[i]

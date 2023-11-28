@@ -70,6 +70,17 @@ def crear_propiedad(req):
             inmueble_form.instance.tipo_servicio = T_list
 
         try:
+            # Validar si el cod_referencia ya existen en la base de datos
+            if Inmueble.objects.filter(cod_referencia=req.POST['cod_referencia']).exists():
+                ERR = 'El cod. referencia ya está registrado en la base de datos.'
+                context = {
+                    'inmueble': inmueble_form,
+                    'clientes': lista,
+                    'error': ERR,
+                    'success': success
+                }
+                return render(req, 'propiedad/inmueble_form.html', context)
+
             I = inmueble_form.save()
             ultimo_id = I.id_inmueble
 

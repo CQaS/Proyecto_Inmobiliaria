@@ -41,6 +41,34 @@ def crear_cliente(req):
     clientes = ClienteForm(req.POST or None, req.FILES or None)
     if clientes.is_valid():
         try:
+            # Validar si el DNI o el correo electrónico ya existen en la base de datos
+            if Clientes.objects.filter(dni_cliente=req.POST['dni_cliente']).exists():
+                ERR = 'El DNI ya está registrado en la base de datos.'
+                contexto = {
+                    'clientes': clientes,
+                    'error': ERR,
+                    'success': success
+                }
+                return render(req, 'cliente/cliente_form.html', contexto)
+
+            if Clientes.objects.filter(rg_cliente=req.POST['rg_cliente']).exists():
+                ERR = 'El RG ya está registrado en la base de datos.'
+                contexto = {
+                    'clientes': clientes,
+                    'error': ERR,
+                    'success': success
+                }
+                return render(req, 'cliente/cliente_form.html', contexto)
+
+            if Clientes.objects.filter(email_cliente=req.POST['email_cliente']).exists():
+                ERR = 'El correo electrónico ya está registrado en la base de datos.'
+                contexto = {
+                    'clientes': clientes,
+                    'error': ERR,
+                    'success': success
+                }
+                return render(req, 'cliente/cliente_form.html', contexto)
+
             C = clientes.save()
             print(f'Cliente id: {C.id_cliente}')
             print('Cliente, OK')
@@ -56,10 +84,19 @@ def crear_cliente(req):
             ERR = error_message
             print(f"error: {error_message}")
             contexto = {
+                'clientes': clientes,
                 'error': ERR,
                 'success': success
             }
             return render(req, 'cliente/cliente_form.html', contexto)
+
+        except Clientes.DoesNotExist:
+            print("NO ENCONTRADO")
+            return redirect('404')
+
+        except IntegrityError as e:
+            ERR = 'Algo fallo, intenta nuevamente o ponte en contacto con Admin'
+            print("Error:", e)
 
     else:
         print(clientes.errors)
@@ -76,31 +113,60 @@ def crear_cliente(req):
 
 
 @login_required(login_url='/#modal-opened')
-def editar_cliente(req, id_cliente):
+def editar_cliente(req, id_cliente=None):
     ERR = ''
-    cliente = Clientes.objects.get(id_cliente=id_cliente)
-    formulario = ClienteForm(
+    success = ''
+    try:
+        cliente = Clientes.objects.get(id_cliente=id_cliente)
+    except Clientes.DoesNotExist:
+        print("NO ENCONTRADO")
+        return redirect('404')
+
+    except IntegrityError as e:
+        ERR = 'Algo fallo, intenta nuevamente o ponte en contacto con Admin'
+        print("Error:", e)
+
+    cliente_form = ClienteForm(
         req.POST or None, req.FILES or None, instance=cliente)
-    if formulario.is_valid() and req.POST:
+    if cliente_form.is_valid() and req.POST:
         try:
-            formulario.save()
+            cliente_form.save()
             print('Cliente, OK')
-            return redirect('index_cliente')
+            success = "Cliente editado correctamente"
+            context = {
+                'cliedit': cliente,
+                'error': ERR,
+                'success': success
+            }
+
+            return render(req, 'cliente/cliente_form.html', context)
 
         except Exception as e:
             error_message = f"Error al guardar el Cliente: {str(e)}"
             ERR = error_message
             print(f"error: {error_message}")
-            return redirect('index_cliente')
 
     else:
-        print(formulario.errors)
-        for field_name, error_msgs in formulario.errors.items():
+        print(cliente_form.errors)
+        for field_name, error_msgs in cliente_form.errors.items():
             for error_msg in error_msgs:
                 ERR = 'Algun campo contiene Errores'
                 print(f"Error en el campo '{field_name}': {error_msg}")
 
-    return render(req, 'cliente/editar.html', {'formulario': formulario, 'error': ERR})
+    print(cliente.fechnac)
+    if ERR != '':
+        context = {
+            'formulario': cliente_form,
+            'error': ERR
+        }
+    else:
+        context = {
+            'cliedit': cliente,
+            'error': ERR,
+            'success': success
+        }
+
+    return render(req, 'cliente/cliente_form.html', context)
 
 
 @login_required(login_url='/#modal-opened')
