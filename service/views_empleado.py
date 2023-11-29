@@ -1,9 +1,10 @@
 import json
 from datetime import date
+from django.shortcuts import render, redirect
 from .forms import *
 from .models import *
 from django.db import connection
-from django.shortcuts import render, redirect
+
 # LOGIN
 from django.contrib.auth.decorators import login_required
 
@@ -34,6 +35,17 @@ def crear_empleado(req):
         }
 
         try:
+
+            #Validar si el DNI o el correo electrónico ya existen en la base de datos
+            if Empleados.objects.filter(dni_empleado=req.POST['dni_empleado']).exists():
+                ERR = 'El DNI ya está registrado en la base de datos.'
+                contexto = {
+                    'empleados': empleado_form,
+                    'error': ERR,
+                    'success': success
+                }
+                return render(req, 'empleado/empleado_form.html', contexto)
+
 
             existing_user = Empleados.objects.get(
                 email_empleado=email_empleado)

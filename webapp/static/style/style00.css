@@ -457,19 +457,31 @@ ul {
 	text-align: center;
 }
 
-section .titulo {
-	height: 25px;
-	width: 100%;
-}
-
-section h4 {
+h4 {
 	display: flex;
 	justify-content: center;
-	align-items: center;
 	font-size: 24px;
 	font-weight: bold;
 	margin-top: 15px;
 }
+
+.fecha {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.titulo {
+	margin: 5px;
+}
+
+.search-input {
+	margin: 5px;
+	background-color: rgb(183, 146, 91, 0.5);
+}
+
+
 
 /*FOOTER */
 

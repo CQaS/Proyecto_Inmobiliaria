@@ -55,9 +55,14 @@
       </button>
     </div>
     {% endif %}
-    <form action="{% url 'crear_empleado' %}" id="formulario_empleado" class="formulario" method="POST">
-      {% csrf_token %}
 
+    {% if cliedit %}
+    <form action="{% url 'editar_empleado' empledit.id_empleado %}" id="formulario_empleado" class="formulario"
+      method="POST">
+      {% else %}
+    <form action="{% url 'crear_empleado' %}" id="formulario_empleado" class="formulario" method="POST">
+      {% endif %}
+      {% csrf_token %}
       <div class="formbold-steps">
         <ul>
           <li class="parte_1 active">
@@ -70,12 +75,13 @@
       <div class="form_1 active">
 
         <!-- Validamos maxlength, autofoco required-->
-
         <div class="formbold-input-flex">
           <div>
             <label for="nom_empleado" class="formbold-form-label"> Nome do Empregado </label>
             <input type="text" name="nom_empleado" id="nom_empleado" class="formbold-form-input"
-              value="{{ empleados.nom_empleado.value  }}" />
+              value="{{ empleados.nom_empleado.value  }}"
+              {% if empledit %}
+                value="{{ empledit.nom_empleado }}" {% else %} value="{{ empleado.nom_empleado.value }}" {% endif %}  />
           </div>
           <div>
             <label for="dni_empleado" class="formbold-form-label"> Dni </label>
