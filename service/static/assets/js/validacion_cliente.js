@@ -44,7 +44,7 @@ crear_cliente.addEventListener("click", (e) => {
         return
     }
     // || c_direccion.value.length < 3
-    if (solo_numeros(c_dni) == null || c_dni.value.length < 8) {
+    if (solo_numeros(c_dni) == null || c_dni.value.length < 5) {
         _alerta('DNI de Cliente no valido!')
         return
     }
