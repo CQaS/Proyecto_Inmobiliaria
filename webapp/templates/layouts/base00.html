@@ -38,11 +38,17 @@
   <title>Imóveis MEC</title>
   <script type="text/javascript">
     function googleTranslateElementInit() {
-        new google.translate.TranslateElement({pageLanguage: 'pt', includedLanguages: 'es,en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, gaTrack: true}, 'google_translate_element');
-            }
-    </script>
-    
-    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+      new google.translate.TranslateElement({
+        pageLanguage: 'pt',
+        includedLanguages: 'es,en',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        gaTrack: true
+      }, 'google_translate_element');
+    }
+  </script>
+
+  <script type="text/javascript"
+    src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
 
 <body>
@@ -98,7 +104,7 @@
           <li><a class="link_name" href="#">Serviços</a></li>
           <li><a href="{% url 'crear_cliente' %}">Clientes</a></li>
           <li><a href="{% url 'crear_propiedad' %}">Imovel</a></li>
-          <li><a href="{% url 'crear_propiedad' %}">Disponível</a></li>
+          <li><a href="{% url 'disponibilidad' %}">Disponível</a></li>
           <li><a href="{% url 'contrato_codRef' %}">Contratos</a></li>
           <li><a href="{% url 'crear_empleado' %}">Empregados</a></li>
           <li><a href="{% url 'reportes' %}">Repórter</a></li>
@@ -143,7 +149,7 @@
       <span class="text">Imóveis MEC</span>
       <div id="google_translate_element" class="google"></div>
     </div>
-   
+
   </section>
 
   <main>

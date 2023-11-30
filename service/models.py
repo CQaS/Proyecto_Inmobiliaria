@@ -152,9 +152,9 @@ class Clientes(models.Model):
     nom_cliente = models.CharField(max_length=70, null=False, blank=False,
                                    verbose_name='Nombre de Cliente', validators=[validar_nombre])
     dni_cliente = models.IntegerField(
-        verbose_name='Dni de Cliente', null=False, blank=False, validators=[validar_numero])
+        verbose_name='Dni de Cliente', null=True, blank=True, validators=[validar_numero])
     rg_cliente = models.CharField(max_length=100,
-                                  verbose_name='RG Cliente', null=False, blank=False, validators=[validar_direccion])
+                                  verbose_name='RG Cliente', null=True, blank=True, validators=[validar_direccion])
     dir_cliente = models.CharField(max_length=100, verbose_name='Direccion de Cliente',
                                    null=False, blank=False, validators=[validar_direccion])
     tel_cliente = models.BigIntegerField(

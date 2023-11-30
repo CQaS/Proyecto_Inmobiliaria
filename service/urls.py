@@ -22,6 +22,8 @@ urlpatterns = [
          views_propiedad.reportes, name="reportes"),
     path('propiedad/reportes_json',
          views_propiedad.reportes_json, name="reportes_json"),
+    path('propiedad/disponibilidad',
+         views_propiedad.disponibilidad, name="disponibilidad"),
     ##### FIN RUTAS PROPIEDADES #####
     ##### RUTAS CLIENTES #####
     path('cliente', views_cliente.index_cliente, name="index_cliente"),
