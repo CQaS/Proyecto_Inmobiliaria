@@ -2,9 +2,10 @@ import json
 from datetime import date
 from django.shortcuts import render, redirect
 from django.core.serializers import serialize
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 # LOGIN
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from .models import *
 from .forms import *
 
@@ -174,3 +175,38 @@ def eliminar_cliente(req, id_cliente):
     cliente = Clientes.objects.get(id_cliente=id_cliente)
     cliente.delete()
     return redirect('index_cliente')
+
+
+""" 
+
+        APARTADO LOGICA DE RECUPERAR PASSWORD DE USUARIO 
+        
+        
+                                                                """
+
+
+def reset_password(req):
+    if req.method == 'POST':
+        try:
+            data = json.loads(req.body)
+            u = data.get('username')
+            e = data.get('email')
+            p = data.get('password')
+            print(p)
+
+            # Validar que los campos no estén en blanco o sean nulos
+            if not all([u, e, p]):
+                return JsonResponse({'error': 'Todos los campos son obligatorios.'})
+
+            user = get_user_model().objects.get(username=u, email=e, is_superuser=True)
+
+            user.set_password(p)
+            user.save()
+
+            print('Contraseña cambiada con éxito.')
+            return JsonResponse({'message': 'Contraseña cambiada con éxito.'})
+        except User.DoesNotExist:
+            print('Usuario no encontrado o no es un superusuario.')
+            return JsonResponse({'error': 'Usuario no encontrado.'})
+    else:
+        return JsonResponse({'error': 'Método no permitido.'})

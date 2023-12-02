@@ -56,6 +56,9 @@ urlpatterns = [
          views_contrato.contrato_idInmueble, name="contrato_idInmueble"),
     path('contrato/crear', views_contrato.crear_contrato, name="crear_contrato"),
     ##### FIN RUTAS CONTRATOS #####
+    ##### RESET PASSWORD #####
+    path('reset_password/', views_cliente.reset_password, name="reset_password"),
+    ##### FIN RESET PASSWORD #####
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

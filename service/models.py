@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 import re
 from PIL import Image
 from django.db import models

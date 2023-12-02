@@ -162,7 +162,7 @@
   <!-- Footer Links -->
   <footer>
     <div class="_container">
-      <div class="sec-quicklink">
+      <div class="sec_login">
         <h2>Quem Somos</h2>
         <p>Dedicamo-nos a fazer os seus sonhos realidade, com o nosso atendimento personalizado na área imobiliária.
           Nosso aprimoramento e inovação são contínuos, proporcionando um atendimento de excelência aos nossos clientes.
@@ -181,7 +181,7 @@
         </ul>
       </div>
 
-      <div class="sec-quicklink">
+      <div class="sec_login">
         <h2>Entre em Contato</h2>
         <ul class="info">
           <li>
@@ -190,7 +190,7 @@
           </li>
         </ul>
       </div>
-      <div class="sec-quicklink">
+      <div class="sec_login">
         <h2>Contato </h2>
         <form action="{% url 'msg' %}" class="form" id="formulario_msg" method="POST">
           {% csrf_token %}
@@ -221,8 +221,8 @@
     <div class="modal-container" id="modal-opened">
       <div class="modal">
 
-        <div class="sec-quicklink">
-          <h2>INGRESO </h2>
+        <div id="sec_login" class="sec_login">
+          <h2>Painel de administração </h2>
           <form action="/accounts/login/" class="form" id="form_login" method="POST">
             {% csrf_token %}
 
@@ -231,8 +231,29 @@
             <input type="password" class="form_input" id="password" name="password" placeholder="Password" required>
             <br>
 
-            <input type="submit" id="btn_login" value="Ingresar" class="form_enviar">
+            <input type="submit" id="btn_login" value="Entrar" class="form_enviar">
+            <input type="button" id="btn_reset" value="Esqueci a senha" class="btn form_enviar">
           </form>
+        </div>
+
+        <div id="sec_reset" class="sec_reset oculto">
+          <h2>Painel de administração </h2>
+          <h2 id="info_reset" style="color: coral;"></h2>
+
+          <input type="text" class="form_input" id="username_re" name="username" placeholder="Usuario" required>
+          <br>
+          <input type="email" class="form_input" id="email_re" name="email" placeholder="E-mail" required>
+          <br>
+          <input type="password" class="form_input" id="password_re" name="password" placeholder="Password" required>
+          <br>
+          <input type="password" class="form_input" id="RePassword_re" name="RePassword" placeholder="Re-Password"
+            required>
+          <br>
+
+          <input type="submit" id="btn_login_re" value="Reset" class="form_enviar">
+          <input type="button" id="btn_noreset" value="lembre-se da senha" class="btn form_enviar">
+          <h2 id="error_reset" style="color: red;"></h2>
+
         </div>
 
         <a href="#modal-closed" class="link-2"></a>
