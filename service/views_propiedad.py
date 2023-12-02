@@ -384,3 +384,7 @@ def reportes_json(req):
     inmueble = list(Inmueble.objects.values())
     data = {'inmueble': inmueble}
     return JsonResponse(data)
+
+@login_required(login_url='/#modal-opened')
+def disponibilidad(req):
+    return render(req, 'propiedad/disponibilidad.html')

@@ -36,7 +36,7 @@ def crear_empleado(req):
 
         try:
 
-            #Validar si el DNI o el correo electrónico ya existen en la base de datos
+            # Validar si el DNI o el correo electrónico ya existen en la base de datos
             if Empleados.objects.filter(dni_empleado=req.POST['dni_empleado']).exists():
                 ERR = 'El DNI ya está registrado en la base de datos.'
                 contexto = {
@@ -45,7 +45,6 @@ def crear_empleado(req):
                     'success': success
                 }
                 return render(req, 'empleado/empleado_form.html', contexto)
-
 
             existing_user = Empleados.objects.get(
                 email_empleado=email_empleado)
@@ -86,30 +85,89 @@ def crear_empleado(req):
 
 
 @login_required(login_url='/#modal-opened')
-def editar_empleado(req, id_empleado):
+def editar_empleado(req, id_empleado=None):
     ERR = ''
-    empleado = Empleados.objects.get(id_empleado=id_empleado)
-    formulario = EmpleadoForm(
+    success = ''
+    try:
+        empleado = Empleados.objects.get(id_empleado=id_empleado)
+    except Empleados.DoesNotExist:
+        print("NO ENCONTRADO")
+        return redirect('404')
+
+    except IntegrityError as e:
+        ERR = 'Algo fallo, intenta nuevamente o ponte en contacto con Admin'
+        print("Error:", e)
+
+    empleado_form = EmpleadoForm(
         req.POST or None, req.FILES or None, instance=empleado)
-    if formulario.is_valid() and req.POST:
+    if empleado_form.is_valid() and req.POST:
+        email_empleado = empleado_form.cleaned_data['email_empleado']
+        nom_empleado = empleado_form.cleaned_data['nom_empleado']
+        dni_empleado = empleado_form.cleaned_data['dni_empleado']
+        tel_empleado = empleado_form.cleaned_data['tel_empleado']
+        dir_empleado = empleado_form.cleaned_data['dir_empleado']
+
         try:
-            formulario.save()
+
+            """ # Validar si el DNI o el correo electrónico ya existen en la base de datos
+            if Empleados.objects.filter(dni_empleado=req.POST['dni_empleado']).exists():
+                ERR = 'El DNI ya está registrado en la base de datos.'
+                contexto = {
+                    'empleado': empleado_form,
+                    'error': ERR,
+                    'success': success
+                }
+                return render(req, 'empleado/empleado_form.html', contexto)
+
+            # Validar si el DNI o el correo electrónico ya existen en la base de datos
+            if Empleados.objects.filter(email_empleado=req.POST['email_empleado']).exists():
+                ERR = 'El email ya está registrado en la base de datos.'
+                contexto = {
+                    'empleados': empleado_form,
+                    'error': ERR,
+                    'success': success
+                }
+                return render(req, 'empleado/empleado_form.html', contexto) """
+
+        except Empleados.DoesNotExist:
+            # Si no se encuentra ningún usuario con el correo electrónico, todo está bien
+            pass
+
+        try:
+            empleado_form.save()
             print('Empleado, OK')
-            return redirect('editar_empleado')
+            success = "Empleado Editado correctamente"
+            contexto = {
+                'empleado': empleado_form,
+                'error': ERR,
+                'success': success
+            }
+            return render(req, 'empleado/empleado_form.html', contexto)
 
         except Exception as e:
             error_message = f"Error al guardar el empleado: {str(e)}"
             ERR = error_message
             print(f"error: {error_message}")
-            return redirect('editar_empleado')
+            contexto = {
+                'empleados': empleado_form,
+                'error': ERR,
+                'success': success
+            }
+            return render(req, 'empleado/empleado_form.html', contexto)
 
     else:
-        for field_name, error_msgs in empleado.errors.items():
+        for field_name, error_msgs in empleado_form.errors.items():
             for error_msg in error_msgs:
                 ERR = 'Algun campo contiene Errores'
                 print(f"Error en el campo '{field_name}': {error_msg}")
 
-    return render(req, 'empleado/empleado_form.html', {'formulario': formulario, 'error': ERR})
+    contexto = {
+        'empledit': empleado,
+        'error': ERR,
+        'success': success
+    }
+
+    return render(req, 'empleado/empleado_form.html', contexto)
 
 
 @login_required(login_url='/#modal-opened')
