@@ -95,7 +95,7 @@
           <div>
             <label for="bloco_inmueble" class="formbold-form-label"> Bloco </label>
             <input type="text" name="bloco_inmueble" id="bloco_inmueble" class="formbold-form-input"
-              {% if inedit %} value="{{ inedit.bloco_inmueble }}" {% else %} value="{{ inmueble.bloco_inmueble.value }}"
+              {% if inedit %} value="{{ inedit.bloco_inmueble }}" {% else %} value="{{ inmueble.bloco_inmueble.value | default:'0' }}"
               {% endif %} />
           </div>
           <div>
