@@ -83,7 +83,7 @@ porFecha.addEventListener('click', async () => {
     f_f = f_fin.value
 
     if (f_i == '' || f_f == '') {
-        _alerta('Seleccion fechas')
+        _alerta('Seleção de data')
         return
     }
 

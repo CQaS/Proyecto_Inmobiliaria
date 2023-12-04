@@ -32,33 +32,33 @@ crear_empleado.addEventListener("click", (e) => {
     }
 
     if (letra_y_espacios(e_nombre) == null || e_nombre.value.length < 3) {
-        _alerta('Nombre del Empleado solo letras y debe comenzar con Mayusculas')
+        _alerta('Nome do funcionário apenas em letras e deve começar com letras maiúsculas')
         return
     }
 
     if (letras_numero_espacios(e_direccion) == null || e_direccion.value.length < 3) {
-        _alerta('Direccion de Empleado solo letras/numeros y comenzar con MAYUSCULAS!')
+        _alerta('Endereço do funcionário apenas letras/números e começar com MAIÚSCULAS!')
         return
     }
 
     if (solo_numeros(e_dni) == null || e_dni.value.length < 6) {
-        _alerta('DNI de Empleado no valido!')
+        _alerta('DNI de funcionário inválido!')
         return
     }
 
     if (solo_numeros(e_tel) == null || e_tel.value.length < 10) {
-        _alerta('Telefono de Empleado no valido!')
+        _alerta('Telefono de funcionário inválido!')
         return
     }
 
     if (mail(e_mail) == null) {
-        _alerta('E-mail de Empleado no valido!')
+        _alerta('E-mail de funcionário inválido!')
         return
     }
 
 
     if (e_puesto.value.length == 0) {
-        _alerta('Selecciona un Puesto de Empleado')
+        _alerta('Selecione um cargo de funcionário')
         return
     }
 

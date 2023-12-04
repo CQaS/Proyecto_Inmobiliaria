@@ -245,47 +245,47 @@ crear_contrato.addEventListener("click", (e) => {
 
   /* VALIDACIONES INMUEBLE */
   if (solo_numeros(cod_referencia) == null || cod_referencia.value.length < 6) {
-    _alerta('Cod referencia no valido!')
+    _alerta('Cód. de referência inválido!')
     return
   }
 
   if (letras_numero_espacios(dir_inmueble) == null || dir_inmueble.value.length < 3) {
-    _alerta('Direccion de Inmueble solo letras/numeros y comenzar con MAYUSCULAS!')
+    _alerta('Propriedade Endereço apenas letras/números e começar com MAIÚSCULAS!')
     return
   }
 
   if (letra_y_espacios(ciudad_inmueble) == null || ciudad_inmueble.value.length < 3) {
-    _alerta('Ciudad del Inmueble solo letras y debe comenzar con Mayusculas')
+    _alerta('Propriedade Cidade apenas letras e deve começar com letras maiúsculas')
     return
   }
 
   if (solo_numeros(num_apto) == null) {
-    _alerta('Num Apto de Inmueble no valido!')
+    _alerta('Núm. Apto inválido!')
     return
   }
 
   if (solo_numeros(habitac_maxima) == null) {
-    _alerta('Ocupantes Max de Inmueble no valido!')
+    _alerta('Máximo de ocupantes do imóvel não é válido!')
     return
   }
 
   if (solo_numeros2(pass_hall1) == null) {
-    _alerta('pass_hall1 de Inmueble no valido!')
+    _alerta('pass_hall1 de Propriedade inválida!')
     return
   }
 
   if (solo_numeros2(pass_hall2) == null) {
-    _alerta('pass_hall2 de Inmueble no valido!')
+    _alerta('pass_hall2 Propriedade inválida!')
     return
   }
 
   if (solo_numeros(pass_wifi) == null) {
-    _alerta('Wi-Fi de Inmueble no valido!')
+    _alerta('Wi-Fi Propriedade inválida!')
     return
   }
 
   if (solo_numeros(valor_inmueble) == null) {
-    _alerta('Valor de Inmueble no valido!')
+    _alerta('Valor Propriedade inválida!')
     return
   }
 
@@ -294,7 +294,7 @@ crear_contrato.addEventListener("click", (e) => {
   /* VALIDACIONES CLIENTE */
 
   if (letra_y_espacios(nom_cliente) == null || nom_cliente.value.length < 3) {
-    _alerta('Nombre Cliente solo letras y debe comenzar con Mayusculas')
+    _alerta('Nome do cliente apenas em letras e deve começar com letras maiúsculas')
     return
   }
 
@@ -309,7 +309,7 @@ crear_contrato.addEventListener("click", (e) => {
   }
 
   if (letra_y_espacios(ciudad_cliente) == null || ciudad_cliente.value.length < 3) {
-    _alerta('Ciudad del Cliente solo letras y debe comenzar con Mayusculas')
+    _alerta('A cidade do cliente contém apenas letras e deve começar com letras maiúsculas')
     return
   }
 
@@ -324,7 +324,7 @@ crear_contrato.addEventListener("click", (e) => {
   }
 
   if (letras_numero_espacios(dir_cliente) == null || dir_cliente.value.length < 3) {
-    _alerta('Direccion de Cliente solo letras/numeros y comenzar con MAYUSCULAS!')
+    _alerta('Endereço do cliente apenas letras/números e começar com LETRAS MAIÚSCULAS!')
     return
   }
 
@@ -333,37 +333,37 @@ crear_contrato.addEventListener("click", (e) => {
   /* VALIDACIONES FECHAS/CONFIRMACION */
 
   if (!f_in.value) {
-    _alerta('Selecciona una fecha de Ingreso!')
+    _alerta('Selecione uma data de entrada!')
     return
   }
 
   if (!f_sal.value) {
-    _alerta('Selecciona una fecha de Salida!')
+    _alerta('Selecione uma data de partida!')
     return
   }
 
   if (d_envio(datos_envio) == null || datos_envio.value.length < 3) {
-    _alerta('DAtos de Envio no validos!')
+    _alerta('Informações de envio inválidas!')
     return
   }
 
   if (parseFloat(cant_dias.value) < 0 || cant_dias.value === '' || isNaN(cant_dias.value)) {
-    _alerta("Cantidad de Dias necesaria")
+    _alerta("Número necessário de dias")
     return
   }
 
   if (parseFloat(taxa_limpeza.value) < 0 || taxa_limpeza.value === '' || isNaN(taxa_limpeza.value)) {
-    _alerta("Taxa de Limpeza necesaria")
+    _alerta("Taxa de limpeza necessária")
     return
   }
 
   if (parseFloat(valor_total.value) < 0 || valor_total.value === '' || isNaN(valor_total.value)) {
-    _alerta("Valor Total necesaria")
+    _alerta("Valor total necessário")
     return
   }
 
   if (parseFloat(saldo_pendiente.value) < 0 || saldo_pendiente.value === '' || isNaN(saldo_pendiente.value)) {
-    _alerta("Valor Total necesaria")
+    _alerta("Valor total necessário")
     return
   }
 

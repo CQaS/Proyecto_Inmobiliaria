@@ -55,37 +55,37 @@ if (send) {
 
         if (letras_numero_espacios(i_direccion) == null || i_direccion.value.length < 3) {
             i_direccion.focus()
-            _alerta('Direccion del Inmueble solo letras/números y comenzar con MAYUSCULAS!')
+            _alerta('Propriedade Endereço apenas letras/números e começar com MAIÚSCULAS!')
             return
         }
 
         if (letras_numero_espacios(i_barrio) == null || i_barrio.value.length < 3) {
             i_barrio.focus()
-            _alerta('Barrio del Inmueble solo letras/números y comenzar con MAYUSCULAS!')
+            _alerta('Propriedade Distrito apenas letras/números e começar com LETRAS MAIÚSCULAS!')
             return
         }
 
         if (letras_numero_espacios(i_ciudad) == null || i_ciudad.value.length < 3) {
             i_ciudad.focus()
-            _alerta('Ciudad del Inmueble solo letras/números y comenzar con MAYUSCULAS!')
+            _alerta('Propriedade Cidade apenas letras/números e comece com MAIÚSCULAS!')
             return
         }
 
         if (letras_numero_espacios(i_red) == null || i_red.value.length < 3) {
             i_red.focus()
-            _alerta('Nombre Red Wifi solo letras/números!')
+            _alerta('Nome da rede Wi-Fi apenas letras/números!')
             return
         }
 
         if (num_apto(i_num_apto) == null) {
             i_num_apto.value = "0"; // Establecer el valor predeterminado como "0"
             i_num_apto.focus()
-            _alerta('Num apto del Inmueble solo letras/números!')
+            _alerta('Núm da propriedade apenas letras/números!')
             return
         }
 
         if (i_tipo.value.length == 0) {
-            _alerta('Selecciona un Tipo de Inmueble')
+            _alerta('Selecione um tipo de propriedadee')
             return
         }
 
@@ -101,80 +101,80 @@ if (send) {
             console.log(tipos)
         }
 
-        if (i_operacion.value == 'Selecciona') {
+        if (i_operacion.value == 'Selecione') {
             i_operacion.focus()
-            _alerta('Selecciona un Tipo de Operación')
+            _alerta('Selecione um tipo de operação')
             return
         }
 
         if (solo_numeros(i_suptotal) == null || Number(i_suptotal.value) < 0) {
             i_suptotal.focus()
-            _alerta('Superficie Total de Inmueble no valido!')
+            _alerta('Área Total do Imóvel não válida!')
             return
         }
 
         if (solo_numeros(i_supcubierta) == null || Number(i_supcubierta.value) < 0) {
             i_supcubierta.value = "0"; // Establecer el valor predeterminado como "0"
             i_supcubierta.focus()
-            _alerta('Superficie Cubierta de Inmueble no valido!')
+            _alerta('Superfície Coberta de Propriedade não válida!')
             return
         }
 
         if (solo_numeros(i_supsemicubierta) == null || Number(i_supsemicubierta.value) < 0) {
             i_supsemicubierta.value = "0"; // Establecer el valor predeterminado como "0"
             i_supsemicubierta.focus()
-            _alerta('Superficie Semi Cubierta de Inmueble no valido!')
+            _alerta('Superfície de Imóvel Semi Coberta não é válida!')
             return
         }
 
         if (solo_numeros(i_cantplantas) == null || Number(i_cantplantas.value) < 0) {
             i_cantplantas.value = "0"; // Establecer el valor predeterminado como "0"
             i_cantplantas.focus()
-            _alerta('Cantidad de Plantas de Inmueble no valido!')
+            _alerta('Número de Pisos do Imóvel não válido!')
             return
         }
 
         if (solo_numeros(i_cantdormitorios) == null || Number(i_cantdormitorios.value) < 0) {
             i_cantdormitorios.value = "0"; // Establecer el valor predeterminado como "0"
             i_cantdormitorios.focus()
-            _alerta('Cantidad de dormitorios de Inmueble no valido!')
+            _alerta('Número de quartos do Imóvel não válido!')
             return
         }
 
         if (solo_numeros(i_cantbanos) == null || Number(i_cantbanos.value) < 0) {
             i_cantbanos.value = "0"; // Establecer el valor predeterminado como "0"
             i_cantbanos.focus()
-            _alerta('Cantidad de baños del Inmueble no valido!')
+            _alerta('Número de banheiros na Propriedade não é válido!')
             return
         }
 
         if (cod_ref(i_cod_referencia) == null) {
             i_cod_referencia.focus()
             console.log(i_cod_referencia.value)
-            _alerta('Cod. Referencia del Inmueble no valido!')
+            _alerta('Cod. Referência de propriedade não válida!')
             return
         }
 
-        if (i_condicion.value == 'Selecciona') {
+        if (i_condicion.value == 'Selecione') {
             i_condicion.focus()
-            _alerta('Selecciona la Condición del Inmueble')
+            _alerta('Selecione a condição do imóvel')
             return
         }
 
         if (letras_numero_espacios(i_descripcion) == null || i_descripcion.value.length > 200 || i_descripcion.value.length < 3) {
             i_descripcion.focus()
-            _alerta('Descripción del Inmueble solo letras/números y comenzar con MAYUSCULAS, Max. 200 caracteres!')
+            _alerta('Descrição do Imóvel apenas letras/números e iniciados em LETRAS MAIÚSCULAS, Máx. 200 caracteres!')
             return
         }
 
         if (i_idcliente.value == '') {
-            _alerta('Selecciona un Cliente')
+            _alerta('Selecione um cliente')
             return
         }
 
         if (solo_numeros(i_valorinmueble) == null || Number(i_valorinmueble.value) <= 0) {
             i_valorinmueble.focus()
-            _alerta('Valor del Inmueble no valido!')
+            _alerta('Valor de propriedade inválido!')
             return
         }
 
@@ -199,7 +199,7 @@ if (send) {
                 const maxSize = 2 * 1024 * 1024 // 2MB en bytes
 
                 if (f.size > maxSize) {
-                    console.log(`Por favor, Foto Nro:${i} que no excedan los 2MB.`)
+                    console.log(`Por favor, Foto Nro:${i} que não excedam o 2MB.`)
                     _alerta(`foto Nro:${i} no Valida!`)
                     return
                 } else {
