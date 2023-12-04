@@ -8,19 +8,51 @@
 
 <style>
 
+.disponible {
+    position: relative; 
+    margin-left: 78px;
+	width: calc(100% - 78px);
+}
+
+
 #calendar {
+    position: relative;
     max-width: 1200px;
     margin: 40px auto;
+    margin-left: 78px;
+	width: calc(100% - 78px);
+
 }
+
+.form_input {
+	display: block;
+    width: calc(100% - 78px);
+	padding: .375rem .75rem;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #212529;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #ced4da;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	border-radius: .375rem;
+	transition: border-color .15s ease-in-out,
+		box-shadow .15s ease-in-out;
+}
+
+
 
 </style>
 
-
-<h1>Reservas</h1>
-<input type="text" class="form_input" id="" name="" placeholder="Nº Referencia" required><br>
-<input type="text" class="form_input" id=""  name="" placeholder="Direccion Inmueble" required><br>
-<button type="button"><i class="fa-solid fa-rotate-right fa-spin"></i> Sincronizar</button>
-
+<div class="disponible">
+    <h1>Disponibilidade</h1>
+    <input type="text" class="form_input" id="" name="" placeholder="Cód. Referência" required><br>
+    <input type="text" class="form_input" id=""  name="" placeholder="Direção" required><br>
+    <button type="button"><i class="fa-solid fa-rotate-right fa-spin"></i> Sincronizar</button>
+</div>
 
 <div id='calendar'></div>
 
@@ -41,7 +73,7 @@
             select: function(info) {
                 // Al seleccionar una fecha, se pregunta si es reserva propia o de terceros
                 var isOwnEvent = true; // Por defecto, es reserva propia
-                var userInput = prompt('¿Es una reserva de terceros? (S/N)'); // Se solicita información
+                var userInput = prompt('¿É uma reserva de terceiros? (S/N)'); // Se solicita información
 
                 if (userInput !== null) {
                     userInput = userInput.toLowerCase();
@@ -51,7 +83,7 @@
                 var eventColor = isOwnEvent ? 'red' : 'green'; // Cambio de color según el tipo de reserva
 
                 calendar.addEvent({
-                    title: isOwnEvent ? 'Nueva Reserva Propia' : 'Nueva Reserva de Terceros',
+                    title: isOwnEvent ? 'Nova Reserva Própria': 'Nova Reserva de Terceiros',
                     start: info.startStr,
                     end: info.endStr,
                     color: eventColor, // Color según el tipo de reserva
@@ -75,7 +107,7 @@
             // ],
             eventClick: function(info) {
                 // Al hacer clic en un evento, se pregunta si se desea eliminar
-                if (confirm('¿Estás seguro de eliminar esta reserva?')) {
+                if (confirm('¿Tem certeza de que deseja excluir esta reserva?')) {
                     info.event.remove();
                 }
             }
