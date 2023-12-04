@@ -205,7 +205,7 @@ def editar_propiedad(req, id_inmueble=None):
                     print(f"Error inesperado: {e}") """
 
             print('Inmueble Editado, OK')
-            success = "Inmueble Editado correctamente"
+            success = "Propriedade editada corretamente"
             context = {
                 'clientes': lista,
                 'error': ERR,
@@ -214,7 +214,7 @@ def editar_propiedad(req, id_inmueble=None):
             return render(req, 'propiedad/inmueble_form.html', context)
 
         except Exception as e:
-            error_message = f"Error al guardar el Inmueble: {str(e)}"
+            error_message = f"Erro ao salvar o imóvel: {str(e)}"
             ERR = error_message
             print(f"error: {error_message}")
     else:
@@ -237,6 +237,9 @@ def editar_propiedad(req, id_inmueble=None):
             'error': ERR,
             'success': success
         }
+    
+    print(inmueble.cliente_id.id_cliente)
+    print(lista)
     return render(req, 'propiedad/inmueble_form.html', context)
 
 

@@ -11,7 +11,7 @@ const c_fecha = document.getElementById('fechnac')
 const c_categoria = document.getElementById('categoria')
 
 const pattern_letras_espacios_ = /^[a-zA-ZñÑáÁéÉíÍúÚóÓ ]*$/
-const pattern_letras_numero_espacios_ = /^[a-zA-ZñÑáÁéÉíÍúÚóÓ0-9 ]*$/
+const pattern_letras_numero_espacios_ = /^[a-zA-ZñÑáÁéÉíÍúÚóÓ0-9. ]*$/
 const pattern_solo_numeros_ = /^[0-9][0-9]*$/
 const pattern_mail_ = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
 

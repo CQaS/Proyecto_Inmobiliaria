@@ -107,14 +107,11 @@ btn_login_re.addEventListener("click", () => {
         $('#error_reset').text(data.error)
       },
       error: (xhr, status, error) => {
-        let errorMessage = xhr.responseJSON ? xhr.responseJSON.error : 'Error desconocido'
+        let errorMessage = xhr.responseJSON ? xhr.responseJSON.error : 'Error desconhecido'
         $('#error_reset').text('Error: ' + errorMessage)
       }
     })
   } else {
-    $('#error_reset').text('Usuario o Password incorrecto')
+    $('#error_reset').text('Usuário ou senha incorretos')
   }
-
-
-
 })

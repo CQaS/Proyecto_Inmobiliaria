@@ -110,14 +110,14 @@ btn_siguiente.addEventListener("click", function (event) {
 
 $(() => {
   Buscar()
-  $("#contrato_nombre_cliente").keyup(() => {
+  $("#_nombre_cliente").keyup(() => {
     Buscar()
   })
 })
 
 const Buscar = () => {
 
-  let Name = $.trim($("#contrato_nombre_cliente").val())
+  let Name = $.trim($("#_nombre_cliente").val())
   if (Name !== null && Name !== "" && Name.length !== 0) {
 
     let url = `/cliente/json_Inq/${Name}`

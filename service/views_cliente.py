@@ -23,9 +23,9 @@ def JSONclientes_dni_Inq(request, dni):
 
 
 def JSONclientes_Prop(request, Name):
-    list = Clientes.objects.filter(
-        categoria='Propietario', nom_cliente__icontains=Name)
-    return HttpResponse(serialize('json', list), 'application/json')
+    lista = Clientes.objects.filter(
+        categoria='Propietario', nom_cliente__icontains=Name).values('id_cliente', 'nom_cliente')
+    return JsonResponse(list(lista), safe=False)
 
 
 @login_required(login_url='/#modal-opened')
@@ -43,23 +43,26 @@ def crear_cliente(req):
     if clientes.is_valid():
         try:
             # Validar si el DNI o el correo electrónico ya existen en la base de datos
-            if Clientes.objects.filter(dni_cliente=req.POST['dni_cliente']).exists():
-                ERR = 'El DNI ya está registrado en la base de datos.'
-                contexto = {
-                    'clientes': clientes,
-                    'error': ERR,
-                    'success': success
-                }
-                return render(req, 'cliente/cliente_form.html', contexto)
 
-            if Clientes.objects.filter(rg_cliente=req.POST['rg_cliente']).exists():
-                ERR = 'El RG ya está registrado en la base de datos.'
-                contexto = {
-                    'clientes': clientes,
-                    'error': ERR,
-                    'success': success
-                }
-                return render(req, 'cliente/cliente_form.html', contexto)
+            if req.POST['dni_cliente'] != '0':
+                if Clientes.objects.filter(dni_cliente=req.POST['dni_cliente']).exists():
+                    ERR = 'El DNI ya está registrado en la base de datos.'
+                    contexto = {
+                        'clientes': clientes,
+                        'error': ERR,
+                        'success': success
+                    }
+                    return render(req, 'cliente/cliente_form.html', contexto)
+
+            if req.POST['rg_cliente'] != '0':
+                if Clientes.objects.filter(rg_cliente=req.POST['rg_cliente']).exists():
+                    ERR = 'El RG ya está registrado en la base de datos.'
+                    contexto = {
+                        'clientes': clientes,
+                        'error': ERR,
+                        'success': success
+                    }
+                    return render(req, 'cliente/cliente_form.html', contexto)
 
             if Clientes.objects.filter(email_cliente=req.POST['email_cliente']).exists():
                 ERR = 'El correo electrónico ya está registrado en la base de datos.'
@@ -196,17 +199,17 @@ def reset_password(req):
 
             # Validar que los campos no estén en blanco o sean nulos
             if not all([u, e, p]):
-                return JsonResponse({'error': 'Todos los campos son obligatorios.'})
+                return JsonResponse({'error': 'Todos os campos são obrigatórios.'})
 
             user = get_user_model().objects.get(username=u, email=e, is_superuser=True)
 
             user.set_password(p)
             user.save()
 
-            print('Contraseña cambiada con éxito.')
-            return JsonResponse({'message': 'Contraseña cambiada con éxito.'})
+            print('Senha alterada com sucesso.')
+            return JsonResponse({'message': 'Senha alterada com sucesso.'})
         except User.DoesNotExist:
-            print('Usuario no encontrado o no es un superusuario.')
-            return JsonResponse({'error': 'Usuario no encontrado.'})
+            print('Usuário não encontrado.')
+            return JsonResponse({'error': 'Usuário não encontrado.'})
     else:
-        return JsonResponse({'error': 'Método no permitido.'})
+        return JsonResponse({'error': 'Error desconhecido.'})
