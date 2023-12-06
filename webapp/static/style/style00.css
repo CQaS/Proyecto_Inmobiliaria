@@ -830,11 +830,16 @@ footer input[type="submit"]:hover {
 }
 
 .tabla {
+	margin-left: 8rem;
 	transition: .5s;
 }
 
 .tabla1 {
-	margin-left: 14rem;
+	margin-left: 23rem;
+}
+
+.bootstrap-table .fixed-table-pagination>.pagination-detail .page-list {
+	display: none !important;
 }
 
 .dir p {
@@ -1068,3 +1073,30 @@ div.carrusel {
 	color: white;
 	box-shadow: 0 2px 20px rgb(183, 146, 91);;
 } */
+
+/* REPORTES STYLE */
+caption {
+	color: white !important;
+	font-size: large !important;
+	font-weight: 900 !important;
+	padding: 10px !important;
+}
+
+.table tbody tr {
+	transition: .5s;
+}
+
+.table tbody tr:hover {
+	transform: scale(1.02);
+	background-color: rgba(0, 0, 0, 0.05);
+}
+
+.btn_pencil {
+	color: #f1f1f1 !important;
+	border: 2px solid !important;
+}
+
+.btn_trash {
+	color: red !important;
+	border: 2px solid !important;
+}

@@ -8,12 +8,12 @@ for (let i = 0; i < arrow.length; i++) {
 }
 
 const pattern_letras_espacios = /^[A-Z][a-zA-ZñÑáÁéÉíÍúÚóÓ ]*$/
-const pattern_letras_numero_espacios = /^[a-zA-ZñÑáÁéÉíÍúÚóÓ.0-9 ]*$/
+const pattern_letras_numero_espacios = /^[a-zA-ZñÑáÁéÉíÍúÚóÓ.0-9/ ]*$/
 const pattern_solo_numeros = /^[0-9][0-9]*$/
 const pattern_mail_m = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
 const pattern_cod_ref = /^[a-zA-Z0-9-]*$/
 const pattern_num_apto = /^[a-zA-Z0-9 ]*$/
-
+    
 let sidebar = document.querySelector(".sidebar")
 let sidebarBtn = document.querySelector(".bx-menu")
 let cards = document.querySelector(".cards")

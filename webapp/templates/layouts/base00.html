@@ -58,9 +58,8 @@
     </div>
     <ul class="nav-links">
       <li>
-        <a href="/">
+        <a href="/" title="Home">
           <i class='bx bx-grid-alt'></i>
-          <span class="link_name">Home</span>
         </a>
       </li>
       <li>
@@ -80,15 +79,13 @@
       </li>
       <li>
       <li>
-        <a href="#">
+        <a href="#Quem_Somos" title="Quem Somos">
           <i class='bx bx-user-pin'></i>
-          <span class="link_name">Quem Somos</span>
         </a>
       </li>
       <li>
-        <a href="#">
+        <a href="#ir_a_msg" title="Contatos">
           <i class='bx bx-mail-send'></i>
-          <span class="link_name">Contatos</span>
         </a>
       </li>
       {% if user.is_authenticated %}
@@ -128,16 +125,14 @@
       </li> -->
       {% if user.is_authenticated %}
       <li>
-        <a href="{% url 'salir' %}" id="">
+        <a class="salir" href="{% url 'salir' %}" id="" title="Sair">
           <i class='bx bx-log-out'></i>
-          <span class="link_name">Sair</span>
         </a>
       </li>
       {% else %}
       <li>
-        <a href="#modal-opened" id="modal-closed">
+        <a href="#modal-opened" id="modal-closed" title="Login">
           <i class='bx bx-log-in'></i>
-          <span class="link_name">Login</span>
         </a>
       </li>
       {% endif %}
@@ -162,7 +157,7 @@
   <!-- Footer Links -->
   <footer>
     <div class="_container">
-      <div class="sec_login">
+      <div id="Quem_Somos" class="sec_login">
         <h2>Quem Somos</h2>
         <p>Dedicamo-nos a fazer os seus sonhos realidade, com o nosso atendimento personalizado na área imobiliária.
           Nosso aprimoramento e inovação são contínuos, proporcionando um atendimento de excelência aos nossos clientes.
@@ -190,7 +185,7 @@
           </li>
         </ul>
       </div>
-      <div class="sec_login">
+      <div id="ir_a_msg" class="sec_login">
         <h2>Contato </h2>
         <form action="{% url 'msg' %}" class="form" id="formulario_msg" method="POST">
           {% csrf_token %}
