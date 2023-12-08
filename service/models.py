@@ -74,8 +74,8 @@ class Inmueble(models.Model):
         max_length=100, null=False, blank=False, verbose_name='Ciudad', validators=[validar_direccion])
     nombre_red = models.CharField(
         max_length=100, null=False, blank=False, verbose_name='Red WiFi', validators=[validar_direccion])
-    num_apto = models.IntegerField(
-        null=False, blank=False, verbose_name='Apto')
+    num_apto = models.CharField(
+        max_length=3, null=False, blank=False, verbose_name='Apto')
     tipo_inmueble = models.CharField(max_length=25, null=False, blank=False,
                                      verbose_name='Tipo de Propiedad', validators=[validar_letras])
     tipo_operacion = models.CharField(
