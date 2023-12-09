@@ -6,50 +6,74 @@
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 
 <style>
-    .error-box {
-        font-size: 1rem;
-        max-width: 30%; /* Hacer el cartel más angosto */
-        margin: 20px auto 0 auto; /* Ajustar margen */
-        padding: 10px; /* Ajustar el relleno */
-        border-radius: 5px;
-        border: 2px solid rgb(183, 146, 91);
-        background-color: rgb(238, 208, 161);
-        text-align: center;
+    .form-container {
+        max-width: 400px; /* Ancho máximo del contenedor */
+        margin: 20px auto;
+        border: 2px solid #ccc; /* Establecer un borde alrededor del formulario */
+        padding: 20px; /* Añadir espacio interno al formulario */
+        border-radius: 8px; /* Añadir bordes redondeados al formulario */
+        text-align: center; /* Centrar contenido del contenedor */
     }
 
     /* Estilo para los inputs */
     #username,
     #password {
-        width: 35%; /* Ancho de los inputs al 35% */
-        margin: 0 auto; /* Centrar los inputs */
+        width: 100%; /* Ancho del input */
+    }
+
+    .error-box {
+        font-size: 1rem;
+        padding: 10px; /* Ajustar el relleno */
+        border-radius: 8px; /* Añadir bordes redondeados al error-box */
+        border: 2px solid rgb(183, 146, 91);
+        background-color: rgb(238, 208, 161); /* Cambiar color de fondo del cartel */
+        text-align: center;
+        margin-bottom: 15px; /* Espacio entre el formulario y el mensaje de error */
+        word-wrap: break-word; /* Permitir el salto de línea en caso de texto largo */
+        width: calc(100% - 40px); /* Igualar al ancho del form-container - restando el padding */
+        margin: 0 auto; /* Centrar el error-box */
+    }
+
+    .error-message {
+        margin-bottom: 0; /* Eliminar el margen inferior del mensaje de error */
+    }
+
+    /* Estilo para el mensaje de error */
+    .error-alert {
+        max-width: 50%; /* Ancho máximo del mensaje de error */
+        margin: 0 auto; /* Centrar el mensaje de error */
     }
 </style>
 
-<h3 class="text-center">LOGIN</h3>
 <div class="container">
-    {% if form.errors %}
-    <div class="alert alert-danger text-center error-box" role="alert">
-        <h6 class="mb-1">LOGIN ERROR!!!!</h6>
-        {% for field in form %}
-            {% for error in field.errors %}
-                <p class="mb-0">{{ error }}</p>
-            {% endfor %}
-        {% endfor %}
-    </div>
-    {% endif %}
-    <form action="/accounts/login/" method="post">
-        {% csrf_token %}
+    <div class="form-container">
+        <h3>LOGIN</h3>
+        <div class="error-box">
+            {% if form.errors %}
+            <div class="alert alert-danger text-center error-alert" role="alert">
+                <h5 class="mb-1">LOGIN ERROR!!!!</h5>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <p class="error-message">{{ error }}</p>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        <form action="/accounts/login/" method="post" class="text-center">
+            {% csrf_token %}
 
-        <div class="form-group text-center"> <!-- Centrar los campos de entrada -->
-            <label for="username" class="form-label">Username</label>
-            <input type="text" name="username" id="username" class="form-control"> <!-- Ajustar el ancho de los inputs -->
-        </div>
-        <div class="form-group text-center"> <!-- Centrar los campos de entrada -->
-            <label for="password" class="form-label">Password</label>
-            <input type="password" name="password" id="password" class="form-control"> <!-- Ajustar el ancho de los inputs -->
-        </div>
-        <button type="submit" class="btn btn-primary">ENTRAR</button>
-    </form>
+            <div class="form-group">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" name="username" id="username" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" name="password" id="password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">ENTRAR</button>
+        </form>
+    </div>
 </div>
 
 {% endblock %}
