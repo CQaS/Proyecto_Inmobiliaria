@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from .forms import *
 from .models import *
 from django.db import connection
+from django.contrib.auth.models import User
 
 # LOGIN
 from django.contrib.auth.decorators import login_required
@@ -25,13 +26,17 @@ def crear_empleado(req):
         nom_empleado = empleado_form.cleaned_data['nom_empleado']
         dni_empleado = empleado_form.cleaned_data['dni_empleado']
         tel_empleado = empleado_form.cleaned_data['tel_empleado']
+        print(tel_empleado)
         dir_empleado = empleado_form.cleaned_data['dir_empleado']
-        context = {
+        nom_puesto = empleado_form.cleaned_data['nom_puesto']
+        username_empleado = req.POST['username_empleado']
+        context_emp = {
             'email_empleado': email_empleado,
             'nom_empleado': nom_empleado,
             'dni_empleado': dni_empleado,
             'tel_empleado': tel_empleado,
-            'dir_empleado': dir_empleado
+            'dir_empleado': dir_empleado,
+            'nom_puesto': nom_puesto,
         }
 
         try:
@@ -40,22 +45,35 @@ def crear_empleado(req):
             if Empleados.objects.filter(dni_empleado=req.POST['dni_empleado']).exists():
                 ERR = 'El DNI ya está registrado en la base de datos.'
                 contexto = {
-                    'empleados': empleado_form,
+                    'empleado': context_emp,
                     'error': ERR,
                     'success': success
                 }
                 return render(req, 'empleado/empleado_form.html', contexto)
 
-            existing_user = Empleados.objects.get(
-                email_empleado=email_empleado)
-            ERR = "Este correo electrónico ya está registrado."
-            return render(req, 'empleado/empleado_form.html', {'empleados': context, 'error': ERR})
+            # Validar si el DNI o el correo electrónico ya existen en la base de datos
+            if Empleados.objects.filter(email_empleado=req.POST['email_empleado']).exists():
+                ERR = 'El DNI ya está registrado en la base de datos.'
+                contexto = {
+                    'empleado': context_emp,
+                    'error': ERR,
+                    'success': success
+                }
+                return render(req, 'empleado/empleado_form.html', contexto)
         except Empleados.DoesNotExist:
             # Si no se encuentra ningún usuario con el correo electrónico, todo está bien
             pass
 
         try:
             empleado_form.save()
+            if nom_puesto == 'Administracion':
+                password = username_empleado + str(dni_empleado)
+                # Crea un nuevo usuario
+                nuevo_usuario = User.objects.create_user(
+                    username_empleado, email_empleado, password)
+                nuevo_usuario.first_name = nom_empleado
+                nuevo_usuario.save()
+
             print('Empleado, OK')
             success = "Empleado creado correctamente"
             contexto = {
@@ -65,10 +83,14 @@ def crear_empleado(req):
             return render(req, 'empleado/empleado_form.html', contexto)
 
         except Exception as e:
-            error_message = f"Error al guardar el empleado: {str(e)}"
-            ERR = error_message
-            print(f"error: {error_message}")
-            return redirect('crear_empleado')
+            ERR = f"Error al Crear el empleado"
+            print(f"error: {str(e)}")
+            contexto = {
+                'empleado': context_emp,
+                'error': ERR,
+                'success': success
+            }
+            return render(req, 'empleado/empleado_form.html', contexto)
 
     else:
         for field_name, error_msgs in empleado_form.errors.items():

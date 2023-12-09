@@ -79,48 +79,59 @@
             <div>
               <label for="nom_empleado" class="formbold-form-label"> Nome do Empregado </label>
               <input type="text" name="nom_empleado" id="nom_empleado" class="formbold-form-input" {% if empledit %}
-                value="{{ empledit.nom_empleado }}" {% else %} value="{{ empleado.nom_empleado.value }}" {% endif %} />
+                value="{{ empledit.nom_empleado }}" {% else %} value="{{ empleado.nom_empleado }}" {% endif %} />
             </div>
             <div>
               <label for="dni_empleado" class="formbold-form-label"> Documento </label>
               <input type="number" name="dni_empleado" id="dni_empleado" class="formbold-form-input" {% if empledit %}
-                readonly value="{{ empledit.dni_empleado }}" {% else %} value="{{ empleado.dni_empleado.value }}"
+                readonly value="{{ empledit.dni_empleado }}" {% else %} value="{{ empleado.dni_empleado }}"
                 {% endif %} />
             </div>
             <div>
               <label for="tel_empleado" class="formbold-form-label"> Telefone </label>
               <input type="number" name="tel_empleado" id="tel_empleado" class="formbold-form-input" {% if empledit %}
-                value="{{ empledit.tel_empleado }}" {% else %} value="{{ empleado.tel_empleado.value }}" {% endif %} />
+                value="{{ empledit.tel_empleado }}" {% else %} value="{{ empleado.tel_empleado }}" {% endif %} />
             </div>
-        </div>
-        <div class="formbold-input-flex">
-          <div>
-            <label for="dir_empleado" class="formbold-form-label"> Direção </label>
-            <input type="text" name="dir_empleado" id="dir_empleado" class="formbold-form-input" {% if empledit %}
-              value="{{ empledit.dir_empleado}}" {% else %} value="{{ empleado.dir_empleado.value }}" {% endif %} />
           </div>
-          <div>
-            <label for="email_empleado" class="formbold-form-label"> E-mail </label>
-            <input type="email" name="email_empleado" id="email_empleado" class="formbold-form-input"
-              {% if empledit %} value="{{ empledit.email_empleado }}" readonly {% else %}
-              value="{{ empleado.email_empleado.value }}" {% endif %} />
+          <div class="formbold-input-flex">
+            <div>
+              <label for="dir_empleado" class="formbold-form-label"> Direção </label>
+              <input type="text" name="dir_empleado" id="dir_empleado" class="formbold-form-input" {% if empledit %}
+                value="{{ empledit.dir_empleado}}" {% else %} value="{{ empleado.dir_empleado }}" {% endif %} />
+            </div>
+            <div>
+              <label for="email_empleado" class="formbold-form-label"> E-mail </label>
+              <input type="email" name="email_empleado" id="email_empleado" class="formbold-form-input"
+                {% if empledit %} value="{{ empledit.email_empleado }}" readonly {% else %}
+                value="{{ empleado.email_empleado }}" {% endif %} />
+            </div>
+            <div>
+              <label class="formbold-form-label">Posição de Empregado</label>
+              <select id="nom_puesto" name="nom_puesto" class="formbold-form-input" style="margin-top: 0;" required
+                onchange="mostrarCampoUsername()">
+                <option>Selecciona</option>
+                <option value="Maestranza" {% if empledit.nom_puesto == "Maestranza" %} selected
+                  {% elif empleado.nom_puesto == "Maestranza" %} selected {% endif %}>Faxina
+                </option>
+                <option value="Jardineria" {% if empledit.nom_puesto == "Jardineria" %} selected
+                  {% elif empleado.nom_puesto == 'Jardineria' %} selected {% endif %}>Jardineiro
+                </option>
+                <option value="Piletero" {% if empledit.nom_puesto == "Piletero" %} selected
+                  {% elif empleado.nom_puesto == 'Piletero' %} selected {% endif %}>Manutenção
+                  piscina</option>
+                <option value="Administracion" {% if empledit.nom_puesto == "Administracion" %} selected
+                  {% elif empleado.nom_puesto == 'Administracion' %} selected {% endif %}>
+                  Administração</option>
+              </select>
+            </div>
           </div>
-          <div>
-            <label class="formbold-form-label">Posição de Empregado</label>
-            <select id="nom_puesto" name="nom_puesto" class="formbold-form-input" style="margin-top: 0;" required>
-              <option>Selecciona</option>
-              <option value="Maestranza" {% if empledit.nom_puesto == "Maestranza" %} selected {% endif %}>Faxina
-              </option>
-              <option value="Jardineria" {% if empledit.nom_puesto == "Jardineria" %} selected {% endif %}>Jardineiro
-              </option>
-              <option value="Piletero" {% if empledit.nom_puesto == "Piletero" %} selected {% endif %}>Manutenção
-                piscina</option>
-              <option value="Administracion" {% if empledit.nom_puesto == "Administracion" %} selected {% endif %}>
-                Administração</option>
-            </select>
+          <div id="campo_username" style="display: none;" class="formbold-input-flex">
+            <label for="username_empleado" class="formbold-form-label"> Username Empregado </label>
+            <input type="email" name="username_empleado" id="username_empleado" class="formbold-form-input"
+              {% if empledit %} value="{{ empledit.username_empleado }}" readonly {% else %}
+              value="{{ empleado.username_empleado }}" {% endif %} />
           </div>
-        </div>
-        <br>
+          <br>
 
           <div>
             <button type="submit" class="formbold-confirm-btn active" id="crear_empleado">

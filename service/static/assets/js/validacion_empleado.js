@@ -62,10 +62,18 @@ crear_empleado.addEventListener("click", (e) => {
         return
     }
 
-
-
-
     // SI ESTA TODO BIEN SE ENVIA EL FORMULARIO...
     formulario_empleado.submit()
 
 })
+
+const mostrarCampoUsername = () => {
+    let select = document.getElementById("nom_puesto");
+    let campoUsername = document.getElementById("campo_username");
+
+    if (select.value === "Administracion") {
+        campoUsername.style.display = "block";
+    } else {
+        campoUsername.style.display = "none";
+    }
+}
