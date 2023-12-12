@@ -378,14 +378,26 @@ def propiedad_por_tipo(req, tipo_o, tipo_p):
 
 
 @login_required(login_url='/#modal-opened')
-def reportes(req):
-    return render(req, 'propiedad/reportes.html')
+def reportes(req, R):
+    return render(req, 'propiedad/reportes.html', {'R': R})
 
 
 @login_required(login_url='/#modal-opened')
-def reportes_json(req):
+def reportes_json_i(req):
     inmueble = list(Inmueble.objects.values())
     data = {'inmueble': inmueble}
+    return JsonResponse(data)
+
+@login_required(login_url='/#modal-opened')
+def reportes_json_c(req):
+    cliente = list(Clientes.objects.values())
+    data = {'cliente': cliente}
+    return JsonResponse(data)
+
+@login_required(login_url='/#modal-opened')
+def reportes_json_e(req):
+    empleado = list(Empleados.objects.values())
+    data = {'empleado': empleado}
     return JsonResponse(data)
 
 @login_required(login_url='/#modal-opened')

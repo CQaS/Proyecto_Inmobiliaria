@@ -24,11 +24,18 @@
 
 <div class="tabla">
     <div class="fresh-table full-color-azure">
+        <div class="toolbar">
+            <button id="alertBtn" class="btn btn-default">Alert</button>
+            <input type="button" value="Reporte 1" id="alertBtn2" class="btn btn-primary">
+            <input type="button" value="Reporte 2" class="btn btn-primary">
+            <input type="button" value="Reporte 3" class="btn btn-primary">
+        </div>
         <table id="fresh-table" class="table" data-sort-class="table-active" data-sortable="true">
             <caption>
                 Reportes
             </caption>
             <thead>
+                {% if 'I' in R %}
                 <tr>
                     <th data-field="cod_ref">Cod. Ref.</th>
                     <th data-field="dire">Direção</th>
@@ -38,6 +45,19 @@
                     <th data-field="serv">Serviços</th>
                     <th data-field="accion"><i class="fa-solid fa-gears"></i></th>
                 </tr>
+                {% elif 'C' in R %}
+                <tr>
+                    <th data-field="nombre">Nombre</th>
+                    <th data-field="dire">Direção</th>
+                    <th data-field="accion"><i class="fa-solid fa-gears"></i></th>
+                </tr>
+                {% elif 'E' in R %}
+                <tr>
+                    <th data-field="nombre">Nombre</th>
+                    <th data-field="dire">Direção</th>
+                    <th data-field="accion"><i class="fa-solid fa-gears"></i></th>
+                </tr>
+                {% endif %}
             </thead>
             <tbody id="tableBody_reportes"></tbody>
         </table>
@@ -50,6 +70,7 @@
 <script src="https://unpkg.com/bootstrap-table/dist/bootstrap-table.min.js"></script>
 <script>
     datatableweb = true
+    let R = '{{ R|safe }}'
 </script>
 
 <script src="{% static 'assets/js/reportes.js' %}"></script>

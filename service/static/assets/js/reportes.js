@@ -11,8 +11,17 @@ let dataTableIsInitialized = false
 let $table = $('#fresh-table')
 let $alertBtn = $('#alertBtn')
 
+$alertBtn.click(() => {
+    alert('You pressed on Alert')
+})
+let $alertBtn2 = $('#alertBtn2')
+
+$alertBtn2.click(() => {
+    alert('You pressed on Alert2')
+})
+
 const dataTableOptions = {
-    locale:'es',
+    locale: 'es',
     classes: 'table table-hover table-striped',
     toolbar: '.toolbar',
     search: true,
@@ -33,7 +42,21 @@ const initDataTable = async () => {
         dataTable.bootstrapTable('destroy')
     }
 
-    await listInmuebles()
+    if(R == 'I'){
+        console.log('I')
+        await listInmuebles()
+    }
+    
+    if(R == 'C'){
+        console.log('C')
+        await listClientes()
+    }
+    
+    if(R == 'E'){
+        console.log('E')
+        await listEmpleados()
+    }
+
 
     dataTable = $("#fresh-table").bootstrapTable(dataTableOptions)
 
@@ -42,7 +65,7 @@ const initDataTable = async () => {
 
 const listInmuebles = async () => {
     try {
-        const response = await fetch("/propiedad/reportes_json")
+        const response = await fetch("/propiedad/reportes_json_i")
         const data = await response.json()
         console.log(data)
 
@@ -58,6 +81,56 @@ const listInmuebles = async () => {
                     <td >${p.tipo_servicio}</td>                    
                     <td >
                         <a href='/propiedad/detalles/${p.id_inmueble}' class='btn btn-sm btn_pencil' title='Ver'><i class='fa-solid fa-pencil'></i></a>
+                        <a href='#' class='btn btn-sm btn_trash'><i class='fa-solid fa-trash-can'></i></a>
+                    </td>
+                </tr>`;
+        })
+        tableBody_reportes.innerHTML = content
+    } catch (ex) {
+        alert(ex)
+    }
+}
+
+const listClientes = async () => {
+    try {
+        const response = await fetch("/propiedad/reportes_json_c")
+        const data = await response.json()
+        console.log(data)
+
+        let content = ``
+        data.cliente.forEach((c, i) => {
+            content += `
+                <tr>
+                    <td >${c.nom_cliente}</td>
+                    <td >${c.dir_cliente}</td>                   
+                    <td >
+                        <a href='/cliente/editar/${c.id_cliente}'
+                        class = 'btn btn-sm btn_pencil'
+                        title = 'Edit'><i class='fa-solid fa-pencil'></i></a>
+                        <a href='#' class='btn btn-sm btn_trash'><i class='fa-solid fa-trash-can'></i></a>
+                    </td>
+                </tr>`;
+        })
+        tableBody_reportes.innerHTML = content
+    } catch (ex) {
+        alert(ex)
+    }
+}
+
+const listEmpleados = async () => {
+    try {
+        const response = await fetch("/propiedad/reportes_json_e")
+        const data = await response.json()
+        console.log(data)
+
+        let content = ``
+        data.empleado.forEach((e, i) => {
+            content += `
+                <tr>
+                    <td >${e.nom_empleado}</td>
+                    <td >${e.dir_empleado}</td>                    
+                    <td >
+                        <a href='/empleado/editar/${e.id_empleado}' class='btn btn-sm btn_pencil' title='Ver'><i class='fa-solid fa-pencil'></i></a>
                         <a href='#' class='btn btn-sm btn_trash'><i class='fa-solid fa-trash-can'></i></a>
                     </td>
                 </tr>`;
