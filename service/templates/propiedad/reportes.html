@@ -26,9 +26,9 @@
     <div class="fresh-table full-color-azure">
         <div class="toolbar">
             <button id="alertBtn" class="btn btn-default">Alert</button>
-            <input type="button" value="Reporte 1" id="alertBtn2" class="btn btn-primary">
-            <input type="button" value="Reporte 2" class="btn btn-primary">
-            <input type="button" value="Reporte 3" class="btn btn-primary">
+            <input type="button" value="Imovel" id="reporte1" class="btn btn-primary">
+            <input type="button" value="Clientes" id="reporte2" class="btn btn-primary">
+            <input type="button" value="Empregados" id="reporte3" class="btn btn-primary">
         </div>
         <table id="fresh-table" class="table" data-sort-class="table-active" data-sortable="true">
             <caption>
@@ -47,14 +47,24 @@
                 </tr>
                 {% elif 'C' in R %}
                 <tr>
-                    <th data-field="nombre">Nombre</th>
+                    <th data-field="nombre">Nome Cliente</th>
                     <th data-field="dire">Direção</th>
+                    <th data-field="dni">DNI</th>
+                    <th data-field="rg">R.G.</th>
+                    <th data-field="telefone">Telefone</th>
+                    <th data-field="email">Email</th>
+                    <th data-field="data nasc">Data Nasc.</th>
+                    <th data-field="categoria">Categoria</th>
                     <th data-field="accion"><i class="fa-solid fa-gears"></i></th>
                 </tr>
                 {% elif 'E' in R %}
                 <tr>
-                    <th data-field="nombre">Nombre</th>
+                    <th data-field="nombre">Nome Empregado</th>
+                    <th data-field="dni">Documento</th>
+                    <th data-field="telefone">Telefone</th>
                     <th data-field="dire">Direção</th>
+                    <th data-field="email">Email</th>
+                    <th data-field="nom puesto">Posição</th>
                     <th data-field="accion"><i class="fa-solid fa-gears"></i></th>
                 </tr>
                 {% endif %}

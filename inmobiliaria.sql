@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-12-2023 a las 23:01:24
+-- Tiempo de generación: 11-12-2023 a las 21:41:52
 -- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.0.28
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `inmobiliaria`
 --
+CREATE DATABASE IF NOT EXISTS `inmobiliaria` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `inmobiliaria`;
 
 -- --------------------------------------------------------
 
@@ -136,8 +138,7 @@ CREATE TABLE `auth_user` (
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(1, 'pbkdf2_sha256$600000$KTStVKJ3Mc6C4nwNQ8wo0Q$Hv07KmW8DVS6eaWURyV5hdvHz3Fm5G8qHtga8UdJ/Jw=', NULL, 1, 'vnazzar', '', '', 'vnazzar@hotmail.com', 1, 1, '2023-11-14 18:32:19.230345'),
-(2, 'pbkdf2_sha256$600000$Cxm0df7Kx49bH7qiiq3VQh$u6mmG2U9GFEwspD9TRP3zrOeEYxb9xKrdD+h4phrWMI=', '2023-11-30 13:44:50.466142', 1, 'mvnazzar', '', '', 'vnnaaa@hotmail.com', 1, 1, '2023-11-17 16:42:41.519525');
+(1, 'pbkdf2_sha256$600000$CBYlvxWep727xeh3wLglPT$vtWAA5tu/CYRHyYESOvaJlI9w7jdIQAV0+Q9LEIbSgE=', '2023-12-02 12:50:42.698293', 1, 'dhubalde', '', '', 'dalilahubalde@hotmail.com', 1, 1, '2023-11-14 18:50:25.682772');
 
 -- --------------------------------------------------------
 
@@ -197,7 +198,13 @@ INSERT INTO `clientes` (`id_cliente`, `nom_cliente`, `dni_cliente`, `rg_cliente`
 (10, 'Gonzalez Juan', '23710155', '0', 'San Martin', '333333333333', 'gj@gmail.com', 'gchu', 'Argentina', '2001-02-14', 'Propietario'),
 (11, 'Juan', '1542871', '454545', 'Maipu 160', '2525252525', 'da@gmail.com', 'Gchu', 'Argentina', '1970-01-12', 'Locatario'),
 (12, 'Esteban', '52525252', '2222', '9 de julio 20', '25252', 'este@gmail.com', 'San Luis', 'Argentina', '1999-02-15', 'Propietario'),
-(13, 'Seba', '1111111', '11111', 'Andrade 741', '11111111', 'and@gmail.com', 'Gchu', 'Argentina', '2000-12-14', 'Propietario');
+(13, 'Seba', '1111111', '11111', 'Andrade 741', '11111111', 'and@gmail.com', 'Gchu', 'Argentina', '2000-12-14', 'Propietario'),
+(14, 'Dumon Nina', '666666666', '0', 'Churruarin 100', '45454545', 'nd@gmail.com', 'Gchu', 'Argentina', '2001-10-03', 'Locatario'),
+(15, 'Cecilia', '30060490', '0', 'JB Gonzalez 32', '1154326236', 'ce@hotmail.com', 'Caba', 'Argentina', '1986-01-02', 'Propietario'),
+(16, 'Huba Cecilia', '32556630', '0', 'Belgrano 50', '963258100', 'ch@aol.com', 'gchu', 'Argentina', '1896-01-02', 'Locatario'),
+(17, 'Patri Bruno', '30526598', '0', 'Rivadavia 5100', '3446635231', 'bp@hotmail.com', 'Gchu', 'Argentina', '1984-12-10', 'Locatario'),
+(18, 'Lizzi Lucrecia', '22356356', '0', 'Bvar Montana 1050', '1143226451', 'll@hotmail.com', 'Gualeguaychu', 'Argentina', '1970-08-25', 'Selecciona'),
+(19, 'Echaza Victoria', '42505050', '0', 'Bvar Montana 1050', '3446363636', 've@hotmail.com', 'Gualeguaychu', 'Argentina', '2004-04-05', 'Propietario');
 
 -- --------------------------------------------------------
 
@@ -292,24 +299,24 @@ CREATE TABLE `django_migrations` (
 --
 
 INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
-(1, 'contenttypes', '0001_initial', '2023-11-11 19:34:28.005908'),
-(2, 'auth', '0001_initial', '2023-11-11 19:34:28.216915'),
-(3, 'admin', '0001_initial', '2023-11-11 19:34:28.270920'),
-(4, 'admin', '0002_logentry_remove_auto_add', '2023-11-11 19:34:28.280919'),
-(5, 'admin', '0003_logentry_add_action_flag_choices', '2023-11-11 19:34:28.289929'),
-(6, 'contenttypes', '0002_remove_content_type_name', '2023-11-11 19:34:28.339946'),
-(7, 'auth', '0002_alter_permission_name_max_length', '2023-11-11 19:34:28.372909'),
-(8, 'auth', '0003_alter_user_email_max_length', '2023-11-11 19:34:28.386909'),
-(9, 'auth', '0004_alter_user_username_opts', '2023-11-11 19:34:28.395909'),
-(10, 'auth', '0005_alter_user_last_login_null', '2023-11-11 19:34:28.418928'),
-(11, 'auth', '0006_require_contenttypes_0002', '2023-11-11 19:34:28.420909'),
-(12, 'auth', '0007_alter_validators_add_error_messages', '2023-11-11 19:34:28.429944'),
-(13, 'auth', '0008_alter_user_username_max_length', '2023-11-11 19:34:28.441909'),
-(14, 'auth', '0009_alter_user_last_name_max_length', '2023-11-11 19:34:28.455922'),
-(15, 'auth', '0010_alter_group_name_max_length', '2023-11-11 19:34:28.468909'),
-(16, 'auth', '0011_update_proxy_permissions', '2023-11-11 19:34:28.482936'),
-(17, 'auth', '0012_alter_user_first_name_max_length', '2023-11-11 19:34:28.494911'),
-(18, 'sessions', '0001_initial', '2023-11-11 19:34:28.511917');
+(1, 'contenttypes', '0001_initial', '2023-11-11 19:34:02.097955'),
+(2, 'auth', '0001_initial', '2023-11-11 19:34:02.947732'),
+(3, 'admin', '0001_initial', '2023-11-11 19:34:03.107615'),
+(4, 'admin', '0002_logentry_remove_auto_add', '2023-11-11 19:34:03.118111'),
+(5, 'admin', '0003_logentry_add_action_flag_choices', '2023-11-11 19:34:03.133337'),
+(6, 'contenttypes', '0002_remove_content_type_name', '2023-11-11 19:34:03.219318'),
+(7, 'auth', '0002_alter_permission_name_max_length', '2023-11-11 19:34:03.299017'),
+(8, 'auth', '0003_alter_user_email_max_length', '2023-11-11 19:34:03.321057'),
+(9, 'auth', '0004_alter_user_username_opts', '2023-11-11 19:34:03.330673'),
+(10, 'auth', '0005_alter_user_last_login_null', '2023-11-11 19:34:03.387847'),
+(11, 'auth', '0006_require_contenttypes_0002', '2023-11-11 19:34:03.393624'),
+(12, 'auth', '0007_alter_validators_add_error_messages', '2023-11-11 19:34:03.408796'),
+(13, 'auth', '0008_alter_user_username_max_length', '2023-11-11 19:34:03.427736'),
+(14, 'auth', '0009_alter_user_last_name_max_length', '2023-11-11 19:34:03.454454'),
+(15, 'auth', '0010_alter_group_name_max_length', '2023-11-11 19:34:03.480670'),
+(16, 'auth', '0011_update_proxy_permissions', '2023-11-11 19:34:03.502587'),
+(17, 'auth', '0012_alter_user_first_name_max_length', '2023-11-11 19:34:03.542277'),
+(18, 'sessions', '0001_initial', '2023-11-11 19:34:03.577881');
 
 -- --------------------------------------------------------
 
@@ -328,10 +335,9 @@ CREATE TABLE `django_session` (
 --
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
-('cgrr06n4vpg0ykfww11dmdqewc0e0fco', '.eJxVjDsOwjAQBe_iGlnrTeQPJT1nsHb9wQFkS3FSIe4OllJA-2bmvYSnfSt-72n1SxRngeL0uzGFR6oDxDvVW5Oh1W1dWA5FHrTLa4vpeTncv4NCvYxaMyq0rHhWqA0aUDkaJALrOGtnsgnJgZ1ynOCrAOkUAs1RGcgpgHh_AM5eN7w:1r5UzB:pxoMIvnLJKAPXBwb2uGbgJDH3-nI-zzIRdarJsmqyfM', '2023-12-05 17:56:33.664488'),
-('cgt9dxxdh5lr4qkyvhkstc0ddeyuw5jx', '.eJxVjDsOwjAQBe_iGlnrTeQPJT1nsHb9wQFkS3FSIe4OllJA-2bmvYSnfSt-72n1SxRngeL0uzGFR6oDxDvVW5Oh1W1dWA5FHrTLa4vpeTncv4NCvYxaMyq0rHhWqA0aUDkaJALrOGtnsgnJgZ1ynOCrAOkUAs1RGcgpgHh_AM5eN7w:1r5tRn:L8UgIUC5EtWg1Vlguc3OLoWy2gV_TD5c0xhrtN9x9jU', '2023-12-06 20:03:43.740763'),
-('u6fzf0u27zjct8utum9wrcqbwweqm9dq', '.eJxVjDsOwjAQBe_iGlnrTeQPJT1nsHb9wQFkS3FSIe4OllJA-2bmvYSnfSt-72n1SxRngeL0uzGFR6oDxDvVW5Oh1W1dWA5FHrTLa4vpeTncv4NCvYxaMyq0rHhWqA0aUDkaJALrOGtnsgnJgZ1ynOCrAOkUAs1RGcgpgHh_AM5eN7w:1r4QO3:jYdl0LLxkNOWq6hwui5eTVIJLaz9y2xlwFK8spgUuRU', '2023-12-02 18:49:47.536487'),
-('xjarq8t7l29c4evtqej2nxtq4l3pqq0i', '.eJxVjDsOwjAQBe_iGlnrTeQPJT1nsHb9wQFkS3FSIe4OllJA-2bmvYSnfSt-72n1SxRngeL0uzGFR6oDxDvVW5Oh1W1dWA5FHrTLa4vpeTncv4NCvYxaMyq0rHhWqA0aUDkaJALrOGtnsgnJgZ1ynOCrAOkUAs1RGcgpgHh_AM5eN7w:1r8hLW:H3q6iwkOpYNSX0PZJ6k4QfPB73jCY0XRslhS-zA1TY0', '2023-12-14 13:44:50.468143');
+('etxjaacdp3g0dw0l9evx55gf6cc9cona', '.eJxVjDsOwjAQBe_iGlk2_mUp6TmDtfZucADZUpxUiLuTSCmgfTPz3iLiupS4dp7jROIitDj9bgnzk-sO6IH13mRudZmnJHdFHrTLWyN-XQ_376BgL1tttBqVNeyRM40ALg3og3JasSe0AdizC0SUCXhzjAWNgz4riyFxAvH5AvMTOJY:1r45h3:Y9C26aEFSJQYTvhZ2CwN_W73bDWVlE4Z64vcjI61SBM', '2023-12-01 20:44:01.310260'),
+('ikxdwmju5j25ymx0cofvl0gcq96ykr11', '.eJxVjDsOwjAQBe_iGlk2_mUp6TmDtfZucADZUpxUiLuTSCmgfTPz3iLiupS4dp7jROIitDj9bgnzk-sO6IH13mRudZmnJHdFHrTLWyN-XQ_376BgL1tttBqVNeyRM40ALg3og3JasSe0AdizC0SUCXhzjAWNgz4riyFxAvH5AvMTOJY:1r6dBf:bSFNIMkk6ebcMMWstbtwMbY9Q1-WnSuZ30VXu_yWNvU', '2023-12-08 20:54:07.190435'),
+('joqzrnax2alsnfuutqxphb3k3qruth5r', '.eJxVjDsOwjAQBe_iGlk2_mUp6TmDtfZucADZUpxUiLuTSCmgfTPz3iLiupS4dp7jROIitDj9bgnzk-sO6IH13mRudZmnJHdFHrTLWyN-XQ_376BgL1tttBqVNeyRM40ALg3og3JasSe0AdizC0SUCXhzjAWNgz4riyFxAvH5AvMTOJY:1r9PSE:1Yoo035QVxlG4GQYa_iJ3eNlZyG-CvaDcRzQ9xzFTBQ', '2023-12-16 12:50:42.734059');
 
 -- --------------------------------------------------------
 
@@ -343,7 +349,7 @@ CREATE TABLE `empleados` (
   `id_empleado` int(11) NOT NULL,
   `nom_empleado` varchar(70) DEFAULT NULL,
   `dni_empleado` int(11) NOT NULL,
-  `tel_empleado` int(11) NOT NULL,
+  `tel_empleado` bigint(20) NOT NULL,
   `dir_empleado` varchar(100) NOT NULL,
   `email_empleado` varchar(45) NOT NULL,
   `nom_puesto` varchar(45) NOT NULL
@@ -358,7 +364,13 @@ INSERT INTO `empleados` (`id_empleado`, `nom_empleado`, `dni_empleado`, `tel_emp
 (2, 'Dalila Hu', 34569302, 2147483647, 'Gualeguaychu 2345', 'hu@mail.com', 'Piletero'),
 (3, 'Juan', 33333333, 2147483647, 'A25 de Mayo 555', 'gj@gmail.com', 'Administracion'),
 (4, 'Pedro', 9999999, 2147483647, '25 de mayo 231', 'nd@gmail.com', 'Piletero'),
-(5, 'Pedro', 9999999, 2147483647, '25 de mayo 231', 'pp@gmail.com', 'Maestranza');
+(5, 'Pedro', 9999999, 2147483647, '25 de mayo 231', 'pp@gmail.com', 'Maestranza'),
+(6, 'Franchi', 28282828, 2147483647, 'Los Alerces 6', 'fra@gmail.com', 'Jardineria'),
+(7, 'Lucia', 665655665, 2147483647, 'San Martin 1111', 'l@gmail.com', 'Piletero'),
+(8, 'Caceres Matias', 29000325, 2147483647, 'Goldaracena 930', 'mc@gmail.com', 'Piletero'),
+(9, 'Huba Benja', 40365630, 2147483647, 'Bravo 35', 'hb@hotmail.com', 'Administracion'),
+(10, 'Patriarca Martina', 40386520, 2147483647, 'Bolivar y Maipu', 'mp@gmail.com', 'Jardineria'),
+(11, 'Martina', 47654663, 1143226451, 'Joaquin B Gonzalez 2044', 'Marti@hotmail.com', 'Administracion');
 
 -- --------------------------------------------------------
 
@@ -377,40 +389,64 @@ CREATE TABLE `fotos_prop` (
 --
 
 INSERT INTO `fotos_prop` (`id_foto`, `image`, `inmueble_id`) VALUES
-(14, 'webapp/static/assets/img/8ba06c5c724148b4ba7c7fe63523ef10.jpg', 22),
-(15, 'webapp/static/assets/img/ea7328bf1f2f45a799f452cb7ac7952a.jpg', 22),
-(16, 'webapp/static/assets/img/c2f4f127192a44e2b46afd853c03de9c.jpg', 23),
-(17, 'webapp/static/assets/img/15d1bf76a8ed4359ad8e4670ceebaf73.jpg', 24),
-(18, 'webapp/static/assets/img/111b9d26d690493ba38e2cc0c69110de.jpg', 25),
-(19, 'webapp/static/assets/img/c735f56141c54cb2ba87c2ab003ea2a9.jpg', 26),
-(20, 'webapp/static/assets/img/43c13b7f540d4777a769a781fb2b0ede.jpg', 27),
-(21, 'webapp/static/assets/img/79b2ca95679c4164bf0d0c09d151dd23.jpg', 27),
-(22, 'webapp/static/assets/img/597f877a0b7440f896c87e53ac498cec.jpeg', 28),
-(23, 'webapp/static/assets/img/53fb56a93e79471ca7609f8b19493681.jpg', 28),
-(24, 'webapp/static/assets/img/611a82fbe66b40babb147b56d3ab324f.jpg', 29),
-(25, 'webapp/static/assets/img/fb76e83a50444963a91cbfe0285b5767.jpg', 29),
-(26, 'webapp/static/assets/img/0682b9edb0034e118ac93df3bcc3a0f1.jpg', 29),
-(27, 'webapp/static/assets/img/256e180df186452f893e25cf6626ad04.jpg', 29),
-(28, 'webapp/static/assets/img/297677040a534935982cc3f96a28c26a.jpg', 29),
-(29, 'webapp/static/assets/img/a95d6146d4eb432ab5989927e05c9ea5.jpg', 29),
-(30, 'webapp/static/assets/img/ec8c0c1f4b8b4932bba60ff9d45460aa.jpg', 29),
-(31, 'webapp/static/assets/img/df54f6c51478423aae51a3b5eb164a67.jpeg', 29),
-(32, 'webapp/static/assets/img/b778d808b63745aea1db9d607167b7f6.jpeg', 29),
-(33, 'webapp/static/assets/img/397a4d9623af4559b44acfb9f0b55ada.jpg', 30),
-(34, 'webapp/static/assets/img/71f6d8c2f14945728949a22e756cf32d.jpg', 31),
-(35, 'webapp/static/assets/img/66cbff7af40947748760ccc82c03b9fe.jpg', 31),
-(36, 'webapp/static/assets/img/2eeb41e4fe484f158acaac89301de298.jpg', 31),
-(37, 'webapp/static/assets/img/0b69b2e4e50443fa969781dd576b32c3.jpg', 32),
-(38, 'webapp/static/assets/img/7591e35c546d438f95e3fec90f29d9c9.jpeg', 32),
-(39, 'webapp/static/assets/img/698cfef338ba4e318790014998dd9bf9.jpeg', 32),
-(40, 'webapp/static/assets/img/8b5a606819a14bba93c321de260bbb07.jpeg', 33),
-(41, 'webapp/static/assets/img/d8d6fedb740e4dae9c5c6f2545a1270f.jpg', 34),
-(42, 'webapp/static/assets/img/558d59bfd1f2463e970b5f5c0090727b.jpg', 34),
-(43, 'webapp/static/assets/img/06178cf4f4fb4cbb90720a6cb36d08f2.jpg', 34),
-(44, 'webapp/static/assets/img/a9c88e6f45ac47128e790ca2aee88e68.jpg', 35),
-(45, 'webapp/static/assets/img/b91868e6413845cf92b318cedd698870.jpg', 36),
-(46, 'webapp/static/assets/img/c86bc86e01e54554b278997c0c86558c.jpeg', 37),
-(47, 'webapp/static/assets/img/4bc9142fe8054a189d21ba276c84b5fc.jpg', 38);
+(10, 'webapp/static/assets/img/bca4e4b6c3664607a72f253ddfd7e23a.jpg', 20),
+(11, 'webapp/static/assets/img/78cad6d492f64e0fb065bec18c17d9a4.jpeg', 20),
+(12, 'webapp/static/assets/img/d0ee47a5ab7c4d63a3c23d187fc37b2b.jpeg', 20),
+(13, 'webapp/static/assets/img/026ca053b9404c5099a2618406044cb1.jpg', 21),
+(14, 'webapp/static/assets/img/298abb54ae0b4b7e815bf6109d01462e.jpg', 22),
+(15, 'webapp/static/assets/img/2e69f6280d32473da5271cdb39660633.jpg', 22),
+(16, 'webapp/static/assets/img/dc41d80a0f314f60a2dcaee89d25cf11.jpg', 22),
+(17, 'webapp/static/assets/img/ef04611fa5954aef820194abaf4aaeed.jpg', 22),
+(18, 'webapp/static/assets/img/3cb2fac24e5348fb97e77a7a66afb9e6.jpg', 22),
+(19, 'webapp/static/assets/img/24673e89beb141caa32f9bdb4c949235.jpg', 23),
+(20, 'webapp/static/assets/img/f60e6b777a6b4fac9f85ab15cd0cf18c.jpg', 23),
+(21, 'webapp/static/assets/img/364f2cfab80c4adb812270f3877c64e1.jpg', 24),
+(22, 'webapp/static/assets/img/a77932cb58074099bdc03835e4ee0106.jpeg', 24),
+(23, 'webapp/static/assets/img/22ae067ad8ff4d6d8e8d20cd1af19c9d.jpeg', 24),
+(24, 'webapp/static/assets/img/22b50df0b3834388b48477b00fca5fa3.jpg', 24),
+(25, 'webapp/static/assets/img/2212dfb712b84939ba6b45f2c1f9dee1.jpg', 24),
+(26, 'webapp/static/assets/img/94849b0c96034df78aca2506d563d39d.jpg', 25),
+(27, 'webapp/static/assets/img/eeb386bb244e435b9c219127dbc3c9c1.jpg', 25),
+(28, 'webapp/static/assets/img/992339f58a4743258dbf9d1f95a8135a.jpg', 26),
+(29, 'webapp/static/assets/img/2e41b31446ca4b41b5665dd8c32f55cc.jpg', 27),
+(30, 'webapp/static/assets/img/8a2307d25a5148a6999ecb4b5902c1cf.jpeg', 28),
+(31, 'webapp/static/assets/img/83af16397e7e454c9c16a648ed691a08.jpg', 29),
+(32, 'webapp/static/assets/img/d3619ed4ff8b46dd9a75ff937c374c1b.jpeg', 30),
+(33, 'webapp/static/assets/img/759b82b1e1aa48979058f12b5e8b07c7.jpeg', 30),
+(34, 'webapp/static/assets/img/26a0ea6daa8d4a3aa0e278a09b46d3ec.jpeg', 30),
+(35, 'webapp/static/assets/img/cf3835a03caa4c5391cd51f21f27a565.jpeg', 31),
+(36, 'webapp/static/assets/img/bafa14bfb95a449caa2e54586cab6438.jpeg', 31),
+(37, 'webapp/static/assets/img/691c2b853fbb442a93f1b14008990677.jpg', 32),
+(38, 'webapp/static/assets/img/0c5394ccaf134bdd8b6e0d28a05284a9.jpg', 32),
+(39, 'webapp/static/assets/img/25eec2d5a61142b3a1de8847bbf869f0.jpg', 32),
+(40, 'webapp/static/assets/img/8d3be5342597437c825ac8629409a68b.jpg', 33),
+(41, 'webapp/static/assets/img/457c2194912040ada1963d2964b64e4e.jpg', 33),
+(42, 'webapp/static/assets/img/70258f23ac1f4a5d98c10fbc299480fb.jpg', 33),
+(43, 'webapp/static/assets/img/97361b17491747468dcfd9592d1572c2.jpg', 34),
+(44, 'webapp/static/assets/img/03fe1f7578dc40f4ba9d338ffbbe5794.jpg', 34),
+(45, 'webapp/static/assets/img/0b1be85d4e894596a561dd756d7d2b17.jpg', 34),
+(46, 'webapp/static/assets/img/104695b3812042ba80cccf04bfb0d2b9.jpg', 35),
+(47, 'webapp/static/assets/img/9676d24822e64e198da2fb81d74a5970.jpg', 36),
+(48, 'webapp/static/assets/img/3ab58cb19e774ab4834ad79b3f996fe6.jpg', 37),
+(49, 'webapp/static/assets/img/d8f6992635a248baa4c2be620ea5e57d.jpg', 37),
+(50, 'webapp/static/assets/img/7cfd2ebd8da34d169b527c9620aa2570.jpeg', 37),
+(51, 'webapp/static/assets/img/ff1b259bd96d4e4babaf51eab0c60443.jpeg', 37),
+(52, 'webapp/static/assets/img/bdaca6cfbbad438f97ee3aaf46901309.jpg', 38),
+(53, 'webapp/static/assets/img/785618c51a4441a8a4db132ee555976f.jpeg', 38),
+(54, 'webapp/static/assets/img/0556a3c45c534ace9c10e50dde6ab7b1.jpg', 38),
+(55, 'webapp/static/assets/img/0db2c4a8fe864cd5859904554a4761dd.jpg', 39),
+(56, 'webapp/static/assets/img/918eec1abd2143ff963eb77ec8ce7160.jpg', 40),
+(57, 'webapp/static/assets/img/5b0c9a4c31af441e8d1b1cf7458fe491.jpg', 41),
+(58, 'webapp/static/assets/img/6ec19d681ba54944986a525032f3fc2d.jpeg', 42),
+(59, 'webapp/static/assets/img/bd264fc484a14b08887db54ee03a8601.jpeg', 42),
+(60, 'webapp/static/assets/img/e4cee07da53f454398fda148c7760df3.jpeg', 42),
+(61, 'webapp/static/assets/img/bfc2a87eb8ea40b6b3a3dd2e79a67639.jpg', 43),
+(62, 'webapp/static/assets/img/540d60e4510743bc987a81c4c179a105.jpg', 44),
+(63, 'webapp/static/assets/img/25d7d22bedf0454d966a856fd6bf1e73.jpg', 45),
+(64, 'webapp/static/assets/img/5ec36d47005348508e12aa0f5ba986b8.jpg', 46),
+(65, 'webapp/static/assets/img/3c68d9a444994726ac78842474273c1f.jpg', 47),
+(66, 'webapp/static/assets/img/4cfa7bcfe8e348098b242eb07f6a93f7.jpg', 47),
+(67, 'webapp/static/assets/img/ba55fb692c7d46cab1538a969fc57429.jpg', 47);
 
 -- --------------------------------------------------------
 
@@ -434,7 +470,7 @@ CREATE TABLE `inmueble` (
   `cant_dormitorios` int(11) DEFAULT NULL,
   `cant_banos` int(11) DEFAULT NULL,
   `cochera` tinyint(1) NOT NULL DEFAULT 0,
-  `cochera_rotativa` tinyint(4) NOT NULL,
+  `cochera_rotativa` tinyint(4) DEFAULT NULL,
   `cod_referencia` varchar(50) DEFAULT NULL,
   `condicion` varchar(50) NOT NULL,
   `expensas` tinyint(1) NOT NULL DEFAULT 0,
@@ -458,15 +494,29 @@ CREATE TABLE `inmueble` (
 --
 
 INSERT INTO `inmueble` (`id_inmueble`, `dir_inmueble`, `bloco_inmueble`, `barrio_inmueble`, `ciudad_inmueble`, `num_apto`, `tipo_inmueble`, `tipo_operacion`, `sup_total`, `sup_cubierta`, `sup_semicub`, `cant_plantas`, `cant_dormitorios`, `cant_banos`, `cochera`, `cochera_rotativa`, `cod_referencia`, `condicion`, `expensas`, `descripcion`, `clave_puerta_ingreso`, `clave_puerta_ingreso2`, `clave_wifi`, `nombre_red`, `tipo_servicio`, `cliente_id`, `valor_inmueble`, `exclusividad`, `habitac_maxima`, `estado`, `latitud`, `longitud`) VALUES
-(30, 'Espana 25', '', '', 'Gchu', 10, 'Casa', 'Alquiler temporario', 150, 10, 10, 2, 2, 2, 1, 0, '2344', 'Muy buena', 0, 'Prueba', 'q', 'q', 'q', '', 'Ropa de cama', 6, 100000, 1, 2, 1, '-33.020098342812894', '-58.519648205001445'),
-(31, 'Urquiza 1070', '', '', 'Gchu', 0, 'Casa', 'Alquiler temporario', 150, 70, 0, 2, 2, 2, 0, 0, '369', 'Muy buena', 0, 'Estamos probando', 'q', 'q', 'q', '', 'Ropa de cama, Mucama', 4, 852366, 1, 4, 1, '-33.01577567702897', '-58.51965308189392'),
-(32, 'España 420', '', '', 'Gchu', 105, 'Apart', 'Alquiler temporario', 120, 0, 0, 2, 2, 1, 0, 0, '587', 'Muy buena', 0, 'Esta es otra propiedad de prueba', 'q', 'q', 'q', '', 'WI-FI, Ropa de cama', 4, 5874695, 1, 5, 1, '-33.02151932708696', '-58.51924636117475'),
-(33, 'Ruta 14 km 250', '', '', 'Gchu', 0, 'Otros', 'Venta', 40000, 0, 0, 0, 0, 0, 0, 0, '2574', 'Muy buena', 0, 'Campo', '0', '0', '0', '', 'SD', 12, 250000, 1, 0, 1, '-33.00772738521005', '-58.55207269603853'),
-(34, 'Magnasco 643', '', '', 'Gualeguaychu', 0, 'Casa', 'Venta', 200, 120, 0, 1, 2, 1, 1, 0, '643', 'Buena', 0, 'Casucha', '0', '0', '0', '', 'SD', 12, 120000, 1, 4, 1, '-33.02336338830253', '-58.49745707018884'),
-(35, 'Ayacucho 120', '', '', 'Gualeguaychu', 10, 'Departamento', 'Venta', 44444, 44, 44, 4, 1, 1, 0, 0, 'jkjkj', 'Muy buena', 0, 'probando', '0', '0', '0', '', 'SD', 10, 1000000, 1, 10, 1, '-27.15982337628752', '-48.5075014570202'),
-(36, 'Luis N Palma 1965', '', '', 'Gualeguaychu', 0, 'Oficina', 'Alquiler permanente', 120, 100, 0, 1, 0, 1, 1, 0, '1965', 'Buena', 0, 'Oficina', '2020', '0', 'Oficina21', '', 'WI-FI', 13, 80000, 0, 0, 1, '-27.15982337628752', '-48.5075014570202'),
-(37, 'Galarza 776', '', '', 'Concepcion del Uruguay', 0, 'Otros', 'Alquiler permanente', 100, 90, 0, 1, 0, 1, 0, 0, '776', 'Buena', 0, 'Heladeria Bahillo', '0', '0', '0', '', 'WI-FI', 12, 120000, 1, 0, 1, '-27.15982337628752', '-48.5075014570202'),
-(38, 'Luis N Palma 1965', '', '', 'Gualeguaychu', 0, 'Oficina', 'Alquiler permanente', 2222222, 2222, 0, 1, 0, 1, 1, 0, '1965', 'Muy buena', 0, 'Probando estab la ganza', '0', '0', '0', '', 'Piscinas', 12, 120000, 1, 0, 1, '-27.15982337628752', '-48.5075014570202');
+(25, 'Maipu 160 ', '', '', 'Gualeguaychu', 2, 'Departamento', 'Alquiler permanente', 60, 58, 2, 1, 1, 1, 1, NULL, '6666666', 'Muy buena', 1, 'Casa 1 plantas frente al norte', '2705', '2705', '2705', '', 'WI-FI', 8, 100000, 1, 2, 1, '0.00000000000000', '0.00000000000000'),
+(26, 'Artigas 152', '', '', 'Concepción del Uruguay', 5, 'Departamento', 'Alquiler permanente', 100, 80, 20, 1, 2, 1, 1, NULL, '167522', 'Muy buena', 1, 'Departamento', '6', '6', '7202', '', 'WI-FI, Ropa de cama', 15, 150, 1, 4, 1, '-33.018649682813226', '-58.536057472229004'),
+(27, 'Magnasco 643', '', '', 'Gualeguaychu', 2, 'Casa', 'Venta', 300, 100, 10, 1, 2, 1, 0, NULL, '987456', 'Buena', 0, 'Casa', '65', '065', '065', '', 'SD', 13, 100000, 1, 4, 1, '-33.01211015057216', '-58.515232801437385'),
+(28, 'Magnasco 1152', '', '', 'Gualeguaychu', 0, 'Oficina', 'Venta', 40000, 0, 0, 0, 0, 0, 0, NULL, '1152', 'Muy buena', 0, 'Quinta para loteo', '0', '0', '0', '', 'SD', 15, 800000, 1, 0, 1, '-33.02183422931766', '-58.582878112792976'),
+(29, 'Rioja 775', '', '', 'Gualeguaychu', 0, 'Casa', 'Alquiler permanente', 200, 120, 0, 2, 3, 2, 1, NULL, '775', 'Muy buena', 0, 'Casa planta alta', '0', '0', '14523', '', 'WI-FI', 15, 120000, 1, 6, 1, '-33.01220011776397', '-58.51510405540467'),
+(30, 'Magnasco y Federacion', '', '', 'Gualeguaychu', 0, 'Otros', 'Venta', 12000, 0, 0, 0, 0, 0, 0, NULL, '32', 'Buena', 0, 'terreno para loteo', '0', '0', '0', '', 'SD', 13, 250000, 1, 0, 1, '-33.01304777289296', '-58.51415991783143'),
+(31, 'San Martin 3000', '', '', 'Gualeguaychu', 0, 'Otros', 'Venta', 300, 0, 0, 0, 0, 0, 0, NULL, '3000', 'Buena', 0, 'Terreno en barrio residencial', '0', '0', '0', '', 'SD', 12, 80000, 1, 0, 1, '-33.024903969276224', '-58.56472492218018'),
+(32, 'Ituzaingo 932', '', '', 'Gualeguaychu', 0, 'Departamento', 'Venta', 80, 80, 0, 1, 2, 1, 1, NULL, '932', 'Buena', 1, 'Departamento a estrenar', '0', '0', '1111', '', 'WI-FI', 5, 65000, 1, 4, 1, '-33.012903826725676', '-58.51514697074891'),
+(33, 'Ituzaingo 932', '', '', 'Caba', 0, 'Departamento', 'Venta', 80, 80, 0, 1, 2, 1, 1, NULL, '932', 'Buena', 1, 'Departamento a estrenar', '0', '0', '1111', '', 'WI-FI', 5, 65000, 1, 4, 1, '-33.012903826725676', '-58.51514697074891'),
+(34, 'French 2868, CABA', '', '', 'CABA', 0, 'Departamento', 'Venta', 80, 80, 0, 1, 2, 1, 1, NULL, '932', 'Buena', 1, 'Departamento a estrenar', '0', '0', '1111', '', 'WI-FI', 5, 65000, 1, 4, 1, '-33.012903826725676', '-58.51514697074891'),
+(35, 'Urquiza 2000', '', '', 'Colon', 0, 'Oficina', 'Alquiler permanente', 200, 200, 0, 1, 0, 1, 0, NULL, '2000', 'Buena', 0, 'Galpon', '0', '0', '0', '', 'SD', 8, 150000, 0, 0, 1, '-33.01330523071073', '-58.5106971859932'),
+(36, 'Luis N Palma 1965', '', '', 'Gualeguachu', 0, 'Oficina', 'Alquiler permanente', 120, 100, 0, 1, 0, 1, 1, NULL, '1968', 'Regular', 0, 'Oficina', '2020', '0', 'Oficina21', '', 'WI-FI', 13, 80000, 0, 0, 1, '-27.15982337628752', '-48.5075014570202'),
+(37, 'Luis N Palma 1675', '', '', 'Gualeguachu', 0, 'Casa', 'Venta', 200, 100, 0, 2, 4, 3, 1, NULL, '167588', 'Muy buena', 0, 'Casa 1 plantas frente al norte', '0', '0', '0202020', '', 'WI-FI, Piscinas', 15, 350000, 1, 8, 1, '-27.15982337628752', '-48.5075014570202'),
+(38, 'Rua Parati 379', '', '', 'Bombinhas', 0, 'Complejo', 'Alquiler temporario', 45, 0, 0, 1, 1, 1, 0, NULL, '37901', 'Muy buena', 0, 'Pousada suite lateral', '0', '0', 'Bellu379', '', 'WI-FI, Ropa de cama, Mucama', 10, 130, 1, 6, 1, '-27.15982337628752', '-48.5075014570202'),
+(39, 'Urquiza 560', '', '', 'Gualeguaychu', 20, 'Complejo', 'Alquiler temporario', 200, 120, 0, 1, 0, 1, 0, NULL, '560', 'Buena', 0, 'Casa 1 plantas frente al norte', 'ww', '0', '0', '', 'WI-FI', 12, 120000, 0, 5, 1, '-27.15982337628752', '-48.5075014570202'),
+(40, '25 de Mayo 801', '', '', 'Gualeguaychu', 20, 'Otros', 'Alquiler permanente', 200, 120, 0, 2, 0, 3, 0, NULL, '801', 'Muy buena', 0, 'Local comercial en pleno centro de la ciudad', '2424', '0', 'momentos-felices', '', 'WI-FI', 12, 150000, 1, 50, 1, '-27.15982337628752', '-48.5075014570202'),
+(41, '25 de Mayo 809', '', '', 'Paraná', 20, 'Otros', 'Alquiler permanente', 200, 120, 0, 1, 0, 1, 0, NULL, '809-01', 'Buena', 0, 'Depósito de mercaderia', '2020', '0', 'momentos20', '', 'WI-FI', 4, 50000, 1, 0, 1, '-27.15982337628752', '-48.5075014570202'),
+(42, 'Luis N Palma 1976', '0', 'Oeste', 'Gualeguaychu', 0, 'Otros', 'Venta', 300, 300, 0, 1, 0, 2, 0, 0, '1976', 'Muy buena', 0, 'Fabrica', '0', '0', '0', 'bhl', 'SD', 5, 500000, 0, 0, 1, '-27.15982337628752', '-48.5075014570202'),
+(43, 'Rioja 775', '0', 'Norte', 'Gualeguaychu', 0, 'Casa', 'Venta', 220, 140, 0, 2, 3, 2, 1, 0, '775-b', 'Muy buena', 0, 'Casa centrica', '27023', '27023', '0', 'eee', 'SD', 13, 120000, 1, 6, 1, '-27.15982337628752', '-48.5075014570202'),
+(44, 'San Lorenzo 1', '0', 'Costanera', 'Gualeguaychu', 1, 'Departamento', 'Alquiler permanente', 80, 60, 0, 2, 2, 2, 0, 0, '1', 'Muy buena', 0, 'Duplex A', '0', '0', 'S/D', 'SanLorenzo', 'SD', 10, 100000, 1, 4, 1, '-27.15982337628752', '-48.5075014570202'),
+(45, 'San Lorenzo 2', '0', 'Costanera', 'Gualeguaychu', 2, 'Departamento', 'Alquiler permanente', 80, 60, 0, 2, 2, 2, 0, 0, '2', 'Muy buena', 0, 'Duplex B', '0', '0', 'S/D', 'SanLorenzo', 'SD', 10, 100000, 1, 4, 1, '-27.15982337628752', '-48.5075014570202'),
+(46, 'San Lorenzo 3', '0', 'Costanera', 'Gualeguaychu', 3, 'Departamento', 'Alquiler permanente', 80, 60, 0, 2, 2, 2, 0, 0, '3', 'Muy buena', 0, 'Duplex C', '0', '0', 'S/D', 'SanLorenzo', 'SD', 10, 100000, 1, 4, 1, '-27.15982337628752', '-48.5075014570202'),
+(47, 'Colombo 2556', '0', 'Oeste', 'Gualeguaychu', 0, 'Casa', 'Alquiler temporario', 500, 110, 50, 1, 2, 2, 0, 0, '2556', 'Muy buena', 0, 'Casa con pileta', '0', '0', 'S/D', 'S/D', 'WI-FI, Ropa de cama, Piscinas', 13, 150000, 1, 3, 1, '-27.15982337628752', '-48.5075014570202');
 
 -- --------------------------------------------------------
 
@@ -623,7 +673,7 @@ ALTER TABLE `auth_permission`
 -- AUTO_INCREMENT de la tabla `auth_user`
 --
 ALTER TABLE `auth_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `auth_user_groups`
@@ -641,7 +691,7 @@ ALTER TABLE `auth_user_user_permissions`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `contrato`
@@ -671,19 +721,19 @@ ALTER TABLE `django_migrations`
 -- AUTO_INCREMENT de la tabla `empleados`
 --
 ALTER TABLE `empleados`
-  MODIFY `id_empleado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_empleado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `fotos_prop`
 --
 ALTER TABLE `fotos_prop`
-  MODIFY `id_foto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id_foto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT de la tabla `inmueble`
 --
 ALTER TABLE `inmueble`
-  MODIFY `id_inmueble` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id_inmueble` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT de la tabla `servicios`
@@ -734,6 +784,455 @@ ALTER TABLE `django_admin_log`
 --
 ALTER TABLE `inmueble`
   ADD CONSTRAINT `inmueble_ibfk_1` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id_cliente`);
+--
+-- Base de datos: `phpmyadmin`
+--
+CREATE DATABASE IF NOT EXISTS `phpmyadmin` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+USE `phpmyadmin`;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__bookmark`
+--
+
+CREATE TABLE `pma__bookmark` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `dbase` varchar(255) NOT NULL DEFAULT '',
+  `user` varchar(255) NOT NULL DEFAULT '',
+  `label` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `query` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Bookmarks';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__central_columns`
+--
+
+CREATE TABLE `pma__central_columns` (
+  `db_name` varchar(64) NOT NULL,
+  `col_name` varchar(64) NOT NULL,
+  `col_type` varchar(64) NOT NULL,
+  `col_length` text DEFAULT NULL,
+  `col_collation` varchar(64) NOT NULL,
+  `col_isNull` tinyint(1) NOT NULL,
+  `col_extra` varchar(255) DEFAULT '',
+  `col_default` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Central list of columns';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__column_info`
+--
+
+CREATE TABLE `pma__column_info` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `db_name` varchar(64) NOT NULL DEFAULT '',
+  `table_name` varchar(64) NOT NULL DEFAULT '',
+  `column_name` varchar(64) NOT NULL DEFAULT '',
+  `comment` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `mimetype` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `transformation` varchar(255) NOT NULL DEFAULT '',
+  `transformation_options` varchar(255) NOT NULL DEFAULT '',
+  `input_transformation` varchar(255) NOT NULL DEFAULT '',
+  `input_transformation_options` varchar(255) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Column information for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__designer_settings`
+--
+
+CREATE TABLE `pma__designer_settings` (
+  `username` varchar(64) NOT NULL,
+  `settings_data` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Settings related to Designer';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__export_templates`
+--
+
+CREATE TABLE `pma__export_templates` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `username` varchar(64) NOT NULL,
+  `export_type` varchar(10) NOT NULL,
+  `template_name` varchar(64) NOT NULL,
+  `template_data` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Saved export templates';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__favorite`
+--
+
+CREATE TABLE `pma__favorite` (
+  `username` varchar(64) NOT NULL,
+  `tables` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Favorite tables';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__history`
+--
+
+CREATE TABLE `pma__history` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `username` varchar(64) NOT NULL DEFAULT '',
+  `db` varchar(64) NOT NULL DEFAULT '',
+  `table` varchar(64) NOT NULL DEFAULT '',
+  `timevalue` timestamp NOT NULL DEFAULT current_timestamp(),
+  `sqlquery` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='SQL history for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__navigationhiding`
+--
+
+CREATE TABLE `pma__navigationhiding` (
+  `username` varchar(64) NOT NULL,
+  `item_name` varchar(64) NOT NULL,
+  `item_type` varchar(64) NOT NULL,
+  `db_name` varchar(64) NOT NULL,
+  `table_name` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Hidden items of navigation tree';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__pdf_pages`
+--
+
+CREATE TABLE `pma__pdf_pages` (
+  `db_name` varchar(64) NOT NULL DEFAULT '',
+  `page_nr` int(10) UNSIGNED NOT NULL,
+  `page_descr` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='PDF relation pages for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__recent`
+--
+
+CREATE TABLE `pma__recent` (
+  `username` varchar(64) NOT NULL,
+  `tables` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Recently accessed tables';
+
+--
+-- Volcado de datos para la tabla `pma__recent`
+--
+
+INSERT INTO `pma__recent` (`username`, `tables`) VALUES
+('root', '[{\"db\":\"inmobiliaria\",\"table\":\"empleados\"},{\"db\":\"inmobiliaria\",\"table\":\"clientes\"}]');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__relation`
+--
+
+CREATE TABLE `pma__relation` (
+  `master_db` varchar(64) NOT NULL DEFAULT '',
+  `master_table` varchar(64) NOT NULL DEFAULT '',
+  `master_field` varchar(64) NOT NULL DEFAULT '',
+  `foreign_db` varchar(64) NOT NULL DEFAULT '',
+  `foreign_table` varchar(64) NOT NULL DEFAULT '',
+  `foreign_field` varchar(64) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Relation table';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__savedsearches`
+--
+
+CREATE TABLE `pma__savedsearches` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `username` varchar(64) NOT NULL DEFAULT '',
+  `db_name` varchar(64) NOT NULL DEFAULT '',
+  `search_name` varchar(64) NOT NULL DEFAULT '',
+  `search_data` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Saved searches';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__table_coords`
+--
+
+CREATE TABLE `pma__table_coords` (
+  `db_name` varchar(64) NOT NULL DEFAULT '',
+  `table_name` varchar(64) NOT NULL DEFAULT '',
+  `pdf_page_number` int(11) NOT NULL DEFAULT 0,
+  `x` float UNSIGNED NOT NULL DEFAULT 0,
+  `y` float UNSIGNED NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table coordinates for phpMyAdmin PDF output';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__table_info`
+--
+
+CREATE TABLE `pma__table_info` (
+  `db_name` varchar(64) NOT NULL DEFAULT '',
+  `table_name` varchar(64) NOT NULL DEFAULT '',
+  `display_field` varchar(64) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table information for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__table_uiprefs`
+--
+
+CREATE TABLE `pma__table_uiprefs` (
+  `username` varchar(64) NOT NULL,
+  `db_name` varchar(64) NOT NULL,
+  `table_name` varchar(64) NOT NULL,
+  `prefs` text NOT NULL,
+  `last_update` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Tables'' UI preferences';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__tracking`
+--
+
+CREATE TABLE `pma__tracking` (
+  `db_name` varchar(64) NOT NULL,
+  `table_name` varchar(64) NOT NULL,
+  `version` int(10) UNSIGNED NOT NULL,
+  `date_created` datetime NOT NULL,
+  `date_updated` datetime NOT NULL,
+  `schema_snapshot` text NOT NULL,
+  `schema_sql` text DEFAULT NULL,
+  `data_sql` longtext DEFAULT NULL,
+  `tracking` set('UPDATE','REPLACE','INSERT','DELETE','TRUNCATE','CREATE DATABASE','ALTER DATABASE','DROP DATABASE','CREATE TABLE','ALTER TABLE','RENAME TABLE','DROP TABLE','CREATE INDEX','DROP INDEX','CREATE VIEW','ALTER VIEW','DROP VIEW') DEFAULT NULL,
+  `tracking_active` int(1) UNSIGNED NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Database changes tracking for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__userconfig`
+--
+
+CREATE TABLE `pma__userconfig` (
+  `username` varchar(64) NOT NULL,
+  `timevalue` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `config_data` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='User preferences storage for phpMyAdmin';
+
+--
+-- Volcado de datos para la tabla `pma__userconfig`
+--
+
+INSERT INTO `pma__userconfig` (`username`, `timevalue`, `config_data`) VALUES
+('root', '2023-12-11 20:39:02', '{\"Console\\/Mode\":\"collapse\",\"lang\":\"es\"}');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__usergroups`
+--
+
+CREATE TABLE `pma__usergroups` (
+  `usergroup` varchar(64) NOT NULL,
+  `tab` varchar(64) NOT NULL,
+  `allowed` enum('Y','N') NOT NULL DEFAULT 'N'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='User groups with configured menu items';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__users`
+--
+
+CREATE TABLE `pma__users` (
+  `username` varchar(64) NOT NULL,
+  `usergroup` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Users and their assignments to user groups';
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `pma__bookmark`
+--
+ALTER TABLE `pma__bookmark`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `pma__central_columns`
+--
+ALTER TABLE `pma__central_columns`
+  ADD PRIMARY KEY (`db_name`,`col_name`);
+
+--
+-- Indices de la tabla `pma__column_info`
+--
+ALTER TABLE `pma__column_info`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `db_name` (`db_name`,`table_name`,`column_name`);
+
+--
+-- Indices de la tabla `pma__designer_settings`
+--
+ALTER TABLE `pma__designer_settings`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indices de la tabla `pma__export_templates`
+--
+ALTER TABLE `pma__export_templates`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `u_user_type_template` (`username`,`export_type`,`template_name`);
+
+--
+-- Indices de la tabla `pma__favorite`
+--
+ALTER TABLE `pma__favorite`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indices de la tabla `pma__history`
+--
+ALTER TABLE `pma__history`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `username` (`username`,`db`,`table`,`timevalue`);
+
+--
+-- Indices de la tabla `pma__navigationhiding`
+--
+ALTER TABLE `pma__navigationhiding`
+  ADD PRIMARY KEY (`username`,`item_name`,`item_type`,`db_name`,`table_name`);
+
+--
+-- Indices de la tabla `pma__pdf_pages`
+--
+ALTER TABLE `pma__pdf_pages`
+  ADD PRIMARY KEY (`page_nr`),
+  ADD KEY `db_name` (`db_name`);
+
+--
+-- Indices de la tabla `pma__recent`
+--
+ALTER TABLE `pma__recent`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indices de la tabla `pma__relation`
+--
+ALTER TABLE `pma__relation`
+  ADD PRIMARY KEY (`master_db`,`master_table`,`master_field`),
+  ADD KEY `foreign_field` (`foreign_db`,`foreign_table`);
+
+--
+-- Indices de la tabla `pma__savedsearches`
+--
+ALTER TABLE `pma__savedsearches`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `u_savedsearches_username_dbname` (`username`,`db_name`,`search_name`);
+
+--
+-- Indices de la tabla `pma__table_coords`
+--
+ALTER TABLE `pma__table_coords`
+  ADD PRIMARY KEY (`db_name`,`table_name`,`pdf_page_number`);
+
+--
+-- Indices de la tabla `pma__table_info`
+--
+ALTER TABLE `pma__table_info`
+  ADD PRIMARY KEY (`db_name`,`table_name`);
+
+--
+-- Indices de la tabla `pma__table_uiprefs`
+--
+ALTER TABLE `pma__table_uiprefs`
+  ADD PRIMARY KEY (`username`,`db_name`,`table_name`);
+
+--
+-- Indices de la tabla `pma__tracking`
+--
+ALTER TABLE `pma__tracking`
+  ADD PRIMARY KEY (`db_name`,`table_name`,`version`);
+
+--
+-- Indices de la tabla `pma__userconfig`
+--
+ALTER TABLE `pma__userconfig`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indices de la tabla `pma__usergroups`
+--
+ALTER TABLE `pma__usergroups`
+  ADD PRIMARY KEY (`usergroup`,`tab`,`allowed`);
+
+--
+-- Indices de la tabla `pma__users`
+--
+ALTER TABLE `pma__users`
+  ADD PRIMARY KEY (`username`,`usergroup`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `pma__bookmark`
+--
+ALTER TABLE `pma__bookmark`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `pma__column_info`
+--
+ALTER TABLE `pma__column_info`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `pma__export_templates`
+--
+ALTER TABLE `pma__export_templates`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `pma__history`
+--
+ALTER TABLE `pma__history`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `pma__pdf_pages`
+--
+ALTER TABLE `pma__pdf_pages`
+  MODIFY `page_nr` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `pma__savedsearches`
+--
+ALTER TABLE `pma__savedsearches`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- Base de datos: `test`
+--
+CREATE DATABASE IF NOT EXISTS `test` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `test`;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

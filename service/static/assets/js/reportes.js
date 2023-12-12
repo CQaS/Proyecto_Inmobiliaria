@@ -14,10 +14,20 @@ let $alertBtn = $('#alertBtn')
 $alertBtn.click(() => {
     alert('You pressed on Alert')
 })
-let $alertBtn2 = $('#alertBtn2')
 
-$alertBtn2.click(() => {
-    alert('You pressed on Alert2')
+let $reporte1 = $('#reporte1') // reporte de Inmuebles
+$reporte1.click(() => {
+    
+})
+
+let $reporte2 = $('#reporte2') // reporte de Clie
+$reporte2.click(() => {
+    
+})
+
+let $reporte3 = $('#reporte3') // reporte de empleados
+$reporte3.click(() => {
+    
 })
 
 const dataTableOptions = {
@@ -102,7 +112,12 @@ const listClientes = async () => {
             content += `
                 <tr>
                     <td >${c.nom_cliente}</td>
-                    <td >${c.dir_cliente}</td>                   
+                    <td >${c.dir_cliente}</td>
+                    <td >${c.dni_cliente}</td>
+                    <td >${c.tel_cliente}</td>  
+                    <td >${c.email_cliente}</td>
+                    <td >${c.fechanac}</td>  
+                    <td >${c.categoria}</td>                           
                     <td >
                         <a href='/cliente/editar/${c.id_cliente}'
                         class = 'btn btn-sm btn_pencil'
@@ -128,7 +143,12 @@ const listEmpleados = async () => {
             content += `
                 <tr>
                     <td >${e.nom_empleado}</td>
-                    <td >${e.dir_empleado}</td>                    
+                    <td >${e.dni_empleado}</td>
+                    <td >${e.tel_empleado}</td>    
+                    <td >${e.email_empleado}</td>  
+                    <td >${e.dir_empleado}</td>    
+                    <td >${e.email_empleado}</td> 
+                    <td >${e.nom_puesto}</td>                   
                     <td >
                         <a href='/empleado/editar/${e.id_empleado}' class='btn btn-sm btn_pencil' title='Ver'><i class='fa-solid fa-pencil'></i></a>
                         <a href='#' class='btn btn-sm btn_trash'><i class='fa-solid fa-trash-can'></i></a>
