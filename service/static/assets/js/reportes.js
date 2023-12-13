@@ -9,25 +9,20 @@ if (typeof inmueble_Form == "undefined") {
 let dataTable
 let dataTableIsInitialized = false
 let $table = $('#fresh-table')
-let $alertBtn = $('#alertBtn')
 
-$alertBtn.click(() => {
-    alert('You pressed on Alert')
+let $reporte_i = $('#reporte_i') // reporte de Inmuebles
+$reporte_i.click(() => {
+    window.location.href = '/reportes/I'
 })
 
-let $reporte1 = $('#reporte1') // reporte de Inmuebles
-$reporte1.click(() => {
-    
-})
-
-let $reporte2 = $('#reporte2') // reporte de Clientes
+let $reporte2 = $('#reporte2') // reporte de Clie
 $reporte2.click(() => {
     
 })
 
-let $reporte3 = $('#reporte3') // reporte de empleados
-$reporte3.click(() => {
-    
+let $reporte_e = $('#reporte_e') // reporte de Empleados
+$reporte_e.click(() => {
+    window.location.href = '/reportes/E'
 })
 
 const dataTableOptions = {
@@ -52,20 +47,7 @@ const initDataTable = async () => {
         dataTable.bootstrapTable('destroy')
     }
 
-    if(R == 'I'){
-        console.log('I')
-        await listInmuebles()
-    }
-    
-    if(R == 'C'){
-        console.log('C')
-        await listClientes()
-    }
-    
-    if(R == 'E'){
-        console.log('E')
-        await listEmpleados()
-    }
+    (R == 'I') ? await listInmuebles(): (R == 'C') ? await listClientes() : (R == 'E') ? await listEmpleados() : null
 
 
     dataTable = $("#fresh-table").bootstrapTable(dataTableOptions)
@@ -75,7 +57,7 @@ const initDataTable = async () => {
 
 const listInmuebles = async () => {
     try {
-        const response = await fetch("/propiedad/reportes_json_i")
+        const response = await fetch("/reportes_json_i")
         const data = await response.json()
         console.log(data)
 
@@ -103,7 +85,7 @@ const listInmuebles = async () => {
 
 const listClientes = async () => {
     try {
-        const response = await fetch("/propiedad/reportes_json_c")
+        const response = await fetch("/reportes_json_c")
         const data = await response.json()
         console.log(data)
 
@@ -114,9 +96,10 @@ const listClientes = async () => {
                     <td >${c.nom_cliente}</td>
                     <td >${c.dir_cliente}</td>
                     <td >${c.dni_cliente}</td>
-                    <td >${c.tel_cliente}</td>  
-                    <td >${c.email_cliente}</td>
-                    <td >${c.fechanac}</td>  
+                    <td >${c.rg_cliente}</td>  
+                    <td >${c.tel_cliente}</td>
+                    <td >${c.email_cliente}</td>  
+                    <td >${c.fechnac}</td>                           
                     <td >${c.categoria}</td>                           
                     <td >
                         <a href='/cliente/editar/${c.id_cliente}'
@@ -134,7 +117,7 @@ const listClientes = async () => {
 
 const listEmpleados = async () => {
     try {
-        const response = await fetch("/propiedad/reportes_json_e")
+        const response = await fetch("/reportes_json_e")
         const data = await response.json()
         console.log(data)
 
@@ -145,9 +128,8 @@ const listEmpleados = async () => {
                     <td >${e.nom_empleado}</td>
                     <td >${e.dni_empleado}</td>
                     <td >${e.tel_empleado}</td>    
-                    <td >${e.email_empleado}</td>  
                     <td >${e.dir_empleado}</td>    
-                    <td >${e.email_empleado}</td> 
+                    <td >${e.email_empleado}</td>  
                     <td >${e.nom_puesto}</td>                   
                     <td >
                         <a href='/empleado/editar/${e.id_empleado}' class='btn btn-sm btn_pencil' title='Ver'><i class='fa-solid fa-pencil'></i></a>

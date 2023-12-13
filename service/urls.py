@@ -18,17 +18,19 @@ urlpatterns = [
          views_propiedad.buscar_por_fechas, name="buscar_por_fechas"),
     path('propiedad/propiedad_por_tipo/<str:tipo_o>/<str:tipo_p>',
          views_propiedad.propiedad_por_tipo, name="propiedad_por_tipo"),
-    path('propiedad/reportes/<str:R>',
-         views_propiedad.reportes, name="reportes"),
-    path('propiedad/reportes_json_i',
-         views_propiedad.reportes_json_i, name="reportes_json_i"),
-    path('propiedad/reportes_json_c',
-         views_propiedad.reportes_json_c, name="reportes_json_c"),
-    path('propiedad/reportes_json_e',
-         views_propiedad.reportes_json_e, name="reportes_json_e"),
     path('propiedad/disponibilidad',
          views_propiedad.disponibilidad, name="disponibilidad"),
     ##### FIN RUTAS PROPIEDADES #####
+    ##### RUTAS REPORTES #####
+    path('reportes/<str:R>',
+         views_propiedad.reportes, name="reportes"),
+    path('reportes_json_i',
+         views_propiedad.reportes_json_i, name="reportes_json_i"),
+    path('reportes_json_c',
+         views_propiedad.reportes_json_c, name="reportes_json_c"),
+    path('reportes_json_e',
+         views_propiedad.reportes_json_e, name="reportes_json_e"),
+    ##### FIN RUTAS REPORTES #####
     ##### RUTAS CLIENTES #####
     path('cliente', views_cliente.index_cliente, name="index_cliente"),
     path('cliente/crear', views_cliente.crear_cliente, name="crear_cliente"),
