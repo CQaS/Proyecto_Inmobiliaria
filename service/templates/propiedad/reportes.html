@@ -28,6 +28,7 @@
             <input type="button" value="Imovel" id="reporte_i" class="btn btn-primary">
             <input type="button" value="Clientes" id="reporte_c" class="btn btn-primary">
             <input type="button" value="Empregados" id="reporte_e" class="btn btn-primary">
+            <input type="button" value="Contratos" id="reporte_t" class="btn btn-primary">
         </div>
         <table id="fresh-table" class="table" data-sort-class="table-active" data-sortable="true">
             <caption>
@@ -64,6 +65,18 @@
                     <th data-field="dire">Direção</th>
                     <th data-field="email">Email</th>
                     <th data-field="nom puesto">Posição</th>
+                    <th data-field="accion"><i class="fa-solid fa-gears"></i></th>
+                </tr>
+                {% elif 'T' in R %}
+                <tr>
+                    <th data-field="cod_ref">Cod. Ref.</th>
+                    <th data-field="dire">Direção</th>
+                    <th data-field="proprietario">Proprietario</th>
+                    <th data-field="cliente">Cliente</th>
+                    <th data-field="fecha_ing">Data entrada</th>
+                    <th data-field="fecha_sal">Data saída</th>
+                    <th data-field="cant_dias">Dias</th>
+                    <th data-field="precio">Preço</th>
                     <th data-field="accion"><i class="fa-solid fa-gears"></i></th>
                 </tr>
                 {% endif %}

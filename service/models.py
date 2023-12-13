@@ -170,6 +170,8 @@ class Clientes(models.Model):
         verbose_name='Fecha de Nac.', null=False, blank=False,)
     categoria = models.CharField(max_length=45, verbose_name='Categoria',
                                  null=False, blank=False, validators=[validar_letras])
+    estado = models.IntegerField(
+        null=True, default=1, blank=True, verbose_name='Estado')  # Estado = 1 seria Disponible
 
     def __str__(self):
         return self.nom_cliente
@@ -195,6 +197,8 @@ class Empleados(models.Model):
         null=False, blank=False, verbose_name='Mail de empleado', validators=[validate_email])
     nom_puesto = models.CharField(max_length=45, null=False, blank=False,
                                   verbose_name='Nombre de puesto', validators=[validar_letras])
+    estado = models.IntegerField(
+        null=True, default=1, blank=True, verbose_name='Estado')  # Estado = 1 seria Disponible
 
     def __str__(self):
         return self.nom_empleado

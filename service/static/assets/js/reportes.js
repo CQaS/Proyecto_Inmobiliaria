@@ -25,6 +25,11 @@ $reporte_e.click(() => {
     window.location.href = '/reportes/E'
 })
 
+let $reporte_con = $('#reporte_t') // reporte de Contratos
+$reporte_con.click(() => {
+    window.location.href = '/reportes/T'
+})
+
 const dataTableOptions = {
     locale: 'es',
     classes: 'table table-hover table-striped',
@@ -47,7 +52,7 @@ const initDataTable = async () => {
         dataTable.bootstrapTable('destroy')
     }
 
-    (R == 'I') ? await listInmuebles(): (R == 'C') ? await listClientes() : (R == 'E') ? await listEmpleados() : null
+    (R == 'I') ? await listInmuebles(): (R == 'C') ? await listClientes() : (R == 'E') ? await listEmpleados() : (R == 'T') ? await listContrato(): null
 
 
     dataTable = $("#fresh-table").bootstrapTable(dataTableOptions)
@@ -74,6 +79,7 @@ const listInmuebles = async () => {
                     <td >
                         <a href='/propiedad/detalles/${p.id_inmueble}' class='btn btn-sm btn_pencil' title='Ver'><i class='fa-solid fa-pencil'></i></a>
                         <a href='#' class='btn btn-sm btn_trash'><i class='fa-solid fa-trash-can'></i></a>
+                        <a href='#' class='btn btn-sm btn_file'><i class="fa-solid fa-file-invoice-dollar "></i></a>
                     </td>
                 </tr>`;
         })
@@ -106,6 +112,7 @@ const listClientes = async () => {
                         class = 'btn btn-sm btn_pencil'
                         title = 'Edit'><i class='fa-solid fa-pencil'></i></a>
                         <a href='#' class='btn btn-sm btn_trash'><i class='fa-solid fa-trash-can'></i></a>
+                        <a href='#' class='btn btn-sm btn_file'><i class="fa-solid fa-file-invoice-dollar"></i></a>
                     </td>
                 </tr>`;
         })
@@ -134,6 +141,38 @@ const listEmpleados = async () => {
                     <td >
                         <a href='/empleado/editar/${e.id_empleado}' class='btn btn-sm btn_pencil' title='Ver'><i class='fa-solid fa-pencil'></i></a>
                         <a href='#' class='btn btn-sm btn_trash'><i class='fa-solid fa-trash-can'></i></a>
+                        <a href='#' class='btn btn-sm btn_file'><i class="fa-solid fa-file-invoice-dollar"></i></a>
+                    </td>
+                </tr>`;
+        })
+        tableBody_reportes.innerHTML = content
+    } catch (ex) {
+        alert(ex)
+    }
+}
+
+const listContrato = async () => {
+    try {
+        const response = await fetch("/reportes_json_t")
+        const data = await response.json()
+        console.log(data)
+
+        let content = ``
+        data.contrato.forEach((t, i) => {
+            content += `
+                <tr>
+                    <td >${t.cod_referencia}</td>
+                    <td >${t.dir_inmueble}</td>
+                    <td >${t.non_propietario}</td>
+                    <td >${t.non_cliente}</td>
+                    <td >${t.fecha_ing}</td>
+                    <td >${t.fecha_salida}</td>
+                    <td >${t.cant_dias}</td> 
+                    <td >${t.valor_total}</td>                   
+                    <td >
+                        <a href='/propiedad/detalles/${con.id_contrato}' class='btn btn-sm btn_pencil' title='Ver'><i class='fa-solid fa-pencil'></i></a>
+                        <a href='#' class='btn btn-sm btn_trash'><i class='fa-solid fa-trash-can'></i></a>
+                        <a href='#' class='btn btn-sm btn_file'><i class="fa-solid fa-file-invoice-dollar"></i></a>
                     </td>
                 </tr>`;
         })
