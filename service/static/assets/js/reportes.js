@@ -20,7 +20,7 @@ $reporte1.click(() => {
     
 })
 
-let $reporte2 = $('#reporte2') // reporte de Clie
+let $reporte2 = $('#reporte2') // reporte de Clientes
 $reporte2.click(() => {
     
 })
