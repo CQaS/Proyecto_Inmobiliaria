@@ -15,9 +15,9 @@ $reporte_i.click(() => {
     window.location.href = '/reportes/I'
 })
 
-let $reporte2 = $('#reporte2') // reporte de Clie
-$reporte2.click(() => {
-    
+let $reporte_c = $('#reporte_c') // reporte de Cliente
+$reporte_c.click(() => {
+    window.location.href = '/reportes/C'
 })
 
 let $reporte_e = $('#reporte_e') // reporte de Empleados
