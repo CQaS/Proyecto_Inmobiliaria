@@ -112,7 +112,7 @@ const listClientes = async () => {
                         class = 'btn btn-sm btn_pencil'
                         title = 'Edit'><i class='fa-solid fa-pencil'></i></a>
                         <a href='#' class='btn btn-sm btn_trash'><i class='fa-solid fa-trash-can'></i></a>
-                        <a href='#' class='btn btn-sm btn_file'><i class="fa-solid fa-file-invoice-dollar"></i></a>
+                        <a href='/cliente/recibo/${c.id_cliente}' class='btn btn-sm btn_file'><i class="fa-solid fa-file-invoice-dollar"></i></a>
                     </td>
                 </tr>`;
         })
@@ -141,7 +141,7 @@ const listEmpleados = async () => {
                     <td >
                         <a href='/empleado/editar/${e.id_empleado}' class='btn btn-sm btn_pencil' title='Ver'><i class='fa-solid fa-pencil'></i></a>
                         <a href='#' class='btn btn-sm btn_trash'><i class='fa-solid fa-trash-can'></i></a>
-                        <a href='#' class='btn btn-sm btn_file'><i class="fa-solid fa-file-invoice-dollar"></i></a>
+                        <a href='/empleado/recibo/${e.id_empleado}' class='btn btn-sm btn_file'><i class="fa-solid fa-file-invoice-dollar"></i></a>
                     </td>
                 </tr>`;
         })

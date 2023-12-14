@@ -4,7 +4,7 @@
     <h2>Recibo de pagamento</h2>
     <form id="reciboForm">
         <label for="nom_cliente">Nome Cliente:</label>
-        <input type="text" id="nom_cliente" name="nom_cliente" required>
+        <input type="text" id="nom_cliente" name="nom_cliente" value="{{ cliente.nom_cliente }}" required>
 
         <label for="cod_referencia">Código de referência:</label>
         <input type="text" id="cod_referencia" name="cod_referencia" required>
@@ -102,6 +102,6 @@
     </style>
 
 <script src="{% static '/assets/js/recibos.js' %}"></script>
-<script type="text/javascript" src="{% static '/assets/js/jspdf.min.js %}"></script>
+<script type="text/javascript" src="{% static '/assets/js/jspdf.min.js' %}"></script>
 
 {% endblock%}

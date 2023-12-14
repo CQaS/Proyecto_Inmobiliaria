@@ -174,6 +174,16 @@ def editar_cliente(req, id_cliente=None):
 
 
 @login_required(login_url='/#modal-opened')
+def recibo_cliente(req, id_cliente):
+    cliente = Clientes.objects.get(id_cliente=id_cliente)
+    context = {
+        'cliente': cliente
+    }
+    print(cliente)
+    return render(req, 'cliente/recibo_cliente.html', context)
+
+
+@login_required(login_url='/#modal-opened')
 def eliminar_cliente(req, id_cliente):
     cliente = Clientes.objects.get(id_cliente=id_cliente)
     cliente.delete()

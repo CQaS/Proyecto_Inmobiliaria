@@ -193,6 +193,16 @@ def editar_empleado(req, id_empleado=None):
 
 
 @login_required(login_url='/#modal-opened')
+def recibo_empleado(req, id_empleado):
+    empleado = Empleados.objects.get(id_empleado=id_empleado)
+    context={
+        'empleado': empleado
+    }
+    print(empleado)
+    return render(req, 'empleado/recibo_empleado.html', context)
+
+
+@login_required(login_url='/#modal-opened')
 def eliminar_empleado(req, id_empleado):
     empleado = Empleados.objects.get(id_empleado=id_empleado)
     empleado.delete()

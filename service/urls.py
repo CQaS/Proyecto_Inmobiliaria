@@ -36,6 +36,8 @@ urlpatterns = [
     path('cliente/crear', views_cliente.crear_cliente, name="crear_cliente"),
     path('cliente/editar/<int:id_cliente>',
          views_cliente.editar_cliente, name="editar_cliente"),
+    path('cliente/recibo/<int:id_cliente>',
+         views_cliente.recibo_cliente, name="recibo_cliente"),
     path('cliente/eliminar/<int:id_cliente>',
          views_cliente.eliminar_cliente, name="eliminar_cliente"),
     path('cliente/json_Inq/<str:Name>', views_cliente.JSONclientes_Inq,
@@ -50,6 +52,8 @@ urlpatterns = [
     path('empleado/crear', views_empleado.crear_empleado, name="crear_empleado"),
     path('empleado/editar/<int:id_empleado>',
          views_empleado.editar_empleado, name="editar_empleado"),
+    path('empleado/recibo/<int:id_empleado>',
+         views_empleado.recibo_empleado, name="recibo_empleado"),
     path('empleado/eliminar/<int:id_empleado>',
          views_empleado.eliminar_empleado, name="eliminar_empleado"),
     ##### FIN RUTAS EMPLEADOS #####

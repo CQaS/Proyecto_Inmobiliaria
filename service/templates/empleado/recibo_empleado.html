@@ -7,7 +7,7 @@
             <input type="date" id="fecha" name="fecha" required> -->
 
             <label for="nom_empleado">Nome do empregado:</label>
-            <input type="text" id="nom_empleado" name="nom_empleado" required>
+            <input type="text" id="nom_empleado" name="nom_empleado" value="{{ empleado.nom_empleado }}" required>
 
             <label for="codigo_referencia">Código de referência:</label>
             <input type="text" id="codigo_referencia" name="codigo_referencia" required>
@@ -104,6 +104,6 @@ input[type="number"][readonly] {
 </style>
 
 <script src="{% static '/assets/js/recibos.js' %}"></script>
-<script type="text/javascript" src="{% static '/assets/js/jspdf.min.js %}"></script>
+<script type="text/javascript" src="{% static '/assets/js/jspdf.min.js' %}"></script>
 
 {% endblock%}
