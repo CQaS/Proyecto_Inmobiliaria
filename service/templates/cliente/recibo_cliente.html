@@ -1,0 +1,107 @@
+{% extends 'layouts/base00.html' %} {% load static %} {% block content %}
+
+<div class="container">
+    <h2>Recibo de pagamento</h2>
+    <form id="reciboForm">
+        <label for="nom_cliente">Nome Cliente:</label>
+        <input type="text" id="nom_cliente" name="nom_cliente" required>
+
+        <label for="cod_referencia">Código de referência:</label>
+        <input type="text" id="cod_referencia" name="cod_referencia" required>
+
+        <label for="nombre_red">Nome Rede:</label>
+        <input type="text" id="nombre_red" name="nombre_red" required>
+
+        <label for="clave_Wifi">Senha WI-FI:</label>
+        <input type="password" id="clave_Wifi" name="clave_Wifi" required>
+
+        <label for="fecha_ing">Data de admissão:</label>
+        <input type="date" id="fecha_ing" name="fecha_ing" required>
+
+        <label for="fecha_salida">Data saida:</label>
+        <input type="date" id="fecha_salida" name="fecha_salida" required>
+
+        <label for="monto">Valor:</label>
+        <input type="number" id="monto" name="monto" required>
+
+        <button type="button" onclick="generarRecibo()">Gerar recibo</button>
+        <button type="button" onclick="javascript:genPDF()">Salvar PDF</button>
+    </form>
+
+    <div id="recibo">
+        <!-- Aquí se mostrará el recibo generado -->
+    </div>
+</div>
+
+<style>
+
+    .container_recibos {
+        max-width: 600px;
+        margin: 50px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    form {
+        display: grid;
+        gap: 10px;
+    }
+    
+    /* Ajusta los estilos de los botones */
+    button {
+        background-color: rgb(183, 146, 130);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        flex: 1; /* Permite que los botones se ajusten dentro del contenedor */
+    }
+    
+    button:hover {
+        background-color: rgb(183, 146, 91);
+    }
+    
+    
+    #recibo {
+        margin-top: 20px;
+        border-top: 1px solid #ccc;
+        padding-top: 10px;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+    
+    /* Estilos específicos para el recibo generado */
+    #recibo p {
+        margin: 0;
+    }
+    
+    #recibo strong {
+        font-weight: bold;
+    }
+    
+    /* Estilos para los campos de entrada del formulario */
+    input[type="text"],
+    input[type="number"],
+    input[type="date"] {
+        width: calc(100% - 10px);
+        padding: 8px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+    
+    input[type="number"][readonly] {
+        background-color: #f4f4f4;
+        cursor: not-allowed;
+    }
+    
+    </style>
+
+<script src="{% static '/assets/js/recibos.js' %}"></script>
+<script type="text/javascript" src="{% static '/assets/js/jspdf.min.js %}"></script>
+
+{% endblock%}
