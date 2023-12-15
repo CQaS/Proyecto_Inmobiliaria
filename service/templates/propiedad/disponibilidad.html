@@ -43,7 +43,24 @@
 		box-shadow .15s ease-in-out;
 }
 
+/* Ajusta los estilos de los botones */
+button {
+    background-color: rgb(183, 146, 91);
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    flex: 1; /* Permite que los botones se ajusten dentro del contenedor */
+}
 
+.btn_calendar { 
+    width: 140px;
+}
+
+button:hover {
+    color: white;
+}
 
 </style>
 
@@ -51,7 +68,8 @@
     <h1>Disponibilidade</h1>
     <input type="text" class="form_input" id="" name="" placeholder="Cód. Referência" required><br>
     <input type="text" class="form_input" id=""  name="" placeholder="Direção" required><br>
-    <button type="button"><i class="fa-solid fa-rotate-right fa-spin"></i> Sincronizar</button>
+    <button type="button" class="btn_calendar"><i class="fa-solid fa-rotate-right fa-spin"></i> Sincronizar</button>
+    <button type="button" class="btn_calendar"><i class="fa-solid fa-cloud-arrow-up"></i>   Salvar  </button>  
 </div>
 
 <div id='calendar'></div>
