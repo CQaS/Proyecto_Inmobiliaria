@@ -1,6 +1,6 @@
 //Recibos de empleados 
 
-function generarRecibo() {
+function generarReciboEmpleado() {
     //var fecha = document.getElementById('fecha').value;
    var nom_empleado = document.getElementById('nom_empleado').value;
    var codigo_referencia = document.getElementById('codigo_referencia').value;
@@ -15,14 +15,15 @@ function generarRecibo() {
    var reciboTexto = `
    Recibo de pagamento de Funcionário
                                                         Data: ${fechaFormatted}.
-Recebi de ${nom_empleado} o valor total de $ ${monto_total.toFixed(2)} por ${concepto}.
+Recebi de María Eugenia Cáceres (CRECI 1111) o valor total 
+de $ ${monto_total.toFixed(2)} por ${concepto}.
 Código de referência: ${codigo_referencia}
 Número de horas:  ${cant_horas}
 Valor por hora: $${monto_hora.toFixed(2)}
 Valor Total: $${monto_total.toFixed(2)}
 
-                                               María Eugenia Cáceres
-                                               CRECI 1111
+                                               ${nom_empleado}
+                                               
 Obrigado pelo seu pagamento.
    `;
 
@@ -35,7 +36,7 @@ Obrigado pelo seu pagamento.
 }
 
 // Recibo para cliente
-function generarRecibo() {
+function generarReciboCliente() {
     var nom_cliente = document.getElementById('nom_cliente').value;
     var cod_referencia = document.getElementById('cod_referencia').value;
     var nombre_red = document.getElementById('nombre_red').value;
@@ -51,7 +52,8 @@ function generarRecibo() {
     Recibo de pagamento
                                                                         Data: ${fechaFormatted}.
 
-    Recebi de ${nom_cliente} o valor total de $${monto} para pagamento da sua estadia a partir de ${fecha_ing} até ${fecha_salida}.
+    Recebi de ${nom_cliente} o valor total de $${monto} para pagamento da sua estadia a partir 
+    de ${fecha_ing} até ${fecha_salida}.
     Código de referência: ${cod_referencia}
     Nome Rede: ${nombre_red}
     Senha WI-FI: ${clave_Wifi}
@@ -74,8 +76,13 @@ var doc = new jsPDF(); // Crea un nuevo documento jsPDF
 
 var textoRecibo = document.getElementById('recibo').innerText; // Obtén el texto del recibo
 
+//Defino estilo y formato del texto en el PDF
+doc.setFontSize(12);
+
+
 // Agrega el texto del recibo al documento
 doc.text(20, 20, textoRecibo);
+
 
 // Guarda el documento como un archivo PDF
 doc.save('ReciboPago.pdf');
