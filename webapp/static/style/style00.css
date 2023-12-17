@@ -205,6 +205,22 @@ ul {
 	opacity: 1;
 }
 
+.sidebar .nav-links li .sub-menu button {
+	color: black;
+	font-size: 13px;
+	padding: 5px 0;
+	white-space: nowrap;
+	opacity: 0.6;
+	transition: all 0.3s ease;
+	border: none;
+}
+
+.sidebar .nav-links li .sub-menu button:hover {
+	opacity: 1;
+	cursor: pointer;
+	background: rgb(183, 146, 91);
+}
+
 .sidebar.close1 .nav-links li .sub-menu {
 	position: absolute;
 	left: 100%;

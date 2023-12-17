@@ -237,7 +237,7 @@ def editar_propiedad(req, id_inmueble=None):
             'error': ERR,
             'success': success
         }
-    
+
     print(inmueble.cliente_id.id_cliente)
     print(lista)
     return render(req, 'propiedad/inmueble_form.html', context)
@@ -313,7 +313,7 @@ def buscar_por_fechas(req, f_ini, f_fin):
         print(e)
 
 
-def propiedad_por_tipo(req, tipo_o, tipo_p):
+def propiedad_por_tipo(req, tipo_o, tipo_p, temporada, anual, venda):
 
     fecha_hoy = date.today()
     fecha_formateada = fecha_hoy.strftime('%Y-%m-%d')  # fecha de hoy
@@ -336,8 +336,35 @@ def propiedad_por_tipo(req, tipo_o, tipo_p):
             ))
         ).filter(num_contratos=0, tipo_operacion__icontains=tipo_o, estado=1)
 
+    elif temporada == 'true':
+        print('Tipo temporada')
+        list = Inmueble.objects.annotate(
+            num_contratos=models.Count('contrato', filter=(
+                models.Q(contrato__fecha_ing__gt=fecha_formateada,
+                         contrato__fecha_salida__lt=fecha_formateada)
+            ))
+        ).filter(num_contratos=0, tipo_operacion__icontains='Alquiler temporario', estado=1)
+
+    elif anual == 'true':
+        print('Tipo anual')
+        list = Inmueble.objects.annotate(
+            num_contratos=models.Count('contrato', filter=(
+                models.Q(contrato__fecha_ing__gt=fecha_formateada,
+                         contrato__fecha_salida__lt=fecha_formateada)
+            ))
+        ).filter(num_contratos=0, tipo_operacion__icontains='Alquiler permanente', estado=1)
+
+    elif venda == 'true':
+        print('Tipo venta')
+        list = Inmueble.objects.annotate(
+            num_contratos=models.Count('contrato', filter=(
+                models.Q(contrato__fecha_ing__gt=fecha_formateada,
+                         contrato__fecha_salida__lt=fecha_formateada)
+            ))
+        ).filter(num_contratos=0, tipo_operacion__icontains='Venta', estado=1)
+
     else:
-        print('Topo O P')
+        print('Tipo O P')
         list = Inmueble.objects.annotate(
             num_contratos=models.Count('contrato', filter=(
                 models.Q(contrato__fecha_ing__gt=fecha_formateada,
@@ -388,17 +415,20 @@ def reportes_json_i(req):
     data = {'inmueble': inmueble}
     return JsonResponse(data)
 
+
 @login_required(login_url='/#modal-opened')
 def reportes_json_c(req):
     cliente = list(Clientes.objects.values())
     data = {'cliente': cliente}
     return JsonResponse(data)
 
+
 @login_required(login_url='/#modal-opened')
 def reportes_json_e(req):
     empleado = list(Empleados.objects.values())
     data = {'empleado': empleado}
     return JsonResponse(data)
+
 
 @login_required(login_url='/#modal-opened')
 def disponibilidad(req):

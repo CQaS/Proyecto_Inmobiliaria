@@ -13,7 +13,7 @@ const pattern_solo_numeros = /^[0-9][0-9]*$/
 const pattern_mail_m = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
 const pattern_cod_ref = /^[a-zA-Z0-9-]*$/
 const pattern_num_apto = /^[a-zA-Z0-9 ]*$/
-    
+
 let sidebar = document.querySelector(".sidebar")
 let sidebarBtn = document.querySelector(".bx-menu")
 let cards = document.querySelector(".cards")
@@ -43,16 +43,35 @@ const _alerta = (texto) => {
 }
 
 //Search de busqueda //
-let propiedad_por_tipo = document.getElementById("propiedad_por_tipo")
 let resultados_por = document.getElementById('resultados_por')
+let propiedad_por_tipo = document.getElementById("propiedad_por_tipo")
+
+let temporada = document.getElementById("temporada")
+temporada.addEventListener('click', () => {
+    tipo_o = null
+    tipo_p = null
+    temporada = true
+    consulta()
+})
+
+let anual = document.getElementById("anual")
+anual.addEventListener('click', () => {
+    tipo_o = null
+    tipo_p = null
+    anual = true
+    consulta()
+})
+
+let venda = document.getElementById("venda")
+venda.addEventListener('click', () => {
+    tipo_o = null
+    tipo_p = null
+    venda = true
+    consulta()
+})
+
 if (propiedad_por_tipo) {
     propiedad_por_tipo.addEventListener("click", () => {
-
-        let h2 = resultados_por.querySelector("h2")
-        h2 ? resultados_por.removeChild(h2) : null
-
-        let ul = resultados_por.querySelector("ul")
-        ul ? resultados_por.removeChild(ul) : null
 
         let por_operacion = document.getElementById("por_operacion")
         let por_propiedad = document.getElementById("por_propiedad")
@@ -61,43 +80,58 @@ if (propiedad_por_tipo) {
 
         tipo_o ? console.log(tipo_o) : tipo_o = false
         tipo_p ? console.log(tipo_p) : tipo_p = false
+        temporada = false
+        anual = false
+        venda = false
 
         if (!tipo_o && !tipo_p) {
             _alerta('Selecciona al menos Un tipo de Busqueda!')
             return
         }
 
-        let url = `/propiedad/propiedad_por_tipo/${tipo_o}/${tipo_p}`
+        consulta()
+    })
 
-        /* let f_ini = document.getElementById("f_ini").value
-        let f_fin = document.getElementById("f_fin").value
+}
 
-        console.log(f_ini, f_fin)
-        let url2 = `/propiedad/buscar_por_fechas/${f_ini}/${f_fin}` */
+const consulta = () => {
+    let h2 = resultados_por.querySelector("h2")
+    h2 ? resultados_por.removeChild(h2) : null
 
-        $.get(url).done((res) => {
-            console.log(res)
+    let ul = resultados_por.querySelector("ul")
+    ul ? resultados_por.removeChild(ul) : null
 
-            if (res !== undefined && res !== null && res.length > 0) {
+    let url = `/propiedad/propiedad_por_tipo/${tipo_o}/${tipo_p}/${temporada}/${anual}/${venda}`
 
-                let h2Element = document.createElement('h2')
-                h2Element.textContent = 'Resultados de la Búsqueda'
-                h2Element.style.marginLeft = '8%'
+    /* let f_ini = document.getElementById("f_ini").value
+    let f_fin = document.getElementById("f_fin").value
 
-                resultados_por.appendChild(h2Element)
+    console.log(f_ini, f_fin)
+    let url2 = `/propiedad/buscar_por_fechas/${f_ini}/${f_fin}` */
 
-                // Crear un elemento <ul>
-                let ulElement = document.createElement('ul')
-                ulElement.className = 'cards'
-                resultados_por.appendChild(ulElement)
+    $.get(url).done((res) => {
+        console.log(res)
 
-                let _cards = document.querySelector('.cards')
+        if (res !== undefined && res !== null && res.length > 0) {
 
-                $.each(res, (i, R) => {
-                    let url = R.fotos[0].image.replace('webapp/', '')
+            let h2Element = document.createElement('h2')
+            h2Element.textContent = 'Resultados de la Búsqueda'
+            h2Element.style.marginLeft = '8%'
 
-                    // HTML con el bloque completo a agregar
-                    let bloqueCARD = `
+            resultados_por.appendChild(h2Element)
+
+            // Crear un elemento <ul>
+            let ulElement = document.createElement('ul')
+            ulElement.className = 'cards'
+            resultados_por.appendChild(ulElement)
+
+            let _cards = document.querySelector('.cards')
+
+            $.each(res, (i, R) => {
+                let url = R.fotos[0].image.replace('webapp/', '')
+
+                // HTML con el bloque completo a agregar
+                let bloqueCARD = `
                                 <li class="cards__item">
                                     <div class="card">
                                         <div class="card__image" style="background-image: url(${url});"></div>
@@ -113,24 +147,22 @@ if (propiedad_por_tipo) {
                                 </li>
                                 `;
 
-                    // Agregar el bloque HTML al contenido del <ul>
-                    _cards.innerHTML += bloqueCARD
+                // Agregar el bloque HTML al contenido del <ul>
+                _cards.innerHTML += bloqueCARD
 
-                })
+            })
 
-                let hr = document.createElement('hr')
-                resultados_por.appendChild(hr)
+            let hr = document.createElement('hr')
+            resultados_por.appendChild(hr)
 
-            } else {
+        } else {
 
-                let h2Element = document.createElement('h2')
-                h2Element.textContent = 'Sin Resultados de la Búsqueda'
-                h2Element.style.marginLeft = '8%'
-                resultados_por.appendChild(h2Element)
-            }
-        })
+            let h2Element = document.createElement('h2')
+            h2Element.textContent = 'Sin Resultados de la Búsqueda'
+            h2Element.style.marginLeft = '8%'
+            resultados_por.appendChild(h2Element)
+        }
     })
-
 }
 
 /*                      script detalles de inmuebles y MAPA                 */
