@@ -20,6 +20,11 @@ $reporte_c.click(() => {
     window.location.href = '/reportes/C'
 })
 
+let $reporte_p = $('#reporte_p') // reporte de Propietarios
+$reporte_p.click(() => {
+    window.location.href = '/reportes/P'
+})
+
 let $reporte_e = $('#reporte_e') // reporte de Empleados
 $reporte_e.click(() => {
     window.location.href = '/reportes/E'
@@ -52,7 +57,7 @@ const initDataTable = async () => {
         dataTable.bootstrapTable('destroy')
     }
 
-    (R == 'I') ? await listInmuebles(): (R == 'C') ? await listClientes() : (R == 'E') ? await listEmpleados() : (R == 'T') ? await listContrato(): null
+    (R == 'I') ? await listInmuebles(): (R == 'C') ? await listClientes() : (R == 'P') ? await listPropietario() : (R == 'E') ? await listEmpleados() : (R == 'T') ? await listContrato(): null
 
 
     dataTable = $("#fresh-table").bootstrapTable(dataTableOptions)
@@ -97,6 +102,8 @@ const listClientes = async () => {
 
         let content = ``
         data.cliente.forEach((c, i) => {
+            // filtrar por categoria inquilino
+            if (c.categoria === 'Locatario') {
             content += `
                 <tr>
                     <td >${c.nom_cliente}</td>
@@ -115,6 +122,43 @@ const listClientes = async () => {
                         <a href='/cliente/recibo/${c.id_cliente}' class='btn btn-sm btn_file'><i class="fa-solid fa-file-invoice-dollar"></i></a>
                     </td>
                 </tr>`;
+            }
+        })
+        tableBody_reportes.innerHTML = content
+    } catch (ex) {
+        alert(ex)
+    }
+}
+
+const listPropietario = async () => {
+    try {
+        const response = await fetch("/reportes_json_p")
+        const data = await response.json()
+        console.log(data)
+
+        let content = ``
+        data.cliente.forEach((p, i) => {
+            // filtrar por categoria propietario
+            if (p.categoria === 'Propietario') {
+            content += `
+                <tr>
+                    <td >${p.nom_cliente}</td>
+                    <td >${p.dir_cliente}</td>
+                    <td >${p.dni_cliente}</td>
+                    <td >${p.rg_cliente}</td>  
+                    <td >${p.tel_cliente}</td>
+                    <td >${p.email_cliente}</td>  
+                    <td >${p.fechnac}</td>                           
+                    <td >${p.categoria}</td>                           
+                    <td >
+                        <a href='/cliente/editar/${p.id_cliente}'
+                        class = 'btn btn-sm btn_pencil'
+                        title = 'Edit'><i class='fa-solid fa-pencil'></i></a>
+                        <a href='#' class='btn btn-sm btn_trash'><i class='fa-solid fa-trash-can'></i></a>
+                        <a href='/cliente/liquidacion/${p.id_cliente}' class='btn btn-sm btn_file'><i class="fa-solid fa-handshake"></i></a>
+                    </td>
+                </tr>`;
+            }
         })
         tableBody_reportes.innerHTML = content
     } catch (ex) {
@@ -170,7 +214,7 @@ const listContrato = async () => {
                     <td >${t.cant_dias}</td> 
                     <td >${t.valor_total}</td>                   
                     <td >
-                        <a href='/propiedad/detalles/${con.id_contrato}' class='btn btn-sm btn_pencil' title='Ver'><i class='fa-solid fa-pencil'></i></a>
+                        <a href='/propiedad/detalles/${t.id_contrato}' class='btn btn-sm btn_pencil' title='Ver'><i class='fa-solid fa-pencil'></i></a>
                         <a href='#' class='btn btn-sm btn_trash'><i class='fa-solid fa-trash-can'></i></a>
                         <a href='#' class='btn btn-sm btn_file'><i class="fa-solid fa-file-invoice-dollar"></i></a>
                     </td>
