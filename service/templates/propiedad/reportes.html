@@ -27,6 +27,7 @@
         <div class="toolbar">
             <input type="button" value="Imovel" id="reporte_i" class="btn btn-primary">
             <input type="button" value="Clientes" id="reporte_c" class="btn btn-primary">
+            <input type="button" value="Proprietario" id="reporte_p" class="btn btn-primary">
             <input type="button" value="Empregados" id="reporte_e" class="btn btn-primary">
             <input type="button" value="Contratos" id="reporte_t" class="btn btn-primary">
         </div>
@@ -48,6 +49,18 @@
                 {% elif 'C' in R %}
                 <tr>
                     <th data-field="nombre">Nome Cliente</th>
+                    <th data-field="dire">Direção</th>
+                    <th data-field="dni">DNI</th>
+                    <th data-field="rg">R.G.</th>
+                    <th data-field="telefone">Telefone</th>
+                    <th data-field="email">Email</th>
+                    <th data-field="data nasc">Data Nasc.</th>
+                    <th data-field="categoria">Categoria</th>
+                    <th data-field="accion"><i class="fa-solid fa-gears"></i></th>
+                </tr>
+                {% elif 'P' in R %}
+                <tr>
+                    <th data-field="nombre">Nome proprietario</th>
                     <th data-field="dire">Direção</th>
                     <th data-field="dni">DNI</th>
                     <th data-field="rg">R.G.</th>

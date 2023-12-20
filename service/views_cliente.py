@@ -182,6 +182,14 @@ def recibo_cliente(req, id_cliente):
     print(cliente)
     return render(req, 'cliente/recibo_cliente.html', context)
 
+@login_required(login_url='/#modal-opened')
+def liq_propietario(req, id_cliente):
+    cliente = Clientes.objects.get(id_cliente=id_cliente)
+    context = {
+        'cliente': cliente
+    }
+    print(cliente)
+    return render(req, 'cliente/liq_propietario.html', context)
 
 @login_required(login_url='/#modal-opened')
 def eliminar_cliente(req, id_cliente):
