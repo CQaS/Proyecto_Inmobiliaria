@@ -52,7 +52,7 @@ const initDataTable = async () => {
         dataTable.bootstrapTable('destroy')
     }
 
-    (R == 'I') ? await listInmuebles(): (R == 'C') ? await listClientes() : (R == 'E') ? await listEmpleados() : (R == 'T') ? await listContrato(): null
+    (R == 'I') ? await listInmuebles(): (R == 'C') ? await listClientes() : (R == 'E') ? await listEmpleados() : (R == 'T') ? await listContrato() : null
 
 
     dataTable = $("#fresh-table").bootstrapTable(dataTableOptions)
@@ -85,7 +85,7 @@ const listInmuebles = async () => {
         })
         tableBody_reportes.innerHTML = content
     } catch (ex) {
-        alert(ex)
+        _alerta('Algo errado, entre em contato com o administrador!')
     }
 }
 
@@ -118,7 +118,7 @@ const listClientes = async () => {
         })
         tableBody_reportes.innerHTML = content
     } catch (ex) {
-        alert(ex)
+        _alerta('Algo errado, entre em contato com o administrador!')
     }
 }
 
@@ -147,7 +147,7 @@ const listEmpleados = async () => {
         })
         tableBody_reportes.innerHTML = content
     } catch (ex) {
-        alert(ex)
+        _alerta('Algo errado, entre em contato com o administrador!')
     }
 }
 
@@ -163,14 +163,14 @@ const listContrato = async () => {
                 <tr>
                     <td >${t.cod_referencia}</td>
                     <td >${t.dir_inmueble}</td>
-                    <td >${t.non_propietario}</td>
-                    <td >${t.non_cliente}</td>
+                    <td >${t.nom_prop}</td>
+                    <td >${t.nom_cliente}</td>
                     <td >${t.fecha_ing}</td>
                     <td >${t.fecha_salida}</td>
                     <td >${t.cant_dias}</td> 
                     <td >${t.valor_total}</td>                   
                     <td >
-                        <a href='/propiedad/detalles/${con.id_contrato}' class='btn btn-sm btn_pencil' title='Ver'><i class='fa-solid fa-pencil'></i></a>
+                        <a href='#' class='btn btn-sm btn_pencil' title='Ver'><i class='fa-solid fa-pencil'></i></a>
                         <a href='#' class='btn btn-sm btn_trash'><i class='fa-solid fa-trash-can'></i></a>
                         <a href='#' class='btn btn-sm btn_file'><i class="fa-solid fa-file-invoice-dollar"></i></a>
                     </td>
@@ -178,7 +178,7 @@ const listContrato = async () => {
         })
         tableBody_reportes.innerHTML = content
     } catch (ex) {
-        alert(ex)
+        _alerta('Algo errado, entre em contato com o administrador!')
     }
 }
 
@@ -227,6 +227,6 @@ const listInmueblesDisponibles = async (url) => {
         })
         tableBody_reportes.innerHTML = content
     } catch (ex) {
-        _alerta(ex)
+        _alerta('Algo errado, entre em contato com o administrador!')
     }
 }

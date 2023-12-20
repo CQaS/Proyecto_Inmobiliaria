@@ -1,4 +1,5 @@
 import json
+import os
 from datetime import date, datetime
 from pathlib import Path
 from docxtpl import DocxTemplate
@@ -7,6 +8,7 @@ from django.shortcuts import render, redirect
 from django.db import connection, IntegrityError
 from django.core.serializers import serialize
 from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 # LOGIN
 from django.contrib.auth.decorators import login_required
 from .models import *
@@ -183,6 +185,9 @@ def crear_contrato(req):
             f'contrato_REF-{cod_referencia}-{fecha_hora_formateada}.docx'
         doc.save(doc_Arch_completo)
 
+        # Abrir el archivo con la aplicación predeterminada
+        os.startfile(doc_Arch_completo)
+
     except IntegrityError as e:
         print(f"Error al crear: {e}")
     except FileNotFoundError:
@@ -200,3 +205,27 @@ def crear_contrato(req):
         'success': success
     }
     return render(req, "contrato/contrato_form.html", context)
+
+
+@login_required(login_url='/#modal-opened')
+def reportes_json_t(req):
+    # Utiliza raw para realizar una consulta SQL personalizada
+    query = '''
+        SELECT c.*, cl.*, i.*, clP.nom_cliente as nom_prop
+        FROM contrato c 
+        JOIN clientes cl ON c.cliente_id = cl.id_cliente 
+        JOIN inmueble i ON c.inmueble_id = i.id_inmueble
+        JOIN clientes clP ON clP.id_cliente = i.cliente_id
+    '''
+
+    contratos = Contrato.objects.raw(query)
+    # Convierte los resultados a una lista
+    contratos_list = []
+    for contrato in contratos:
+        contrato_dict = contrato.__dict__
+        contrato_dict.pop('_state', None)
+        contratos_list.append(contrato_dict)
+
+    print(contratos_list)
+    data = {'contrato': contratos_list}
+    return JsonResponse(data)

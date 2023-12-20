@@ -5,6 +5,7 @@ from .forms import *
 from .models import *
 from django.db import connection
 from django.contrib.auth.models import User
+from django.http.response import JsonResponse
 
 # LOGIN
 from django.contrib.auth.decorators import login_required
@@ -195,7 +196,7 @@ def editar_empleado(req, id_empleado=None):
 @login_required(login_url='/#modal-opened')
 def recibo_empleado(req, id_empleado):
     empleado = Empleados.objects.get(id_empleado=id_empleado)
-    context={
+    context = {
         'empleado': empleado
     }
     print(empleado)
@@ -207,3 +208,10 @@ def eliminar_empleado(req, id_empleado):
     empleado = Empleados.objects.get(id_empleado=id_empleado)
     empleado.delete()
     return redirect('index_empleado')
+
+
+@login_required(login_url='/#modal-opened')
+def reportes_json_e(req):
+    empleado = list(Empleados.objects.values())
+    data = {'empleado': empleado}
+    return JsonResponse(data)

@@ -27,9 +27,11 @@ urlpatterns = [
     path('reportes_json_i',
          views_propiedad.reportes_json_i, name="reportes_json_i"),
     path('reportes_json_c',
-         views_propiedad.reportes_json_c, name="reportes_json_c"),
+         views_cliente.reportes_json_c, name="reportes_json_c"),
     path('reportes_json_e',
-         views_propiedad.reportes_json_e, name="reportes_json_e"),
+         views_empleado.reportes_json_e, name="reportes_json_e"),
+    path('reportes_json_t',
+         views_contrato.reportes_json_t, name="reportes_json_t"),
     ##### FIN RUTAS REPORTES #####
     ##### RUTAS CLIENTES #####
     path('cliente', views_cliente.index_cliente, name="index_cliente"),

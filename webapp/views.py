@@ -119,5 +119,5 @@ def salir(req):
     return redirect('index')
 
 
-def notFound(req):
+def notFound(req, err=None):
     return render(req, '404.html')

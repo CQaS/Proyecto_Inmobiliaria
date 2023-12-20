@@ -223,3 +223,10 @@ def reset_password(req):
             return JsonResponse({'error': 'Usuário não encontrado.'})
     else:
         return JsonResponse({'error': 'Error desconhecido.'})
+
+
+@login_required(login_url='/#modal-opened')
+def reportes_json_c(req):
+    cliente = list(Clientes.objects.values())
+    data = {'cliente': cliente}
+    return JsonResponse(data)
