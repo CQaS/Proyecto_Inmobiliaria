@@ -57,7 +57,7 @@ const initDataTable = async () => {
         dataTable.bootstrapTable('destroy')
     }
 
-    (R == 'I') ? await listInmuebles(): (R == 'C') ? await listClientes() : (R == 'P') ? await listPropietario() : (R == 'E') ? await listEmpleados() : (R == 'T') ? await listContrato() : null
+    (R == 'I') ? await listInmuebles(): (R == 'C') ? await listClientes() : (R == 'E') ? await listEmpleados() : (R == 'T') ? await listContrato() : null
 
 
     dataTable = $("#fresh-table").bootstrapTable(dataTableOptions)
@@ -102,9 +102,7 @@ const listClientes = async () => {
 
         let content = ``
         data.cliente.forEach((c, i) => {
-            // filtrar por categoria inquilino
-            if (c.categoria === 'Locatario') {
-                content += `
+            content += `
                 <tr>
                     <td >${c.nom_cliente}</td>
                     <td >${c.dir_cliente}</td>
@@ -122,7 +120,6 @@ const listClientes = async () => {
                         <a href='/cliente/recibo/${c.id_cliente}' class='btn btn-sm btn_file'><i class="fa-solid fa-file-invoice-dollar"></i></a>
                     </td>
                 </tr>`;
-            }
         })
         tableBody_reportes.innerHTML = content
     } catch (ex) {
@@ -214,7 +211,7 @@ const listContrato = async () => {
                     <td >${t.cant_dias}</td> 
                     <td >${t.valor_total}</td>                   
                     <td >
-                        <a href='#' class='btn btn-sm btn_pencil' title='Ver'><i class='fa-solid fa-pencil'></i></a>
+                        <a href='/propiedad/detalles/${con.id_contrato}' class='btn btn-sm btn_pencil' title='Ver'><i class='fa-solid fa-pencil'></i></a>
                         <a href='#' class='btn btn-sm btn_trash'><i class='fa-solid fa-trash-can'></i></a>
                         <a href='#' class='btn btn-sm btn_file'><i class="fa-solid fa-file-invoice-dollar"></i></a>
                     </td>
