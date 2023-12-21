@@ -70,7 +70,7 @@ crear_cliente.addEventListener("click", (e) => {
         return
     }
 
-    if (c_categoria.value.length == 0) {
+    if (c_categoria.value.length == 0 || c_categoria.value == "Selecciona") {
         _alerta('Selecciona una Categoria de Cliente')
         return
     }
