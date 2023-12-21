@@ -12,13 +12,13 @@ from .forms import *
 
 def JSONclientes_Inq(request, Name):
     list = Clientes.objects.filter(
-        categoria='Inquilino', nom_cliente__icontains=Name)
+        categoria='Locatario', nom_cliente__icontains=Name)
     return HttpResponse(serialize('json', list), 'application/json')
 
 
 def JSONclientes_dni_Inq(request, dni):
     list = Clientes.objects.filter(
-        categoria='Inquilino', dni_cliente__icontains=dni)
+        categoria='Locatario', dni_cliente__icontains=dni)
     return HttpResponse(serialize('json', list), 'application/json')
 
 
@@ -235,9 +235,9 @@ def reset_password(req):
         return JsonResponse({'error': 'Error desconhecido.'})
 
 
-@login_required(login_url='/#modal-opened')  # Cliente Inquilino
+@login_required(login_url='/#modal-opened')  # Cliente Locatario
 def reportes_json_c(req):
-    cliente = list(Clientes.objects.filter(categoria='Inquilino').values())
+    cliente = list(Clientes.objects.filter(categoria='Locatario').values())
     data = {'cliente': cliente}
     return JsonResponse(data)
 
