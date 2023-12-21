@@ -1,17 +1,17 @@
 const mostrarDetallePropiedades = () => {
 
-  const propietarioSeleccionado = document.getElementById('nom_cliente').value;
-  const id_p = document.getElementById('id_p').value;
-  const fechaInicial = new Date(document.getElementById('fecha1').value);
-  const fechaFinal = new Date(document.getElementById('fecha2').value);
+  const propietarioSeleccionado = document.getElementById('nom_cliente').value
+  const id_p = document.getElementById('id_p').value
+  const fechaInicial = new Date(document.getElementById('fecha1').value)
+  const fechaFinal = new Date(document.getElementById('fecha2').value)
 
-  const tablaDetalle = document.getElementById('detallePropiedades');
-  tablaDetalle.innerHTML = ''; // Limpiar el contenido actual de la tabla
+  const tablaDetalle = document.getElementById('detallePropiedades')
+  tablaDetalle.innerHTML = '' // Limpiar el contenido actual de la tabla
 
-  let totalIngresos = 0;
-  let totalGastosMantenimiento = 0;
-  let totalGananciaNeta = 0;
-  let totalComision = 0;
+  let totalIngresos = 0
+  let totalGastosMantenimiento = 0
+  let totalGananciaNeta = 0
+  let totalComision = 0
 
   const returnFechaFormateada = (D) => {
 
@@ -31,35 +31,50 @@ const mostrarDetallePropiedades = () => {
 
   let url = `/propiedad/json_liquidacion/${id_p}`
   $.get(url).done((res) => {
-    $.each(res, (i, R) => {
-      const row = document.createElement('tr')
-      //const montoComision = (propiedad.ingresosTotales * propiedad.comision) / 100
 
-      row.innerHTML = `
-        <td>${R[0][0]}</td>
-        <td class='rendimento'>${R[0][1]}</td>
-        <td contenteditable="true" oninput="actualizarTotal(this)" class='comision'>0</td>
+    if (res && res.inmueble.length > 0) {
+
+      $.each(res, (j, R) => {
+
+        $.each(R, (k, v) => {
+          console.log(v)
+          const row = document.createElement('tr')
+          //const montoComision = (propiedad.ingresosTotales * propiedad.comision) / 100
+
+          row.innerHTML = `
+          <td>${v[0]}</td>
+          <td class='rendimento'>${v[1]}</td>
+          <td contenteditable="true" oninput="actualizarTotal(this)" class='comision'>0</td>
+          <td>0</td>
+          <td contenteditable="true" oninput="actualizarTotal(this)" class='mantenimiento'>0</td>
+          <td class='lucro'>0</td>
+          <td></td>
+        `
+          totalIngresos = totalIngresos + v[1]
+          tablaDetalle.appendChild(row)
+        })
+      })
+
+      // Agregar fila con totales al final de la tabla
+      const rowTotal = document.createElement('tr')
+      rowTotal.innerHTML = `
+        <td><strong>Totales:</strong></td>
+        <td id='totalGeneral'>0</td>
+        <td id='totalComision'>0</td>
         <td>0</td>
-        <td contenteditable="true" oninput="actualizarTotal(this)" class='mantenimiento'>0</td>
-        <td class='lucro'>0</td>
-        <td></td>
+        <td id='totalGastosMantenimiento'></td>
+        <td id='totalGananciaNeta'>0</td>
+        <td>${new Date().toLocaleDateString()}</td>
       `
-      totalIngresos = totalIngresos + R[0][1]
-      tablaDetalle.appendChild(row)
-    })
+      tablaDetalle.appendChild(rowTotal)
+    } else {
+      // Si no hay elementos, mostrar un alert
+      _alerta('No hay resultados para mostrar');
+    }
 
-    // Agregar fila con totales al final de la tabla
-    const rowTotal = document.createElement('tr')
-    rowTotal.innerHTML = `
-      <td><strong>Totales:</strong></td>
-      <td id='totalGeneral'>0</td>
-      <td id='totalComision'>0</td>
-      <td>0</td>
-      <td id='totalGastosMantenimiento'></td>
-      <td id='totalGananciaNeta'>0</td>
-      <td>${new Date().toLocaleDateString()}</td>
-    `
-    tablaDetalle.appendChild(rowTotal)
+  }).fail(() => {
+    // Manejar cualquier error en la petición AJAX
+    _alerta('Hubo un error al obtener los datos');
   })
 }
 
@@ -135,41 +150,41 @@ const actualizarTotalGeneral = () => {
 
 // funcion para generar PDF     
 function genPDF() {
-  let doc = new jsPDF(); // Crea un nuevo documento jsPDF
-  let tabla = document.getElementById('propiedades'); // Obtén la tabla de propiedades
-  let espacioTabla = document.getElementById('espacioTabla'); // Obtén el div de espacio de tabla para obtener los totales
+  let doc = new jsPDF() // Crea un nuevo documento jsPDF
+  let tabla = document.getElementById('propiedades') // Obtén la tabla de propiedades
+  let espacioTabla = document.getElementById('espacioTabla') // Obtén el div de espacio de tabla para obtener los totales
 
   // Recorre la tabla y obtén sus datos en un array
-  let data = [];
+  let data = []
   for (let i = 0; i < tabla.rows.length; i++) {
-    let rowData = [];
+    let rowData = []
     for (let j = 0; j < tabla.rows[i].cells.length; j++) {
-      rowData.push(tabla.rows[i].cells[j].innerText);
+      rowData.push(tabla.rows[i].cells[j].innerText)
     }
-    data.push(rowData);
+    data.push(rowData)
   }
 
   // Obtiene los totales debajo de la tabla
-  let totales = espacioTabla.innerHTML;
+  let totales = espacioTabla.innerHTML
 
   //Defino estilo y formato del texto en el PDF
-  doc.setFontSize(12);
+  doc.setFontSize(12)
 
   // Define la posición y tamaño del texto en el PDF
-  let posY = 10;
-  let textoRecibo = 'Liquidação de Propriedade\n\n'; // Agrega un encabezado al PDF
+  let posY = 10
+  let textoRecibo = 'Liquidação de Propriedade\n\n' // Agrega un encabezado al PDF
 
   // Agrega los datos de la tabla al texto del PDF
   for (let row of data) {
-    textoRecibo += row.join('\t') + '\n';
+    textoRecibo += row.join('\t') + '\n'
   }
 
   // Agrega los totales debajo de la tabla al texto del PDF
-  textoRecibo += '\n\nTotales:\n' + totales;
+  textoRecibo += '\n\nTotales:\n' + totales
 
   // Agrega el texto al documento
-  doc.text(10, posY, textoRecibo);
+  doc.text(10, posY, textoRecibo)
 
   // Guarda el documento como un archivo PDF
-  doc.save('Liquidação de Propriedade.pdf');
+  doc.save('Liquidação de Propriedade.pdf')
 }

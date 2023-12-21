@@ -123,18 +123,23 @@ def crear_contrato(req):
         return fecha_formateada
 
     try:
+        cliente_instancia = Clientes.objects.get(
+            id_cliente=req.POST['id_cliente'])
+        inmueble_instancia = Inmueble.objects.get(
+            id_inmueble=req.POST['id_inmueble'])
+
         C = Contrato.objects.create(
             tipo_operacion='S/D',
             fecha_contrato=fecha_hora_hoy.date(),
             fecha_ing=req.POST['fecha_ing'],
             fecha_salida=req.POST['fecha_salida'],
             cant_dias=req.POST['cant_dias'],
-            cliente_id=int(req.POST['id_cliente']),
+            cliente_id=cliente_instancia,
             valor_total=req.POST['valor_total'],
             monto_reserva=req.POST['monto_reserva'],
             fecha_reserva=fecha_hora_hoy.date(),
             datos_envio=req.POST['datos_envio'],
-            inmueble_id=int(req.POST['id_inmueble'])
+            inmueble_id=inmueble_instancia
         )
 
         context = {
@@ -188,18 +193,24 @@ def crear_contrato(req):
         # Abrir el archivo con la aplicación predeterminada
         os.startfile(doc_Arch_completo)
 
-    except IntegrityError as e:
-        print(f"Error al crear: {e}")
-    except FileNotFoundError:
-        print("El archivo no existe")
-    except IsADirectoryError:
-        print("El archivo es un directorio")
-    except PermissionError:
-        print("No tienes permisos para acceder al archivo")
-    except Exception as e:
-        print(f"Ocurrió un error: {e}")
+        success = 'Contrato creado con Exito!'
 
-    success = 'Contrato creado con Exito!'
+    except IntegrityError as e:
+        ERR = f"Error al crear: {e}"
+        print(ERR)
+    except FileNotFoundError:
+        ERR = "El archivo no existe"
+        print(ERR)
+    except IsADirectoryError:
+        ERR = "El archivo es un directorio"
+        print(ERR)
+    except PermissionError:
+        ERR = "No tienes permisos para acceder al archivo"
+        print(ERR)
+    except Exception as e:
+        ERR = f"Ocurrió un error: {e}"
+        print(ERR)
+
     context = {
         'error': ERR,
         'success': success
