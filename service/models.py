@@ -262,5 +262,26 @@ def buscarProp_ID(id_inmueble):
 
     except IntegrityError as e:
         ERR = 'Algo fallo, intenta nuevamente o ponte en contacto con Admin'
-        return {'ERR': ERR}
         print("Error:", e)
+        return {'ERR': ERR}
+
+
+def liquidacion(id_p):
+    query = """
+        SELECT inm.dir_inmueble, con.valor_total FROM clientes cli JOIN inmueble inm ON cli.id_cliente = inm.cliente_id JOIN contrato con ON con.inmueble_id = inm.id_inmueble WHERE cli.id_cliente = {0} AND cli.categoria = 'Propietario'
+        """.format(id_p)
+
+    ERR = ''
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            columns = [col[0] for col in cursor.description]
+            res = cursor.fetchall()
+            cursor.close()
+
+            return {'res': res, 'columns': columns, 'ERR': ERR}
+
+    except IntegrityError as e:
+        ERR = 'Algo fallo, intenta nuevamente o ponte en contacto con Admin'
+        print("Error:", e)
+        return {'ERR': ERR}

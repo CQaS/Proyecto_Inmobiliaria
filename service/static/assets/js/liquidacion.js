@@ -1,129 +1,175 @@
-const datosPropietarios = {
-    "propietario1": {
-      propiedades: [
-        {
-          nombre: "Departamento 1",
-          ingresosTotales: 10000,
-          gastosMantenimiento: 2000,
-          comision: 5,
-          fechaActual: "2023-07-20"
-        },
-        {
-          nombre: "Departamento 2",
-          ingresosTotales: 20000,
-          gastosMantenimiento: 4000,
-          comision: 7,
-          fechaActual: "2023-07-21"
-        }
-      ]
-    },
-    "propietario2": {
-      propiedades: [
-        {
-          nombre: "Casa 1",
-          ingresosTotales: 30000,
-          gastosMantenimiento: 6000,
-          comision: 10,
-          fechaActual: "2023-07-22"
-        }
-      ]
-    }
-  };
-  
-  function mostrarDetallePropiedades() {
-    const propietarioSeleccionado = document.getElementById('propietario').value;
-    const fechaInicial = new Date(document.getElementById('fecha1').value);
-    const fechaFinal = new Date(document.getElementById('fecha2').value);
-  
-    const propiedades = datosPropietarios[propietarioSeleccionado].propiedades;
-  
-    const filtradasPorFecha = propiedades.filter(propiedad => {
-      const fechaPropiedad = new Date(propiedad.fechaActual);
-      return fechaPropiedad >= fechaInicial && fechaPropiedad <= fechaFinal;
-    });
-  
-    const tablaDetalle = document.getElementById('detallePropiedades');
-    tablaDetalle.innerHTML = ''; // Limpiar el contenido actual de la tabla
-  
-    let totalIngresos = 0;
-    let totalGastosMantenimiento = 0;
-    let totalGananciaNeta = 0;
-    let totalComision = 0;
-  
-    filtradasPorFecha.forEach(propiedad => {
-      const row = document.createElement('tr');
-      const montoComision = (propiedad.ingresosTotales * propiedad.comision) / 100;
-      const gananciaNeta = propiedad.ingresosTotales - montoComision - propiedad.gastosMantenimiento;
-  
-      totalIngresos += propiedad.ingresosTotales;
-      totalGastosMantenimiento += propiedad.gastosMantenimiento;
-      totalGananciaNeta += gananciaNeta;
-      totalComision += montoComision;
-  
+const mostrarDetallePropiedades = () => {
+
+  const propietarioSeleccionado = document.getElementById('nom_cliente').value;
+  const id_p = document.getElementById('id_p').value;
+  const fechaInicial = new Date(document.getElementById('fecha1').value);
+  const fechaFinal = new Date(document.getElementById('fecha2').value);
+
+  const tablaDetalle = document.getElementById('detallePropiedades');
+  tablaDetalle.innerHTML = ''; // Limpiar el contenido actual de la tabla
+
+  let totalIngresos = 0;
+  let totalGastosMantenimiento = 0;
+  let totalGananciaNeta = 0;
+  let totalComision = 0;
+
+  const returnFechaFormateada = (D) => {
+
+    let year = D.getFullYear()
+    let month = String(D.getMonth() + 1).padStart(2, '0')
+    let day = String(D.getDate()).padStart(2, '0')
+    let fechaFormateada = year + '-' + month + '-' + day
+
+    // Mostrar la fecha formateada
+    return fechaFormateada
+  }
+
+  let fecha_inicial = returnFechaFormateada(fechaInicial)
+  let fecha_Final = returnFechaFormateada(fechaFinal)
+
+  console.log(fecha_inicial, fecha_Final)
+
+  let url = `/propiedad/json_liquidacion/${id_p}`
+  $.get(url).done((res) => {
+    $.each(res, (i, R) => {
+      const row = document.createElement('tr')
+      //const montoComision = (propiedad.ingresosTotales * propiedad.comision) / 100
+
       row.innerHTML = `
-        <td>${propiedad.nombre}</td>
-        <td>${propiedad.ingresosTotales}</td>
-        <td contenteditable="true" oninput="actualizarGananciaNeta(this.parentElement)">${propiedad.comision}</td>
-        <td>${montoComision.toFixed(2)}</td>
-        <td contenteditable="true" oninput="actualizarGananciaNeta(this.parentElement)">${propiedad.gastosMantenimiento}</td>
-        <td>${gananciaNeta.toFixed(2)}</td>
-        <td>${new Date().toLocaleDateString()}</td>
-      `;
-      tablaDetalle.appendChild(row);
-    });
-  
+        <td>${R[0][0]}</td>
+        <td class='rendimento'>${R[0][1]}</td>
+        <td contenteditable="true" oninput="actualizarTotal(this)" class='comision'>0</td>
+        <td>0</td>
+        <td contenteditable="true" oninput="actualizarTotal(this)" class='mantenimiento'>0</td>
+        <td class='lucro'>0</td>
+        <td></td>
+      `
+      totalIngresos = totalIngresos + R[0][1]
+      tablaDetalle.appendChild(row)
+    })
+
     // Agregar fila con totales al final de la tabla
-    const rowTotal = document.createElement('tr');
+    const rowTotal = document.createElement('tr')
     rowTotal.innerHTML = `
       <td><strong>Totales:</strong></td>
-      <td>${totalIngresos}</td>
-      <td></td>
-      <td>${totalComision.toFixed(2)}</td>
-      <td>${totalGastosMantenimiento}</td>
-      <td>${totalGananciaNeta.toFixed(2)}</td>
-      <td></td>
-    `;
-    tablaDetalle.appendChild(rowTotal);
-  }
-  
-  // funcion para generar PDF     
-  function genPDF() {
-    var doc = new jsPDF(); // Crea un nuevo documento jsPDF
-    var tabla = document.getElementById('propiedades'); // Obtén la tabla de propiedades
-    var espacioTabla = document.getElementById('espacioTabla'); // Obtén el div de espacio de tabla para obtener los totales
-  
-    // Recorre la tabla y obtén sus datos en un array
-    var data = [];
-    for (var i = 0; i < tabla.rows.length; i++) {
-      var rowData = [];
-      for (var j = 0; j < tabla.rows[i].cells.length; j++) {
-        rowData.push(tabla.rows[i].cells[j].innerText);
-      }
-      data.push(rowData);
-    }
-  
-    // Obtiene los totales debajo de la tabla
-    var totales = espacioTabla.innerHTML;
+      <td id='totalGeneral'>0</td>
+      <td id='totalComision'>0</td>
+      <td>0</td>
+      <td id='totalGastosMantenimiento'></td>
+      <td id='totalGananciaNeta'>0</td>
+      <td>${new Date().toLocaleDateString()}</td>
+    `
+    tablaDetalle.appendChild(rowTotal)
+  })
+}
 
-    //Defino estilo y formato del texto en el PDF
-    doc.setFontSize(12);
+const actualizarTotal = (e) => {
+  let fila = e.parentNode
+  // Obtener los elementos de la tabla
+  let rendimentoTXT = fila.querySelector('.rendimento')
+  let comisionTXT = fila.querySelector('.comision')
+  let mantenimientoTXT = fila.querySelector('.mantenimiento')
+  let lucro = fila.querySelector('.lucro')
 
-    // Define la posición y tamaño del texto en el PDF
-    var posY = 10;
-    var textoRecibo = 'Liquidação de Propriedade\n\n'; // Agrega un encabezado al PDF
-  
-    // Agrega los datos de la tabla al texto del PDF
-    for (var row of data) {
-      textoRecibo += row.join('\t') + '\n';
+  let rendimento = parseFloat(rendimentoTXT.innerText)
+  let comision = parseFloat(comisionTXT.innerText)
+  let mantenimiento = parseFloat(mantenimientoTXT.innerText)
+
+  lucro.innerText = !isNaN(rendimento - comision - mantenimiento) ? rendimento - comision - mantenimiento : 0
+
+  // Actualizar el total general
+  actualizarTotalGeneral()
+}
+
+const actualizarTotalGeneral = () => {
+  let total_rendimento = document.querySelectorAll('.rendimento')
+  let totalGeneral = 0
+  // Sumar los totales de todas las filas
+  total_rendimento.forEach((t) => {
+    var total = parseFloat(t.innerText)
+    if (!isNaN(total)) {
+      totalGeneral += total
     }
-  
-    // Agrega los totales debajo de la tabla al texto del PDF
-    textoRecibo += '\n\nTotales:\n' + totales;
-  
-    // Agrega el texto al documento
-    doc.text(10, posY, textoRecibo);
-  
-    // Guarda el documento como un archivo PDF
-    doc.save('Liquidação de Propriedade.pdf');
+  })
+  // Actualizar el elemento total general
+  document.getElementById('totalGeneral').innerText = totalGeneral
+
+  let total_comision = document.querySelectorAll('.comision')
+  let totalGeneralComision = 0
+  // Sumar los totales de todas las filas
+  total_comision.forEach((t) => {
+    var total = parseFloat(t.innerText)
+    if (!isNaN(total)) {
+      totalGeneralComision += total
+    }
+  })
+  // Actualizar el elemento total general
+  document.getElementById('totalComision').innerText = totalGeneralComision
+
+  let total_mantenimiento = document.querySelectorAll('.mantenimiento')
+  let totalGeneralMantenimiento = 0
+  // Sumar los totales de todas las filas
+  total_mantenimiento.forEach((t) => {
+    var total = parseFloat(t.innerText)
+    if (!isNaN(total)) {
+      totalGeneralMantenimiento += total
+    }
+  })
+  // Actualizar el elemento total general
+  document.getElementById('totalGastosMantenimiento').innerText = totalGeneralMantenimiento
+
+  let total_lucro = document.querySelectorAll('.lucro')
+  let totalGeneralLucro = 0
+  // Sumar los totales de todas las filas
+  total_lucro.forEach((t) => {
+    var total = parseFloat(t.innerText)
+    if (!isNaN(total)) {
+      totalGeneralLucro += total
+    }
+  })
+  // Actualizar el elemento total general
+  document.getElementById('totalGananciaNeta').innerText = totalGeneralLucro
+
+
+}
+
+// funcion para generar PDF     
+function genPDF() {
+  let doc = new jsPDF(); // Crea un nuevo documento jsPDF
+  let tabla = document.getElementById('propiedades'); // Obtén la tabla de propiedades
+  let espacioTabla = document.getElementById('espacioTabla'); // Obtén el div de espacio de tabla para obtener los totales
+
+  // Recorre la tabla y obtén sus datos en un array
+  let data = [];
+  for (let i = 0; i < tabla.rows.length; i++) {
+    let rowData = [];
+    for (let j = 0; j < tabla.rows[i].cells.length; j++) {
+      rowData.push(tabla.rows[i].cells[j].innerText);
+    }
+    data.push(rowData);
   }
-  
+
+  // Obtiene los totales debajo de la tabla
+  let totales = espacioTabla.innerHTML;
+
+  //Defino estilo y formato del texto en el PDF
+  doc.setFontSize(12);
+
+  // Define la posición y tamaño del texto en el PDF
+  let posY = 10;
+  let textoRecibo = 'Liquidação de Propriedade\n\n'; // Agrega un encabezado al PDF
+
+  // Agrega los datos de la tabla al texto del PDF
+  for (let row of data) {
+    textoRecibo += row.join('\t') + '\n';
+  }
+
+  // Agrega los totales debajo de la tabla al texto del PDF
+  textoRecibo += '\n\nTotales:\n' + totales;
+
+  // Agrega el texto al documento
+  doc.text(10, posY, textoRecibo);
+
+  // Guarda el documento como un archivo PDF
+  doc.save('Liquidação de Propriedade.pdf');
+}

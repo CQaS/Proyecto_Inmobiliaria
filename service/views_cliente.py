@@ -182,6 +182,7 @@ def recibo_cliente(req, id_cliente):
     print(cliente)
     return render(req, 'cliente/recibo_cliente.html', context)
 
+
 @login_required(login_url='/#modal-opened')
 def liq_propietario(req, id_cliente):
     cliente = Clientes.objects.get(id_cliente=id_cliente)
@@ -190,6 +191,7 @@ def liq_propietario(req, id_cliente):
     }
     print(cliente)
     return render(req, 'cliente/liq_propietario.html', context)
+
 
 @login_required(login_url='/#modal-opened')
 def eliminar_cliente(req, id_cliente):
@@ -233,8 +235,15 @@ def reset_password(req):
         return JsonResponse({'error': 'Error desconhecido.'})
 
 
-@login_required(login_url='/#modal-opened')
+@login_required(login_url='/#modal-opened')  # Cliente Inquilino
 def reportes_json_c(req):
-    cliente = list(Clientes.objects.values())
+    cliente = list(Clientes.objects.filter(categoria='Inquilino').values())
+    data = {'cliente': cliente}
+    return JsonResponse(data)
+
+
+@login_required(login_url='/#modal-opened')  # Cliente Propietario
+def reportes_json_p(req):
+    cliente = list(Clientes.objects.filter(categoria='Propietario').values())
     data = {'cliente': cliente}
     return JsonResponse(data)

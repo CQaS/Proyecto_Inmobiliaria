@@ -20,6 +20,8 @@ urlpatterns = [
          views_propiedad.propiedad_por_tipo, name="propiedad_por_tipo"),
     path('propiedad/disponibilidad',
          views_propiedad.disponibilidad, name="disponibilidad"),
+    path('propiedad/json_liquidacion/<int:id_p>',
+         views_propiedad.json_liquidacion, name="json_liquidacion"),
     ##### FIN RUTAS PROPIEDADES #####
     ##### RUTAS REPORTES #####
     path('reportes/<str:R>',
@@ -27,11 +29,13 @@ urlpatterns = [
     path('reportes_json_i',
          views_propiedad.reportes_json_i, name="reportes_json_i"),
     path('reportes_json_c',
-         views_propiedad.reportes_json_c, name="reportes_json_c"),
+         views_cliente.reportes_json_c, name="reportes_json_c"),
+    path('reportes_json_p',
+         views_cliente.reportes_json_p, name="reportes_json_p"),
     path('reportes_json_e',
-         views_propiedad.reportes_json_e, name="reportes_json_e"),
+         views_empleado.reportes_json_e, name="reportes_json_e"),
     path('reportes_json_t',
-         views_propiedad.reportes_json_t, name="reportes_json_t"),
+         views_contrato.reportes_json_t, name="reportes_json_t"),
     ##### FIN RUTAS REPORTES #####
     ##### RUTAS CLIENTES #####
     path('cliente', views_cliente.index_cliente, name="index_cliente"),
@@ -40,6 +44,8 @@ urlpatterns = [
          views_cliente.editar_cliente, name="editar_cliente"),
     path('cliente/recibo/<int:id_cliente>',
          views_cliente.recibo_cliente, name="recibo_cliente"),
+    path('cliente/liquidacion/<int:id_cliente>',
+         views_cliente.liq_propietario, name="liq_propietario"),
     path('cliente/eliminar/<int:id_cliente>',
          views_cliente.eliminar_cliente, name="eliminar_cliente"),
     path('cliente/json_Inq/<str:Name>', views_cliente.JSONclientes_Inq,
@@ -60,11 +66,11 @@ urlpatterns = [
          views_empleado.eliminar_empleado, name="eliminar_empleado"),
     ##### FIN RUTAS EMPLEADOS #####
     ##### RUTAS CONTRATOS #####
-    path('contrato/',
+    path('contrato/crear',
          views_contrato.contrato_codRef, name="contrato_codRef"),
     path('contrato/codRef/<str:codRef>',
          views_contrato.contrato_codRef2, name="contrato_codRef2"),
-    path('contrato/<int:id_inmueble>/',
+    path('contrato/detalles/<int:id_inmueble>/',
          views_contrato.contrato_idInmueble, name="contrato_idInmueble"),
     path('contrato/crear', views_contrato.crear_contrato, name="crear_contrato"),
     ##### FIN RUTAS CONTRATOS #####
