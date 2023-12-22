@@ -9,9 +9,6 @@ const mostrarDetallePropiedades = () => {
   tablaDetalle.innerHTML = '' // Limpiar el contenido actual de la tabla
 
   let totalIngresos = 0
-  let totalGastosMantenimiento = 0
-  let totalGananciaNeta = 0
-  let totalComision = 0
 
   const returnFechaFormateada = (D) => {
 
@@ -45,7 +42,7 @@ const mostrarDetallePropiedades = () => {
           <td>${v[0]}</td>
           <td class='rendimento'>${v[1]}</td>
           <td contenteditable="true" oninput="actualizarTotal(this)" class='comision'>0</td>
-          <td>0</td>
+          <td class='porcentaje'>0</td>
           <td contenteditable="true" oninput="actualizarTotal(this)" class='mantenimiento'>0</td>
           <td class='lucro'>0</td>
           <td></td>
@@ -61,7 +58,7 @@ const mostrarDetallePropiedades = () => {
         <td><strong>Totales:</strong></td>
         <td id='totalGeneral'>0</td>
         <td id='totalComision'>0</td>
-        <td>0</td>
+        <td id='totalPorcentaje'>0</td>
         <td id='totalGastosMantenimiento'></td>
         <td id='totalGananciaNeta'>0</td>
         <td>${new Date().toLocaleDateString()}</td>
@@ -84,12 +81,14 @@ const actualizarTotal = (e) => {
   let rendimentoTXT = fila.querySelector('.rendimento')
   let comisionTXT = fila.querySelector('.comision')
   let mantenimientoTXT = fila.querySelector('.mantenimiento')
+  let porcentajeTXT = fila.querySelector('.porcentaje')
   let lucro = fila.querySelector('.lucro')
 
   let rendimento = parseFloat(rendimentoTXT.innerText)
   let comision = parseFloat(comisionTXT.innerText)
   let mantenimiento = parseFloat(mantenimientoTXT.innerText)
 
+  porcentajeTXT.innerText = !isNaN(rendimento * comision / 100) ? rendimento * comision / 100 : 0
   lucro.innerText = !isNaN(rendimento - comision - mantenimiento) ? rendimento - comision - mantenimiento : 0
 
   // Actualizar el total general
@@ -121,6 +120,18 @@ const actualizarTotalGeneral = () => {
   // Actualizar el elemento total general
   document.getElementById('totalComision').innerText = totalGeneralComision
 
+  let total_Porcentaje = document.querySelectorAll('.porcentaje')
+  let totalGeneralPorcentaje = 0
+  // Sumar los totales de todas las filas
+  total_Porcentaje.forEach((t) => {
+    var total = parseFloat(t.innerText)
+    if (!isNaN(total)) {
+      totalGeneralPorcentaje += total
+    }
+  })
+  // Actualizar el elemento total general
+  document.getElementById('totalPorcentaje').innerText = totalGeneralPorcentaje
+
   let total_mantenimiento = document.querySelectorAll('.mantenimiento')
   let totalGeneralMantenimiento = 0
   // Sumar los totales de todas las filas
@@ -149,7 +160,7 @@ const actualizarTotalGeneral = () => {
 }
 
 // funcion para generar PDF     
-function genPDF() {
+const genPDF = () => {
   let doc = new jsPDF() // Crea un nuevo documento jsPDF
   let tabla = document.getElementById('propiedades') // Obtén la tabla de propiedades
   let espacioTabla = document.getElementById('espacioTabla') // Obtén el div de espacio de tabla para obtener los totales
