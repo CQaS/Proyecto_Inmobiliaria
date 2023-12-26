@@ -152,7 +152,7 @@ const listPropietario = async () => {
                         class = 'btn btn-sm btn_pencil'
                         title = 'Edit'><i class='fa-solid fa-pencil'></i></a>
                         <a href='#' class='btn btn-sm btn_trash'><i class='fa-solid fa-trash-can'></i></a>
-                        <a href='/cliente/liquidacion/${p.id_cliente}' class='btn btn-sm btn_file'><i class="fa-solid fa-handshake"></i></a>
+                        <a href='/cliente/liquidacion/${p.id_cliente}' ></a>
                     </td>
                 </tr>`;
             }
