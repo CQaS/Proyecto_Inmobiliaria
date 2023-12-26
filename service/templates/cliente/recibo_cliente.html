@@ -2,53 +2,90 @@
 
 <div class="container_recibos">
     <h2>Recibo de pagamento</h2>
-    <form id="reciboForm">
-        <label for="nom_cliente">Nome Cliente:</label>
-        <input type="text" id="nom_cliente" name="nom_cliente" value="{{ cliente.nom_cliente }}" required>
+    {% for cli in cliente %}
+    <input type="hidden" name="idPropietario" id="idPropietario" value="{{ cli.idPropietario }}">
+    <label for="nom_cliente">Nome Cliente:</label>
+    <input type="text" id="nom_cliente" name="nom_cliente" value="{{ cli.nom_cliente }}" required>
 
-        <label for="cod_referencia">Código de referência:</label>
-        <input type="text" id="cod_referencia" name="cod_referencia" required>
+    <label for="cod_referencia">Código de referência:</label>
+    <input type="text" id="cod_referencia" name="cod_referencia" value="{{ cli.cod_referencia }}" required>
 
-        <label for="nombre_red">Nome Rede:</label>
-        <input type="text" id="nombre_red" name="nombre_red" required>
+    <label for="nombre_red">Nome Rede:</label>
+    <input type="text" id="nombre_red" name="nombre_red" value="{{ cli.nombre_red}}" required>
 
-        <label for="clave_Wifi">Senha WI-FI:</label>
-        <input type="text" id="clave_Wifi" name="clave_Wifi" required>
+    <label for="clave_Wifi">Senha WI-FI:</label>
+    <input type="text" id="clave_Wifi" name="clave_Wifi" value="{{ cli.clave_wifi }}" required>
 
-        <label for="fecha_ing">Data de admissão:</label>
-        <input type="date" id="fecha_ing" name="fecha_ing" required>
+    <label for="fecha_ing">Data de admissão:</label>
+    <input type="date" id="fecha_ing" name="fecha_ing" value="{{ cli.fecha_ing }}" required>
 
-        <label for="fecha_salida">Data saida:</label>
-        <input type="date" id="fecha_salida" name="fecha_salida" required>
+    <label for="fecha_salida">Data saida:</label>
+    <input type="date" id="fecha_salida" name="fecha_salida" value="{{ cli.fecha_salida }}" required>
 
-        <label for="monto">Valor:</label>
-        <input type="number" id="monto" name="monto" required>
+    <label for="monto">Valor:</label>
+    <input type="number" id="monto" name="monto" value="{{ cli.saldo }}" required>
+    {% endfor %}
 
-        <button type="button" onclick="generarReciboCliente()"><i class="fa-solid fa-file-invoice-dollar"></i> Gerar recibo</button>
-        <button type="button" onclick="javascript:genPDF()"><i class="fa-solid fa-cloud-arrow-up"></i>    Salvar PDF   </button>
-    </form>
+    <button style="margin-top: 10px;" type="button" onclick="generarReciboCliente()"><i
+            class="fa-solid fa-file-invoice-dollar"></i> Gerar
+        recibo</button>
+    <button id="salvarPDF" type="button" onclick="javascript:genPDFR()" style="display: none;"><i
+            class="fa-solid fa-cloud-arrow-up"></i> Salvar PDF
+    </button>
 
     <div id="recibo">
         <!-- Aquí se mostrará el recibo generado -->
     </div>
 </div>
 
-<style>
+<div class="container_liq" style="display: none;">
 
-    .container_recibos {
-        max-width: 600px;
+    <h2>Liquidação de Propriedade</h2>
+
+    <label for="cliente_cliente_p">Nome Proprietario:</label>
+    <input type="hidden" name="id_p" id="id_p" value="{{ cliente_P.id_cliente }}">
+    <input type="text" id="cliente_cliente_p" name="cliente_cliente_p" value="{{ cliente_P.nom_cliente }}" required>
+    <br>
+    <br>
+    <button onclick="mostrarDetallePropiedades()"><i class="fa-solid fa-handshake"></i> Gerar </button>
+    <!-- Botón para mostrar detalles -->
+
+    <div class="table-container">
+        <table id="propiedades">
+            <thead>
+                <tr>
+                    <th>Propiedad</th>
+                    <th>Rendimento</th>
+                    <th>Com. (%)</th>
+                    <th>Com. (R$)</th>
+                    <th>Manutenção</th>
+                    <th>Lucro propr.</th>
+                    <th>Data</th>
+                </tr>
+            </thead>
+            <tbody id="detallePropiedades"></tbody>
+        </table>
+        <button type="button" onclick="javascript:gen_PDFL()"><i class="fa-solid fa-cloud-arrow-up"></i> Salvar PDF
+        </button>
+    </div>
+    <div id="espacioTabla"></div>
+</div>
+
+<style>
+    .container_liq {
+        max-width: 850px;
         margin: 50px auto;
         background-color: #fff;
         padding: 20px;
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
-    
+
     form {
         display: grid;
         gap: 10px;
     }
-    
+
     /* Ajusta los estilos de los botones */
     button {
         background-color: rgb(183, 146, 91);
@@ -57,31 +94,37 @@
         padding: 10px 20px;
         border-radius: 4px;
         cursor: pointer;
-        flex: 1; /* Permite que los botones se ajusten dentro del contenedor */
+        flex: 1;
+        /* Permite que los botones se ajusten dentro del contenedor */
     }
-    
+
     button:hover {
         color: white;
     }
-    
-    
-    #recibo {
+
+    .table-container {
+        overflow-x: auto;
         margin-top: 20px;
-        border-top: 1px solid #ccc;
-        padding-top: 10px;
-        font-size: 14px;
-        line-height: 1.6;
     }
-    
-    /* Estilos específicos para el recibo generado */
-    #recibo p {
-        margin: 0;
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
     }
-    
-    #recibo strong {
-        font-weight: bold;
+
+    table th,
+    table td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: left;
     }
-    
+
+    table th {
+        background-color: rgb(183, 146, 91);
+        border-radius: 5px;
+    }
+
     /* Estilos para los campos de entrada del formulario */
     input[type="text"],
     input[type="number"],
@@ -93,15 +136,79 @@
         font-size: 14px;
         margin-top: 5px;
     }
-    
+
     input[type="number"][readonly] {
         background-color: #f4f4f4;
         cursor: not-allowed;
     }
-    
-    </style>
 
-<script src="{% static '/assets/js/recibos.js' %}"></script>
+    .container_recibos {
+        max-width: 600px;
+        margin: 50px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    form {
+        display: grid;
+        gap: 10px;
+    }
+
+    /* Ajusta los estilos de los botones */
+    button {
+        background-color: rgb(183, 146, 91);
+        color: black;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        flex: 1;
+        /* Permite que los botones se ajusten dentro del contenedor */
+    }
+
+    button:hover {
+        color: white;
+    }
+
+
+    #recibo {
+        margin-top: 20px;
+        border-top: 1px solid #ccc;
+        padding-top: 10px;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    /* Estilos específicos para el recibo generado */
+    #recibo p {
+        margin: 0;
+    }
+
+    #recibo strong {
+        font-weight: bold;
+    }
+
+    /* Estilos para los campos de entrada del formulario */
+    input[type="text"],
+    input[type="number"],
+    input[type="date"] {
+        width: calc(100% - 10px);
+        padding: 8px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
+    input[type="number"][readonly] {
+        background-color: #f4f4f4;
+        cursor: not-allowed;
+    }
+</style>
+
 <script type="text/javascript" src="{% static '/assets/js/jspdf.min.js' %}"></script>
+<script src="{% static '/assets/js/liquidacion.js' %}"></script>
 
 {% endblock%}

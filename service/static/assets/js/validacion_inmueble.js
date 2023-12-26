@@ -91,7 +91,7 @@ if (send) {
 
         if (tipo_servicio) {
             tipos = ''
-            for (var i = 0; i < tipo_servicio.length; i++) {
+            for (let i = 0; i < tipo_servicio.length; i++) {
                 tipo_servicio[i].checked == true ? tipos = tipos + tipo_servicio[i].value + ', ' : console.log('NO')
             }
 

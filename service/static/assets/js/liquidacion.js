@@ -1,31 +1,144 @@
+//Recibos de empleados 
+
+const generarReciboEmpleado = () => {
+  //let fecha = document.getElementById('fecha').value
+  let nom_empleado = document.getElementById('nom_empleado').value
+  let codigo_referencia = document.getElementById('codigo_referencia').value
+  let concepto = document.getElementById('concepto').value
+  let cant_horas = parseFloat(document.getElementById('cant_horas').value)
+  let monto_hora = parseFloat(document.getElementById('monto_hora').value)
+  let monto_total = cant_horas * monto_hora
+
+  let fechaActual = new Date() // Obtiene la fecha actual
+  let fechaFormatted = fechaActual.toLocaleDateString() // Formatea la fecha a string
+
+  let reciboTexto = `
+   Recibo de pagamento de Funcionário
+                                                        Data: ${fechaFormatted}.
+Recebi de María Eugenia Cáceres (CRECI 1111) o valor total 
+de $ ${monto_total.toFixed(2)} por ${concepto}.
+Código de referência: ${codigo_referencia}
+Número de horas:  ${cant_horas}
+Valor por hora: $${monto_hora.toFixed(2)}
+Valor Total: $${monto_total.toFixed(2)}
+
+                                               ${nom_empleado}
+                                               
+Obrigado pelo seu pagamento.
+   `
+
+  document.getElementById('recibo').innerText = reciboTexto
+  document.getElementById('monto_total').value = monto_total.toFixed(2)
+
+  // Generar y descargar archivo de texto
+  descargarTexto(reciboTexto, 'recibo_pago.txt')
+
+}
+
+// Recibo para cliente
+const generarReciboCliente = () => {
+  let nom_cliente = document.getElementById('nom_cliente').value
+  let cod_referencia = document.getElementById('cod_referencia').value
+  let nombre_red = document.getElementById('nombre_red').value
+  let clave_Wifi = document.getElementById('clave_Wifi').value
+  let fecha_ing = document.getElementById('fecha_ing').value
+  let fecha_salida = document.getElementById('fecha_salida').value
+  let monto = document.getElementById('monto').value
+
+  let fechaActual = new Date() // Obtiene la fecha actual
+  let fechaFormatted = fechaActual.toLocaleDateString() // Formatea la fecha a string
+
+  let reciboTexto = `
+    Recibo de pagamento
+                                                                        Data: ${fechaFormatted}.
+
+    Recebi de ${nom_cliente} o valor total de $${monto} para pagamento da sua estadia a partir 
+    de ${fecha_ing} até ${fecha_salida}.
+    Código de referência: ${cod_referencia}
+    Nome Rede: ${nombre_red}
+    Senha WI-FI: ${clave_Wifi}
+
+
+                                                    María Eugenia Cáceres
+                                                    CRECI 1111
+    Obrigado pelo seu pagamento.
+    `
+
+  document.getElementById('recibo').innerText = reciboTexto
+
+  // Generar y descargar archivo de texto
+  descargarTexto(reciboTexto, 'recibo_pago.txt')
+
+  let contenedor = document.querySelector('.container_liq')
+
+  // Cambiar el estilo para hacer el contenedor visible
+  contenedor.style.display = 'block'
+
+  let salvarPDF = document.getElementById('salvarPDF')
+
+  // Cambiar el estilo para hacer el contenedor visible
+  salvarPDF.style.display = 'inline-block'
+
+}
+
+const descargarTexto = (texto, nombreArchivo) => {
+  let blob = new Blob([texto], {
+    type: 'text/plain'
+  })
+  let enlace = document.createElement('a')
+  enlace.href = window.URL.createObjectURL(blob)
+  enlace.download = nombreArchivo
+
+  // Simular clic en el enlace para descargar el archivo
+  enlace.click()
+}
+
+// funcion para generar PDF     
+const genPDFR = () => {
+  let doc = new jsPDF() // Crea un nuevo documento jsPDF
+
+  let textoRecibo = document.getElementById('recibo').innerText // Obtén el texto del recibo
+
+  //Defino estilo y formato del texto en el PDF
+  doc.setFontSize(12)
+
+
+  // Agrega el texto del recibo al documento
+  doc.text(20, 20, textoRecibo)
+
+
+  // Guarda el documento como un archivo PDF
+  doc.save('ReciboPago.pdf')
+}
+
 const mostrarDetallePropiedades = () => {
 
-  const propietarioSeleccionado = document.getElementById('nom_cliente').value
   const id_p = document.getElementById('id_p').value
-  const fechaInicial = new Date(document.getElementById('fecha1').value)
-  const fechaFinal = new Date(document.getElementById('fecha2').value)
+  /* const propietarioSeleccionado = document.getElementById('nom_cliente').value */
+  /* const fechaInicial = new Date(document.getElementById('fecha1').value)
+  const fechaFinal = new Date(document.getElementById('fecha2').value) */
 
   const tablaDetalle = document.getElementById('detallePropiedades')
   tablaDetalle.innerHTML = '' // Limpiar el contenido actual de la tabla
 
   let totalIngresos = 0
 
-  const returnFechaFormateada = (D) => {
+  /*  const returnFechaFormateada = (D) => {
 
-    let year = D.getFullYear()
-    let month = String(D.getMonth() + 1).padStart(2, '0')
-    let day = String(D.getDate()).padStart(2, '0')
-    let fechaFormateada = year + '-' + month + '-' + day
+     let year = D.getFullYear()
+     let month = String(D.getMonth() + 1).padStart(2, '0')
+     let day = String(D.getDate()).padStart(2, '0')
+     let fechaFormateada = year + '-' + month + '-' + day
 
-    // Mostrar la fecha formateada
-    return fechaFormateada
-  }
+     // Mostrar la fecha formateada
+     return fechaFormateada
+   }
 
-  let fecha_inicial = returnFechaFormateada(fechaInicial)
-  let fecha_Final = returnFechaFormateada(fechaFinal)
+   let fecha_inicial = returnFechaFormateada(fechaInicial)
+   let fecha_Final = returnFechaFormateada(fechaFinal)
 
-  console.log(fecha_inicial, fecha_Final)
-
+   console.log(fecha_inicial, fecha_Final)
+  */
   let url = `/propiedad/json_liquidacion/${id_p}`
   $.get(url).done((res) => {
 
@@ -100,7 +213,7 @@ const actualizarTotalGeneral = () => {
   let totalGeneral = 0
   // Sumar los totales de todas las filas
   total_rendimento.forEach((t) => {
-    var total = parseFloat(t.innerText)
+    let total = parseFloat(t.innerText)
     if (!isNaN(total)) {
       totalGeneral += total
     }
@@ -112,7 +225,7 @@ const actualizarTotalGeneral = () => {
   let totalGeneralComision = 0
   // Sumar los totales de todas las filas
   total_comision.forEach((t) => {
-    var total = parseFloat(t.innerText)
+    let total = parseFloat(t.innerText)
     if (!isNaN(total)) {
       totalGeneralComision += total
     }
@@ -124,7 +237,7 @@ const actualizarTotalGeneral = () => {
   let totalGeneralPorcentaje = 0
   // Sumar los totales de todas las filas
   total_Porcentaje.forEach((t) => {
-    var total = parseFloat(t.innerText)
+    let total = parseFloat(t.innerText)
     if (!isNaN(total)) {
       totalGeneralPorcentaje += total
     }
@@ -136,7 +249,7 @@ const actualizarTotalGeneral = () => {
   let totalGeneralMantenimiento = 0
   // Sumar los totales de todas las filas
   total_mantenimiento.forEach((t) => {
-    var total = parseFloat(t.innerText)
+    let total = parseFloat(t.innerText)
     if (!isNaN(total)) {
       totalGeneralMantenimiento += total
     }
@@ -148,7 +261,7 @@ const actualizarTotalGeneral = () => {
   let totalGeneralLucro = 0
   // Sumar los totales de todas las filas
   total_lucro.forEach((t) => {
-    var total = parseFloat(t.innerText)
+    let total = parseFloat(t.innerText)
     if (!isNaN(total)) {
       totalGeneralLucro += total
     }
@@ -160,7 +273,7 @@ const actualizarTotalGeneral = () => {
 }
 
 // funcion para generar PDF     
-const genPDF = () => {
+const gen_PDFL = () => {
   let doc = new jsPDF() // Crea un nuevo documento jsPDF
   let tabla = document.getElementById('propiedades') // Obtén la tabla de propiedades
   let espacioTabla = document.getElementById('espacioTabla') // Obtén el div de espacio de tabla para obtener los totales
