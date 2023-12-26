@@ -9,11 +9,11 @@ function loadGoogleTranslate()
 // Función para cargar el widget de Google Translate
 function loadGoogleTranslate() {
   // Obtener el elemento select del widget
-  var select = document.querySelector("#myid select");
+  let select = document.querySelector("#myid select");
 
   // Recuperar los últimos idiomas seleccionados del almacenamiento local
-  var lastLanguages = JSON.parse(localStorage.getItem("lastLanguages")) || [];
-  var defaultLanguage = "es"; // Establecer aquí el idioma predeterminado
+  let lastLanguages = JSON.parse(localStorage.getItem("lastLanguages")) || [];
+  let defaultLanguage = "es"; // Establecer aquí el idioma predeterminado
 
   // Establecer las opciones predeterminadas
   if (lastLanguages.length > 0) {
@@ -33,10 +33,10 @@ function loadGoogleTranslate() {
   // Escuchar el evento de cambio del idioma en el widget
   select.addEventListener("change", function () {
     // Obtener el valor del idioma seleccionado
-    var selectedLanguage = select.value;
+    let selectedLanguage = select.value;
 
     // Recuperar los últimos idiomas seleccionados del almacenamiento local
-    var lastLanguages = JSON.parse(localStorage.getItem("lastLanguages")) || [];
+    let lastLanguages = JSON.parse(localStorage.getItem("lastLanguages")) || [];
 
     // Verificar si el idioma ya está en la lista de últimos idiomas seleccionados
     if (lastLanguages.indexOf(selectedLanguage) === -1) {

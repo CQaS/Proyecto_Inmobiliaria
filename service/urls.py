@@ -44,8 +44,6 @@ urlpatterns = [
          views_cliente.editar_cliente, name="editar_cliente"),
     path('cliente/recibo/<int:id_cliente>',
          views_cliente.recibo_cliente, name="recibo_cliente"),
-    path('cliente/liquidacion/<int:id_cliente>',
-         views_cliente.liq_propietario, name="liq_propietario"),
     path('cliente/eliminar/<int:id_cliente>',
          views_cliente.eliminar_cliente, name="eliminar_cliente"),
     path('cliente/json_Inq/<str:Name>', views_cliente.JSONclientes_Inq,

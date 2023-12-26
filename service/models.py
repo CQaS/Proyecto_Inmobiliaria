@@ -285,3 +285,28 @@ def liquidacion(id_p):
         ERR = 'Algo fallo, intenta nuevamente o ponte en contacto con Admin'
         print("Error:", e)
         return {'ERR': ERR}
+
+
+def reciboCliente(id_cliente):
+    query = """
+        SELECT cli.nom_cliente, inm.cod_referencia, inm.cliente_id as idPropietario, inm.nombre_red, inm.clave_wifi, con.fecha_ing, con.fecha_salida, (con.valor_total - con.monto_reserva) AS saldo 
+        FROM clientes cli 
+        JOIN contrato con ON cli.id_cliente = con.cliente_id 
+        JOIN inmueble inm ON con.inmueble_id = inm.id_inmueble 
+        WHERE cli.id_cliente = {0}
+        """.format(id_cliente)
+
+    ERR = ''
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            columns = [col[0] for col in cursor.description]
+            res = cursor.fetchall()
+            cursor.close()
+
+            return {'res': res, 'columns': columns, 'ERR': ERR}
+
+    except IntegrityError as e:
+        ERR = 'Algo fallo, intenta nuevamente o ponte en contacto con Admin'
+        print("Error:", e)
+        return {'ERR': ERR}

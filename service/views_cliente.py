@@ -175,22 +175,39 @@ def editar_cliente(req, id_cliente=None):
 
 @login_required(login_url='/#modal-opened')
 def recibo_cliente(req, id_cliente):
-    cliente = Clientes.objects.get(id_cliente=id_cliente)
+
+    cliente_I = reciboCliente(id_cliente)
+
+    resultados = cliente_I['res']
+    columnas = cliente_I['columns']
+
+    datos_finales = []
+    id_cliente_P = 0
+    for resultado in resultados:
+        # Formatear la fecha de entrada en el formato "YYYY-MM-DD"
+        fecha_ing_formateada = resultado[columnas.index(
+            'fecha_ing')].isoformat()
+
+        # Formatear la fecha de salida en el formato "YYYY-MM-DD"
+        fecha_salida_formateada = resultado[columnas.index(
+            'fecha_salida')].isoformat()
+        id_cliente_P = resultado[columnas.index('idPropietario')]
+
+        # Crear el diccionario con las fechas formateadas
+        dato = dict(zip(columnas, resultado))
+        dato['fecha_ing'] = fecha_ing_formateada
+        dato['fecha_salida'] = fecha_salida_formateada
+
+        # Agregar el diccionario a la lista
+        datos_finales.append(dato)
+
+    cliente_P = Clientes.objects.get(id_cliente=id_cliente_P)
+
     context = {
-        'cliente': cliente
+        'cliente': datos_finales,
+        'cliente_P': cliente_P
     }
-    print(cliente)
     return render(req, 'cliente/recibo_cliente.html', context)
-
-
-@login_required(login_url='/#modal-opened')
-def liq_propietario(req, id_cliente):
-    cliente = Clientes.objects.get(id_cliente=id_cliente)
-    context = {
-        'cliente': cliente
-    }
-    print(cliente)
-    return render(req, 'cliente/liq_propietario.html', context)
 
 
 @login_required(login_url='/#modal-opened')
