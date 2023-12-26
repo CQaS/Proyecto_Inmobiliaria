@@ -418,3 +418,30 @@ document.getElementById('taxa_limpeza').addEventListener('keyup', () => {
 })
 
 /* FIN VALIDACIONES FECHAS/CONFIRMACION docx2pdf */
+
+//// boton indisponible reserva de terceros
+
+
+function guardarBtnIndisponible() {
+
+    const cod_referencia = document.getElementById('cod_referencia').value;
+    const dir_inmueble = document.getElementById('dir_inmueble').value;
+    const ciudad_inmueble = document.getElementById('ciudad_inmueble').value;
+    const num_apto = document.getElementById('num_apto').value;
+    //const valor_inmueble = document.getElementById('valor_inmueble').value;
+    
+    const fechaEntrada = document.getElementById('fecha_ing').value;
+    const fechaSalida = document.getElementById('fecha_salida').value;
+    
+    // Guardar los datos del inmueble y las fechas de entrada y salida
+    console.log('Datos del inmueble:', {
+      cod_referencia,
+      dir_inmueble,
+      ciudad_inmueble,
+      num_apto,
+      valor_inmueble,
+      fechaEntrada,
+      fechaSalida
+    });
+}
+  
