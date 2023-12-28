@@ -1,7 +1,7 @@
 import json
 import uuid
 import os
-from datetime import date
+from datetime import date, datetime
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db import models, connection, IntegrityError
 from django.db.models import Count, Q
@@ -426,3 +426,58 @@ def json_liquidacion(req, id_p):
 @login_required(login_url='/#modal-opened')
 def disponibilidad(req):
     return render(req, 'propiedad/disponibilidad.html')
+
+
+@login_required(login_url='/#modal-opened')
+def inmueble_indisponible(req):
+    if req.method == 'POST':
+        start = req.POST.get('start')
+        end = req.POST.get('end')
+        cantidadDeDias = req.POST.get('cantidadDeDias')
+        cantidadDeDias = req.POST.get('cantidadDeDias')
+        cod_referencia = req.POST.get('cod_referencia')
+
+        print('Fecha de Ingreso:', start)
+        print('Fecha de Finalizado:', end)
+        print('Dias:', cantidadDeDias)
+
+        fecha_hora_hoy = datetime.now()
+        formateado = "%d/%m/%Y"
+        fecha_hora_hoy.strftime(formateado)
+
+        try:
+
+            inmueble_instancia = Inmueble.objects.get(
+                cod_referencia=cod_referencia)
+            print(inmueble_instancia)
+            cliente_instancia = Clientes.objects.get(id_cliente=1)
+            print(cliente_instancia)
+
+            C = Contrato.objects.create(
+                tipo_operacion='S/D',
+                fecha_contrato=fecha_hora_hoy.date(),
+                fecha_ing=start,
+                fecha_salida=end,
+                cant_dias=cantidadDeDias,
+                valor_total=0,
+                monto_reserva=0,
+                fecha_reserva=fecha_hora_hoy.date(),
+                datos_envio='A cuenta de Propietario',
+                inmueble_id=inmueble_instancia,
+                cliente_id=cliente_instancia)
+
+            """          
+            INSERT INTO `clientes` (`id_cliente`, `nom_cliente`, `dni_cliente`, `rg_cliente`, `dir_cliente`, `tel_cliente`, `email_cliente`, `ciudad_cliente`, `pais_cliente`, `fechnac`, `categoria`, `estado`) VALUES ('0', 'ReservaDeTerceros', '0', '0', 'ReservaDeTerceros', '0', 'ReservaDeTerceros', 'ReservaDeTerceros', 'ReservaDeTerceros', '1900-01-01', 'ReservaDeTerceros', '1')
+            """
+
+            return JsonResponse({'message': 'Inmueble Indisponible con éxito'}, status=200)
+        except IntegrityError as e:
+            ERR = f"Error al crear"
+            print(e)
+            return JsonResponse({'message': ERR}, status=405)
+        except Exception as e:
+            ERR = f"Ocurrió un error"
+            print(e)
+            return JsonResponse({'message': ERR}, status=405)
+
+    return JsonResponse({'message': 'Método no permitido'}, status=405)

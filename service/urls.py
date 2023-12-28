@@ -22,6 +22,8 @@ urlpatterns = [
          views_propiedad.disponibilidad, name="disponibilidad"),
     path('propiedad/json_liquidacion/<int:id_p>',
          views_propiedad.json_liquidacion, name="json_liquidacion"),
+    path('propiedad/inmueble_indisponible', views_propiedad.inmueble_indisponible,
+         name='inmueble_indisponible'),
     ##### FIN RUTAS PROPIEDADES #####
     ##### RUTAS REPORTES #####
     path('reportes/<str:R>',

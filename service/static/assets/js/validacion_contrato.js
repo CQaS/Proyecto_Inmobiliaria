@@ -150,32 +150,143 @@ if (codRef) {
       return
     }
 
-    let url = `/contrato/codRef/${cod_referencia}`
-    $.get(url).done((res) => {
+    Swal.fire({
+      title: '¿Quieres dejar Indisponible este Inmueble?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Muestra el formulario personalizado
+        Swal.mixin({
+          title: 'Selecciona las fechas de Ingreso y Finalizado',
+          html: '<label for="start">Fecha de Ingreso</label>' +
+            '<input type="date" id="start" class="swal2-input" min="' + getFormattedToday() + '">' +
+            '<label for="end">Fecha de Finalizado</label>' +
+            '<input type="date" id="end" class="swal2-input" min="' + getFormattedToday() + '">',
+          showCancelButton: true,
+          confirmButtonText: 'Confirmar',
+          cancelButtonText: 'Cancelar',
+          focusConfirm: false,
+          preConfirm: () => {
+            const start = document.getElementById('start').value
+            const end = document.getElementById('end').value
 
-      if (res != 'null') {
+            // Obtener la fecha actual
+            const today = new Date();
+            const todayFormatted = today.toISOString().split('T')[0];
 
-        nom_propietario.value = res[0].nombre_cliente
+            if (!start || !end) {
+              Swal.showValidationMessage('Ambas fechas son requeridas')
+            }
 
-        resJSON = JSON.parse(res[0].inm)
-        $.each(resJSON, (i, R) => {
+            // Validar que ambas fechas no sean menores que hoy
+            if (start < todayFormatted || end < todayFormatted) {
+              Swal.showValidationMessage('Las fechas no pueden ser menores que hoy');
+              return false;
+            }
 
-          dir_inmueble.value = R.fields.dir_inmueble
-          ciudad_inmueble.value = R.fields.ciudad_inmueble
-          num_apto.value = R.fields.num_apto
-          habitac_maxima.value = R.fields.habitac_maxima
-          pass_hall1.value = R.fields.clave_puerta_ingreso
-          pass_hall2.value = R.fields.clave_puerta_ingreso2
-          pass_wifi.value = R.fields.clave_wifi
-          valor_inmueble.value = R.fields.valor_inmueble
-          id_inmueble.value = R.pk
+            return {
+              start,
+              end
+            }
+          }
+        }).fire().then((result) => {
+          if (result.isConfirmed) {
+            const {
+              start,
+              end
+            } = result.value
+
+            // Validar que ambas fechas han sido seleccionadas
+            if (start && end) {
+              // Hacer algo con las fechas seleccionadas
+              console.log('Fecha de Ingreso:', start)
+              console.log('Fecha de Finalizado:', end)
+
+              // Calcular la diferencia en milisegundos entre las fechas
+              const differenceInMilliseconds = new Date(end) - new Date(start);
+
+              // Convertir la diferencia a días
+              const cantidadDeDias = differenceInMilliseconds / (1000 * 60 * 60 * 24)
+              console.log(cod_referencia)
+
+              // Obtener el token CSRF del formulario
+              let csrfToken = $('#formulario_contrato [name=csrfmiddlewaretoken]').val()
+
+              let data = {
+                start: start,
+                end: end,
+                cantidadDeDias: cantidadDeDias,
+                cod_referencia: cod_referencia,
+                csrfmiddlewaretoken: csrfToken // Incluye el token CSRF en la solicitud
+              }
+
+              // Enviar las fechas a la vista Django usando AJAX
+              $.ajax({
+                type: 'POST',
+                url: '/propiedad/inmueble_indisponible', // La URL que definiste en urls.py
+                data: data,
+                success: (response) => {
+                  _alerta(response.message); // Mensaje recibido desde la vista
+                },
+                error: (error) => {
+                  _alerta('Ocurrio un error!');
+                }
+              })
+
+            } else {
+              // Si no se seleccionaron ambas fechas, puedes mostrar un mensaje o tomar alguna otra acción
+              Swal.fire('Por favor, selecciona ambas fechas', '', 'error')
+            }
+          } else {
+            cod_referencia_url()
+          }
         })
 
       } else {
-        _alerta('Cod. Ref invalido')
+        cod_referencia_url()
       }
-
     })
+  })
+}
+
+// Función para obtener la fecha de hoy en formato YYYY-MM-DD
+const getFormattedToday = () => {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+const cod_referencia_url = () => {
+
+  let url = `/contrato/codRef/${cod_referencia.value}`
+  $.get(url).done((res) => {
+
+    if (res != 'null') {
+
+      nom_propietario.value = res[0].nombre_cliente
+
+      resJSON = JSON.parse(res[0].inm)
+      $.each(resJSON, (i, R) => {
+
+        dir_inmueble.value = R.fields.dir_inmueble
+        ciudad_inmueble.value = R.fields.ciudad_inmueble
+        num_apto.value = R.fields.num_apto
+        habitac_maxima.value = R.fields.habitac_maxima
+        pass_hall1.value = R.fields.clave_puerta_ingreso
+        pass_hall2.value = R.fields.clave_puerta_ingreso2
+        pass_wifi.value = R.fields.clave_wifi
+        valor_inmueble.value = R.fields.valor_inmueble
+        id_inmueble.value = R.pk
+      })
+
+    } else {
+      _alerta('Cod. Ref invalido')
+    }
 
   })
 }
@@ -424,24 +535,23 @@ document.getElementById('taxa_limpeza').addEventListener('keyup', () => {
 
 function guardarBtnIndisponible() {
 
-    const cod_referencia = document.getElementById('cod_referencia').value;
-    const dir_inmueble = document.getElementById('dir_inmueble').value;
-    const ciudad_inmueble = document.getElementById('ciudad_inmueble').value;
-    const num_apto = document.getElementById('num_apto').value;
-    //const valor_inmueble = document.getElementById('valor_inmueble').value;
-    
-    const fechaEntrada = document.getElementById('fecha_ing').value;
-    const fechaSalida = document.getElementById('fecha_salida').value;
-    
-    // Guardar los datos del inmueble y las fechas de entrada y salida
-    console.log('Datos del inmueble:', {
-      cod_referencia,
-      dir_inmueble,
-      ciudad_inmueble,
-      num_apto,
-      valor_inmueble,
-      fechaEntrada,
-      fechaSalida
-    });
+  const cod_referencia = document.getElementById('cod_referencia').value
+  const dir_inmueble = document.getElementById('dir_inmueble').value
+  const ciudad_inmueble = document.getElementById('ciudad_inmueble').value
+  const num_apto = document.getElementById('num_apto').value
+  //const valor_inmueble = document.getElementById('valor_inmueble').value
+
+  const fechaEntrada = document.getElementById('fecha_ing').value
+  const fechaSalida = document.getElementById('fecha_salida').value
+
+  // Guardar los datos del inmueble y las fechas de entrada y salida
+  console.log('Datos del inmueble:', {
+    cod_referencia,
+    dir_inmueble,
+    ciudad_inmueble,
+    num_apto,
+    valor_inmueble,
+    fechaEntrada,
+    fechaSalida
+  })
 }
-  
