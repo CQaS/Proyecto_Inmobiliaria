@@ -220,8 +220,17 @@ if (typeof inmueble_html !== "undefined") {
     }
 
     document.addEventListener("DOMContentLoaded", () => {
-        let contenedor = document.querySelector('.carrusel')
-        contenedor ? carrusel(contenedor) : null
+        /* let contenedor = document.querySelector('.carrusel')
+        contenedor ? carrusel(contenedor) : null */
+
+        document.getElementById('next').onclick = () => {
+            let lists = document.querySelectorAll('.itemCarrusel');
+            document.getElementById('slide').appendChild(lists[0]);
+        }
+        /* document.getElementById('prev').onclick = () => {
+            let lists = document.querySelectorAll('.itemCarrusel');
+            document.getElementById('slide').prepend(lists[lists.length - 1]);
+        } */
 
         /* codigo del mapa */
 

@@ -315,7 +315,7 @@ def reciboCliente(id_cliente):
 def calendarCodRef(id_codRef):
     print(id_codRef)
     query = """
-        SELECT con.fecha_ing, DATE_ADD(con.fecha_salida, INTERVAL 1 DAY) as nueva_fecha_salida, con.cliente_id, inm.dir_inmueble FROM inmueble inm JOIN contrato con ON inm.id_inmueble = con.inmueble_id WHERE inm.cod_referencia = '{0}'
+        SELECT con.fecha_ing, con.fecha_salida, con.cliente_id, inm.dir_inmueble FROM inmueble inm JOIN contrato con ON inm.id_inmueble = con.inmueble_id WHERE inm.cod_referencia = '{0}'
         """.format(id_codRef)
 
     ERR = ''
