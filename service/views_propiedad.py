@@ -424,6 +424,13 @@ def json_liquidacion(req, id_p):
 
 
 @login_required(login_url='/#modal-opened')
+def calendar_codRef(req, id_codRef):
+    c = calendarCodRef(id_codRef)
+    data = {'fechas': c['res']}
+    return JsonResponse(data)
+
+
+@login_required(login_url='/#modal-opened')
 def disponibilidad(req):
     return render(req, 'propiedad/disponibilidad.html')
 

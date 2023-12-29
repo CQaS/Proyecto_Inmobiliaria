@@ -4,136 +4,76 @@
 
 {% block content %}
 
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
 
 <style>
+    .disponible {
+        position: relative;
+        margin-left: 240px;
+        width: calc(100% - 240px);
+    }
 
-.disponible {
-    position: relative; 
-    margin-left: 240px;
-	width: calc(100% - 240px);
-}
 
+    #calendarDisponibles {
+        position: relative;
+        max-width: 800px;
+        margin: 40px auto;
+        margin-left: 240px;
+        width: calc(100% - 240px);
 
-#calendar {
-    position: relative;
-    max-width: 800px;
-    margin: 40px auto;
-    margin-left: 240px;
-	width: calc(100% - 240px);
+    }
 
-}
+    .form_input {
+        display: block;
+        width: calc(100% - 230px);
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #212529;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border-radius: .375rem;
+        transition: border-color .15s ease-in-out,
+            box-shadow .15s ease-in-out;
+    }
 
-.form_input {
-	display: block;
-    width: calc(100% - 230px);
-	padding: .375rem .75rem;
-	font-size: 1rem;
-	font-weight: 400;
-	line-height: 1.5;
-	color: #212529;
-	background-color: #fff;
-	background-clip: padding-box;
-	border: 1px solid #ced4da;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-	border-radius: .375rem;
-	transition: border-color .15s ease-in-out,
-		box-shadow .15s ease-in-out;
-}
+    /* Ajusta los estilos de los botones */
+    button {
+        background-color: rgb(183, 146, 91);
+        color: black;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        flex: 1;
+        /* Permite que los botones se ajusten dentro del contenedor */
+    }
 
-/* Ajusta los estilos de los botones */
-button {
-    background-color: rgb(183, 146, 91);
-    color: black;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    flex: 1; /* Permite que los botones se ajusten dentro del contenedor */
-}
+    .btn_calendar {
+        width: 140px;
+    }
 
-.btn_calendar { 
-    width: 140px;
-}
-
-button:hover {
-    color: white;
-}
-
+    button:hover {
+        color: white;
+    }
 </style>
 
 <div class="disponible">
     <h1>Disponibilidade</h1>
-    <input type="text" class="form_input" id="" name="cod_referencia" placeholder="Cód. Referência" required><br>
-    <input type="text" class="form_input" value id="dir_inmueble" name="dir_inmueble" placeholder="Direção" readonly ><br>
-    <button type="button" class="btn_calendar"><i class="fa-solid fa-rotate-right fa-spin"></i> Sincronizar</button>
-    <button type="button" class="btn_calendar"><i class="fa-solid fa-cloud-arrow-up"></i>   Salvar  </button>  
+    <input type="text" class="form_input" id="cod_referencia" name="cod_referencia" placeholder="Cód. Referência"
+        required><br>
+    <input type="text" class="form_input" id="dir_inmueble" name="dir_inmueble" placeholder="Direção" readonly><br>
+    <button type="button" id="btn_calendar" class="btn_calendar"><i class="fa-solid fa-cloud-arrow-up"></i> Ver
+    </button>
 </div>
 
-<div id='calendar'></div>
+<div id='calendarDisponibles'></div>
 
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/main.min.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            timeZone: 'UTC',
-            initialView: 'multiMonth', // Cambiado a 'multiMonth'
-            views: {
-                multiMonth: {
-                duration: { months: 12 },   // Muestra 12 meses (un año)
-                }
-            },
-            selectable: true,
-            select: function(info) {
-                // Al seleccionar una fecha, se pregunta si es reserva propia o de terceros
-                var isOwnEvent = true; // Por defecto, es reserva propia
-                var userInput = prompt('¿É uma reserva de terceiros? (S/N)'); // Se solicita información
-
-                if (userInput !== null) {
-                    userInput = userInput.toLowerCase();
-                    isOwnEvent = userInput !== 's' && userInput !== 'S' && userInput !== 'yes';
-                }
-
-                var eventColor = isOwnEvent ? 'red' : 'green'; // Cambio de color según el tipo de reserva
-
-                calendar.addEvent({
-                    title: isOwnEvent ? 'Nova Reserva Própria': 'Nova Reserva de Terceiros',
-                    start: info.startStr,
-                    end: info.endStr,
-                    color: eventColor, // Color según el tipo de reserva
-                    allDay: true // O false si la reserva tiene una hora específica
-                    // Puedes agregar más propiedades al evento según tus necesidades
-                });
-            },
-            // events: [// Ejemplo de eventos existentes con diferentes colores
-            //     {
-            //         title: 'Reserva Propia',
-            //         start: '2023-11-23',
-            //         color: 'red', // Color para representar la reserva propia
-            //         allDay: true
-            //     },
-            //     {
-            //         title: 'Reserva de Terceros',
-            //         start: '2023-11-24',
-            //         color: 'green', // Color para representar la reserva de terceros
-            //         allDay: true
-            //     }
-            // ],
-            eventClick: function(info) {
-                // Al hacer clic en un evento, se pregunta si se desea eliminar
-                if (confirm('¿Tem certeza de que deseja excluir esta reserva?')) {
-                    info.event.remove();
-                }
-            }
-        });
-
-        calendar.render();
-    });
-
-</script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
+<script src="{% static 'assets/js/calendar.js' %}"></script>
 
 {% endblock%}

@@ -310,3 +310,24 @@ def reciboCliente(id_cliente):
         ERR = 'Algo fallo, intenta nuevamente o ponte en contacto con Admin'
         print("Error:", e)
         return {'ERR': ERR}
+
+
+def calendarCodRef(id_codRef):
+    query = """
+        SELECT con.fecha_ing, DATE_ADD(con.fecha_salida, INTERVAL 1 DAY) as nueva_fecha_salida, con.cliente_id, inm.dir_inmueble FROM inmueble inm JOIN contrato con ON inm.id_inmueble = con.inmueble_id WHERE inm.cod_referencia = {0}
+        """.format(id_codRef)
+
+    ERR = ''
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            columns = [col[0] for col in cursor.description]
+            res = cursor.fetchall()
+            cursor.close()
+
+            return {'res': res, 'columns': columns, 'ERR': ERR}
+
+    except IntegrityError as e:
+        ERR = 'Algo fallo, intenta nuevamente o ponte en contacto con Admin'
+        print("Error:", e)
+        return {'ERR': ERR}
