@@ -22,7 +22,7 @@ urlpatterns = [
          views_propiedad.disponibilidad, name="disponibilidad"),
     path('propiedad/json_liquidacion/<int:id_p>',
          views_propiedad.json_liquidacion, name="json_liquidacion"),
-    path('propiedad/calendar_codRef/<int:id_codRef>',
+    path('propiedad/calendar_codRef/<str:id_codRef>',
          views_propiedad.calendar_codRef, name="calendar_codRef"),
     path('propiedad/inmueble_indisponible', views_propiedad.inmueble_indisponible,
          name='inmueble_indisponible'),
