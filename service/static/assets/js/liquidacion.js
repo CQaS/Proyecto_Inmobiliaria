@@ -30,10 +30,26 @@ Obrigado pelo seu pagamento.
   document.getElementById('recibo').innerText = reciboTexto
   document.getElementById('monto_total').value = monto_total.toFixed(2)
 
-  // Generar y descargar archivo de texto
-  descargarTexto(reciboTexto, 'recibo_pago.txt')
-
 }
+
+// funcion para generar PDF Empleados    
+const genPDFE = () => {
+  let doc = new jsPDF() // Crea un nuevo documento jsPDF
+
+  let textoRecibo = document.getElementById('recibo').innerText // Obtén el texto del recibo
+
+  //Defino estilo y formato del texto en el PDF
+  doc.setFontSize(12)
+
+
+  // Agrega el texto del recibo al documento
+  doc.text(20, 20, textoRecibo)
+
+
+  // Guarda el documento como un archivo PDF
+  doc.save('ReciboEmpleado.pdf')
+}
+
 
 // Recibo para cliente
 const generarReciboCliente = () => {
@@ -66,8 +82,8 @@ const generarReciboCliente = () => {
 
   document.getElementById('recibo').innerText = reciboTexto
 
-  // Generar y descargar archivo de texto
-  descargarTexto(reciboTexto, 'recibo_pago.txt')
+  // // Generar y descargar archivo de texto
+  // descargarTexto(reciboTexto, 'recibo_pago.txt')
 
   let contenedor = document.querySelector('.container_liq')
 
@@ -272,43 +288,39 @@ const actualizarTotalGeneral = () => {
 
 }
 
-// funcion para generar PDF     
+
 const gen_PDFL = () => {
-  let doc = new jsPDF() // Crea un nuevo documento jsPDF
-  let tabla = document.getElementById('propiedades') // Obtén la tabla de propiedades
-  let espacioTabla = document.getElementById('espacioTabla') // Obtén el div de espacio de tabla para obtener los totales
+  let doc = new jsPDF();
+  let tabla = document.getElementById('propiedades');
+  let espacioTabla = document.getElementById('espacioTabla');
 
-  // Recorre la tabla y obtén sus datos en un array
-  let data = []
+  let data = [];
   for (let i = 0; i < tabla.rows.length; i++) {
-    let rowData = []
+    let rowData = [];
     for (let j = 0; j < tabla.rows[i].cells.length; j++) {
-      rowData.push(tabla.rows[i].cells[j].innerText)
+      rowData.push(tabla.rows[i].cells[j].innerText);
     }
-    data.push(rowData)
+    data.push(rowData);
   }
 
-  // Obtiene los totales debajo de la tabla
-  let totales = espacioTabla.innerHTML
+  let totales = espacioTabla.innerHTML;
+  
+  doc.setFontSize(12);
+  let posY = 10;
 
-  //Defino estilo y formato del texto en el PDF
-  doc.setFontSize(12)
-
-  // Define la posición y tamaño del texto en el PDF
-  let posY = 10
-  let textoRecibo = 'Liquidação de Propriedade\n\n' // Agrega un encabezado al PDF
-
-  // Agrega los datos de la tabla al texto del PDF
+  // Agrega los datos de la tabla al PDF con alineación
   for (let row of data) {
-    textoRecibo += row.join('\t') + '\n'
+    let posX = 10; // Reinicia la posición en X para cada fila
+    for (let cell of row) {
+      doc.text(posX, posY, cell);
+      posX += 28; // Incrementa la posición en X para la siguiente celda
+    }
+    posY += 10; // Incrementa la posición en Y para la siguiente fila
   }
 
-  // Agrega los totales debajo de la tabla al texto del PDF
-  textoRecibo += '\n\nTotales:\n' + totales
+  // Ajusta la posición antes de agregar "Totales:"
+  posY += 10; 
 
-  // Agrega el texto al documento
-  doc.text(10, posY, textoRecibo)
-
-  // Guarda el documento como un archivo PDF
-  doc.save('Liquidação de Propriedade.pdf')
+  doc.save('Liquidação de Propriedade.pdf');
 }
+

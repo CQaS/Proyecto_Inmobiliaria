@@ -25,7 +25,7 @@
             <input type="number" id="monto_total" name="monto_total" readonly>
 
             <button type="button" onclick="generarReciboEmpleado()"><i class="fa-solid fa-file-invoice-dollar"></i> Gerar recibo</button>
-            <button type="button" onclick="javascript:genPDF()"><i class="fa-solid fa-cloud-arrow-up"></i> Salvar PDF</button>
+            <button type="button" onclick="javascript:genPDFE()"><i class="fa-solid fa-cloud-arrow-up"></i> Salvar PDF</button>
         </form>
 
         <div id="recibo">
@@ -103,7 +103,7 @@ input[type="number"][readonly] {
 
 </style>
 
-<script src="{% static '/assets/js/recibos.js' %}"></script>
+<script src="{% static '/assets/js/liquidacion.js' %}"></script>
 <script type="text/javascript" src="{% static '/assets/js/jspdf.min.js' %}"></script>
 
 {% endblock%}
