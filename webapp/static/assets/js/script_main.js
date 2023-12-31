@@ -17,6 +17,7 @@ const pattern_num_apto = /^[a-zA-Z0-9 ]*$/
 let sidebar = document.querySelector(".sidebar")
 let sidebarBtn = document.querySelector(".bx-menu")
 let cards = document.querySelector(".cards")
+let introsingle = document.querySelector(".intro-single")
 let _container = document.querySelector("._container")
 let box = document.querySelector(".box")
 let tabla = document.querySelector(".tabla")
@@ -25,6 +26,7 @@ let copyrightText = document.querySelector(".copyrightText")
 sidebarBtn.addEventListener("click", () => {
     sidebar.classList.toggle("close1")
     cards ? cards.classList.toggle("cards1") : null
+    introsingle ? introsingle.classList.toggle("intro-single1") : null
     _container ? _container.classList.toggle("_container1") : null
     box ? box.classList.toggle("box1") : null
     tabla ? tabla.classList.toggle("tabla1") : null

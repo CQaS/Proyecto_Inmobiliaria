@@ -57,6 +57,7 @@ def index(request):
 
     form = ContactForm(request.POST or None, request.FILES or None)
     context = {
+        'categoria': True,
         'error': ERR,
         'form': form,
         'exclusivos_lista': resultado,

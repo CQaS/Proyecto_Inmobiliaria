@@ -74,7 +74,7 @@ def contrato_idInmueble(req, id_inmueble):
     print(lista)
     if len(lista) == 0:
         context = {
-            'error': 'Inmueble no econtrado',
+            'error': 'Imóvel não encontrado ou não disponível para Contrato',
             'success': success
         }
     else:

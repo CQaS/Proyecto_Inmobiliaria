@@ -247,7 +247,7 @@ class Contrato(models.Model):
 
 def buscarProp_ID(id_inmueble):
     query = """
-        SELECT i.*, c.nom_cliente, c.id_cliente FROM inmueble i JOIN clientes c ON i.cliente_id = c.id_cliente WHERE i.id_inmueble = {0}
+        SELECT i.*, c.nom_cliente, c.id_cliente FROM inmueble i JOIN clientes c ON i.cliente_id = c.id_cliente WHERE i.id_inmueble = {0} AND (i.tipo_operacion = 'Alquiler temporario' OR i.tipo_operacion = 'Alquiler permanente')
         """.format(id_inmueble)
 
     ERR = ''
