@@ -10,17 +10,28 @@
     <label for="cod_referencia">Código de referência:</label>
     <input type="text" id="cod_referencia" name="cod_referencia" value="{{ cli.cod_referencia }}" required>
 
-    <label for="nombre_red">Nome Rede:</label>
-    <input type="text" id="nombre_red" name="nombre_red" value="{{ cli.nombre_red}}" required>
+    <div class="wifi-info">
+        <div class="input-row">
+            <label for="nombre_red">Nome Rede:</label>
+            <input type="text" id="nombre_red" name="nombre_red" value="{{ cli.nombre_red }}" required>
+        </div>
+        <div class="input-row">
+            <label for="clave_Wifi">Senha de rede:</label>
+            <input type="text" id="clave_Wifi" name="clave_Wifi" value="{{ cli.clave_wifi }}" required>
+        </div>
+    </div>
 
-    <label for="clave_Wifi">Senha WI-FI:</label>
-    <input type="text" id="clave_Wifi" name="clave_Wifi" value="{{ cli.clave_wifi }}" required>
+    <div class="fechas">
+        <div class="input-row">
+            <label for="fecha_ing">Data de admissão:</label>
+            <input type="date" id="fecha_ing" name="fecha_ing" value="{{ cli.fecha_ing }}" required>
+        </div>
 
-    <label for="fecha_ing">Data de admissão:</label>
-    <input type="date" id="fecha_ing" name="fecha_ing" value="{{ cli.fecha_ing }}" required>
-
-    <label for="fecha_salida">Data saida:</label>
-    <input type="date" id="fecha_salida" name="fecha_salida" value="{{ cli.fecha_salida }}" required>
+        <div class="input-row">
+            <label for="fecha_salida">Data saida:</label>
+            <input type="date" id="fecha_salida" name="fecha_salida" value="{{ cli.fecha_salida }}" required>
+        </div>
+    </div>
 
     <label for="monto">Valor:</label>
     <input type="number" id="monto" name="monto" value="{{ cli.saldo }}" required>
@@ -37,6 +48,7 @@
         <!-- Aquí se mostrará el recibo generado -->
     </div>
 </div>
+
 
 <div class="container_liq" style="display: none;">
 
@@ -142,13 +154,15 @@
         cursor: not-allowed;
     }
 
+
     .container_recibos {
-        max-width: 600px;
+        max-width: 850px;
         margin: 50px auto;
         background-color: #fff;
         padding: 20px;
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        line-height: 2; /* Incrementa el espaciado entre líneas */
     }
 
     form {
@@ -190,6 +204,28 @@
         font-weight: bold;
     }
 
+        
+    .wifi-info,
+    .fechas {
+        display: flex;    
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 0;
+    }
+
+    .wifi-info label,
+    .fechas label {
+        width: 250px; /* Ancho fijo para las etiquetas */
+    }
+
+    .wifi-info input,
+    .fechas input {
+        width: 100%
+        max-width: 100%; /* Ancho máximo para adaptarse al contenedor */
+        margin-top: 5px; /* Ajuste de margen superior */
+    }
+
+    
     /* Estilos para los campos de entrada del formulario */
     input[type="text"],
     input[type="number"],
