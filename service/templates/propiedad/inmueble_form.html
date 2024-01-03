@@ -232,7 +232,8 @@
         <div class="form_3">
           <!-- pantalla 3 linea 1-5 cajas-->
           <div class="formbold-input-flex">
-            <input id="_nombre_propietario" type="text" placeholder="Insira o nome do cliente" class="formbold-form-input">
+            <input id="_nombre_propietario" type="text" placeholder="Insira o nome do cliente"
+              class="formbold-form-input">
           </div>
           <div class="formbold-input-flex">
             <div>
@@ -255,7 +256,11 @@
               <label class="formbold-form-label">Tipo Operação</label>
               <select id="tipo_operacion" name="tipo_operacion" class="formbold-form-input" style="margin-top: 0;"
                 required>
+                {% if inedit %}
                 <option value="{{ inedit.tipo_operacion }}" selected>{{ inedit.tipo_operacion }}</option>
+                {% elif inmueble %}
+                <option value="{{ inmueble.tipo_operacion.value }}" selected>{{ inmueble.tipo_operacion.value }}</option>
+                {% endif %}
                 <option value="">Selecione</option>
                 <option value="Alquiler temporario">Aluguer Temporário</option>
                 <option value="Alquiler permanente">Aluguer Anual</option>
@@ -269,7 +274,11 @@
               <label class="formbold-form-label">Tipo Propriedad</label>
               <select id="tipo_inmueble" name="tipo_inmueble" class="formbold-form-input" style="margin-top: 0;"
                 required>
+                {% if inedit %}
                 <option value="{{ inedit.tipo_inmueble }}" selected>{{ inedit.tipo_inmueble }}</option>
+                {% elif inmueble %}
+                <option value="{{ inmueble.tipo_inmueble.value }}" selected>{{ inmueble.tipo_inmueble.value }}</option>
+                {% endif %}
                 <option value="">Selecione</option>
                 <option value="Casa">Casa</option>
                 <option value="Departamento">Apartamento</option>
@@ -286,12 +295,15 @@
             <div>
               <label class="formbold-form-label">Condição</label>
               <select id="condicion" name="condicion" class="formbold-form-input" style="margin-top: 0;" required>
-                <option value="{{ inedit.condicion }}" selected>{{ inedit.condicion }}</option>
-                <option value="">Selecione</option>
-                <option value="Muy buena">Muito Bom</option>
-                <option value="Buena">Bom</option>
-                <option value="Regular">Regular</option>
-                <option value="Mala">Mala</option>
+                <{% if inedit %} <option value="{{ inedit.condicion }}" selected>{{ inedit.condicion }}</option>
+                  {% elif inmueble %}
+                  <option value="{{ inmueble.condicion.value }}" selected>{{ inmueble.condicion.value }}</option>
+                  {% endif %}
+                  <option value="">Selecione</option>
+                  <option value="Muy buena">Muito Bom</option>
+                  <option value="Buena">Bom</option>
+                  <option value="Regular">Regular</option>
+                  <option value="Mala">Mala</option>
               </select>
             </div>
           </div>
@@ -299,8 +311,7 @@
           <!-- pantalla 3 linea 3-5 cajas-->
           <div class="formbold-input-flex">
             <div class="check">
-              <input type="checkbox" id="cochera" name="cochera" value="true" {% if inedit.cochera %} checked
-                {% endif %}>
+              <input type="checkbox" id="cochera" name="cochera" value="true" {% if inedit.cochera %} checked {% endif %}>
               <label class="">Garagem</label>
             </div>
 
@@ -317,8 +328,7 @@
             </div>
 
             <div class="check">
-              <input type="checkbox" id="expensas" name="expensas" value="true" {% if inedit.expensas %} checked
-                {% endif %}>
+              <input type="checkbox" id="expensas" name="expensas" value="true" {% if inedit.expensas %} checked {% endif %}>
               <label class="">Expensas</label>
             </div>
           </div>
@@ -420,10 +430,9 @@
 
 <script>
   let inmueble_Form = true 
-  {% if inedit %}
-  let inedit = true 
-  {% else %}
   let inedit = false 
+  {% if inedit %}
+  let inedit = true
   {% endif %}
 </script>
 <script src="{% static '/assets/js/validacion_inmueble.js' %}"></script>

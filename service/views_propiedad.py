@@ -73,6 +73,7 @@ def crear_propiedad(req):
             # Validar si el cod_referencia ya existen en la base de datos
             if Inmueble.objects.filter(cod_referencia=req.POST['cod_referencia']).exists():
                 ERR = 'El cod. referencia ya está registrado en la base de datos.'
+                print(inmueble_form.expensas)
                 context = {
                     'inmueble': inmueble_form,
                     'clientes': lista,

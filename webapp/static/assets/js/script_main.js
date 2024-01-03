@@ -49,28 +49,34 @@ let resultados_por = document.getElementById('resultados_por')
 let propiedad_por_tipo = document.getElementById("propiedad_por_tipo")
 
 let temporada = document.getElementById("temporada")
-temporada.addEventListener('click', () => {
+temporada ? temporada.addEventListener('click', () => {
     tipo_o = null
     tipo_p = null
+    venda = false
+    anual = false
     temporada = true
     consulta()
-})
+}) : null
 
 let anual = document.getElementById("anual")
-anual.addEventListener('click', () => {
+anual ? anual.addEventListener('click', () => {
     tipo_o = null
     tipo_p = null
+    venda = false
+    temporada = false
     anual = true
     consulta()
-})
+}) : null
 
 let venda = document.getElementById("venda")
-venda.addEventListener('click', () => {
+venda ? venda.addEventListener('click', () => {
     tipo_o = null
     tipo_p = null
+    anual = false
+    temporada = false
     venda = true
     consulta()
-})
+}) : null
 
 if (propiedad_por_tipo) {
     propiedad_por_tipo.addEventListener("click", () => {
@@ -97,6 +103,19 @@ if (propiedad_por_tipo) {
 }
 
 const consulta = () => {
+
+    let listaUl = document.querySelector('#resultados_por ul')
+    if (listaUl) {
+        // Elimina el elemento <ul>
+        listaUl.parentNode.removeChild(listaUl);
+    }
+
+    let listahr = document.querySelector('#resultados_por hr')
+    if (listahr) {
+        // Elimina el elemento <hr>
+        listahr.parentNode.removeChild(listahr);
+    }
+
     let h2 = resultados_por.querySelector("h2")
     h2 ? resultados_por.removeChild(h2) : null
 

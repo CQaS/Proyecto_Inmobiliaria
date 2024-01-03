@@ -23,11 +23,6 @@ def index(request):
     columns = R['columns']
     ERR = R['err']
 
-    if not res:
-        print("Tuple is empty")
-    else:
-        print("Tuple is not empty")
-
     # Convertir los resultados a una lista de diccionarios
     lista = []
     for row in res:
