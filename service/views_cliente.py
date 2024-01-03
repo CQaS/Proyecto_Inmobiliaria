@@ -118,10 +118,43 @@ def crear_cliente(req):
 
 @login_required(login_url='/#modal-opened')
 def editar_cliente(req, id_cliente=None):
+
     ERR = ''
     success = ''
     try:
         cliente = Clientes.objects.get(id_cliente=id_cliente)
+
+        if req.method == 'POST' and cliente.email_cliente != req.POST['email_cliente']:
+            if Clientes.objects.filter(email_cliente=req.POST['email_cliente']).exists():
+                ERR = 'El correo electrónico ya está registrado en la base de datos.'
+                context = {
+                    'cliedit': cliente,
+                    'error': ERR,
+                    'success': success
+                }
+
+                return render(req, 'cliente/cliente_form.html', context)
+
+        if req.method == 'POST' and cliente.dni_cliente != req.POST['dni_cliente'] and req.POST['dni_cliente'] != '0':
+            if Clientes.objects.filter(dni_cliente=req.POST['dni_cliente']).exists():
+                ERR = 'El DNI ya está registrado en la base de datos.'
+                contexto = {
+                    'cliedit': cliente,
+                    'error': ERR,
+                    'success': success
+                }
+                return render(req, 'cliente/cliente_form.html', contexto)
+
+        if req.method == 'POST' and cliente.rg_cliente != req.POST['rg_cliente'] and req.POST['rg_cliente'] != '0':
+            if Clientes.objects.filter(rg_cliente=req.POST['rg_cliente']).exists():
+                ERR = 'El RG ya está registrado en la base de datos.'
+                contexto = {
+                    'cliedit': cliente,
+                    'error': ERR,
+                    'success': success
+                }
+                return render(req, 'cliente/cliente_form.html', contexto)
+
     except Clientes.DoesNotExist:
         print("NO ENCONTRADO")
         return redirect('404')
@@ -134,6 +167,7 @@ def editar_cliente(req, id_cliente=None):
         req.POST or None, req.FILES or None, instance=cliente)
     if cliente_form.is_valid() and req.POST:
         try:
+
             cliente_form.save()
             print('Cliente, OK')
             success = "Cliente editado correctamente"
