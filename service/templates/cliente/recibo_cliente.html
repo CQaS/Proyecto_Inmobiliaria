@@ -203,34 +203,32 @@
     #recibo strong {
         font-weight: bold;
     }
-
         
-    .wifi-info,
-    .fechas {
-        display: flex;    
+    .wifi-info {
+        display: flex;
         justify-content: space-between;
-        gap: 10px;
-        margin-bottom: 0;
     }
 
-    .wifi-info label,
-    .fechas label {
-        width: 250px; /* Ancho fijo para las etiquetas */
+    .fechas {
+        display: flex;
+        justify-content: space-between;
     }
 
-    .wifi-info input,
-    .fechas input {
-        width: 100%
-        max-width: 100%; /* Ancho máximo para adaptarse al contenedor */
-        margin-top: 5px; /* Ajuste de margen superior */
+    .input-row {
+        flex: 1;
+        margin-right: 5px; /* Espacio entre los elementos */
     }
 
+    .input-row input[type="date"] {
+        width: 100%; /* Ancho completo dentro del contenedor */
+        box-sizing: border-box; /* Incluye el padding y el borde en el ancho */
+    }
     
     /* Estilos para los campos de entrada del formulario */
     input[type="text"],
     input[type="number"],
     input[type="date"] {
-        width: calc(100% - 10px);
+        width: calc(100% - 5px);
         padding: 8px;
         border-radius: 4px;
         border: 1px solid #ccc;
