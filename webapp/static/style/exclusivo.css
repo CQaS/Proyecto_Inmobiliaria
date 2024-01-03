@@ -125,6 +125,7 @@ img {
 @media (min-width: 40rem) {
   .card__image::before {
     padding-top: 66.6%;
+
   }
 }
 
