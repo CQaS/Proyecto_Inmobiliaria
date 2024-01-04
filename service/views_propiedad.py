@@ -104,7 +104,7 @@ def crear_propiedad(req):
                     print(f"Error inesperado: {e}")
 
             print('Inmueble creado, OK')
-            success = "Inmueble creado correctamente"
+            success = "Propriedade criada corretamente"
             context = {
                 'clientes': lista,
                 'error': ERR,

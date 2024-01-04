@@ -76,7 +76,7 @@ def crear_cliente(req):
             C = clientes.save()
             print(f'Cliente id: {C.id_cliente}')
             print('Cliente, OK')
-            success = "Cliente creado correctamente"
+            success = "Cliente criado com sucesso"
             contexto = {
                 'error': ERR,
                 'success': success
