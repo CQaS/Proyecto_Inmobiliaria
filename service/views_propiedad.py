@@ -412,7 +412,7 @@ def reportes(req, R):
 
 @login_required(login_url='/#modal-opened')
 def reportes_json_i(req):
-    inmueble = list(Inmueble.objects.values())
+    inmueble = list(Inmueble.objects.filter(estado=1).values())
     data = {'inmueble': inmueble}
     return JsonResponse(data)
 
