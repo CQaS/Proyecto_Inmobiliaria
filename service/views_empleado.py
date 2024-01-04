@@ -74,7 +74,7 @@ def crear_empleado(req):
                 nuevo_usuario.save()
 
             print('Empleado, OK')
-            success = "Empleado creado correctamente"
+            success = "Empregado criado com sucesso"
             contexto = {
                 'error': ERR,
                 'success': success
