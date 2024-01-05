@@ -98,10 +98,10 @@ def crear_propiedad(req):
                     )
 
                 except IntegrityError as e:
-                    print(f"Error al crear la foto: {e}")
+                    print(f"Erro ao criar foto: {e}")
 
                 except Exception as e:
-                    print(f"Error inesperado: {e}")
+                    print(f"Erro inesperado: {e}")
 
             print('Inmueble creado, OK')
             success = "Propriedade criada corretamente"
@@ -119,7 +119,7 @@ def crear_propiedad(req):
     else:
         for field_name, error_msgs in inmueble_form.errors.items():
             for error_msg in error_msgs:
-                ERR = 'Algun campo contiene Errores'
+                ERR = 'Alguns campos contêm erros'
                 print(f"Error en el campo '{field_name}': {error_msg}")
 
     if ERR != '':
@@ -164,11 +164,11 @@ def editar_propiedad(req, id_inmueble=None):
         clientes = json.dumps(lista, default=serialize_date)
 
     except Inmueble.DoesNotExist:
-        print("NO ENCONTRADO")
+        print("NAO ENCONTRADO")
         return redirect('404')
 
     except IntegrityError as e:
-        ERR = 'Algo fallo, intenta nuevamente o ponte en contacto con Admin'
+        ERR = 'Algo deu errado, tente novamente ou entre em contato com o administrador'
         print("Error:", e)
 
     inmueble_form = InmuebleForm(
@@ -445,8 +445,8 @@ def inmueble_indisponible(req):
         cantidadDeDias = req.POST.get('cantidadDeDias')
         cod_referencia = req.POST.get('cod_referencia')
 
-        print('Fecha de Ingreso:', start)
-        print('Fecha de Finalizado:', end)
+        print('Data de admissão:', start)
+        print('Data final:', end)
         print('Dias:', cantidadDeDias)
 
         fecha_hora_hoy = datetime.now()
@@ -478,14 +478,14 @@ def inmueble_indisponible(req):
             INSERT INTO `clientes` (`id_cliente`, `nom_cliente`, `dni_cliente`, `rg_cliente`, `dir_cliente`, `tel_cliente`, `email_cliente`, `ciudad_cliente`, `pais_cliente`, `fechnac`, `categoria`, `estado`) VALUES ('0', 'ReservaDeTerceros', '0', '0', 'ReservaDeTerceros', '0', 'ReservaDeTerceros', 'ReservaDeTerceros', 'ReservaDeTerceros', '1900-01-01', 'ReservaDeTerceros', '1')
             """
 
-            return JsonResponse({'message': 'Inmueble Indisponible con éxito'}, status=200)
+            return JsonResponse({'message': 'Propriedade indisponível com sucesso'}, status=200)
         except IntegrityError as e:
             ERR = f"Error al crear"
             print(e)
             return JsonResponse({'message': ERR}, status=405)
         except Exception as e:
-            ERR = f"Ocurrió un error"
+            ERR = f"Um erro ocorreu"
             print(e)
             return JsonResponse({'message': ERR}, status=405)
 
-    return JsonResponse({'message': 'Método no permitido'}, status=405)
+    return JsonResponse({'message': 'Método não permitido'}, status=405)

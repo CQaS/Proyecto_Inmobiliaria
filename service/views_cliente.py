@@ -46,7 +46,7 @@ def crear_cliente(req):
 
             if req.POST['dni_cliente'] != '0':
                 if Clientes.objects.filter(dni_cliente=req.POST['dni_cliente']).exists():
-                    ERR = 'El DNI ya está registrado en la base de datos.'
+                    ERR = 'O DNI já está cadastrado no banco de dados.'
                     contexto = {
                         'clientes': clientes,
                         'error': ERR,
@@ -56,7 +56,7 @@ def crear_cliente(req):
 
             if req.POST['rg_cliente'] != '0':
                 if Clientes.objects.filter(rg_cliente=req.POST['rg_cliente']).exists():
-                    ERR = 'El RG ya está registrado en la base de datos.'
+                    ERR = 'O RG já está cadastrado no banco de dados.'
                     contexto = {
                         'clientes': clientes,
                         'error': ERR,
@@ -65,7 +65,7 @@ def crear_cliente(req):
                     return render(req, 'cliente/cliente_form.html', contexto)
 
             if Clientes.objects.filter(email_cliente=req.POST['email_cliente']).exists():
-                ERR = 'El correo electrónico ya está registrado en la base de datos.'
+                ERR = 'O E-mail já está cadastrado no banco de dados.'
                 contexto = {
                     'clientes': clientes,
                     'error': ERR,
