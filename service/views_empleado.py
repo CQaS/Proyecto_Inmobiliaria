@@ -186,12 +186,20 @@ def editar_empleado(req, id_empleado=None):
 
 @login_required(login_url='/#modal-opened')
 def recibo_empleado(req, id_empleado):
-    empleado = Empleados.objects.get(id_empleado=id_empleado)
-    context = {
-        'empleado': empleado
-    }
-    print(empleado)
-    return render(req, 'empleado/recibo_empleado.html', context)
+    try:
+        empleado = Empleados.objects.get(id_empleado=id_empleado)
+
+        context = {
+            'empleado': empleado
+        }
+        print(empleado)
+        return render(req, 'empleado/recibo_empleado.html', context)
+
+    except Empleados.DoesNotExist:
+        return render(req, '404.html')
+
+    except Empleados.MultipleObjectsReturned:
+        return render(req, '404.html')
 
 
 @login_required(login_url='/#modal-opened')

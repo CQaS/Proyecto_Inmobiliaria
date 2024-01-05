@@ -248,18 +248,22 @@ def detalles_propiedad(req, id_inmueble):
     un_detalle = Inmueble.objects.filter(
         id_inmueble__icontains=id_inmueble)
 
-    for d in un_detalle:
-        print(d.latitud, d.longitud)
-        fotos = Fotos.objects.filter(
-            inmueble_id=d.id_inmueble).values('image', 'inmueble_id')
+    if un_detalle.exists():
 
-    list_fotos = []
-    for foto in fotos:
-        foto['image'] = foto['image'].replace('webapp', '')
-        list_fotos.append(foto['image'])
-    print(list_fotos)
+        for d in un_detalle:
+            print(d.latitud, d.longitud)
+            fotos = Fotos.objects.filter(
+                inmueble_id=d.id_inmueble).values('image', 'inmueble_id')
 
-    return render(req, 'propiedad/inmueble.html', {'detalle': un_detalle, 'fotos': list_fotos})
+        list_fotos = []
+        for foto in fotos:
+            foto['image'] = foto['image'].replace('webapp', '')
+            list_fotos.append(foto['image'])
+        print(list_fotos)
+
+        return render(req, 'propiedad/inmueble.html', {'detalle': un_detalle, 'fotos': list_fotos})
+    else:
+        return render(req, '404.html')
 
 
 @login_required(login_url='/#modal-opened')

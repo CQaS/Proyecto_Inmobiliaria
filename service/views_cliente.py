@@ -214,34 +214,38 @@ def recibo_cliente(req, id_cliente):
 
     resultados = cliente_I['res']
     columnas = cliente_I['columns']
+    if len(resultados) > 0:
 
-    datos_finales = []
-    id_cliente_P = 0
-    for resultado in resultados:
-        # Formatear la fecha de entrada en el formato "YYYY-MM-DD"
-        fecha_ing_formateada = resultado[columnas.index(
-            'fecha_ing')].isoformat()
+        datos_finales = []
+        id_cliente_P = 0
+        for resultado in resultados:
+            # Formatear la fecha de entrada en el formato "YYYY-MM-DD"
+            fecha_ing_formateada = resultado[columnas.index(
+                'fecha_ing')].isoformat()
 
-        # Formatear la fecha de salida en el formato "YYYY-MM-DD"
-        fecha_salida_formateada = resultado[columnas.index(
-            'fecha_salida')].isoformat()
-        id_cliente_P = resultado[columnas.index('idPropietario')]
+            # Formatear la fecha de salida en el formato "YYYY-MM-DD"
+            fecha_salida_formateada = resultado[columnas.index(
+                'fecha_salida')].isoformat()
+            id_cliente_P = resultado[columnas.index('idPropietario')]
 
-        # Crear el diccionario con las fechas formateadas
-        dato = dict(zip(columnas, resultado))
-        dato['fecha_ing'] = fecha_ing_formateada
-        dato['fecha_salida'] = fecha_salida_formateada
+            # Crear el diccionario con las fechas formateadas
+            dato = dict(zip(columnas, resultado))
+            dato['fecha_ing'] = fecha_ing_formateada
+            dato['fecha_salida'] = fecha_salida_formateada
 
-        # Agregar el diccionario a la lista
-        datos_finales.append(dato)
+            # Agregar el diccionario a la lista
+            datos_finales.append(dato)
 
-    cliente_P = Clientes.objects.get(id_cliente=id_cliente_P)
+        cliente_P = Clientes.objects.get(id_cliente=id_cliente_P)
 
-    context = {
-        'cliente': datos_finales,
-        'cliente_P': cliente_P
-    }
-    return render(req, 'cliente/recibo_cliente.html', context)
+        context = {
+            'cliente': datos_finales,
+            'cliente_P': cliente_P
+        }
+        return render(req, 'cliente/recibo_cliente.html', context)
+
+    else:
+        return render(req, '404.html')
 
 
 @login_required(login_url='/#modal-opened')

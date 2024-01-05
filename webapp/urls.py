@@ -12,10 +12,8 @@ urlpatterns = [
     path('accounts/', conf.include('django.contrib.auth.urls')),
     ##### NOT FOUND #####
     path('<str:err>/', views.notFound, name='404'),
-    re_path(r'^propiedad/(?P<err>\w+)/$', views.notFound, name='404'),
-    re_path(r'^cliente/(?P<err>\w+)/$', views.notFound, name='404'),
-    re_path(r'^contrato/(?P<err>\w+)/$', views.notFound, name='404'),
-    re_path(r'^empleado/(?P<err>\w+)/$', views.notFound, name='404'),
+    re_path(r'^(?P<err>[\w/]+)/(?P<err2>[\w/]+)/$',
+            views.notFound, name='404'),
     ##### FIN NOT FOUND #####
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
