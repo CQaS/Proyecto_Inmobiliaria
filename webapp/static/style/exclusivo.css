@@ -66,11 +66,18 @@ img {
   .cards__item {
     width: 50%;
   }
+  .card {
+    width: 100%;
+  }
 }
 
 @media (min-width: 56rem) {
   .cards__item {
     width: 33.3333%;
+  }
+
+  .card {
+    width: 100%;
   }
 }
 
@@ -125,8 +132,8 @@ img {
 @media (min-width: 40rem) {
   .card__image::before {
     padding-top: 66.6%;
-
   }
+ 
 }
 
 .card__title {

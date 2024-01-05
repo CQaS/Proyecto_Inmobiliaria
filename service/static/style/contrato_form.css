@@ -263,3 +263,58 @@
 .btn_siguiente:hover {
   box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
 }
+
+
+/* Existing styles remain unchanged */
+
+/* For screens up to 700px width */
+@media (max-width: 700px) {
+  .formbold-steps li {
+    font-size: 14px;
+  }
+
+  .formbold-form-input {
+    font-size: 14px;
+  }
+
+  .formbold-form-label {
+    font-size: 12px;
+  }
+
+  .formbold-form-confirm p {
+    font-size: 14px;
+  }
+
+  .btn_volver_1,
+  .btn_volver_2,
+  .btn_siguiente {
+    font-size: 14px;
+    padding: 8px 20px;
+  }
+}
+
+/* For screens up to 400px width */
+@media (max-width: 400px) {
+  .formbold-steps li {
+    font-size: 12px;
+  }
+
+  .formbold-form-input {
+    font-size: 12px;
+  }
+
+  .formbold-form-label {
+    font-size: 10px;
+  }
+
+  .formbold-form-confirm p {
+    font-size: 12px;
+  }
+
+  .btn_volver_1,
+  .btn_volver_2,
+  .btn_siguiente {
+    font-size: 12px;
+    padding: 6px 16px;
+  }
+}

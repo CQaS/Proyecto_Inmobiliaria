@@ -68,27 +68,6 @@
     font-size: 1.5rem;
 }
 
-/* label {
-    font-size: 16px;
-    display: flex;
-    vertical-align: middle;
-    align-items: left;
-    margin-top: 20px;
-    padding: 12px;
-    border-radius: 10px;
-    float: left;    
-}
-
-input, select {
-    font-size: 16px;
-    display: flex;
-    vertical-align: middle;
-    align-items: right;
-    margin-top: 20px;
-    padding: 10px;
-    border-radius: 10px;
-    float: right;
-} */
 select,
 .eleccion {
     display: inline-block;
@@ -148,7 +127,30 @@ input[type="submit"]:hover {
 
 /* Mobil */
 @media (max-width: 700px) {
-
-    /* CONTAINER CRUD CLIENTE*/
-
+    .container-form-cliente,
+    .container-form-empleados,
+    .container-form-inmuebles {
+        margin: 50px 20px; /* Ajusta los márgenes según el espacio disponible */
+        width: calc(100% - 78px); /* Resta el espacio del menú lateral en pantallas más pequeñas */
+        flex-direction: column; /* Cambia la dirección del flexbox a column (apilado vertical) */
+        margin-right: 0;
+    }
 }
+
+@media (max-width: 400px) {
+    .container-form-cliente,
+    .container-form-empleados,
+    .container-form-inmuebles {
+      margin: 50px 20px;
+      width: calc(100% - 78px);
+      flex-direction: column;
+      margin-right: 0;
+      pointer-events: none;  /* Oculta la barra inicialmente */
+    }
+  
+    .container-form-cliente:hover,
+    .container-form-empleados:hover,
+    .container-form-inmuebles:hover {
+      pointer-events: auto;  /* Muestra la barra al pasar el cursor o dedo */
+    }
+  }
