@@ -200,7 +200,7 @@ const mostrarDetallePropiedades = () => {
 
   }).fail(() => {
     // Manejar cualquier error en la petición AJAX
-    _alerta('Hubo un error al obtener los datos');
+    _alerta('Ocorreu um erro ao obter os dados');
   })
 }
 

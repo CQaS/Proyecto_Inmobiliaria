@@ -36,31 +36,31 @@ crear_cliente.addEventListener("click", (e) => {
     }
 
     if (letra_y_espacios(c_nombre) == null || c_nombre.value.length < 3) {
-        _alerta('Nombre del Cliente solo letras y debe comenzar con Mayusculas')
+        _alerta('Nome do cliente apenas em letras e deve começar com letras maiúsculas')
         return
     }
 
     if (letras_numero_espacios(c_direccion) == null) {
-        _alerta('Direccion de Cliente solo letras/numeros y comenzar con MAYUSCULAS!')
+        _alerta('Endereço do cliente apenas letras/números e começar com LETRAS MAIÚSCULAS!')
         return
     }
 
     if (!c_dni.value && !c_rg_cliente.value) {
-        _alerta('Debe ingresar al menos el número de DNI o el número de RG!')
+        _alerta('Você deve inserir pelo menos o número DNI ou o número RG!')
 
     } else {
         console.log(c_dni.value)
 
         if (c_dni.value) {
             if (solo_numeros(c_dni) == null || c_dni.value.length < 5) {
-                _alerta('DNI de Cliente no valido!')
+                _alerta('DNI de cliente inválido!')
                 return
             }
         }
 
         if (c_rg_cliente.value) {
             if (solo_numeros(c_rg_cliente) == null || c_rg_cliente.value.length < 5) {
-                _alerta('RG de Cliente no valido!')
+                _alerta('RG de cliente inválido!')
                 return
             }
 
@@ -68,27 +68,27 @@ crear_cliente.addEventListener("click", (e) => {
     }
 
     if (solo_numeros(c_tel) == null || c_tel.value.length < 10) {
-        _alerta('Telefono de Cliente no valido!')
+        _alerta('Número de telefone do cliente inválido!')
         return
     }
 
     if (mail(c_mail) == null) {
-        _alerta('E-mail de Cliente no valido!')
+        _alerta('E-mail do cliente inválido!')
         return
     }
 
     if (letra_y_espacios(c_ciudad) == null || c_ciudad.value.length < 3) {
-        _alerta('Ciudad de Cliente solo letras y comenzar con MAYUSCULAS!')
+        _alerta('Cidade do cliente apenas letras e iniciada em LETRAS MAIÚSCULAS!')
         return
     }
 
     if (letra_y_espacios(c_pais) == null || c_pais.value.length < 3) {
-        _alerta('Pais de Cliente solo letras y comenzar con MAYUSCULAS!')
+        _alerta('País do cliente somente letras e começando com LETRAS MAIÚSCULAS!')
         return
     }
 
     if (c_categoria.value.length == 0 || c_categoria.value == "Selecciona") {
-        _alerta('Selecciona una Categoria de Cliente')
+        _alerta('Selecione uma categoria de cliente')
         return
     }
 

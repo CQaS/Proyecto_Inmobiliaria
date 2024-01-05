@@ -69,7 +69,7 @@ btn_calendar.addEventListener('click', () => {
 
         } else {
             // Si no hay elementos, mostrar un alert
-            _alerta('No hay resultados para mostrar');
+            _alerta('Não há resultados para mostrar');
         }
     })
 })
