@@ -42,7 +42,7 @@ def crear_empleado(req):
         try:
             # Validar si el DNI o el correo electrónico ya existen en la base de datos
             if Empleados.objects.filter(dni_empleado=req.POST['dni_empleado']).exists():
-                ERR = 'El DNI ya está registrado en la base de datos.'
+                ERR = 'O DNI já está cadastrado no banco de dados.'
                 contexto = {
                     'empleado': context_emp,
                     'error': ERR,
@@ -52,7 +52,7 @@ def crear_empleado(req):
 
             # Validar si el DNI o el correo electrónico ya existen en la base de datos
             if Empleados.objects.filter(email_empleado=req.POST['email_empleado']).exists():
-                ERR = 'El E-mail ya está registrado en la base de datos.'
+                ERR = 'O E-mail já está cadastrado no banco de dados.'
                 contexto = {
                     'empleado': context_emp,
                     'error': ERR,
@@ -94,7 +94,7 @@ def crear_empleado(req):
     else:
         for field_name, error_msgs in empleado_form.errors.items():
             for error_msg in error_msgs:
-                ERR = 'Algun campo contiene Errores'
+                ERR = 'Alguns campos contêm erros'
                 print(f"Error en el campo '{field_name}': {error_msg}")
 
     contexto = {
@@ -116,7 +116,7 @@ def editar_empleado(req, id_empleado=None):
         if req.method == 'POST' and str(empleado.dni_empleado) != req.POST['dni_empleado']:
 
             if Empleados.objects.filter(dni_empleado=req.POST['dni_empleado']).exists():
-                ERR = 'El DNI ya está registrado en la base de datos.'
+                ERR = 'O DNI já está cadastrado no banco de dados.'
                 contexto = {
                     'empledit': empleado,
                     'error': ERR,
@@ -127,7 +127,7 @@ def editar_empleado(req, id_empleado=None):
         # Validar si el DNI o el correo electrónico ya existen en la base de datos
         if req.method == 'POST' and empleado.email_empleado != req.POST['email_empleado']:
             if Empleados.objects.filter(email_empleado=req.POST['email_empleado']).exists():
-                ERR = 'El email ya está registrado en la base de datos.'
+                ERR = 'O E-mail já está cadastrado no banco de dados.'
                 contexto = {
                     'empledit': empleado,
                     'error': ERR,
@@ -140,7 +140,7 @@ def editar_empleado(req, id_empleado=None):
         return redirect('404')
 
     except IntegrityError as e:
-        ERR = 'Algo fallo, intenta nuevamente o ponte en contacto con Admin'
+        ERR = 'Algo deu errado, tente novamente ou entre em contato com o administrador'
         print("Error:", e)
 
     empleado_form = EmpleadoForm(
@@ -150,7 +150,7 @@ def editar_empleado(req, id_empleado=None):
         try:
             empleado_form.save()
             print('Empleado, OK')
-            success = "Empleado Editado correctamente"
+            success = "Empregado editado corretamente"
             contexto = {
                 'empledit': empleado,
                 'error': ERR,
@@ -172,7 +172,7 @@ def editar_empleado(req, id_empleado=None):
     else:
         for field_name, error_msgs in empleado_form.errors.items():
             for error_msg in error_msgs:
-                ERR = 'Algun campo contiene Errores'
+                ERR = 'Alguns campos contêm erros'
                 print(f"Error en el campo '{field_name}': {error_msg}")
 
     contexto = {
