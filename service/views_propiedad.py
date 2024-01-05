@@ -55,7 +55,7 @@ def crear_propiedad(req):
         clientes = json.dumps(lista, default=serialize_date)
 
     except IntegrityError as e:
-        ERR = 'Algo fallo, intenta nuevamente o ponte en contacto con Admin'
+        ERR = 'Algo deu errado, tente novamente ou entre em contato com o administrador'
         print("Error:", e)
 
     inmueble_form = InmuebleForm(req.POST or None, req.FILES or None)
@@ -72,7 +72,7 @@ def crear_propiedad(req):
         try:
             # Validar si el cod_referencia ya existen en la base de datos
             if Inmueble.objects.filter(cod_referencia=req.POST['cod_referencia']).exists():
-                ERR = 'El cod. referencia ya está registrado en la base de datos.'
+                ERR = 'O Cód. Referência já está cadastrado no banco de dados.'
                 print(inmueble_form.expensas)
                 context = {
                     'inmueble': inmueble_form,
@@ -113,7 +113,7 @@ def crear_propiedad(req):
             return render(req, 'propiedad/inmueble_form.html', context)
 
         except Exception as e:
-            error_message = f"Error al guardar el Inmueble: {str(e)}"
+            error_message = f"Erro ao salvar o imóvel: {str(e)}"
             ERR = error_message
             print(f"error: {error_message}")
     else:
@@ -221,7 +221,7 @@ def editar_propiedad(req, id_inmueble=None):
     else:
         for field_name, error_msgs in inmueble_form.errors.items():
             for error_msg in error_msgs:
-                ERR = 'Algun campo contiene Errores'
+                ERR = 'Alguns campos contêm erros'
                 print(f"Error en el campo '{field_name}': {error_msg}")
 
     if ERR != '':
