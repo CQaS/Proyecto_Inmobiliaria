@@ -84,7 +84,6 @@ const listInmuebles = async () => {
                     <td >
                         <a href='/propiedad/detalles/${p.id_inmueble}' class='btn btn-sm btn_pencil' title='Ver'><i class='fa-solid fa-pencil'></i></a>
                         <a href='#' class='btn btn-sm btn_trash'><i class='fa-solid fa-trash-can'></i></a>
-                        <a href='#' class='btn btn-sm btn_file'><i class="fa-solid fa-file-invoice-dollar "></i></a>
                     </td>
                 </tr>`;
         })
