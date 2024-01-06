@@ -448,7 +448,7 @@ if (contactar) {
     contactar.addEventListener("click",() => {
         let cod_ref = document.getElementById("cod_ref").value
         let mensaje = document.getElementById("mensaje")
-        let msg_contactar = `Desejo mais informações sobre o imóvel: ${cod_ref}. Saudações .-`
+        let msg_contactar = `Desejo mais informações sobre o imóvel: ${cod_ref}.`
         mensaje.value = msg_contactar
 
         document.getElementById('ir_a_msg').scrollIntoView({

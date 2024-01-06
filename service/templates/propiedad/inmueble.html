@@ -29,7 +29,9 @@
                     | <a href="{% url 'editar_propiedad' D.id_inmueble %}">Edit <i class='fa-solid fa-pencil'></i></a>
                     {% endif %}
                 </div>
+                {% if not user.is_authenticated %}
                 <button class="contactar" id="contactar">Quer mais informações? Entre em contato!</button>
+                {% endif %}
             </div>
         </div>
     </div>
