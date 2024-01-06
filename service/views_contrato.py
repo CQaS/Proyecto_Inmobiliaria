@@ -240,3 +240,21 @@ def reportes_json_t(req):
     print(contratos_list)
     data = {'contrato': contratos_list}
     return JsonResponse(data)
+
+
+def condetalles(req, detalleid):
+    query = """
+     SELECT *, DATE_FORMAT(c.fecha_contrato, 'YYYY-MM-DD') as fecha_contrato, DATE_FORMAT(c.fecha_ing, 'YYYY-MM-DD') as fecha_ing, DATE_FORMAT(c.fecha_salida, 'YYYY-MM-DD') as fecha_salida, DATE_FORMAT(c.fecha_reserva, 'YYYY-MM-DD') as fecha_reserva FROM contrato c JOIN fotos_prop f ON c.inmueble_id = f.inmueble_id JOIN inmueble i ON c.inmueble_id = i.id_inmueble WHERE c.id_contrato = %s
+    """
+
+    with connection.cursor() as cursor:
+        cursor.execute(query, [detalleid])
+        columns = [col[0] for col in cursor.description]
+        contrato_data = [dict(zip(columns, row)) for row in cursor.fetchall()]
+
+    if contrato_data:
+        contrato_json = json.dumps(contrato_data[0])
+        return HttpResponse(contrato_json, content_type='application/json')
+    else:
+        mensaje_error = {'error': 'Contrato no encontrado'}
+        return HttpResponse(json.dumps(mensaje_error), content_type='application/json')

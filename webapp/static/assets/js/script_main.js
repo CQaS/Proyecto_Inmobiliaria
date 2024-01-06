@@ -441,3 +441,18 @@ btn_msg.addEventListener("click", (e) => {
         }
     })
 })
+
+let contactar = document.getElementById("contactar")
+
+if (contactar) {
+    contactar.addEventListener("click",() => {
+        let cod_ref = document.getElementById("cod_ref").value
+        let mensaje = document.getElementById("mensaje")
+        let msg_contactar = `Desejo mais informações sobre o imóvel: ${cod_ref}. Saudações .-`
+        mensaje.value = msg_contactar
+
+        document.getElementById('ir_a_msg').scrollIntoView({
+            behavior: 'smooth'
+        })
+    })
+}

@@ -5,6 +5,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <link rel="shortcut icon" href="{% static '/assets/logo_cobre.ico' %}">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="{% static '/style/style00.css' %}">
@@ -13,6 +14,7 @@
   <link rel="stylesheet" href="{% static '/style/alert_form.css' %}">
   <link rel="stylesheet" href="{% static '/style/exclusivo.css' %}">
   <link rel="stylesheet" href="{% static '/style/modal.css' %}">
+
 
   <!-- Boxiocns CDN Link -->
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -140,7 +142,7 @@
   <section class="home-section">
     <div class="home-content">
       <i class='bx bx-menu'></i>
-      <span class="text">Imóveis MEC</span>
+      <span class="text">Imóveis MEC {% if user.is_authenticated %}- Bem-vindo {{ user.username }} {% endif %}</span>
       <div id="google_translate_element" class="google"></div>
     </div>
   </section>
@@ -196,7 +198,7 @@
           <textarea name="mensaje" class="form_input" id="mensaje" cols="25" rows="3" placeholder="Mensagem"
             required></textarea>
           <br>
-          <input type="submit" id="btn_msg" value="Enviar formulario" class="form_enviar">
+          <input type="submit" id="btn_msg" value="Enviar contato!" class="form_enviar contactar">
           <!--Esto es para que no se vea la confirmacion del envio del formulario-->
           <!-- <input type="hidden" name="_next" value="http://localhost:127.0.0.1:8000/">
           <input type="hidden" name="_captcha" value="false"> -->

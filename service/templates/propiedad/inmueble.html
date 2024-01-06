@@ -11,9 +11,9 @@
 
 <div id="overlay"></div>
 <link rel="stylesheet" href="{% static '/style/inmueble_detalles.css' %}">
+
 {% for D in detalle %}
-
-
+<input type="hidden" name="codRef" id="cod_ref" value="{{ D.cod_referencia }}">
 <section class="intro-single">
     <div class="container">
         <div class="row">
@@ -29,6 +29,7 @@
                     | <a href="{% url 'editar_propiedad' D.id_inmueble %}">Edit <i class='fa-solid fa-pencil'></i></a>
                     {% endif %}
                 </div>
+                <button class="contactar" id="contactar">Quer mais informações? Entre em contato!</button>
             </div>
         </div>
     </div>
@@ -138,7 +139,7 @@
 
 <script>
     let inmueble_html = true
-    let pictures = {{fotos | safe}}
+    let pictures = {{ fotos | safe }}
     let direccion = '{{ D.dir_inmueble }}';
     let ciudad = '{{ D.ciudad_inmueble }}';
 </script>

@@ -75,6 +75,8 @@ urlpatterns = [
     path('contrato/contratar/<int:id_inmueble>/',
          views_contrato.contrato_idInmueble, name="contrato_idInmueble"),
     path('contrato/crear', views_contrato.crear_contrato, name="crear_contrato"),
+    path('contrato/condetalles/<int:detalleid>',
+         views_contrato.condetalles, name="condetalles"),
     ##### FIN RUTAS CONTRATOS #####
     ##### RESET PASSWORD #####
     path('reset_password/', views_cliente.reset_password, name="reset_password"),

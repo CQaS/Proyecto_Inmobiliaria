@@ -210,9 +210,8 @@ const listContrato = async () => {
                     <td >${t.cant_dias}</td> 
                     <td >${t.valor_total}</td>                   
                     <td >
-                        <a href='/contrato/detalles/${t.id_inmueble}' class='btn btn-sm btn_pencil' title='Ver'><i class='fa-solid fa-pencil'></i></a>
+                        <button onclick='condetalles(${t.id_contrato})' class='btn btn-sm btn_pencil' title='Ver'><i class='fa-solid fa-file-invoice-dollar'></i></button>
                         <a href='#' class='btn btn-sm btn_trash'><i class='fa-solid fa-trash-can'></i></a>
-                        <a href='#' class='btn btn-sm btn_file'><i class="fa-solid fa-file-invoice-dollar"></i></a>
                     </td>
                 </tr>`;
         })
@@ -220,6 +219,49 @@ const listContrato = async () => {
     } catch (ex) {
         _alerta('Algo errado, entre em contato com o administrador!')
     }
+}
+
+const condetalles = (v) => {
+    let url = `/contrato/condetalles/${v}`
+    $.get(url).done((res) => {
+            console.log(res)
+
+            if (res && Object.keys(res).length > 0 && res.datos_envio != undefined) {
+
+                let img = res.image.replace('webapp', '')
+
+                Swal.fire({
+                    title: 'Informação detalhada',
+                    html: `
+                        <div class="center">
+                            <div class="property-card">
+                                <a href="#">
+                                <div class="property-image" style="background-image: url('${img}');">
+                                    <div class="property-image-title">
+                                    </div>
+                                </div></a>
+                                <div class="property-description">
+                                <h5 class='h5'> ${res.dir_inmueble} </h5>
+                                <p class='p'>${res.tipo_inmueble}</p>
+                                <p class='p'>${res.tipo_operacion}</p>
+                                <h5 class='h5'>$${res.valor_inmueble} </h5>
+                                </div>
+                            </div>
+                        </div>
+                        `,
+                    showCloseButton: true,
+                    showConfirmButton: false,
+                })
+
+            } else {
+                _alerta(res.error)
+            }
+        })
+        .fail((e) => {
+            _alerta('Error al buscar el contrato!')
+        })
+
+
 }
 
 porFecha.addEventListener('click', async () => {
