@@ -424,7 +424,7 @@ btn_msg.addEventListener("click", (e) => {
 
     $.ajax({
         type: "POST",
-        url: "msg",
+        url: "/msg",
         data: formData,
         success: (res) => {
             // Limpiar los campos del formulario
@@ -433,11 +433,11 @@ btn_msg.addEventListener("click", (e) => {
             $("#email").val("")
             $("#mensaje").val("")
             console.log(res)
-            _alerta("E-mail de Contacto enviado exitosamente!")
+            _alerta("E-mail de contato enviado com sucesso!")
         },
         error: (res) => {
             console.log(res)
-            _alerta("¡Hubo un error al enviar el E-mail de Contacto!")
+            _alerta("¡Ocorreu um erro ao enviar o e-mail de contato!")
         }
     })
 })
