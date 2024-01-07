@@ -73,6 +73,8 @@ const listInmuebles = async () => {
 
         let content = ``
         data.inmueble.forEach((p, i) => {
+            p.estado == 1 ? checked = 'checked' : checked = ''
+            p.estado == 1 ? title = 'Ativo' : title = 'Inativo'
             content += `
                 <tr>
                     <td >${p.cod_referencia}</td>
@@ -83,7 +85,7 @@ const listInmuebles = async () => {
                     <td >${p.tipo_servicio}</td>                    
                     <td >
                         <a href='/propiedad/detalles/${p.id_inmueble}' class='btn btn-sm btn_pencil' title='Ver'><i class='fa-solid fa-pencil'></i></a>
-                        <a href='#' class='btn btn-sm btn_trash'><i class='fa-solid fa-trash-can'></i></a>
+                        <input type="checkbox" value="${p.id_inmueble}" ${checked} title='${title}' onchange="excluirPropiedad(this)">
                     </td>
                 </tr>`;
         })
@@ -91,6 +93,37 @@ const listInmuebles = async () => {
     } catch (ex) {
         _alerta('Algo errado, entre em contato com o administrador!')
     }
+}
+
+const excluirPropiedad = (p) => {
+    Swal.fire({
+        title: 'Você tem certeza de que deseja alterar o Estado do Imóveis?',
+        text: "Esta ação não pode ser desfeita",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim, estou de acordo',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let url = `/propiedad/eliminar/${p.value}`
+            $.get(url).done((res) => {
+                if (res.excluido) {
+                    _alerta(res.mensagem)
+                    $("#fresh-table").bootstrapTable('remove', {
+                        field: 'dni',
+                        values: [res.dni]
+                    }).bootstrapTable('refresh')
+                } else {
+                    _alerta(res.mensagem)
+                }
+            })
+
+        } else {
+            p.checked == true ? p.checked = false : p.checked = true
+        }
+    })
 }
 
 const listClientes = async () => {
@@ -101,6 +134,8 @@ const listClientes = async () => {
 
         let content = ``
         data.cliente.forEach((c, i) => {
+            c.estado == 1 ? checked = 'checked' : checked = ''
+            c.estado == 1 ? title = 'Ativo' : title = 'Inativo'
             content += `
                 <tr>
                     <td >${c.nom_cliente}</td>
@@ -113,10 +148,10 @@ const listClientes = async () => {
                     <td >${c.categoria}</td>                           
                     <td >
                         <a href='/cliente/editar/${c.id_cliente}'
-                        class = 'btn btn-sm btn_pencil'
-                        title = 'Edit'><i class='fa-solid fa-pencil'></i></a>
-                        <a href='#' class='btn btn-sm btn_trash'><i class='fa-solid fa-trash-can'></i></a>
+                        class='btn btn-sm btn_pencil'
+                        title='Edit'><i class='fa-solid fa-pencil'></i></a>
                         <a href='/cliente/recibo/${c.id_cliente}' class='btn btn-sm btn_file'><i class="fa-solid fa-file-invoice-dollar"></i></a>
+                        <input type="checkbox" value="${c.id_cliente}" ${checked} title='${title}' onchange="excluirCliente(this)">
                     </td>
                 </tr>`;
         })
@@ -134,9 +169,9 @@ const listPropietario = async () => {
 
         let content = ``
         data.cliente.forEach((p, i) => {
-            // filtrar por categoria propietario
-            if (p.categoria === 'Propietario') {
-                content += `
+            p.estado == 1 ? checked = 'checked' : checked = ''
+            p.estado == 1 ? title = 'Ativo' : title = 'Inativo'
+            content += `
                 <tr>
                     <td >${p.nom_cliente}</td>
                     <td >${p.dir_cliente}</td>
@@ -150,16 +185,46 @@ const listPropietario = async () => {
                         <a href='/cliente/editar/${p.id_cliente}'
                         class = 'btn btn-sm btn_pencil'
                         title = 'Edit'><i class='fa-solid fa-pencil'></i></a>
-                        <a href='#' class='btn btn-sm btn_trash'><i class='fa-solid fa-trash-can'></i></a>
                         <a href='/cliente/liquidacion/${p.id_cliente}' ></a>
+                        <input type="checkbox" value="${p.id_cliente}" ${checked} title='${title}' onchange="excluirCliente(this)">
                     </td>
                 </tr>`;
-            }
         })
         tableBody_reportes.innerHTML = content
     } catch (ex) {
         _alerta('Algo errado, entre em contato com o administrador!')
     }
+}
+
+const excluirCliente = (c) => {
+    Swal.fire({
+        title: 'Você tem certeza de que deseja alterar o Estado do Cliente?',
+        text: "Esta ação não pode ser desfeita",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim, estou de acordo',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let url = `/cliente/eliminar/${c.value}`
+            $.get(url).done((res) => {
+                if (res.excluido) {
+                    _alerta(res.mensagem)
+                    $("#fresh-table").bootstrapTable('remove', {
+                        field: 'dni',
+                        values: [res.dni]
+                    }).bootstrapTable('refresh')
+                } else {
+                    _alerta(res.mensagem)
+                }
+            })
+
+        } else {
+            c.checked == true ? c.checked = false : c.checked = true
+        }
+    })
 }
 
 const listEmpleados = async () => {
@@ -170,6 +235,8 @@ const listEmpleados = async () => {
 
         let content = ``
         data.empleado.forEach((e, i) => {
+            e.estado == 1 ? checked = 'checked' : checked = ''
+            e.estado == 1 ? title = 'Ativo' : title = 'Inativo'
             content += `
                 <tr>
                     <td >${e.nom_empleado}</td>
@@ -180,8 +247,8 @@ const listEmpleados = async () => {
                     <td >${e.nom_puesto}</td>                   
                     <td >
                         <a href='/empleado/editar/${e.id_empleado}' class='btn btn-sm btn_pencil' title='Ver'><i class='fa-solid fa-pencil'></i></a>
-                        <a href='#' class='btn btn-sm btn_trash'><i class='fa-solid fa-trash-can'></i></a>
                         <a href='/empleado/recibo/${e.id_empleado}' class='btn btn-sm btn_file'><i class="fa-solid fa-file-invoice-dollar"></i></a>
+                        <input type="checkbox" value="${e.id_empleado}" ${checked} title='${title}' onchange="excluirEmpleado(this)">
                     </td>
                 </tr>`;
         })
@@ -189,6 +256,37 @@ const listEmpleados = async () => {
     } catch (ex) {
         _alerta('Algo errado, entre em contato com o administrador!')
     }
+}
+
+const excluirEmpleado = (e) => {
+    Swal.fire({
+        title: 'Você tem certeza de que deseja alterar o Estado do empleado?',
+        text: "Esta ação não pode ser desfeita",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim, estou de acordo',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let url = `/empleado/eliminar/${e.value}`
+            $.get(url).done((res) => {
+                if (res.excluido) {
+                    _alerta(res.mensagem)
+                    $("#fresh-table").bootstrapTable('remove', {
+                        field: 'dni',
+                        values: [res.dni]
+                    }).bootstrapTable('refresh')
+                } else {
+                    _alerta(res.mensagem)
+                }
+            })
+
+        } else {
+            e.checked == true ? e.checked = false : e.checked = true
+        }
+    })
 }
 
 const listContrato = async () => {
@@ -211,7 +309,7 @@ const listContrato = async () => {
                     <td >${t.valor_total}</td>                   
                     <td >
                         <button onclick='condetalles(${t.id_contrato})' class='btn btn-sm btn_pencil' title='Ver'><i class='fa-solid fa-file-invoice-dollar'></i></button>
-                        <a href='#' class='btn btn-sm btn_trash'><i class='fa-solid fa-trash-can'></i></a>
+                        <button title='Excluir' onclick='excluirContrato(${t.id_contrato})' class='btn btn-sm btn_trash'><i class='fa-solid fa-trash-can'></i></button>
                     </td>
                 </tr>`;
         })
@@ -219,6 +317,23 @@ const listContrato = async () => {
     } catch (ex) {
         _alerta('Algo errado, entre em contato com o administrador!')
     }
+}
+
+const excluirContrato = (c) => {
+    Swal.fire({
+        title: 'Você tem certeza de que deseja alterar o Estado do Contrato ?',
+        text: "Esta ação não pode ser desfeita",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim, estou de acordo',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            console.log('ok', c)
+        }
+    })
 }
 
 const condetalles = (v) => {

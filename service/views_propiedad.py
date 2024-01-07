@@ -268,9 +268,17 @@ def detalles_propiedad(req, id_inmueble):
 
 @login_required(login_url='/#modal-opened')
 def eliminar_propiedad(req, id_inmueble):
-    inmueble = Inmueble.objects.get(id_inmueble=id_inmueble)
-    inmueble.delete()
-    return redirect('index_propiedad')
+    try:
+        inmueble = Inmueble.objects.get(id_inmueble=id_inmueble)
+        inmueble.estado = 1 if inmueble.estado == 0 else 0
+        inmueble.save()
+        return JsonResponse({'excluido': True, 'mensagem': 'Estado do Imóveis alterado!'})
+
+    except Inmueble.DoesNotExist:
+        return JsonResponse({'excluido': False, 'mensagem': 'O Imóveis não existe'}, status=404)
+
+    except Exception as e:
+        return JsonResponse({'excluido': False, 'mensagem': f'Erro: {str(e)}'}, status=500)
 
 
 @login_required(login_url='/#modal-opened')
@@ -416,7 +424,7 @@ def reportes(req, R):
 
 @login_required(login_url='/#modal-opened')
 def reportes_json_i(req):
-    inmueble = list(Inmueble.objects.filter(estado=1).values())
+    inmueble = list(Inmueble.objects.values())
     data = {'inmueble': inmueble}
     return JsonResponse(data)
 

@@ -204,9 +204,17 @@ def recibo_empleado(req, id_empleado):
 
 @login_required(login_url='/#modal-opened')
 def eliminar_empleado(req, id_empleado):
-    empleado = Empleados.objects.get(id_empleado=id_empleado)
-    empleado.delete()
-    return redirect('index_empleado')
+    try:
+        empleado = Empleados.objects.get(id_empleado=id_empleado)
+        empleado.estado = 1 if empleado.estado == 0 else 0
+        empleado.save()
+        return JsonResponse({'excluido': True, 'dni': empleado.dni_empleado, 'mensagem': 'Estado do Empleado alterado!'})
+
+    except Empleados.DoesNotExist:
+        return JsonResponse({'excluido': False, 'mensagem': 'O Empleado não existe'}, status=404)
+
+    except Exception as e:
+        return JsonResponse({'excluido': False, 'mensagem': f'Erro: {str(e)}'}, status=500)
 
 
 @login_required(login_url='/#modal-opened')

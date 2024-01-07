@@ -250,9 +250,17 @@ def recibo_cliente(req, id_cliente):
 
 @login_required(login_url='/#modal-opened')
 def eliminar_cliente(req, id_cliente):
-    cliente = Clientes.objects.get(id_cliente=id_cliente)
-    cliente.delete()
-    return redirect('index_cliente')
+    try:
+        cliente = Clientes.objects.get(id_cliente=id_cliente)
+        cliente.estado = 1 if cliente.estado == 0 else 0
+        cliente.save()
+        return JsonResponse({'excluido': True, 'mensagem': 'Estado do Cliente alterado!'})
+
+    except Clientes.DoesNotExist:
+        return JsonResponse({'excluido': False, 'mensagem': 'O Cliente não existe'}, status=404)
+
+    except Exception as e:
+        return JsonResponse({'excluido': False, 'mensagem': f'Erro: {str(e)}'}, status=500)
 
 
 """ 
