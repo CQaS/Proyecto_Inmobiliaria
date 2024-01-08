@@ -57,8 +57,8 @@
     </div>
     {% endif %}
 
-    {% if inedit %}
-    <form action="{% url 'editar_propiedad' inedit.id_inmueble %}" id="formulario_inmueble" method="POST"
+    {% if editar %}
+    <form action="{% url 'editar_propiedad' editar %}" id="formulario_inmueble" method="POST"
       enctype="multipart/form-data">
       {% else %}
       <form action="{% url 'crear_propiedad' %}" id="formulario_inmueble" method="POST" enctype="multipart/form-data">
@@ -241,13 +241,24 @@
               <select id="lista_dinamica2" name="cliente_id" class="formbold-form-input" style="margin-top: 0;">
                 {% if inedit %}
                 <option value="">Selecciona</option>
-                {% for c in clientes %}
-                {% if inedit.cliente_id.id_cliente == c.id_cliente %}
-                <option value="{{ c.id_cliente }}" selected>{{ c.nom_cliente }}</option>
-                {% else %}
-                <option value="{{ c.id_cliente }}">{{ c.nom_cliente }}</option>
+                  {% for c in clientes %}
+                    {% if inedit.cliente_id.id_cliente == c.id_cliente %}
+                      <option value="{{ c.id_cliente }}" selected>{{ c.nom_cliente }}</option>
+                    {% else %}
+                      <option value="{{ c.id_cliente }}">{{ c.nom_cliente }}</option>
+                    {% endif %}
+                  {% endfor %}
                 {% endif %}
-                {% endfor %}
+
+                {% if inmueble %}
+                <option value="">Selecciona</option>
+                  {% for c in clientes %}
+                    {% if inmuebleClienteId == c.id_cliente %}
+                      <option value="{{ c.id_cliente }}" selected>{{ c.nom_cliente }}</option>
+                    {% else %}
+                      <option value="{{ c.id_cliente }}">{{ c.nom_cliente }}</option>
+                    {% endif %}
+                  {% endfor %}
                 {% endif %}
               </select>
             </div>
@@ -311,24 +322,25 @@
           <!-- pantalla 3 linea 3-5 cajas-->
           <div class="formbold-input-flex">
             <div class="check">
-              <input type="checkbox" id="cochera" name="cochera" value="true" {% if inedit.cochera %} checked {% endif %}>
+              <input type="checkbox" id="cochera" name="cochera" value="true" {% if inedit.cochera %} checked {% elif inmueble.cochera %} checked {% endif %}>
               <label class="">Garagem</label>
             </div>
 
             <div class="check">
               <input type="checkbox" id="cochera_rotativa" name="cochera_rotativa" value="true"
-                {% if inedit.cochera_rotativa %} checked {% endif %}>
+                {% if inedit.cochera_rotativa %} checked {% elif inmueble.cochera_rotativa %} checked {% endif %}>
               <label class="">Garagem Rotativa</label>
             </div>
 
             <div class="check">
               <input type="checkbox" id="exclusividad" name="exclusividad" value="true" {% if inedit.exclusividad %}
-                checked {% endif %}>
+                checked {% elif inmueble.exclusividad %} checked {% endif %}>
               <label class="">Exclusividade</label>
             </div>
 
             <div class="check">
-              <input type="checkbox" id="expensas" name="expensas" value="true" {% if inedit.expensas %} checked {% endif %}>
+              <input type="checkbox" id="expensas" name="expensas" value="true" {% if inedit.expensas %} checked
+                {% elif inmueble.expensas %} checked {% endif %}>
               <label class="">Expensas</label>
             </div>
           </div>
@@ -356,10 +368,12 @@
           </div>
           <div class="formbold-form-confirm"></div>
           <!-- pantalla 3 linea 5-5 cajas-->
+          {% if not editar %}
           <div class="formbold-input-flex">
             <label class="">Selecione Imagens</label>
             <input type="file" id="imgs" name="imgs" multiple>
           </div>
+          {% endif %}
 
           <!-- <div class="formbold-input-flex" style="margin-left: -50px; position: sticky;">
           <p id="location-info"></p>
@@ -430,9 +444,9 @@
 
 <script>
   let inmueble_Form = true 
-  let inedit = false 
-  {% if inedit %}
-  let inedit = true
+  let editar = false 
+  {% if editar %}
+  editar = true
   {% endif %}
 </script>
 <script src="{% static '/assets/js/validacion_inmueble.js' %}"></script>

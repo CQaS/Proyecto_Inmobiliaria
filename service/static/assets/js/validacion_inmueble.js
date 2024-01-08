@@ -36,7 +36,6 @@ if (send) {
         }
 
         const letras_numero_espacios = (DATO) => {
-            console.log(DATO.value)
             return DATO.value.match(pattern_letras_numero_espacios)
         }
 
@@ -178,7 +177,7 @@ if (send) {
             return
         }
 
-        if (!inedit) {
+        if (!editar) {
             //uploadImg.files: FileList
             for (let i = 0; i < imgs.files.length; i++) {
                 let f = imgs.files[i]

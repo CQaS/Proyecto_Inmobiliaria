@@ -160,9 +160,6 @@ def editar_propiedad(req, id_inmueble=None):
                 row_dict[column_name] = value
             lista.append(row_dict)
 
-        # Convertir a formato JSON
-        clientes = json.dumps(lista, default=serialize_date)
-
     except Inmueble.DoesNotExist:
         print("NAO ENCONTRADO")
         return redirect('404')
@@ -171,9 +168,7 @@ def editar_propiedad(req, id_inmueble=None):
         ERR = 'Algo deu errado, tente novamente ou entre em contato com o administrador'
         print("Error:", e)
 
-    inmueble_form = InmuebleForm(
-        req.POST or None, req.FILES or None, instance=inmueble)
-    # images = req.FILES.getlist('imgs')
+    inmueble_form = InmuebleForm(req.POST or None, req.FILES or None, instance=inmueble)
 
     if inmueble_form.is_valid():
 
@@ -185,34 +180,9 @@ def editar_propiedad(req, id_inmueble=None):
 
         try:
             I = inmueble_form.save()
-            """ ultimo_id = I.id_inmueble
-
-            for image in images:
-                try:
-                    # Genera un nuevo nombre de archivo (por ejemplo, usando un UUID)
-                    new_filename = f"{uuid.uuid4().hex}{os.path.splitext(image.name)[1]}"
-
-                    # Asigna el nuevo nombre al archivo
-                    image.name = new_filename
-                    foto = Fotos.objects.create(
-                        image=image,
-                        inmueble_id=ultimo_id
-                    )
-
-                except IntegrityError as e:
-                    print(f"Error al crear la foto: {e}")
-
-                except Exception as e:
-                    print(f"Error inesperado: {e}") """
 
             print('Inmueble Editado, OK')
             success = "Propriedade editada corretamente"
-            context = {
-                'clientes': lista,
-                'error': ERR,
-                'success': success
-            }
-            return render(req, 'propiedad/inmueble_form.html', context)
 
         except Exception as e:
             error_message = f"Erro ao salvar o imóvel: {str(e)}"
@@ -226,6 +196,8 @@ def editar_propiedad(req, id_inmueble=None):
 
     if ERR != '':
         context = {
+            'inmuebleClienteId': inmueble.cliente_id.id_cliente,
+            'editar': inmueble.id_inmueble,
             'inmueble': inmueble_form,
             'clientes': lista,
             'error': ERR,
@@ -233,14 +205,13 @@ def editar_propiedad(req, id_inmueble=None):
         }
     else:
         context = {
+            'editar': inmueble.id_inmueble,
             'inedit': inmueble,
             'clientes': lista,
             'error': ERR,
             'success': success
         }
 
-    print(inmueble.cliente_id.id_cliente)
-    print(lista)
     return render(req, 'propiedad/inmueble_form.html', context)
 
 
