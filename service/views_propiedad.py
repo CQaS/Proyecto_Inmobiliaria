@@ -123,7 +123,9 @@ def crear_propiedad(req):
                 print(f"Error en el campo '{field_name}': {error_msg}")
 
     if ERR != '':
+        print(inmueble_form.cleaned_data['cliente_id'].id_cliente)
         context = {
+            'clienteseleccionado': inmueble_form.cleaned_data['cliente_id'].id_cliente,
             'inmueble': inmueble_form,
             'clientes': lista,
             'error': ERR,

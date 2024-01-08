@@ -255,6 +255,8 @@
                   {% for c in clientes %}
                     {% if inmuebleClienteId == c.id_cliente %}
                       <option value="{{ c.id_cliente }}" selected>{{ c.nom_cliente }}</option>
+                    {% elif clienteseleccionado == c.id_cliente %}
+                      <option value="{{ c.id_cliente }}" selected>{{ c.nom_cliente }}</option>
                     {% else %}
                       <option value="{{ c.id_cliente }}">{{ c.nom_cliente }}</option>
                     {% endif %}
@@ -322,25 +324,25 @@
           <!-- pantalla 3 linea 3-5 cajas-->
           <div class="formbold-input-flex">
             <div class="check">
-              <input type="checkbox" id="cochera" name="cochera" value="true" {% if inedit.cochera %} checked {% elif inmueble.cochera %} checked {% endif %}>
+              <input type="checkbox" id="cochera" name="cochera" value="true" {% if inedit.cochera %} checked {% elif inmueble.cochera.value %} checked {% endif %}>
               <label class="">Garagem</label>
             </div>
 
             <div class="check">
               <input type="checkbox" id="cochera_rotativa" name="cochera_rotativa" value="true"
-                {% if inedit.cochera_rotativa %} checked {% elif inmueble.cochera_rotativa %} checked {% endif %}>
+                {% if inedit.cochera_rotativa %} checked {% elif inmueble.cochera_rotativa.value %} checked {% endif %}>
               <label class="">Garagem Rotativa</label>
             </div>
 
             <div class="check">
               <input type="checkbox" id="exclusividad" name="exclusividad" value="true" {% if inedit.exclusividad %}
-                checked {% elif inmueble.exclusividad %} checked {% endif %}>
+                checked {% elif inmueble.exclusividad.value %} checked {% endif %}>
               <label class="">Exclusividade</label>
             </div>
 
             <div class="check">
               <input type="checkbox" id="expensas" name="expensas" value="true" {% if inedit.expensas %} checked
-                {% elif inmueble.expensas %} checked {% endif %}>
+                {% elif inmueble.expensas.value %} checked {% endif %}>
               <label class="">Expensas</label>
             </div>
           </div>
