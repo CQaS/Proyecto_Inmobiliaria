@@ -79,7 +79,7 @@ urlpatterns = [
          views_contrato.condetalles, name="condetalles"),
     ##### FIN RUTAS CONTRATOS #####
     ##### RESET PASSWORD #####
-    path('reset_password/', views_cliente.reset_password, name="reset_password"),
+    path('reset_password', views_cliente.reset_password, name="reset_password"),
     ##### FIN RESET PASSWORD #####
 
 

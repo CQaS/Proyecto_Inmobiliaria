@@ -445,7 +445,7 @@ btn_msg.addEventListener("click", (e) => {
 let contactar = document.getElementById("contactar")
 
 if (contactar) {
-    contactar.addEventListener("click",() => {
+    contactar.addEventListener("click", () => {
         let cod_ref = document.getElementById("cod_ref").value
         let mensaje = document.getElementById("mensaje")
         let msg_contactar = `Desejo mais informações sobre o imóvel: ${cod_ref}.`
@@ -456,3 +456,96 @@ if (contactar) {
         })
     })
 }
+
+/* 
+    ** ** ** ** ** ** ** ** ** ** * LOGIN MODAL ** ** ** ** ** ** ** ** ** ** *
+
+ */
+
+/* HASH PASS */
+let btn_login = document.getElementById("btn_login")
+let form_login = document.getElementById("form_login")
+
+btn_login.addEventListener("click", (e) => {
+  e.preventDefault()
+  
+  let password = document.getElementById("password").value
+  let username = document.getElementById("username").value
+
+  if (username != '' || password != '') {
+    
+    const hashHex_password = sha3_256(password)
+    document.getElementById('password').value = hashHex_password
+    
+  } else {
+    $('#error_log').text('Usuário ou senha incorretos')
+    return
+  }
+  
+  // SI ESTA TODO BIEN SE ENVIA EL FORMULARIO...
+  form_login.submit()
+  
+})
+
+/* RESET PASSWORD */
+let btn_reset = document.getElementById("btn_reset")
+let btn_noreset = document.getElementById("btn_noreset")
+let sec_login = document.getElementById("sec_login")
+let sec_reset = document.getElementById("sec_reset")
+let btn_login_re = document.getElementById("btn_login_re")
+
+btn_reset.addEventListener("click", () => {
+    sec_login.classList.toggle("oculto")
+    sec_reset.classList.toggle("oculto")
+})
+
+btn_noreset.addEventListener("click", () => {
+    sec_login.classList.toggle("oculto")
+    sec_reset.classList.toggle("oculto")
+})
+
+btn_login_re.addEventListener("click", () => {
+
+
+    let csrfToken = $('#form_login [name=csrfmiddlewaretoken]').val()
+    let username_re = $('#username_re').val()
+    let email_re = $("#email_re").val()
+    let password_re = $("#password_re").val()
+    let RePassword_re = $("#RePassword_re").val()
+    
+    
+    if (password_re == RePassword_re || username_re != '' || email_re != '') {
+        
+        console.log(username_re, email_re, password_re)
+        const hashHex_password_re = sha3_256(password_re)
+        $("#password_re").val(hashHex_password_re) 
+        $("#RePassword_re").val(hashHex_password_re)
+
+        $.ajax({
+            url: '/reset_password',
+            type: 'POST',
+            contentType: 'application/json',
+            headers: {
+                'X-CSRFToken': csrfToken
+            },
+            data: JSON.stringify({
+                'username': username_re,
+                'email': email_re,
+                'password': hashHex_password_re
+            }),
+            success: (data) => {
+                console.log(data)
+                $('#info_reset').text(data.message)
+                $('#error_reset').text(data.error)
+            },
+            error: (xhr, status, error) => {
+                console.log(xhr.responseJSON.error)
+                let errorMessage = xhr.responseJSON ? xhr.responseJSON.error : 'Error desconhecido'
+                $('#error_reset').text('Error: ' + errorMessage)
+            }
+        })
+    } else {
+        alert('Error')
+        $('#error_reset').text('Usuário ou senha incorretos')
+    }
+})

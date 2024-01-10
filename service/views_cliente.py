@@ -272,6 +272,7 @@ def eliminar_cliente(req, id_cliente):
 
 
 def reset_password(req):
+    print("reset")
     if req.method == 'POST':
         try:
             data = json.loads(req.body)
@@ -295,6 +296,7 @@ def reset_password(req):
             print('Usuário não encontrado.')
             return JsonResponse({'error': 'Usuário não encontrado.'})
     else:
+        print('no POST')
         return JsonResponse({'error': 'Error desconhecido.'})
 
 

@@ -30,7 +30,10 @@ def index_propiedad(req):
     list = Inmueble.objects.all()
     return render(req, 'propiedad/index.html')
 
+""" from django.db import transaction
+@transaction.atomic 
 
+raise"""
 @login_required(login_url='/#modal-opened')
 def crear_propiedad(req):
     ERR = ''
