@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-12-2023 a las 21:41:52
+-- Tiempo de generación: 08-01-2024 a las 21:49:51
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `inmobiliaria`
 --
-CREATE DATABASE IF NOT EXISTS `inmobiliaria` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `inmobiliaria`;
 
 -- --------------------------------------------------------
 
@@ -138,7 +136,7 @@ CREATE TABLE `auth_user` (
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(1, 'pbkdf2_sha256$600000$CBYlvxWep727xeh3wLglPT$vtWAA5tu/CYRHyYESOvaJlI9w7jdIQAV0+Q9LEIbSgE=', '2023-12-02 12:50:42.698293', 1, 'dhubalde', '', '', 'dalilahubalde@hotmail.com', 1, 1, '2023-11-14 18:50:25.682772');
+(1, 'pbkdf2_sha256$600000$CBYlvxWep727xeh3wLglPT$vtWAA5tu/CYRHyYESOvaJlI9w7jdIQAV0+Q9LEIbSgE=', '2024-01-03 20:54:32.535425', 1, 'dhubalde', '', '', 'dalilahubalde@hotmail.com', 1, 1, '2023-11-14 18:50:25.682772');
 
 -- --------------------------------------------------------
 
@@ -181,30 +179,32 @@ CREATE TABLE `clientes` (
   `ciudad_cliente` varchar(45) DEFAULT NULL,
   `pais_cliente` varchar(45) DEFAULT NULL,
   `fechnac` date DEFAULT NULL,
-  `categoria` varchar(45) NOT NULL
+  `categoria` varchar(45) NOT NULL,
+  `estado` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `clientes`
 --
 
-INSERT INTO `clientes` (`id_cliente`, `nom_cliente`, `dni_cliente`, `rg_cliente`, `dir_cliente`, `tel_cliente`, `email_cliente`, `ciudad_cliente`, `pais_cliente`, `fechnac`, `categoria`) VALUES
-(4, 'Jose Alex', '1234567890', '0', 'Zona ruta 146', '987654321', 'alex@mail.com', 'San luis', 'Argentina', '1997-02-13', 'Propietario'),
-(5, 'Kumiko Lee', '95739584', '0', 'Jkoslay 3456', '9649275044', 'kumiko@mail.com', 'Los Molles', 'Argentina', '1995-06-15', 'Propietario'),
-(6, 'Jose Alex', '93749268', '0', 'Zona ruta 146', '7456340922', 'alex@mail.com', 'San luis', 'Argentina', '1999-11-28', 'Propietario'),
-(7, 'Zelada Sara', '38927503', '0', 'Trapiche sin numero', '7345986533', 'zelada@mail.com', 'Trapiche', 'Argentina', '1976-04-30', 'Inquilino'),
-(8, 'Luis Lemos', '23456782', '0', 'Las artes 32', '987654321', 'lemos@gmail.com', 'Merlo', 'Argentina', '1999-10-20', 'Propietario'),
-(9, 'Zavala Nery', '20476937', '0', 'Volcan 500', '3850284933', 'zavala@mail.com', 'Volcan', 'Argentina', '1973-06-06', 'Locatario'),
-(10, 'Gonzalez Juan', '23710155', '0', 'San Martin', '333333333333', 'gj@gmail.com', 'gchu', 'Argentina', '2001-02-14', 'Propietario'),
-(11, 'Juan', '1542871', '454545', 'Maipu 160', '2525252525', 'da@gmail.com', 'Gchu', 'Argentina', '1970-01-12', 'Locatario'),
-(12, 'Esteban', '52525252', '2222', '9 de julio 20', '25252', 'este@gmail.com', 'San Luis', 'Argentina', '1999-02-15', 'Propietario'),
-(13, 'Seba', '1111111', '11111', 'Andrade 741', '11111111', 'and@gmail.com', 'Gchu', 'Argentina', '2000-12-14', 'Propietario'),
-(14, 'Dumon Nina', '666666666', '0', 'Churruarin 100', '45454545', 'nd@gmail.com', 'Gchu', 'Argentina', '2001-10-03', 'Locatario'),
-(15, 'Cecilia', '30060490', '0', 'JB Gonzalez 32', '1154326236', 'ce@hotmail.com', 'Caba', 'Argentina', '1986-01-02', 'Propietario'),
-(16, 'Huba Cecilia', '32556630', '0', 'Belgrano 50', '963258100', 'ch@aol.com', 'gchu', 'Argentina', '1896-01-02', 'Locatario'),
-(17, 'Patri Bruno', '30526598', '0', 'Rivadavia 5100', '3446635231', 'bp@hotmail.com', 'Gchu', 'Argentina', '1984-12-10', 'Locatario'),
-(18, 'Lizzi Lucrecia', '22356356', '0', 'Bvar Montana 1050', '1143226451', 'll@hotmail.com', 'Gualeguaychu', 'Argentina', '1970-08-25', 'Selecciona'),
-(19, 'Echaza Victoria', '42505050', '0', 'Bvar Montana 1050', '3446363636', 've@hotmail.com', 'Gualeguaychu', 'Argentina', '2004-04-05', 'Propietario');
+INSERT INTO `clientes` (`id_cliente`, `nom_cliente`, `dni_cliente`, `rg_cliente`, `dir_cliente`, `tel_cliente`, `email_cliente`, `ciudad_cliente`, `pais_cliente`, `fechnac`, `categoria`, `estado`) VALUES
+(1, 'ReservaDeTerceros', '0', '0', 'ReservaDeTerceros', '0', 'ReservaDeTerceros', 'ReservaDeTerceros', 'ReservaDeTerceros', '1900-01-01', 'ReservaDeTerceros', 1),
+(4, 'Jose Alex', '1234567890', '0', 'Zona ruta 146', '987654321', 'alex@mail.com', 'San luis', 'Argentina', '1997-02-13', 'Propietario', 1),
+(5, 'Kumiko Lee', '95739584', '0', 'Jkoslay 3456', '9649275044', 'kumiko@mail.com', 'Los Molles', 'Argentina', '1995-06-15', 'Propietario', 1),
+(6, 'Jose Alex', '93749268', '0', 'Zona ruta 146', '7456340922', 'alex@mail.com', 'San luis', 'Argentina', '1999-11-28', 'Propietario', 1),
+(7, 'Zelada Sara', '38927503', '0', 'Trapiche sin numero', '7345986533', 'zelada@mail.com', 'Trapiche', 'Argentina', '1976-04-30', 'Inquilino', 1),
+(8, 'Luis Lemos', '23456782', '0', 'Las artes 32', '987654321', 'lemos@gmail.com', 'Merlo', 'Argentina', '1999-10-20', 'Propietario', 1),
+(9, 'Zavala Nery', '20476937', '0', 'Volcan 500', '3850284933', 'zavala@mail.com', 'Volcan', 'Argentina', '1973-06-06', 'Locatario', 1),
+(10, 'Gonzalez Juan', '23710155', '0', 'San Martin', '333333333333', 'gj@gmail.com', 'gchu', 'Argentina', '2001-02-14', 'Propietario', 1),
+(11, 'Juan', '1542871', '454545', 'Maipu 160', '2525252525', 'da@gmail.com', 'Gchu', 'Argentina', '1970-01-12', 'Locatario', 1),
+(12, 'Esteban', '52525252', '2222', '9 de julio 20', '25252', 'este@gmail.com', 'San Luis', 'Argentina', '1999-02-15', 'Propietario', 1),
+(13, 'Seba', '1111111', '11111', 'Andrade 741', '11111111', 'and@gmail.com', 'Gchu', 'Argentina', '2000-12-14', 'Propietario', 1),
+(14, 'Dumon Nina', '666666666', '0', 'Churruarin 100', '45454545', 'nd@gmail.com', 'Gchu', 'Argentina', '2001-10-03', 'Locatario', 1),
+(15, 'Cecilia', '30060490', '0', 'JB Gonzalez 32', '1154326236', 'ce@hotmail.com', 'Caba', 'Argentina', '1986-01-02', 'Propietario', 1),
+(16, 'Huba Cecilia', '32556630', '0', 'Belgrano 50', '963258100', 'ch@aol.com', 'gchu', 'Argentina', '1896-01-02', 'Locatario', 1),
+(17, 'Patri Bruno', '30526598', '0', 'Rivadavia 5100', '3446635231', 'bp@hotmail.com', 'Gchu', 'Argentina', '1984-12-10', 'Locatario', 1),
+(18, 'Lizzi Lucrecia', '22356356', '0', 'Bvar Montana 1050', '1143226451', 'll@hotmail.com', 'Gualeguaychu', 'Argentina', '1970-08-25', 'Selecciona', 1),
+(19, 'Echaza Victoria', '42505050', '0', 'Bvar Montana 1050', '3446363636', 've@hotmail.com', 'Gualeguaychu', 'Argentina', '2004-04-05', 'Propietario', 1);
 
 -- --------------------------------------------------------
 
@@ -232,7 +232,9 @@ CREATE TABLE `contrato` (
 --
 
 INSERT INTO `contrato` (`id_contrato`, `tipo_operacion`, `fecha_ing`, `fecha_salida`, `fecha_contrato`, `cant_dias`, `valor_total`, `monto_reserva`, `fecha_reserva`, `datos_envio`, `cliente_id`, `inmueble_id`) VALUES
-(1, 'S/D', '2023-10-23', '2023-10-30', '2023-10-03', 7, 5600170, 10000, '2023-10-03', '6565656', 38927503, 10);
+(1, 'S/D', '2023-10-23', '2023-10-30', '2023-10-03', 7, 5600170, 10000, '2023-10-03', '6565656', 38927503, 10),
+(3, 'S/D', '2023-12-28', '2024-01-01', '2023-12-28', 4, 0, 0, '2023-12-28', 'A cuenta de Propietario', 1, 25),
+(4, 'S/D', '2024-01-01', '2024-01-15', '2023-12-30', 14, 2100170, 100000, '2023-12-30', 'Xxvv', 16, 48);
 
 -- --------------------------------------------------------
 
@@ -335,9 +337,11 @@ CREATE TABLE `django_session` (
 --
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
+('3kcug4khslcnlny5jnlxvct9zms60eck', '.eJxVjDsOwjAQBe_iGlnZtfyjpOcM0Xq9xgHkSHFSIe4OkVJA-2bmvdRI21rHrcsyTlmdFajT75aIH9J2kO_UbrPmua3LlPSu6IN2fZ2zPC-H-3dQqddvzWLARCeWEuUhwuDRusIOnCkhYgTKgnbAwJZTBjAeCnAAcd4ERFTvD9QfNwY:1rL8G0:ts-M-8Jn17-diBrPxhr-FvUB3JslWHGXWwQzRj_MRRQ', '2024-01-17 20:54:32.566658'),
+('br4gzrqk90xngj4syqnb0noyjpg9ipya', '.eJxVjDsOwjAQBe_iGlnZtfyjpOcM0Xq9xgHkSHFSIe4OkVJA-2bmvdRI21rHrcsyTlmdFajT75aIH9J2kO_UbrPmua3LlPSu6IN2fZ2zPC-H-3dQqddvzWLARCeWEuUhwuDRusIOnCkhYgTKgnbAwJZTBjAeCnAAcd4ERFTvD9QfNwY:1rIxi9:9Bn1qQy8QdIxU6Ih5jruDGAZUcder4DEACm7js-_zxY', '2024-01-11 21:14:37.925911'),
 ('etxjaacdp3g0dw0l9evx55gf6cc9cona', '.eJxVjDsOwjAQBe_iGlk2_mUp6TmDtfZucADZUpxUiLuTSCmgfTPz3iLiupS4dp7jROIitDj9bgnzk-sO6IH13mRudZmnJHdFHrTLWyN-XQ_376BgL1tttBqVNeyRM40ALg3og3JasSe0AdizC0SUCXhzjAWNgz4riyFxAvH5AvMTOJY:1r45h3:Y9C26aEFSJQYTvhZ2CwN_W73bDWVlE4Z64vcjI61SBM', '2023-12-01 20:44:01.310260'),
 ('ikxdwmju5j25ymx0cofvl0gcq96ykr11', '.eJxVjDsOwjAQBe_iGlk2_mUp6TmDtfZucADZUpxUiLuTSCmgfTPz3iLiupS4dp7jROIitDj9bgnzk-sO6IH13mRudZmnJHdFHrTLWyN-XQ_376BgL1tttBqVNeyRM40ALg3og3JasSe0AdizC0SUCXhzjAWNgz4riyFxAvH5AvMTOJY:1r6dBf:bSFNIMkk6ebcMMWstbtwMbY9Q1-WnSuZ30VXu_yWNvU', '2023-12-08 20:54:07.190435'),
-('joqzrnax2alsnfuutqxphb3k3qruth5r', '.eJxVjDsOwjAQBe_iGlk2_mUp6TmDtfZucADZUpxUiLuTSCmgfTPz3iLiupS4dp7jROIitDj9bgnzk-sO6IH13mRudZmnJHdFHrTLWyN-XQ_376BgL1tttBqVNeyRM40ALg3og3JasSe0AdizC0SUCXhzjAWNgz4riyFxAvH5AvMTOJY:1r9PSE:1Yoo035QVxlG4GQYa_iJ3eNlZyG-CvaDcRzQ9xzFTBQ', '2023-12-16 12:50:42.734059');
+('m2ixhi39w1riteqenaw5f0i4i85lkfov', '.eJxVjDsOwjAQBe_iGlnZtfyjpOcM0Xq9xgHkSHFSIe4OkVJA-2bmvdRI21rHrcsyTlmdFajT75aIH9J2kO_UbrPmua3LlPSu6IN2fZ2zPC-H-3dQqddvzWLARCeWEuUhwuDRusIOnCkhYgTKgnbAwJZTBjAeCnAAcd4ERFTvD9QfNwY:1rDUl8:84f4u5F1P_Szgqr3F1fbFCIFPc4u2g4p8AinQxPl4ww', '2023-12-27 19:19:06.977516');
 
 -- --------------------------------------------------------
 
@@ -352,25 +356,26 @@ CREATE TABLE `empleados` (
   `tel_empleado` bigint(20) NOT NULL,
   `dir_empleado` varchar(100) NOT NULL,
   `email_empleado` varchar(45) NOT NULL,
-  `nom_puesto` varchar(45) NOT NULL
+  `nom_puesto` varchar(45) NOT NULL,
+  `estado` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `empleados`
 --
 
-INSERT INTO `empleados` (`id_empleado`, `nom_empleado`, `dni_empleado`, `tel_empleado`, `dir_empleado`, `email_empleado`, `nom_puesto`) VALUES
-(1, 'Virginia Nazzas', 22345678, 2147483647, 'Gualeguaychu 1010', 'nazzas@mail.com', 'Jardineria'),
-(2, 'Dalila Hu', 34569302, 2147483647, 'Gualeguaychu 2345', 'hu@mail.com', 'Piletero'),
-(3, 'Juan', 33333333, 2147483647, 'A25 de Mayo 555', 'gj@gmail.com', 'Administracion'),
-(4, 'Pedro', 9999999, 2147483647, '25 de mayo 231', 'nd@gmail.com', 'Piletero'),
-(5, 'Pedro', 9999999, 2147483647, '25 de mayo 231', 'pp@gmail.com', 'Maestranza'),
-(6, 'Franchi', 28282828, 2147483647, 'Los Alerces 6', 'fra@gmail.com', 'Jardineria'),
-(7, 'Lucia', 665655665, 2147483647, 'San Martin 1111', 'l@gmail.com', 'Piletero'),
-(8, 'Caceres Matias', 29000325, 2147483647, 'Goldaracena 930', 'mc@gmail.com', 'Piletero'),
-(9, 'Huba Benja', 40365630, 2147483647, 'Bravo 35', 'hb@hotmail.com', 'Administracion'),
-(10, 'Patriarca Martina', 40386520, 2147483647, 'Bolivar y Maipu', 'mp@gmail.com', 'Jardineria'),
-(11, 'Martina', 47654663, 1143226451, 'Joaquin B Gonzalez 2044', 'Marti@hotmail.com', 'Administracion');
+INSERT INTO `empleados` (`id_empleado`, `nom_empleado`, `dni_empleado`, `tel_empleado`, `dir_empleado`, `email_empleado`, `nom_puesto`, `estado`) VALUES
+(1, 'Virginia Nazzas', 22345678, 2147483647, 'Gualeguaychu 1010', 'nazzas@mail.com', 'Jardineria', 1),
+(2, 'Dalila Hu', 34569302, 2147483647, 'Gualeguaychu 2345', 'hu@mail.com', 'Piletero', 1),
+(3, 'Juan', 33333333, 2147483647, 'A25 de Mayo 555', 'gj@gmail.com', 'Administracion', 1),
+(4, 'Pedro', 9999999, 2147483647, '25 de mayo 231', 'nd@gmail.com', 'Piletero', 1),
+(5, 'Pedro', 9999999, 2147483647, '25 de mayo 231', 'pp@gmail.com', 'Maestranza', 1),
+(6, 'Franchi', 28282828, 2147483647, 'Los Alerces 6', 'fra@gmail.com', 'Jardineria', 1),
+(7, 'Lucia', 665655665, 2147483647, 'San Martin 1111', 'l@gmail.com', 'Piletero', 1),
+(8, 'Caceres Matias', 29000325, 2147483647, 'Goldaracena 930', 'mc@gmail.com', 'Piletero', 1),
+(9, 'Huba Benja', 40365630, 2147483647, 'Bravo 35', 'hb@hotmail.com', 'Administracion', 1),
+(10, 'Patriarca Martina', 40386520, 2147483647, 'Bolivar y Maipu', 'mp@gmail.com', 'Jardineria', 1),
+(11, 'Martina', 47654663, 1143226451, 'Joaquin B Gonzalez 2044', 'Marti@hotmail.com', 'Administracion', 1);
 
 -- --------------------------------------------------------
 
@@ -446,7 +451,10 @@ INSERT INTO `fotos_prop` (`id_foto`, `image`, `inmueble_id`) VALUES
 (64, 'webapp/static/assets/img/5ec36d47005348508e12aa0f5ba986b8.jpg', 46),
 (65, 'webapp/static/assets/img/3c68d9a444994726ac78842474273c1f.jpg', 47),
 (66, 'webapp/static/assets/img/4cfa7bcfe8e348098b242eb07f6a93f7.jpg', 47),
-(67, 'webapp/static/assets/img/ba55fb692c7d46cab1538a969fc57429.jpg', 47);
+(67, 'webapp/static/assets/img/ba55fb692c7d46cab1538a969fc57429.jpg', 47),
+(68, 'webapp/static/assets/img/79d6f5084ce24436bc820419094ff782.png', 48),
+(69, 'webapp/static/assets/img/e5adff93435341adadb0d29ee99252c9.jpg', 49),
+(70, 'webapp/static/assets/img/741083ddf0b64ddcb5d7d47f3f57d137.jpg', 50);
 
 -- --------------------------------------------------------
 
@@ -516,7 +524,10 @@ INSERT INTO `inmueble` (`id_inmueble`, `dir_inmueble`, `bloco_inmueble`, `barrio
 (44, 'San Lorenzo 1', '0', 'Costanera', 'Gualeguaychu', 1, 'Departamento', 'Alquiler permanente', 80, 60, 0, 2, 2, 2, 0, 0, '1', 'Muy buena', 0, 'Duplex A', '0', '0', 'S/D', 'SanLorenzo', 'SD', 10, 100000, 1, 4, 1, '-27.15982337628752', '-48.5075014570202'),
 (45, 'San Lorenzo 2', '0', 'Costanera', 'Gualeguaychu', 2, 'Departamento', 'Alquiler permanente', 80, 60, 0, 2, 2, 2, 0, 0, '2', 'Muy buena', 0, 'Duplex B', '0', '0', 'S/D', 'SanLorenzo', 'SD', 10, 100000, 1, 4, 1, '-27.15982337628752', '-48.5075014570202'),
 (46, 'San Lorenzo 3', '0', 'Costanera', 'Gualeguaychu', 3, 'Departamento', 'Alquiler permanente', 80, 60, 0, 2, 2, 2, 0, 0, '3', 'Muy buena', 0, 'Duplex C', '0', '0', 'S/D', 'SanLorenzo', 'SD', 10, 100000, 1, 4, 1, '-27.15982337628752', '-48.5075014570202'),
-(47, 'Colombo 2556', '0', 'Oeste', 'Gualeguaychu', 0, 'Casa', 'Alquiler temporario', 500, 110, 50, 1, 2, 2, 0, 0, '2556', 'Muy buena', 0, 'Casa con pileta', '0', '0', 'S/D', 'S/D', 'WI-FI, Ropa de cama, Piscinas', 13, 150000, 1, 3, 1, '-27.15982337628752', '-48.5075014570202');
+(47, 'Colombo 2556', '0', 'Oeste', 'Gualeguaychu', 0, 'Casa', 'Alquiler temporario', 500, 110, 50, 1, 2, 2, 0, 0, '2556', 'Muy buena', 0, 'Casa con pileta', '0', '0', 'S/D', 'S/D', 'WI-FI, Ropa de cama, Piscinas', 13, 150000, 1, 3, 1, '-27.15982337628752', '-48.5075014570202'),
+(48, 'Urquiza 1001', '0', 'Centro', 'Gualeguaychu', 0, 'Casa', 'Venta', 200, 120, 0, 2, 3, 2, 1, 0, '1001', 'Muy buena', 0, 'Casa centrica', '0', '0', 'S/D', 'S/D', 'SD', 13, 180000, 1, 6, 1, '-27.15982337628752', '-48.5075014570202'),
+(49, 'Urquiza 1002', '0', 'Centro', 'Gualeguaychu', 0, 'Casa', 'Venta', 200, 120, 0, 1, 2, 1, 1, 0, '1002', 'Muy buena', 0, 'Duplex', '0', '0', 'S/D', 'S/D', 'SD', 13, 150000, 1, 4, 1, '-27.15982337628752', '-48.5075014570202'),
+(50, 'Urquiza 1003', '0', 'Centro', 'Gualeguaychu', 0, 'Casa', 'Venta', 200, 120, 0, 1, 1, 1, 1, 0, '1003', 'Muy buena', 0, 'Duplex', '0', '0', 'S/D', 'S/D', 'SD', 13, 120000, 1, 2, 1, '-27.15982337628752', '-48.5075014570202');
 
 -- --------------------------------------------------------
 
@@ -691,13 +702,13 @@ ALTER TABLE `auth_user_user_permissions`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `contrato`
 --
 ALTER TABLE `contrato`
-  MODIFY `id_contrato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_contrato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `django_admin_log`
@@ -727,13 +738,13 @@ ALTER TABLE `empleados`
 -- AUTO_INCREMENT de la tabla `fotos_prop`
 --
 ALTER TABLE `fotos_prop`
-  MODIFY `id_foto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id_foto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT de la tabla `inmueble`
 --
 ALTER TABLE `inmueble`
-  MODIFY `id_inmueble` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id_inmueble` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT de la tabla `servicios`
@@ -784,455 +795,6 @@ ALTER TABLE `django_admin_log`
 --
 ALTER TABLE `inmueble`
   ADD CONSTRAINT `inmueble_ibfk_1` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id_cliente`);
---
--- Base de datos: `phpmyadmin`
---
-CREATE DATABASE IF NOT EXISTS `phpmyadmin` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
-USE `phpmyadmin`;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pma__bookmark`
---
-
-CREATE TABLE `pma__bookmark` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `dbase` varchar(255) NOT NULL DEFAULT '',
-  `user` varchar(255) NOT NULL DEFAULT '',
-  `label` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `query` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Bookmarks';
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pma__central_columns`
---
-
-CREATE TABLE `pma__central_columns` (
-  `db_name` varchar(64) NOT NULL,
-  `col_name` varchar(64) NOT NULL,
-  `col_type` varchar(64) NOT NULL,
-  `col_length` text DEFAULT NULL,
-  `col_collation` varchar(64) NOT NULL,
-  `col_isNull` tinyint(1) NOT NULL,
-  `col_extra` varchar(255) DEFAULT '',
-  `col_default` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Central list of columns';
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pma__column_info`
---
-
-CREATE TABLE `pma__column_info` (
-  `id` int(5) UNSIGNED NOT NULL,
-  `db_name` varchar(64) NOT NULL DEFAULT '',
-  `table_name` varchar(64) NOT NULL DEFAULT '',
-  `column_name` varchar(64) NOT NULL DEFAULT '',
-  `comment` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `mimetype` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `transformation` varchar(255) NOT NULL DEFAULT '',
-  `transformation_options` varchar(255) NOT NULL DEFAULT '',
-  `input_transformation` varchar(255) NOT NULL DEFAULT '',
-  `input_transformation_options` varchar(255) NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Column information for phpMyAdmin';
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pma__designer_settings`
---
-
-CREATE TABLE `pma__designer_settings` (
-  `username` varchar(64) NOT NULL,
-  `settings_data` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Settings related to Designer';
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pma__export_templates`
---
-
-CREATE TABLE `pma__export_templates` (
-  `id` int(5) UNSIGNED NOT NULL,
-  `username` varchar(64) NOT NULL,
-  `export_type` varchar(10) NOT NULL,
-  `template_name` varchar(64) NOT NULL,
-  `template_data` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Saved export templates';
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pma__favorite`
---
-
-CREATE TABLE `pma__favorite` (
-  `username` varchar(64) NOT NULL,
-  `tables` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Favorite tables';
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pma__history`
---
-
-CREATE TABLE `pma__history` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `username` varchar(64) NOT NULL DEFAULT '',
-  `db` varchar(64) NOT NULL DEFAULT '',
-  `table` varchar(64) NOT NULL DEFAULT '',
-  `timevalue` timestamp NOT NULL DEFAULT current_timestamp(),
-  `sqlquery` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='SQL history for phpMyAdmin';
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pma__navigationhiding`
---
-
-CREATE TABLE `pma__navigationhiding` (
-  `username` varchar(64) NOT NULL,
-  `item_name` varchar(64) NOT NULL,
-  `item_type` varchar(64) NOT NULL,
-  `db_name` varchar(64) NOT NULL,
-  `table_name` varchar(64) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Hidden items of navigation tree';
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pma__pdf_pages`
---
-
-CREATE TABLE `pma__pdf_pages` (
-  `db_name` varchar(64) NOT NULL DEFAULT '',
-  `page_nr` int(10) UNSIGNED NOT NULL,
-  `page_descr` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='PDF relation pages for phpMyAdmin';
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pma__recent`
---
-
-CREATE TABLE `pma__recent` (
-  `username` varchar(64) NOT NULL,
-  `tables` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Recently accessed tables';
-
---
--- Volcado de datos para la tabla `pma__recent`
---
-
-INSERT INTO `pma__recent` (`username`, `tables`) VALUES
-('root', '[{\"db\":\"inmobiliaria\",\"table\":\"empleados\"},{\"db\":\"inmobiliaria\",\"table\":\"clientes\"}]');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pma__relation`
---
-
-CREATE TABLE `pma__relation` (
-  `master_db` varchar(64) NOT NULL DEFAULT '',
-  `master_table` varchar(64) NOT NULL DEFAULT '',
-  `master_field` varchar(64) NOT NULL DEFAULT '',
-  `foreign_db` varchar(64) NOT NULL DEFAULT '',
-  `foreign_table` varchar(64) NOT NULL DEFAULT '',
-  `foreign_field` varchar(64) NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Relation table';
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pma__savedsearches`
---
-
-CREATE TABLE `pma__savedsearches` (
-  `id` int(5) UNSIGNED NOT NULL,
-  `username` varchar(64) NOT NULL DEFAULT '',
-  `db_name` varchar(64) NOT NULL DEFAULT '',
-  `search_name` varchar(64) NOT NULL DEFAULT '',
-  `search_data` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Saved searches';
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pma__table_coords`
---
-
-CREATE TABLE `pma__table_coords` (
-  `db_name` varchar(64) NOT NULL DEFAULT '',
-  `table_name` varchar(64) NOT NULL DEFAULT '',
-  `pdf_page_number` int(11) NOT NULL DEFAULT 0,
-  `x` float UNSIGNED NOT NULL DEFAULT 0,
-  `y` float UNSIGNED NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table coordinates for phpMyAdmin PDF output';
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pma__table_info`
---
-
-CREATE TABLE `pma__table_info` (
-  `db_name` varchar(64) NOT NULL DEFAULT '',
-  `table_name` varchar(64) NOT NULL DEFAULT '',
-  `display_field` varchar(64) NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table information for phpMyAdmin';
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pma__table_uiprefs`
---
-
-CREATE TABLE `pma__table_uiprefs` (
-  `username` varchar(64) NOT NULL,
-  `db_name` varchar(64) NOT NULL,
-  `table_name` varchar(64) NOT NULL,
-  `prefs` text NOT NULL,
-  `last_update` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Tables'' UI preferences';
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pma__tracking`
---
-
-CREATE TABLE `pma__tracking` (
-  `db_name` varchar(64) NOT NULL,
-  `table_name` varchar(64) NOT NULL,
-  `version` int(10) UNSIGNED NOT NULL,
-  `date_created` datetime NOT NULL,
-  `date_updated` datetime NOT NULL,
-  `schema_snapshot` text NOT NULL,
-  `schema_sql` text DEFAULT NULL,
-  `data_sql` longtext DEFAULT NULL,
-  `tracking` set('UPDATE','REPLACE','INSERT','DELETE','TRUNCATE','CREATE DATABASE','ALTER DATABASE','DROP DATABASE','CREATE TABLE','ALTER TABLE','RENAME TABLE','DROP TABLE','CREATE INDEX','DROP INDEX','CREATE VIEW','ALTER VIEW','DROP VIEW') DEFAULT NULL,
-  `tracking_active` int(1) UNSIGNED NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Database changes tracking for phpMyAdmin';
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pma__userconfig`
---
-
-CREATE TABLE `pma__userconfig` (
-  `username` varchar(64) NOT NULL,
-  `timevalue` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `config_data` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='User preferences storage for phpMyAdmin';
-
---
--- Volcado de datos para la tabla `pma__userconfig`
---
-
-INSERT INTO `pma__userconfig` (`username`, `timevalue`, `config_data`) VALUES
-('root', '2023-12-11 20:39:02', '{\"Console\\/Mode\":\"collapse\",\"lang\":\"es\"}');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pma__usergroups`
---
-
-CREATE TABLE `pma__usergroups` (
-  `usergroup` varchar(64) NOT NULL,
-  `tab` varchar(64) NOT NULL,
-  `allowed` enum('Y','N') NOT NULL DEFAULT 'N'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='User groups with configured menu items';
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pma__users`
---
-
-CREATE TABLE `pma__users` (
-  `username` varchar(64) NOT NULL,
-  `usergroup` varchar(64) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Users and their assignments to user groups';
-
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `pma__bookmark`
---
-ALTER TABLE `pma__bookmark`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `pma__central_columns`
---
-ALTER TABLE `pma__central_columns`
-  ADD PRIMARY KEY (`db_name`,`col_name`);
-
---
--- Indices de la tabla `pma__column_info`
---
-ALTER TABLE `pma__column_info`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `db_name` (`db_name`,`table_name`,`column_name`);
-
---
--- Indices de la tabla `pma__designer_settings`
---
-ALTER TABLE `pma__designer_settings`
-  ADD PRIMARY KEY (`username`);
-
---
--- Indices de la tabla `pma__export_templates`
---
-ALTER TABLE `pma__export_templates`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `u_user_type_template` (`username`,`export_type`,`template_name`);
-
---
--- Indices de la tabla `pma__favorite`
---
-ALTER TABLE `pma__favorite`
-  ADD PRIMARY KEY (`username`);
-
---
--- Indices de la tabla `pma__history`
---
-ALTER TABLE `pma__history`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `username` (`username`,`db`,`table`,`timevalue`);
-
---
--- Indices de la tabla `pma__navigationhiding`
---
-ALTER TABLE `pma__navigationhiding`
-  ADD PRIMARY KEY (`username`,`item_name`,`item_type`,`db_name`,`table_name`);
-
---
--- Indices de la tabla `pma__pdf_pages`
---
-ALTER TABLE `pma__pdf_pages`
-  ADD PRIMARY KEY (`page_nr`),
-  ADD KEY `db_name` (`db_name`);
-
---
--- Indices de la tabla `pma__recent`
---
-ALTER TABLE `pma__recent`
-  ADD PRIMARY KEY (`username`);
-
---
--- Indices de la tabla `pma__relation`
---
-ALTER TABLE `pma__relation`
-  ADD PRIMARY KEY (`master_db`,`master_table`,`master_field`),
-  ADD KEY `foreign_field` (`foreign_db`,`foreign_table`);
-
---
--- Indices de la tabla `pma__savedsearches`
---
-ALTER TABLE `pma__savedsearches`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `u_savedsearches_username_dbname` (`username`,`db_name`,`search_name`);
-
---
--- Indices de la tabla `pma__table_coords`
---
-ALTER TABLE `pma__table_coords`
-  ADD PRIMARY KEY (`db_name`,`table_name`,`pdf_page_number`);
-
---
--- Indices de la tabla `pma__table_info`
---
-ALTER TABLE `pma__table_info`
-  ADD PRIMARY KEY (`db_name`,`table_name`);
-
---
--- Indices de la tabla `pma__table_uiprefs`
---
-ALTER TABLE `pma__table_uiprefs`
-  ADD PRIMARY KEY (`username`,`db_name`,`table_name`);
-
---
--- Indices de la tabla `pma__tracking`
---
-ALTER TABLE `pma__tracking`
-  ADD PRIMARY KEY (`db_name`,`table_name`,`version`);
-
---
--- Indices de la tabla `pma__userconfig`
---
-ALTER TABLE `pma__userconfig`
-  ADD PRIMARY KEY (`username`);
-
---
--- Indices de la tabla `pma__usergroups`
---
-ALTER TABLE `pma__usergroups`
-  ADD PRIMARY KEY (`usergroup`,`tab`,`allowed`);
-
---
--- Indices de la tabla `pma__users`
---
-ALTER TABLE `pma__users`
-  ADD PRIMARY KEY (`username`,`usergroup`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `pma__bookmark`
---
-ALTER TABLE `pma__bookmark`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `pma__column_info`
---
-ALTER TABLE `pma__column_info`
-  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `pma__export_templates`
---
-ALTER TABLE `pma__export_templates`
-  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `pma__history`
---
-ALTER TABLE `pma__history`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `pma__pdf_pages`
---
-ALTER TABLE `pma__pdf_pages`
-  MODIFY `page_nr` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `pma__savedsearches`
---
-ALTER TABLE `pma__savedsearches`
-  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- Base de datos: `test`
---
-CREATE DATABASE IF NOT EXISTS `test` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `test`;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
