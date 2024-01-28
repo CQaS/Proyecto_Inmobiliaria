@@ -9,7 +9,7 @@
 set -o errexit
 
 #instala todos los pip necesarios para el entorno virtual
-pip install -r requierements.txt
+# pip install -r requierements.txt
 
 #genera la carpeta de archivos estaticos 
 python manage.py collectstatic --no-input
