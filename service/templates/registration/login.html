@@ -7,43 +7,61 @@
 
 <style>
     .form-container {
-        max-width: 400px; /* Ancho máximo del contenedor */
+        max-width: 400px;
+        /* Ancho máximo del contenedor */
         margin: 20px auto;
-        border: 2px solid #ccc; /* Establecer un borde alrededor del formulario */
-        padding: 20px; /* Añadir espacio interno al formulario */
-        border-radius: 8px; /* Añadir bordes redondeados al formulario */
-        text-align: center; /* Centrar contenido del contenedor */
+        border: 2px solid #ccc;
+        /* Establecer un borde alrededor del formulario */
+        padding: 20px;
+        /* Añadir espacio interno al formulario */
+        border-radius: 8px;
+        /* Añadir bordes redondeados al formulario */
+        text-align: center;
+        /* Centrar contenido del contenedor */
     }
 
     /* Estilo para los inputs */
     #username,
     #password {
-        width: 100%; /* Ancho del input */
+        width: 100%;
+        /* Ancho del input */
     }
 
     .error-box {
         font-size: 1rem;
-        padding: 10px; /* Ajustar el relleno */
-        border-radius: 8px; /* Añadir bordes redondeados al error-box */
+        padding: 10px;
+        /* Ajustar el relleno */
+        border-radius: 8px;
+        /* Añadir bordes redondeados al error-box */
         border: 2px solid rgb(183, 146, 91);
-        background-color: rgb(238, 208, 161); /* Cambiar color de fondo del cartel */
+        background-color: rgb(238, 208, 161);
+        /* Cambiar color de fondo del cartel */
         text-align: center;
-        margin-bottom: 15px; /* Espacio entre el formulario y el mensaje de error */
-        word-wrap: break-word; /* Permitir el salto de línea en caso de texto largo */
-        width: calc(100% - 40px); /* Igualar al ancho del form-container - restando el padding */
-        margin: 0 auto; /* Centrar el error-box */
+        margin-bottom: 15px;
+        /* Espacio entre el formulario y el mensaje de error */
+        word-wrap: break-word;
+        /* Permitir el salto de línea en caso de texto largo */
+        width: calc(100% - 40px);
+        /* Igualar al ancho del form-container - restando el padding */
+        margin: 0 auto;
+        /* Centrar el error-box */
     }
 
     .error-message {
-        margin-bottom: 0; /* Eliminar el margen inferior del mensaje de error */
+        margin-bottom: 0;
+        /* Eliminar el margen inferior del mensaje de error */
     }
 
     /* Estilo para el mensaje de error */
     .error-alert {
-        max-width: 50%; /* Ancho máximo del mensaje de error */
-        margin: 0 auto; /* Centrar el mensaje de error */
-        background-color: transparent !important; /* Fondo transparente */
-        color: black; !important; /* Color de texto azul */
+        max-width: 50%;
+        /* Ancho máximo del mensaje de error */
+        margin: 0 auto;
+        /* Centrar el mensaje de error */
+        background-color: transparent !important;
+        /* Fondo transparente */
+        color: black !important;
+        /* Color de texto azul */
     }
 </style>
 
@@ -55,14 +73,14 @@
             <div class="alert alert-danger text-center error-alert" role="alert">
                 <h5 class="mb-1">LOGIN ERROR!!!!</h5>
                 {% for field in form %}
-                    {% for error in field.errors %}
-                        <p class="error-message">{{ error }}</p>
-                    {% endfor %}
+                {% for error in field.errors %}
+                <p class="error-message">{{ error }}</p>
+                {% endfor %}
                 {% endfor %}
             </div>
             {% endif %}
         </div>
-        <form action="/accounts/login/" method="post" class="text-center">
+        <form action="/accounts/login/" method="post" id="form_login" class="text-center">
             {% csrf_token %}
 
             <div class="form-group">
@@ -73,7 +91,7 @@
                 <label for="password" class="form-label">Password</label>
                 <input type="password" name="password" id="password" class="form-control">
             </div>
-            <button type="submit" class="btn btn-primary mt-3">ENTRAR</button>
+            <button type="submit" id="btn_login" class="btn btn-primary mt-3">ENTRAR</button>
         </form>
     </div>
 </div>
