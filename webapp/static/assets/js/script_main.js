@@ -467,24 +467,24 @@ let btn_login = document.getElementById("btn_login")
 let form_login = document.getElementById("form_login")
 
 btn_login.addEventListener("click", (e) => {
-  e.preventDefault()
-  
-  let password = document.getElementById("password").value
-  let username = document.getElementById("username").value
+    e.preventDefault()
 
-  if (username != '' || password != '') {
-    
-    const hashHex_password = sha3_256(password)
-    document.getElementById('password').value = hashHex_password
-    
-  } else {
-    $('#error_log').text('Usuário ou senha incorretos')
-    return
-  }
-  
-  // SI ESTA TODO BIEN SE ENVIA EL FORMULARIO...
-  form_login.submit()
-  
+    let password = document.getElementById("password").value
+    let username = document.getElementById("username").value
+
+    if (username != '' || password != '') {
+
+        const hashHex_password = sha3_256(password)
+        document.getElementById('password').value = hashHex_password
+
+    } else {
+        $('#error_log').text('Usuário ou senha incorretos')
+        return
+    }
+
+    // SI ESTA TODO BIEN SE ENVIA EL FORMULARIO desde MODAL...
+    form_login.submit()
+
 })
 
 /* RESET PASSWORD */
@@ -512,13 +512,13 @@ btn_login_re.addEventListener("click", () => {
     let email_re = $("#email_re").val()
     let password_re = $("#password_re").val()
     let RePassword_re = $("#RePassword_re").val()
-    
-    
+
+
     if (password_re == RePassword_re || username_re != '' || email_re != '') {
-        
+
         console.log(username_re, email_re, password_re)
         const hashHex_password_re = sha3_256(password_re)
-        $("#password_re").val(hashHex_password_re) 
+        $("#password_re").val(hashHex_password_re)
         $("#RePassword_re").val(hashHex_password_re)
 
         $.ajax({
