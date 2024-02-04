@@ -427,13 +427,17 @@ btn_msg.addEventListener("click", (e) => {
         url: "/msg",
         data: formData,
         success: (res) => {
-            // Limpiar los campos del formulario
-            $("#nombre").val("")
-            $("#tel").val("")
-            $("#email").val("")
-            $("#mensaje").val("")
-            console.log(res)
-            _alerta("E-mail de contato enviado com sucesso!")
+            if (res.success) {
+                // Limpiar los campos del formulario
+                $("#nombre").val("")
+                $("#tel").val("")
+                $("#email").val("")
+                $("#mensaje").val("")
+                console.log(res)
+                _alerta("E-mail de contato enviado com sucesso!")
+            } else {
+                _alerta("¡Ocorreu um erro ao enviar o e-mail de contato!")
+            }
         },
         error: (res) => {
             console.log(res)

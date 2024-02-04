@@ -72,7 +72,7 @@ urlpatterns = [
          views_contrato.contrato_codRef, name="contrato_form"),
     path('contrato/codRef/<str:codRef>',
          views_contrato.contrato_codRef2, name="contrato_codRef2"),
-    path('contrato/contratar/<int:id_inmueble>/',
+    path('contrato/contratar/<int:id_inmueble>',
          views_contrato.contrato_idInmueble, name="contrato_idInmueble"),
     path('contrato/crear', views_contrato.crear_contrato, name="crear_contrato"),
     path('contrato/condetalles/<int:detalleid>',

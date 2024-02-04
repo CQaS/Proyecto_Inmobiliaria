@@ -4,9 +4,10 @@ from django.http.response import JsonResponse
 from django.core.exceptions import ValidationError
 from django.http import HttpResponseServerError
 from django.shortcuts import render, redirect
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage, EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.contrib.auth import logout
+from django.utils.html import strip_tags
 from .forms import ContactForm
 from .models import *
 
@@ -71,7 +72,29 @@ def msg(req):
             tel = req.POST['tel']
             mensaje = req.POST['mensaje']
 
-            # Crear un objeto EmailMessage
+            subject = 'Entre em Contato - Imóveis MEC'
+
+            context = {
+                'nombre': nombre,
+                'email': email,
+                'tel': tel,
+                'mensaje': mensaje
+            }
+
+            html_mensaje = render_to_string('email_template.html', context)
+            msg_plano = strip_tags(html_mensaje)
+
+            mensaje = EmailMultiAlternatives(
+                subject=subject,
+                body=msg_plano,
+                from_email=email,
+                to=[config('EMAIL_HOST_USER')]
+            )
+
+            mensaje.attach_alternative(html_mensaje, 'text/html')
+            mensaje.send()
+
+            """ # Crear un objeto EmailMessage
             subject = 'E-mail del Cliente {nombre}'.format(nombre=nombre)
             context = {
                 'nombre': nombre,
@@ -86,16 +109,17 @@ def msg(req):
             email.content_subtype = "html"  # Establecer el contenido como HTML
 
             # Enviar el correo electrónico
-            email.send()
+            email.send() """
+
             return JsonResponse({'success': True})
 
     except ValidationError as e:
         print(e)
         # Maneja las excepciones de validación, si ocurren
-        return JsonResponse({'error': False})
+        return JsonResponse({'success': False})
     except Exception as e:
         print(e)
-        return JsonResponse({'error': False})
+        return JsonResponse({'success': False})
     # return redirect('index')
 
 
