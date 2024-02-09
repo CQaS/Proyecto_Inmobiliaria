@@ -175,6 +175,7 @@ const consulta = () => {
 
             let hr = document.createElement('hr')
             resultados_por.appendChild(hr)
+            window.location.hash = '#resultados_por'
 
         } else {
 
@@ -182,6 +183,7 @@ const consulta = () => {
             h2Element.textContent = 'Sin Resultados de la Búsqueda'
             h2Element.style.marginLeft = '8%'
             resultados_por.appendChild(h2Element)
+            window.location.hash = '#resultados_por'
         }
     })
 }
