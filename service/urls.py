@@ -1,5 +1,5 @@
 from django.urls import path
-from service import views_propiedad, views_cliente, views_empleado, views_contrato
+from service import views_propiedad, views_cliente, views_empleado, views_contrato, views_user
 from django.conf import settings
 from django.contrib.staticfiles.urls import static
 from django.contrib.auth.decorators import login_required
@@ -81,6 +81,9 @@ urlpatterns = [
     ##### RESET PASSWORD #####
     path('reset_password', views_cliente.reset_password, name="reset_password"),
     ##### FIN RESET PASSWORD #####
+    ##### CREATESUPERUSER #####
+    path('nuevo/create_superuser', views_user.create_superuser, name="create_superuser"),
+    ##### FIN CREATESUPERUSER #####
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
