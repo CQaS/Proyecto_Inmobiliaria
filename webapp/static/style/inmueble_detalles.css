@@ -22,7 +22,7 @@
 }
 
 .intro-single .titulo-single-box {
-    border-left: 3px solid rgb(183, 146, 91);
+    border-left: 3px solid #ef233c;
 }
 
 .intro-single .titulo-single-box .titulo-single {
@@ -58,7 +58,7 @@
     position: absolute;
     width: 70px;
     height: 4px;
-    background-color: rgb(183, 146, 91);
+    background-color: #ef233c;
     bottom: 20px;
     left: 0;
 }
