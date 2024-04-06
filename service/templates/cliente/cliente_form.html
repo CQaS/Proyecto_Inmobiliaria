@@ -92,13 +92,13 @@
             </div>
 
             <div>
-              <label for="dni_cliente" class="formbold-form-label"> DNI </label>
+              <label for="dni_cliente" class="formbold-form-label"> DNI / CPF </label>
               <input type="number" name="dni_cliente" id="dni_cliente" class="formbold-form-input" {% if cliedit %}
                 value="{{ cliedit.dni_cliente }}" {% else %} value="{{ clientes.dni_cliente.value }}" {% endif %} />
             </div>
 
             <div>
-              <label for="rg_cliente" class="formbold-form-label"> RG </label>
+              <label for="rg_cliente" class="formbold-form-label"> RG / RNM</label>
               <input type="number" name="rg_cliente" id="rg_cliente" class="formbold-form-input" {% if cliedit %}
                 value="{{ cliedit.rg_cliente }}" {% else %} value="{{ clientes.rg_cliente.value }}" {% endif %} />
             </div>
