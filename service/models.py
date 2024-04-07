@@ -7,7 +7,7 @@ from django.core.exceptions import ValidationError
 from django.db import connection, IntegrityError
 
 pattern_Nombre = r'^[A-Z]*[a-z]{2,}[a-zA-ZñÑáÁéÉíÍúÚóÓ. ]*$'
-pattern_Direccion = r'^[a-zA-ZñÑáÁéÉíÍúÚóÓ.0-9/ ]*$'
+pattern_Direccion = r'^[a-zA-ZñÑáÁéÉíÍúÚóÓ.0-9/- ]*$'
 pattern_Datos_envio = r'^[A-Z0-9][a-zA-ZñÑáÁéÉíÍúÚóÓ0-9,.:;\- ]*$'
 pattern_soloNumeros = r'^[0-9][0-9]*$'
 pattern_cod_ = r'^[a-zA-Z0-9-]*$'
@@ -121,7 +121,8 @@ class Inmueble(models.Model):
     habitac_maxima = models.IntegerField(
         verbose_name='Hab. max.', null=False, blank=False, validators=[validar_numero])
     estado = models.IntegerField(
-        null=True, default=1, blank=True, verbose_name='Estado')  # Estado = 1 seria Disponible
+        # Estado = 1 seria Disponible
+        null=True, default=1, blank=True, verbose_name='Estado')
     latitud = models.CharField(max_length=100, null=False, blank=False,
                                default='0.0', verbose_name='Latitud')
     longitud = models.CharField(max_length=100, null=False, blank=False,
@@ -153,7 +154,7 @@ class Clientes(models.Model):
     nom_cliente = models.CharField(max_length=70, null=False, blank=False,
                                    verbose_name='Nombre de Cliente', validators=[validar_nombre])
     dni_cliente = models.IntegerField(
-        verbose_name='Dni de Cliente', null=True, blank=True, validators=[validar_numero])
+        verbose_name='Dni de Cliente', null=True, blank=True, validators=[validar_direccion])
     rg_cliente = models.CharField(max_length=100,
                                   verbose_name='RG Cliente', null=True, blank=True, validators=[validar_direccion])
     dir_cliente = models.CharField(max_length=100, verbose_name='Direccion de Cliente',
@@ -171,7 +172,8 @@ class Clientes(models.Model):
     categoria = models.CharField(max_length=45, verbose_name='Categoria',
                                  null=False, blank=False, validators=[validar_letras])
     estado = models.IntegerField(
-        null=True, default=1, blank=True, verbose_name='Estado')  # Estado = 1 seria Disponible
+        # Estado = 1 seria Disponible
+        null=True, default=1, blank=True, verbose_name='Estado')
 
     def __str__(self):
         return self.nom_cliente
@@ -198,7 +200,8 @@ class Empleados(models.Model):
     nom_puesto = models.CharField(max_length=45, null=False, blank=False,
                                   verbose_name='Nombre de puesto', validators=[validar_letras])
     estado = models.IntegerField(
-        null=True, default=1, blank=True, verbose_name='Estado')  # Estado = 1 seria Disponible
+        # Estado = 1 seria Disponible
+        null=True, default=1, blank=True, verbose_name='Estado')
 
     def __str__(self):
         return self.nom_empleado
