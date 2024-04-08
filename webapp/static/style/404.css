@@ -4,7 +4,7 @@
 }
 
 body {
-    background: linear-gradient(45deg, #ef233c, #fff);
+    background: linear-gradient(45deg, rgb(183,146,91), #fff);
     height: 100vh;
 }
 

@@ -38,7 +38,7 @@ img {
   display: block;
   width: 100%;
   border-radius: 5px;
-  background: #ef233c;
+  background: rgb(183,146,91);
   color: black;
   text-align: center;
 }
@@ -158,7 +158,7 @@ img {
 
 .card__btn:hover {
   color: azure;
-  background: #ef233c;
+  background: rgb(183,146,91);
 }
 
 /* ## MAS INFO ## */
