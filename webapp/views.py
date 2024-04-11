@@ -11,6 +11,11 @@ from django.utils.html import strip_tags
 from .forms import ContactForm
 from .models import *
 
+####
+from django.conf import settings
+from django.contrib import messages
+
+
 
 def serialize_date(obj):
     if isinstance(obj, date):
@@ -62,64 +67,64 @@ def index(request):
     return render(request, 'index.html', context)
 
 
-def msg(req):
-    try:
-        print(req.POST)
+# def msg(req):
+#     try:
+#         print(req.POST)
 
-        if req.method == 'POST':
-            nombre = req.POST['nombre']
-            email = req.POST['email']
-            tel = req.POST['tel']
-            mensaje = req.POST['mensaje']
+#         if req.method == 'POST':
+#             nombre = req.POST['nombre']
+#             email = req.POST['email']
+#             tel = req.POST['tel']
+#             mensaje = req.POST['mensaje']
 
-            subject = 'Entre em Contato - Imóveis MEC'
+#             subject = 'Entre em Contato - Imóveis MEC'
 
-            context = {
-                'nombre': nombre,
-                'email': email,
-                'tel': tel,
-                'mensaje': mensaje
-            }
+#             context = {
+#                 'nombre': nombre,
+#                 'email': email,
+#                 'tel': tel,
+#                 'mensaje': mensaje
+#             }
 
-            html_mensaje = render_to_string('email_template.html', context)
-            msg_plano = strip_tags(html_mensaje)
+#             html_mensaje = render_to_string('email_template.html', context)
+#             msg_plano = strip_tags(html_mensaje)
 
-            mensaje = EmailMultiAlternatives(
-                subject=subject,
-                body=msg_plano,
-                from_email=email,
-                to=[config('EMAIL_HOST_USER')]
-            )
+#             mensaje = EmailMultiAlternatives(
+#                 subject=subject,
+#                 body=msg_plano,
+#                 from_email=email,
+#                 to=[config('EMAIL_HOST_USER')]
+#             )
 
-            mensaje.attach_alternative(html_mensaje, 'text/html')
-            mensaje.send()
+#             mensaje.attach_alternative(html_mensaje, 'text/html')
+#             mensaje.send()
 
-            """ # Crear un objeto EmailMessage
-            subject = 'E-mail del Cliente {nombre}'.format(nombre=nombre)
-            context = {
-                'nombre': nombre,
-                'email': email,
-                'tel': tel,
-                'mensaje': mensaje
-            }
-            print(context)
-            message = render_to_string('email_template.html', context)
-            email = EmailMessage(subject, message, email, [
-                config('EMAIL_HOST_USER')])
-            email.content_subtype = "html"  # Establecer el contenido como HTML
+            # """ # Crear un objeto EmailMessage
+            # subject = 'E-mail del Cliente {nombre}'.format(nombre=nombre)
+            # context = {
+            #     'nombre': nombre,
+            #     'email': email,
+            #     'tel': tel,
+            #     'mensaje': mensaje
+            # }
+            # print(context)
+            # message = render_to_string('email_template.html', context)
+            # email = EmailMessage(subject, message, email, [
+            #     config('EMAIL_HOST_USER')])
+            # email.content_subtype = "html"  # Establecer el contenido como HTML
 
-            # Enviar el correo electrónico
-            email.send() """
+            # # Enviar el correo electrónico
+            # email.send() """
 
-            return JsonResponse({'success': True})
+    #         return JsonResponse({'success': True})
 
-    except ValidationError as e:
-        print(e)
-        # Maneja las excepciones de validación, si ocurren
-        return JsonResponse({'success': False})
-    except Exception as e:
-        print(e)
-        return JsonResponse({'success': False})
+    # except ValidationError as e:
+    #     print(e)
+    #     # Maneja las excepciones de validación, si ocurren
+    #     return JsonResponse({'success': False})
+    # except Exception as e:
+    #     print(e)
+    #     return JsonResponse({'success': False})
     # return redirect('index')
 
 
@@ -141,3 +146,45 @@ def salir(req):
 
 def notFound(req, err=None, err2=None):
     return render(req, '404.html')
+
+
+def contact(request):
+    try:
+        if request.method == 'POST':
+            nombre = request.POST['nombre']
+            email = request.POST['email']
+            tel = request.POST['tel']
+            subject = request.POST['subject']
+            mensaje = request.POST['mensaje']
+        
+            template = render_to_string('email.html', {
+                'nombre': nombre,
+                'email': email,
+                'tel': tel,
+                'subject': subject,
+                'mensaje': mensaje
+            })
+
+            emailSend = EmailMessage(
+                mensaje,
+                template,
+                settings.EMAIL_HOST_USER,
+                ['infoimoveismec@gmail.com']
+            )
+
+            emailSend.content_subtype = 'html'
+            emailSend.send(fail_silently=False)
+            emailSend.send()
+
+    except ValidationError as e:
+        print(e)
+        # Maneja las excepciones de validación, si ocurren
+        return JsonResponse({'success': False})
+    except Exception as e:
+        print(e)
+        return JsonResponse({'success': False})
+    return redirect('index')
+
+        # messages.success(request, 'Email enviado correctamente')
+
+    return JsonResponse({'success': True})

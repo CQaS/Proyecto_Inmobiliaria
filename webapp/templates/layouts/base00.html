@@ -178,21 +178,32 @@
       </div>
       <div id="ir_a_msg" class="sec_login">
         <h2>Contato </h2>
-        <form action="{% url 'msg' %}" class="form" id="formulario_msg" method="POST">
+        <form action="{% url 'contact' %}" class="form" id="formulario_msg" method="POST">
           {% csrf_token %}
+
+          {% if messages %}
+                                    
+            {% for message in messages %}
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  {{ message }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            {% endfor %}
+          {% endif %}
+
           <input type="text" class="form_input" id="nombre" name="nombre" placeholder="Nome e Sobrenome" required>
           <br>
           <input type="email" id="email" class="form_input" name="email" placeholder="e-mail" required>
           <br>
           <input type="tel" class="form_input" id="tel" name="tel" placeholder="Telefone" required>
           <br>
+          <input type="text" class="form_input" id="subject" name="subject" placeholder="Assunto" required>
+          <br>
           <textarea name="mensaje" class="form_input" id="mensaje" cols="25" rows="3" placeholder="Mensagem"
             required></textarea>
           <br>
-          <input type="submit" id="btn_msg" value="Enviar contato!" class="form_enviar contactar">
-          <!--Esto es para que no se vea la confirmacion del envio del formulario-->
-          <!-- <input type="hidden" name="_next" value="http://localhost:127.0.0.1:8000/">
-          <input type="hidden" name="_captcha" value="false"> -->
+          <!-- <input type="submit" id="btn_msg" value="Enviar contato!" class="form_enviar contactar"> -->
+          <button type="submit" class="form_enviar contactar">Contactar</button>
         </form>
       </div>
     </div>
