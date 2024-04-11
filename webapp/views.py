@@ -11,6 +11,11 @@ from django.utils.html import strip_tags
 from .forms import ContactForm
 from .models import *
 
+####
+from django.conf import settings
+from django.contrib import messages
+
+
 
 def serialize_date(obj):
     if isinstance(obj, date):
@@ -82,18 +87,17 @@ def msg(req):
             }
 
             html_mensaje = render_to_string('email_template.html', context)
-            msg_plano = strip_tags(html_mensaje)
 
-            mensaje = EmailMultiAlternatives(
-                subject=subject,
-                body=msg_plano,
-                from_email=email,
-                to=[config('EMAIL_HOST_USER')]
+            emailSend = EmailMessage(
+                subject,
+                html_mensaje,
+                settings.EMAIL_HOST_USER,
+                ['infoimoveismec@gmail.com']
             )
 
-            mensaje.attach_alternative(html_mensaje, 'text/html')
-            mensaje.send()
-
+            emailSend.content_subtype = 'html'
+            emailSend.send(fail_silently=False)
+            emailSend.send()
             return JsonResponse({'success': True})
 
     except ValidationError as e:
@@ -103,8 +107,7 @@ def msg(req):
     except Exception as e:
         print(e)
         return JsonResponse({'success': False})
-    # return redirect('index')
-
+    return redirect('index')
 
 def login(req):
     print(req.POST)
@@ -124,3 +127,5 @@ def salir(req):
 
 def notFound(req, err=None, err2=None):
     return render(req, '404.html')
+
+
