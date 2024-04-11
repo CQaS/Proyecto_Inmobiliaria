@@ -21,6 +21,7 @@ const i_valorinmueble = document.getElementById("valor_inmueble")
 const i_num_apto = document.getElementById("num_apto")
 const i_idcliente = document.getElementById("lista_dinamica2")
 const imgs = document.getElementById('imgs')
+const video = document.getElementById('video')
 const tipo_servicio = document.getElementsByName('tipo_servicio')
 const lati = document.getElementById('lat')
 const long = document.getElementById('lon')
@@ -177,7 +178,32 @@ if (send) {
             return
         }
 
-        if (!editar) {
+        if (!video.files || video.files.length === 0) {
+            _alerta('Selecione VIDEO!')
+            console.log('Selecione VDEO!')
+            return
+
+        }else if (!editar){
+            let file = video.files[0]
+
+            if (!file.type.startsWith('video/')) {
+                _alerta('Por favor, selecione um arquivo de vídeo.')
+                return
+            }
+
+            let maxSizeInBytes = 100 * 1024 * 1024 // 50 MB (exemplo)
+            if (file.size > maxSizeInBytes) {
+                _alerta('O tamanho do arquivo excede o limite permitido.')
+                return
+            }
+        }
+
+        if (!imgs.files || imgs.files.length === 0) {
+            _alerta('Selecione FOTOS!')
+            console.log('Selecione FOTOS!')
+            return
+
+        } else if (!editar) {
             //uploadImg.files: FileList
             for (let i = 0; i < imgs.files.length; i++) {
                 let f = imgs.files[i]

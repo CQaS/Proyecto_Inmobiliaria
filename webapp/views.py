@@ -94,23 +94,6 @@ def msg(req):
             mensaje.attach_alternative(html_mensaje, 'text/html')
             mensaje.send()
 
-            """ # Crear un objeto EmailMessage
-            subject = 'E-mail del Cliente {nombre}'.format(nombre=nombre)
-            context = {
-                'nombre': nombre,
-                'email': email,
-                'tel': tel,
-                'mensaje': mensaje
-            }
-            print(context)
-            message = render_to_string('email_template.html', context)
-            email = EmailMessage(subject, message, email, [
-                config('EMAIL_HOST_USER')])
-            email.content_subtype = "html"  # Establecer el contenido como HTML
-
-            # Enviar el correo electrónico
-            email.send() """
-
             return JsonResponse({'success': True})
 
     except ValidationError as e:

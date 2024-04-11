@@ -35,13 +35,13 @@ DEBUG = True
 
 EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_PASSWORD = 'klpr ptiy lkej gyhz'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 ALLOWED_HOSTS = []
-#ALLOWED_HOSTS = ['www.imoveismec.com.br']
+# ALLOWED_HOSTS = ['www.imoveismec.com.br']
 
 # Application definition
 
@@ -147,9 +147,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-#STATIC_URL = 'static/' 
-STATIC_URL = '/static/' 
-
+# STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 
 # Default primary key field type
@@ -166,4 +165,3 @@ MIGRATION_MODULES = {
 # LOGIN
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
-
