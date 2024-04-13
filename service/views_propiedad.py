@@ -30,10 +30,13 @@ def index_propiedad(req):
     list = Inmueble.objects.all()
     return render(req, 'propiedad/index.html')
 
+
 """ from django.db import transaction
 @transaction.atomic 
 
 raise"""
+
+
 @login_required(login_url='/#modal-opened')
 def crear_propiedad(req):
     ERR = ''
@@ -65,6 +68,7 @@ def crear_propiedad(req):
     images = req.FILES.getlist('imgs')
 
     if inmueble_form.is_valid() and len(images) > 0:
+        print(req.POST)
 
         T = req.POST.getlist('tipo_servicio')
         T_list = ', '.join(T)
@@ -76,7 +80,7 @@ def crear_propiedad(req):
             # Validar si el cod_referencia ya existen en la base de datos
             if Inmueble.objects.filter(cod_referencia=req.POST['cod_referencia']).exists():
                 ERR = 'O Cód. Referência já está cadastrado no banco de dados.'
-                print(inmueble_form.expensas)
+
                 context = {
                     'inmueble': inmueble_form,
                     'clientes': lista,
@@ -88,10 +92,30 @@ def crear_propiedad(req):
             I = inmueble_form.save()
             ultimo_id = I.id_inmueble
 
+            try:
+                portadaName = req.FILES['imgportada']
+                # Genera un nuevo nombre de archivo (por ejemplo, usando un UUID)
+                new_fileportadaname = f"PORTADA_{uuid.uuid4().hex}{
+                    os.path.splitext(portadaName.name)[1]}"
+
+                # Asigna el nuevo nombre al archivo
+                portadaName.name = new_fileportadaname
+                foto = Fotos.objects.create(
+                    image=portadaName,
+                    inmueble_id=ultimo_id
+                )
+
+            except IntegrityError as e:
+                print(f"Erro ao criar Video: {e}")
+
+            except Exception as e:
+                print(f"Erro inesperado - Video: {e}")
+
             for image in images:
                 try:
                     # Genera un nuevo nombre de archivo (por ejemplo, usando un UUID)
-                    new_filename = f"{uuid.uuid4().hex}{os.path.splitext(image.name)[1]}"
+                    new_filename = f"{uuid.uuid4().hex}{
+                        os.path.splitext(image.name)[1]}"
 
                     # Asigna el nuevo nombre al archivo
                     image.name = new_filename
@@ -105,6 +129,25 @@ def crear_propiedad(req):
 
                 except Exception as e:
                     print(f"Erro inesperado: {e}")
+
+            try:
+                videoName = req.FILES['video']
+                # Genera un nuevo nombre de archivo (por ejemplo, usando un UUID)
+                new_fileVideoname = f"{uuid.uuid4().hex}{
+                    os.path.splitext(videoName.name)[1]}"
+
+                # Asigna el nuevo nombre al archivo
+                videoName.name = new_fileVideoname
+                foto = Fotos.objects.create(
+                    image=videoName,
+                    inmueble_id=ultimo_id
+                )
+
+            except IntegrityError as e:
+                print(f"Erro ao criar Video: {e}")
+
+            except Exception as e:
+                print(f"Erro inesperado - Video: {e}")
 
             print('Inmueble creado, OK')
             success = "Propriedade criada corretamente"
@@ -173,7 +216,8 @@ def editar_propiedad(req, id_inmueble=None):
         ERR = 'Algo deu errado, tente novamente ou entre em contato com o administrador'
         print("Error:", e)
 
-    inmueble_form = InmuebleForm(req.POST or None, req.FILES or None, instance=inmueble)
+    inmueble_form = InmuebleForm(
+        req.POST or None, req.FILES or None, instance=inmueble)
 
     if inmueble_form.is_valid():
 
@@ -232,12 +276,35 @@ def detalles_propiedad(req, id_inmueble):
                 inmueble_id=d.id_inmueble).values('image', 'inmueble_id')
 
         list_fotos = []
+        portada_foto = ''
+        video = ''
         for foto in fotos:
-            foto['image'] = foto['image'].replace('webapp', '')
-            list_fotos.append(foto['image'])
-        print(list_fotos)
+            if 'PORTADA' not in foto['image'] and not foto['image'].lower().endswith(('.mp4', '.avi', '.mov', '.mkv')):
+                print(foto['image'])
+                foto['image'] = foto['image'].replace('webapp', '')
+                list_fotos.append(foto['image'])
 
-        return render(req, 'propiedad/inmueble.html', {'detalle': un_detalle, 'fotos': list_fotos})
+            if 'PORTADA' in foto['image'] and not foto['image'].lower().endswith(('.mp4', '.avi', '.mov', '.mkv')):
+                print(foto['image'])
+                foto['image'] = foto['image'].replace('webapp', '')
+                portada_foto = foto['image']
+
+            if 'PORTADA' not in foto['image'] and foto['image'].lower().endswith(('.mp4', '.avi', '.mov', '.mkv')):
+                print(foto['image'])
+                foto['image'] = foto['image'].replace('webapp', '')
+                video = foto['image']
+        print(list_fotos)
+        print(portada_foto)
+        print(video)
+
+        context = {
+            'detalle': un_detalle,
+            'fotos': list_fotos,
+            'portada': portada_foto,
+            'video': video
+        }
+
+        return render(req, 'propiedad/inmueble.html', context)
     else:
         return render(req, '404.html')
 

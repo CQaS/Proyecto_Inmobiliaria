@@ -20,6 +20,7 @@ const i_descripcion = document.getElementById("descripcion")
 const i_valorinmueble = document.getElementById("valor_inmueble")
 const i_num_apto = document.getElementById("num_apto")
 const i_idcliente = document.getElementById("lista_dinamica2")
+const imgportada = document.getElementById('imgportada')
 const imgs = document.getElementById('imgs')
 const video = document.getElementById('video')
 const tipo_servicio = document.getElementsByName('tipo_servicio')
@@ -183,7 +184,7 @@ if (send) {
             console.log('Selecione VDEO!')
             return
 
-        }else if (!editar){
+        } else if (!editar) {
             let file = video.files[0]
 
             if (!file.type.startsWith('video/')) {
@@ -196,6 +197,39 @@ if (send) {
                 _alerta('O tamanho do arquivo excede o limite permitido.')
                 return
             }
+        }
+
+        if (!imgportada.files || imgportada.files.length === 0) {
+            _alerta('Selecione a foto da capa!')
+            console.log('Selecione a foto da capa!')
+            return
+
+        } else if (!editar) {
+
+            let portadaName = imgportada.files[0]
+            // Verificar extensión del archivo
+            let filePath = portadaName.name
+            let allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i
+
+            if (!allowedExtensions.exec(filePath)) {
+                console.log(`foto no Valida!`)
+                _alerta(`foto Portada no Valida!`)
+                return
+            } else {
+                console.log(`ext Portada ok`)
+            }
+
+            //Verificar tamaño del archivo(máximo 2 MB) 2w
+            const maxSize = 2 * 1024 * 1024 // 2MB en bytes
+
+            if (imgportada.size > maxSize) {
+                console.log(`Por favor, Foto Portada que não excedam o 2MB.`)
+                _alerta(`foto Portada no Valida!`)
+                return
+            } else {
+                console.log(`size Portada ok`)
+            }
+
         }
 
         if (!imgs.files || imgs.files.length === 0) {

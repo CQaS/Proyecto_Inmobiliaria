@@ -375,11 +375,15 @@
           <!-- pantalla 3 linea 5-5 cajas-->
           {% if not editar %}
           <div class="formbold-input-flex">
+            <label class="">Selecione a foto da capa</label>
+            <input type="file" id="imgportada" name="imgportada">
+          </div>
+          <div class="formbold-input-flex">
             <label class="">Selecione Imagens</label>
             <input type="file" id="imgs" name="imgs" multiple>
           </div>
           <div class="formbold-input-flex">
-            <label class="">Selecione Imagens</label>
+            <label class="">Selecione Video</label>
             <input type="file" id="video" name="video" accept="video/*">
           </div>
           {% endif %}

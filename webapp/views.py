@@ -16,7 +16,6 @@ from django.conf import settings
 from django.contrib import messages
 
 
-
 def serialize_date(obj):
     if isinstance(obj, date):
         return obj.strftime('%Y-%m-%d')
@@ -109,6 +108,7 @@ def msg(req):
         return JsonResponse({'success': False})
     return redirect('index')
 
+
 def login(req):
     print(req.POST)
 
@@ -127,5 +127,3 @@ def salir(req):
 
 def notFound(req, err=None, err2=None):
     return render(req, '404.html')
-
-
