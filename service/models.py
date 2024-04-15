@@ -1,10 +1,11 @@
-from django.contrib.auth import get_user_model
 import re
 from PIL import Image
 from django.db import models
+from django.contrib.auth import get_user_model
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.db import connection, IntegrityError
+from django.shortcuts import redirect
 
 pattern_Nombre = r'^[A-Z]*[a-z]{2,}[a-zA-ZñÑáÁéÉíÍúÚóÓ. ]*$'
 pattern_Direccion = r'^[a-zA-ZñÑáÁéÉíÍúÚóÓ.0-9/ -]*$'
@@ -264,7 +265,7 @@ def buscarProp_ID(id_inmueble):
             return {'res': res, 'columns': columns, 'ERR': ERR}
 
     except IntegrityError as e:
-        ERR = 'Algo fallo, intenta nuevamente o ponte en contacto con Admin'
+        ERR = 'Algo deu errado, tente novamente ou entre em contato com o administrador'
         print("Error:", e)
         return {'ERR': ERR}
 
@@ -285,7 +286,7 @@ def liquidacion(id_p):
             return {'res': res, 'columns': columns, 'ERR': ERR}
 
     except IntegrityError as e:
-        ERR = 'Algo fallo, intenta nuevamente o ponte en contacto con Admin'
+        ERR = 'Algo deu errado, tente novamente ou entre em contato com o administrador'
         print("Error:", e)
         return {'ERR': ERR}
 
@@ -310,7 +311,7 @@ def reciboCliente(id_cliente):
             return {'res': res, 'columns': columns, 'ERR': ERR}
 
     except IntegrityError as e:
-        ERR = 'Algo fallo, intenta nuevamente o ponte en contacto con Admin'
+        ERR = 'Algo deu errado, tente novamente ou entre em contato com o administrador'
         print("Error:", e)
         return {'ERR': ERR}
 
@@ -332,6 +333,97 @@ def calendarCodRef(id_codRef):
             return {'res': res, 'columns': columns, 'ERR': ERR}
 
     except IntegrityError as e:
-        ERR = 'Algo fallo, intenta nuevamente o ponte en contacto con Admin'
+        ERR = 'Algo deu errado, tente novamente ou entre em contato com o administrador'
         print("Error:", e)
         return {'ERR': ERR}
+
+
+def reemplazarFotoPortada(idInmueble):
+    ERR = ''
+    delete = ''
+    try:
+        with connection.cursor() as cursor:
+            queryimg = """
+                    SELECT f.image FROM fotos_prop f WHERE f.inmueble_id = {0} AND f.image LIKE '%PORTADA%'
+                    """.format(idInmueble)
+            cursor.execute(queryimg)
+            img = cursor.fetchone()
+
+            query = """
+                    DELETE FROM fotos_prop WHERE inmueble_id = {0} AND image LIKE '%PORTADA%'
+                    """.format(idInmueble)
+            cursor.execute(query)
+            cursor.close()
+        delete = True
+        ERR = 'OK'
+
+    except IntegrityError as e:
+        ERR = 'Algo deu errado, tente novamente ou entre em contato com o administrador'
+        print("Error:", e)
+        delete = False
+
+    return {'delete': delete, 'err': ERR, 'img': img[0]}
+
+
+def reemplazarVideo(idInmueble):
+    ERR = ''
+    delete = ''
+    try:
+        with connection.cursor() as cursor:
+            queryvideo = """
+                    SELECT f.image FROM fotos_prop f WHERE f.inmueble_id = {0} AND image LIKE '%mp4%'
+                    """.format(idInmueble)
+            cursor.execute(queryvideo)
+            video = cursor.fetchone()
+
+            query = """
+                    DELETE FROM fotos_prop WHERE inmueble_id = {0} AND image LIKE '%mp4%'
+                    """.format(idInmueble)
+            cursor.execute(query)
+            cursor.close()
+        delete = True
+        ERR = 'OK'
+
+    except IntegrityError as e:
+        ERR = 'Algo deu errado, tente novamente ou entre em contato com o administrador'
+        print("Error:", e)
+        delete = False
+
+    return {'delete': delete, 'err': ERR, 'video': video}
+
+
+def Buscar_inmueble(id_inmueble):
+    try:
+        inmueble = Inmueble.objects.get(id_inmueble=id_inmueble)
+
+        with connection.cursor() as cursor:
+            cursor.execute(
+                "select * from clientes where categoria = 'Propietario'")
+            columns = [col[0] for col in cursor.description]
+            res = cursor.fetchall()
+
+        # Convertir los resultados a una lista de diccionarios
+        lista = []
+        for row in res:
+            row_dict = {}
+            for i, value in enumerate(row):
+                column_name = columns[i]
+                row_dict[column_name] = value
+            lista.append(row_dict)
+
+    except Inmueble.DoesNotExist:
+        print("NAO ENCONTRADO")
+        return redirect('404')
+
+    except IntegrityError as e:
+        print("Error:", e)
+        print('Algo deu errado, tente novamente ou entre em contato com o administrador')
+        return redirect('404')
+
+    return {'inmueble': inmueble, 'lista': lista}
+
+
+def get_fotos_porinmueble(id_inmueble):
+    fotos = Fotos.objects.filter(
+        inmueble_id=id_inmueble).values('image', 'inmueble_id')
+    return fotos

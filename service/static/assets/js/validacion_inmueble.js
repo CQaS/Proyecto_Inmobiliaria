@@ -32,6 +32,7 @@ const pattern_mail = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
 if (send) {
     send.addEventListener("click", (e) => {
         e.preventDefault()
+        console.log(`EDICION ${editar}`)
 
         const letra_y_espacios = (DATO) => {
             return DATO.value.match(pattern_letras_espacios)
@@ -93,7 +94,7 @@ if (send) {
         if (tipo_servicio) {
             tipos = ''
             for (let i = 0; i < tipo_servicio.length; i++) {
-                tipo_servicio[i].checked == true ? tipos = tipos + tipo_servicio[i].value + ', ' : console.log('NO')
+                tipo_servicio[i].checked == true ? tipos = tipos + tipo_servicio[i].value + ', ' : console.log(`No se eligio el tipo de servicio numero: ${i}`)
             }
 
             if (tipos.charAt(tipos.length - 2) == ',') {
@@ -179,32 +180,30 @@ if (send) {
             return
         }
 
-        if (!video.files || video.files.length === 0) {
-            _alerta('Selecione VIDEO!')
-            console.log('Selecione VDEO!')
-            return
+        if (video.files && video.files.length > 0) {
+            console.log(video.files)
+            console.log(video.files.length)
 
-        } else if (!editar) {
-            let file = video.files[0]
-
-            if (!file.type.startsWith('video/')) {
+            if (!video.type.startsWith('video/')) {
                 _alerta('Por favor, selecione um arquivo de vídeo.')
                 return
             }
 
-            let maxSizeInBytes = 100 * 1024 * 1024 // 50 MB (exemplo)
-            if (file.size > maxSizeInBytes) {
+            let maxSizeInBytes = 100 * 1024 * 1024 // 100 MB (exemplo)
+            if (video.size > maxSizeInBytes) {
                 _alerta('O tamanho do arquivo excede o limite permitido.')
                 return
             }
         }
 
-        if (!imgportada.files || imgportada.files.length === 0) {
+        if (!editar && (!imgportada.files && imgportada.files.length === 0)) {
             _alerta('Selecione a foto da capa!')
             console.log('Selecione a foto da capa!')
             return
 
-        } else if (!editar) {
+        }
+
+        if (imgportada.files && imgportada.files.length > 0) {
 
             let portadaName = imgportada.files[0]
             // Verificar extensión del archivo
@@ -232,12 +231,14 @@ if (send) {
 
         }
 
-        if (!imgs.files || imgs.files.length === 0) {
+        if (!editar && (!imgs.files && imgs.files.length === 0)) {
             _alerta('Selecione FOTOS!')
             console.log('Selecione FOTOS!')
             return
 
-        } else if (!editar) {
+        }
+
+        if (imgs.files && imgs.files.length > 0) {
             //uploadImg.files: FileList
             for (let i = 0; i < imgs.files.length; i++) {
                 let f = imgs.files[i]

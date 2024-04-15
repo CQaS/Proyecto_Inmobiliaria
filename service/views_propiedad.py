@@ -9,6 +9,7 @@ from django.core import serializers
 from django.core.serializers import serialize
 from django.http import HttpResponse, Http404
 from django.http.response import JsonResponse
+from django.conf import settings
 # LOGIN
 from django.contrib.auth.decorators import login_required
 from .forms import InmuebleForm
@@ -190,34 +191,19 @@ def crear_propiedad(req):
 def editar_propiedad(req, id_inmueble=None):
     ERR = ''
     success = ''
-    try:
-        inmueble = Inmueble.objects.get(id_inmueble=id_inmueble)
 
-        with connection.cursor() as cursor:
-            cursor.execute(
-                "select * from clientes where categoria = 'Propietario'")
-            columns = [col[0] for col in cursor.description]
-            res = cursor.fetchall()
+    datos_inmueble = Buscar_inmueble(id_inmueble)
+    fotos = get_fotos_porinmueble(id_inmueble)
 
-        # Convertir los resultados a una lista de diccionarios
-        lista = []
-        for row in res:
-            row_dict = {}
-            for i, value in enumerate(row):
-                column_name = columns[i]
-                row_dict[column_name] = value
-            lista.append(row_dict)
-
-    except Inmueble.DoesNotExist:
-        print("NAO ENCONTRADO")
-        return redirect('404')
-
-    except IntegrityError as e:
-        ERR = 'Algo deu errado, tente novamente ou entre em contato com o administrador'
-        print("Error:", e)
+    list_fotos = []
+    for foto in fotos:
+        if 'PORTADA' not in foto['image'] and not foto['image'].lower().endswith(('.mp4', '.avi', '.mov', '.mkv')):
+            print(foto['image'])
+            foto['image'] = foto['image'].replace('webapp', '')
+            list_fotos.append(foto['image'])
 
     inmueble_form = InmuebleForm(
-        req.POST or None, req.FILES or None, instance=inmueble)
+        req.POST or None, req.FILES or None, instance=datos_inmueble['inmueble'])
 
     if inmueble_form.is_valid():
 
@@ -228,7 +214,121 @@ def editar_propiedad(req, id_inmueble=None):
             inmueble_form.instance.tipo_servicio = T_list
 
         try:
-            I = inmueble_form.save()
+            instancia_guardada = inmueble_form.save()
+
+            """ 
+            
+            REEMPLAZO DE FOTO Y VIDEO 
+            
+                                        """
+
+            if instancia_guardada.id_inmueble and 'imgportada' in req.FILES and req.FILES['imgportada']:
+                print('REEMPLAZO DE FOTO PORTADA')
+
+                R = reemplazarFotoPortada(id_inmueble)
+                ERR_delete = R['err']
+                if R['delete']:
+                    print('SE BORRO CORRECTA LA FOTO PORTADA ANTERIOR')
+
+                    try:
+                        ruta_foto = os.path.join(settings.MEDIA_ROOT, R['img'])
+                        if os.path.isfile(ruta_foto):
+                            os.remove(ruta_foto)
+
+                        portadaName = req.FILES['imgportada']
+                        # Genera un nuevo nombre de archivo (por ejemplo, usando un UUID)
+                        new_fileportadaname = f"PORTADA_{uuid.uuid4().hex}{
+                            os.path.splitext(portadaName.name)[1]}"
+
+                        # Asigna el nuevo nombre al archivo
+                        portadaName.name = new_fileportadaname
+                        foto = Fotos.objects.create(
+                            image=portadaName,
+                            inmueble_id=id_inmueble
+                        )
+                        print('A NOVA FOTO DA CAPA FOI SALVA CORRETAMENTE')
+
+                    except IntegrityError as e:
+                        print(f"Erro ao criar Portada: {e}")
+                        print('A NOVA FOTO DA CAPA NÃO FOI SALVA CORRETAMENTE')
+                        ERR = 'A NOVA FOTO DA CAPA NÃO FOI SALVA CORRETAMENTE'
+
+                    except FileNotFoundError as e:
+                        print(f"Erro ao criar Portada: {e}")
+                        print(
+                            'A NOVA FOTO DA CAPA NÃO FOI SALVA CORRETAMENTE, ARRCHIVO NÃO')
+                        ERR = 'A NOVA FOTO DA CAPA NÃO FOI SALVA CORRETAMENTE, ARRCHIVO NÃO'
+
+                    except Exception as e:
+                        print(f"Erro inesperado - Portada: {e}")
+                        ERR = 'A NOVA FOTO DA CAPA NÃO FOI SALVA CORRETAMENTE'
+                else:
+                    ERR = ERR_delete
+
+            if instancia_guardada.id_inmueble and 'imgs' in req.FILES and req.FILES['imgs']:
+
+                images = req.FILES.getlist('imgs')
+
+                for image in images:
+                    try:
+                        # Genera un nuevo nombre de archivo (por ejemplo, usando un UUID)
+                        new_filename = f"{uuid.uuid4().hex}{
+                            os.path.splitext(image.name)[1]}"
+
+                        # Asigna el nuevo nombre al archivo
+                        image.name = new_filename
+                        foto = Fotos.objects.create(
+                            image=image,
+                            inmueble_id=id_inmueble
+                        )
+
+                    except IntegrityError as e:
+                        print(f"Erro ao criar foto: {e}")
+                        print('Não foi possível salvar algumas das novas fotos')
+                        ERR = 'Não foi possível salvar algumas das novas fotos'
+
+                    except Exception as e:
+                        print(f"Erro inesperado: {e}")
+                        print('Não foi possível salvar algumas das novas fotos')
+                        ERR = 'Não foi possível salvar algumas das novas fotos'
+
+            if instancia_guardada.id_inmueble and 'video' in req.FILES and req.FILES['video']:
+
+                R = reemplazarVideo(id_inmueble)
+                ERR_delete = R['err']
+                if R['delete']:
+
+                    try:
+                        ruta_video = os.path.join(
+                            settings.MEDIA_ROOT, R['video'])
+                        if os.path.isfile(ruta_video):
+                            os.remove(ruta_video)
+
+                        videoName = req.FILES['video']
+                        # Genera un nuevo nombre de archivo (por ejemplo, usando un UUID)
+                        new_fileVideoname = f"{uuid.uuid4().hex}{
+                            os.path.splitext(videoName.name)[1]}"
+
+                        # Asigna el nuevo nombre al archivo
+                        videoName.name = new_fileVideoname
+                        video = Fotos.objects.create(
+                            image=videoName,
+                            inmueble_id=id_inmueble
+                        )
+
+                    except IntegrityError as e:
+                        print(f"Erro ao criar Video: {e}")
+                        ERR = 'O NOVO VÍDEO NÃO FOI SALVO CORRETAMENTE'
+
+                    except FileNotFoundError as e:
+                        print(f"Erro ao criar Video: {e}")
+                        print(
+                            'O NOVO VÍDEO NÃO FOI SALVO CORRETAMENTE, ARRCHIVO NÃO')
+                        ERR = 'O NOVO VÍDEO NÃO FOI SALVO CORRETAMENTE, ARRCHIVO NÃO'
+
+                    except Exception as e:
+                        print(f"Erro inesperado - Video: {e}")
+                        ERR = 'O NOVO VÍDEO NÃO FOI SALVO CORRETAMENTE'
 
             print('Inmueble Editado, OK')
             success = "Propriedade editada corretamente"
@@ -237,6 +337,7 @@ def editar_propiedad(req, id_inmueble=None):
             error_message = f"Erro ao salvar o imóvel: {str(e)}"
             ERR = error_message
             print(f"error: {error_message}")
+
     else:
         for field_name, error_msgs in inmueble_form.errors.items():
             for error_msg in error_msgs:
@@ -244,19 +345,22 @@ def editar_propiedad(req, id_inmueble=None):
                 print(f"Error en el campo '{field_name}': {error_msg}")
 
     if ERR != '':
+        print(ERR)
         context = {
-            'inmuebleClienteId': inmueble.cliente_id.id_cliente,
-            'editar': inmueble.id_inmueble,
+            'inmuebleClienteId': datos_inmueble['inmueble'].cliente_id.id_cliente,
+            'editar': datos_inmueble['inmueble'].id_inmueble,
             'inmueble': inmueble_form,
-            'clientes': lista,
+            'clientes': datos_inmueble['lista'],
+            'fotos': list_fotos,
             'error': ERR,
             'success': success
         }
     else:
         context = {
-            'editar': inmueble.id_inmueble,
-            'inedit': inmueble,
-            'clientes': lista,
+            'editar': datos_inmueble['inmueble'].id_inmueble,
+            'inedit': datos_inmueble['inmueble'],
+            'clientes': datos_inmueble['lista'],
+            'fotos': list_fotos,
             'error': ERR,
             'success': success
         }
@@ -272,8 +376,7 @@ def detalles_propiedad(req, id_inmueble):
 
         for d in un_detalle:
             print(d.latitud, d.longitud)
-            fotos = Fotos.objects.filter(
-                inmueble_id=d.id_inmueble).values('image', 'inmueble_id')
+            fotos = get_fotos_porinmueble(id_inmueble)
 
         list_fotos = []
         portada_foto = ''
