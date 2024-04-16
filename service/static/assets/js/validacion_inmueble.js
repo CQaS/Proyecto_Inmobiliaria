@@ -184,10 +184,10 @@ if (send) {
             console.log(video.files)
             console.log(video.files.length)
 
-            if (!video.type.startsWith('video/')) {
-                _alerta('Por favor, selecione um arquivo de vídeo.')
-                return
-            }
+            // if (!video.type.startsWith('video/')) {
+            //     _alerta('Por favor, selecione um arquivo de vídeo.')
+            //     return
+            // }
 
             let maxSizeInBytes = 100 * 1024 * 1024 // 100 MB (exemplo)
             if (video.size > maxSizeInBytes) {

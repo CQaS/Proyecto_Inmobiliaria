@@ -12,7 +12,7 @@ pattern_Direccion = r'^[a-zA-ZñÑáÁéÉíÍúÚóÓ.0-9/ -]*$'
 pattern_Datos_envio = r'^[A-Z0-9][a-zA-ZñÑáÁéÉíÍúÚóÓ0-9,.:;\ -]*$'
 pattern_soloNumeros = r'^[0-9][0-9]*$'
 pattern_cod_ = r'^[a-zA-Z0-9-]*$'
-pattern_soloLetras = r'^[A-Z][a-zñÑáÁéÉíÍúÚóÓA-Z- ]*$'
+pattern_soloLetras = r'^[A-Z][a-zA-ZñÑáÁéÉíÍúÚóÓA-Z- ]*$'
 
 
 def validar_nombre(value):
@@ -112,7 +112,7 @@ class Inmueble(models.Model):
     clave_wifi = models.CharField(max_length=50, null=False, blank=False,
                                   verbose_name='Clave Wi-Fi')
     tipo_servicio = models.CharField(max_length=45, null=True, blank=True,
-                                     default='SD', verbose_name='Tipo de Servicio', validators=[validar_letras])
+                                     default='SD', verbose_name='Tipo de Servicio')
     cliente_id = models.ForeignKey('Clientes',
                                    verbose_name='cliente_id', on_delete=models.CASCADE, unique=False, db_column='cliente_id')
     valor_inmueble = models.IntegerField(
