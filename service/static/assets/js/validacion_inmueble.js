@@ -281,7 +281,6 @@ if (send) {
     })
 }
 
-
 /* formulario tri-partido */
 
 const parte_1 = document.querySelector('.parte_1')
@@ -295,6 +294,29 @@ const form_3 = document.querySelector('.form_3')
 const btn_volver_1 = document.querySelector('.btn_volver_1')
 const btn_volver_2 = document.querySelector('.btn_volver_2')
 const btn_siguiente = document.querySelector('.btn_siguiente')
+const btn_foto = document.querySelector('.btn_foto')
+const btn_video = document.querySelector('.btn_video')
+
+document.getElementById("btn_foto").addEventListener("click", function() {
+    mostrarElemento("carrusel");
+    ocultarElemento("video");
+});
+
+document.getElementById("btn_video").addEventListener("click", function() {
+    mostrarElemento("video");
+    ocultarElemento("carrusel");
+});
+
+function mostrarElemento(id) {
+    var elemento = document.getElementById(id);
+    elemento.style.display = "block";
+}
+
+function ocultarElemento(id) {
+    var elemento = document.getElementById(id);
+    elemento.style.display = "none";
+}
+
 
 if (btn_siguiente) {
     btn_siguiente.addEventListener("click", function (event) {
