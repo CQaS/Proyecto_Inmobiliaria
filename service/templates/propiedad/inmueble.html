@@ -41,14 +41,16 @@
         <button class="btn_foto" id="btn_foto">
           Fotos
         </button>
-        <button class="btn_video" id="btn_video">
-          Video
-        </button>
+        {%if video %}
+            <button class="btn_video" id="btn_video">
+            Video
+            </button>
+        {% endif %}
     </div>
      
-    <div class="carrusel">
+    <div class="carrusel" >
         
-        <div class="containerCarrusel">
+        <div class="containerCarrusel" id="carrusel">
             <div id="slide">
                 {% for p in fotos %}
                 <div class="itemCarrusel" style="background-image: url({{ p }});">
@@ -59,15 +61,25 @@
             </div>
             <div class="buttons">
                 <button id="next"><i class="fa-solid fa-angle-right"></i></button>
+              
             </div>
+        </div>
+        <div class="video-container" id="video" style="display: none;">
+            <video controls height="400px" width="700px"> 
+                <source src="{{video}}" type="video/mp4">
+                Tu navegador no soporta el elemento de video.
+            </video>
+           
         </div>
     </div>
 
-
+    
     <div class="info-basica">
         <div class="titulo-box-d">
             <h3 class="titulo-d">INFORMAÇÃO BASICA</h3>
+            
         </div>
+
         <!-- va una table 2 columnas x 4 filas -->
         <div class="d-flex justify-content-between">
             <label>Cidade:</label>

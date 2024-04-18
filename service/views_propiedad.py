@@ -398,7 +398,7 @@ def detalles_propiedad(req, id_inmueble):
                 video = foto['image']
         print(list_fotos)
         print(portada_foto)
-        print(video)
+        # print(video)
 
         context = {
             'detalle': un_detalle,

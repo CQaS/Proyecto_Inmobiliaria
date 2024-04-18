@@ -59,6 +59,8 @@ function loadGoogleTranslate() {
 
 const btn_foto = document.getElementById('btn_foto')
 const btn_video = document.getElementById('btn_video')
+const carrusel = document.getElementById('carrusel')
+const video = document.getElementById('video');
 
 btn_foto.addEventListener("click", () => {
   console.log('btn_foto')
