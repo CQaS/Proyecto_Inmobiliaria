@@ -266,6 +266,7 @@ def editar_propiedad(req, id_inmueble=None):
                     ERR = ERR_delete
 
             if instancia_guardada.id_inmueble and 'imgs' in req.FILES and req.FILES['imgs']:
+                print('REEMPLAZO DE FOTOS')
 
                 images = req.FILES.getlist('imgs')
 
@@ -293,6 +294,7 @@ def editar_propiedad(req, id_inmueble=None):
                         ERR = 'Não foi possível salvar algumas das novas fotos'
 
             if instancia_guardada.id_inmueble and 'video' in req.FILES and req.FILES['video']:
+                print('REEMPLAZO DE VIDEO')
 
                 R = reemplazarVideo(id_inmueble)
                 ERR_delete = R['err']
@@ -300,7 +302,7 @@ def editar_propiedad(req, id_inmueble=None):
 
                     try:
                         ruta_video = os.path.join(
-                            settings.MEDIA_ROOT, R['video'])
+                            settings.MEDIA_ROOT, R['video'][0])
                         if os.path.isfile(ruta_video):
                             os.remove(ruta_video)
 
@@ -330,8 +332,9 @@ def editar_propiedad(req, id_inmueble=None):
                         print(f"Erro inesperado - Video: {e}")
                         ERR = 'O NOVO VÍDEO NÃO FOI SALVO CORRETAMENTE'
 
-            print('Inmueble Editado, OK')
-            success = "Propriedade editada corretamente"
+            if ERR == '':
+                print('Inmueble Editado, OK')
+                success = "Propriedade editada corretamente"
 
         except Exception as e:
             error_message = f"Erro ao salvar o imóvel: {str(e)}"
