@@ -12,7 +12,7 @@ const c_fecha = document.getElementById('fechnac')
 const c_categoria = document.getElementById('categoria')
 
 const pattern_letras_espacios_ = /^[a-zA-ZñÑáÁéÉíÍúÚóÓ ]*$/
-const pattern_letras_numero_espacios_ = /^[a-zA-ZñÑáÁéÉíÍúÚóÓ0-9.- ]*$/
+const pattern_letras_numero_espacios_ = /^[a-zA-ZñÑáÁéÉíÍúÚóÓ0-9.\-\s]*$/
 const pattern_solo_numeros_ = /^[0-9][0-9]*$/
 const pattern_mail_ = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
 
@@ -47,12 +47,14 @@ crear_cliente.addEventListener("click", (e) => {
 
     if (!c_dni.value && !c_rg_cliente.value) {
         _alerta('Você deve inserir pelo menos o número DNI ou o número RG!')
+        return
 
     } else {
         console.log(c_dni.value)
+        console.log(c_rg_cliente.value)
 
         if (c_dni.value) {
-            if (letras_numero_espacios(c_dni) == null || c_dni.value.length < 5) {
+            if (solo_numeros(c_dni) == null || c_dni.value.length < 5) {
                 _alerta('DNI de cliente inválido!')
                 return
             }

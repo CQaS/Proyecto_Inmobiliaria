@@ -39,14 +39,41 @@ def crear_cliente(req):
     ERR = ''
     success = ''
 
-    clientes = ClienteForm(req.POST or None, req.FILES or None)
-    if clientes.is_valid():
-        try:
-            # Validar si el DNI o el correo electrónico ya existen en la base de datos
+    try:
+        for nombre_variable, valor_variable in req.POST.items():
+            tipo_variable = type(valor_variable)
+            print(f"Variable '{nombre_variable}': {
+                valor_variable} (Tipo: {tipo_variable})")
 
-            if req.POST['dni_cliente'] != '0':
-                if Clientes.objects.filter(dni_cliente=req.POST['dni_cliente']).exists():
-                    ERR = 'O DNI já está cadastrado no banco de dados.'
+        clientes = ClienteForm(req.POST or None, req.FILES or None)
+        if clientes.is_valid():
+            print('cliente valido')
+
+            try:
+                # Validar si el DNI o el correo electrónico ya existen en la base de datos
+
+                if req.POST['dni_cliente'] != '0':
+                    if Clientes.objects.filter(dni_cliente=req.POST['dni_cliente']).exists():
+                        ERR = 'O DNI já está cadastrado no banco de dados.'
+                        contexto = {
+                            'clientes': clientes,
+                            'error': ERR,
+                            'success': success
+                        }
+                        return render(req, 'cliente/cliente_form.html', contexto)
+
+                if req.POST['rg_cliente'] != '0':
+                    if Clientes.objects.filter(rg_cliente=req.POST['rg_cliente']).exists():
+                        ERR = 'O RG já está cadastrado no banco de dados.'
+                        contexto = {
+                            'clientes': clientes,
+                            'error': ERR,
+                            'success': success
+                        }
+                        return render(req, 'cliente/cliente_form.html', contexto)
+
+                if Clientes.objects.filter(email_cliente=req.POST['email_cliente']).exists():
+                    ERR = 'O E-mail já está cadastrado no banco de dados.'
                     contexto = {
                         'clientes': clientes,
                         'error': ERR,
@@ -54,18 +81,20 @@ def crear_cliente(req):
                     }
                     return render(req, 'cliente/cliente_form.html', contexto)
 
-            if req.POST['rg_cliente'] != '0':
-                if Clientes.objects.filter(rg_cliente=req.POST['rg_cliente']).exists():
-                    ERR = 'O RG já está cadastrado no banco de dados.'
-                    contexto = {
-                        'clientes': clientes,
-                        'error': ERR,
-                        'success': success
-                    }
-                    return render(req, 'cliente/cliente_form.html', contexto)
+                C = clientes.save()
+                print(f'Cliente id: {C.id_cliente}')
+                print('Cliente, OK')
+                success = "Cliente criado com sucesso"
+                contexto = {
+                    'error': ERR,
+                    'success': success
+                }
+                return render(req, 'cliente/cliente_form.html', contexto)
 
-            if Clientes.objects.filter(email_cliente=req.POST['email_cliente']).exists():
-                ERR = 'O E-mail já está cadastrado no banco de dados.'
+            except Exception as e:
+                error_message = f"Erro ao salvar o cliente: {str(e)}"
+                ERR = error_message
+                print(f"error: {error_message}")
                 contexto = {
                     'clientes': clientes,
                     'error': ERR,
@@ -73,41 +102,33 @@ def crear_cliente(req):
                 }
                 return render(req, 'cliente/cliente_form.html', contexto)
 
-            C = clientes.save()
-            print(f'Cliente id: {C.id_cliente}')
-            print('Cliente, OK')
-            success = "Cliente criado com sucesso"
-            contexto = {
-                'error': ERR,
-                'success': success
-            }
-            return render(req, 'cliente/cliente_form.html', contexto)
+            except Clientes.DoesNotExist:
+                print("NO ENCONTRADO")
+                return redirect('404')
 
-        except Exception as e:
-            error_message = f"Error al guardar el Cliente: {str(e)}"
-            ERR = error_message
-            print(f"error: {error_message}")
-            contexto = {
-                'clientes': clientes,
-                'error': ERR,
-                'success': success
-            }
-            return render(req, 'cliente/cliente_form.html', contexto)
+            except IntegrityError as e:
+                ERR = 'Algo fallo, intenta nuevamente o ponte en contacto con Admin'
+                print("Error:", e)
 
-        except Clientes.DoesNotExist:
-            print("NO ENCONTRADO")
-            return redirect('404')
+        else:
+            print(clientes.errors)
+            for field_name, error_msgs in clientes.errors.items():
+                for error_msg in error_msgs:
+                    ERR = 'Algun campo contiene Errores'
+                    print(f"Error en el campo '{field_name}': {error_msg}")
 
-        except IntegrityError as e:
-            ERR = 'Algo fallo, intenta nuevamente o ponte en contacto con Admin'
-            print("Error:", e)
+    except Exception as e:
+        error_message = f"Erro ao salvar o cliente: {str(e)}"
+        error_ = f"Erro ao salvar o cliente"
+        ERR = error_
+        print(f"error: {error_message}")
 
-    else:
-        print(clientes.errors)
-        for field_name, error_msgs in clientes.errors.items():
-            for error_msg in error_msgs:
-                ERR = 'Algun campo contiene Errores'
-                print(f"Error en el campo '{field_name}': {error_msg}")
+        contexto = {
+            'clientes': clientes,
+            'error': ERR,
+            'success': success
+        }
+        return render(req, 'cliente/cliente_form.html', contexto)
 
     contexto = {
         'error': ERR,
@@ -180,7 +201,7 @@ def editar_cliente(req, id_cliente=None):
             return render(req, 'cliente/cliente_form.html', context)
 
         except Exception as e:
-            error_message = f"Error al guardar el Cliente: {str(e)}"
+            error_message = f"Erro ao salvar o cliente: {str(e)}"
             ERR = error_message
             print(f"error: {error_message}")
 

@@ -62,17 +62,21 @@ const btn_video = document.getElementById('btn_video')
 const carrusel = document.getElementById('carrusel')
 const video = document.getElementById('video');
 
-btn_foto.addEventListener("click", () => {
-  console.log('btn_foto')
-  mostrarElemento("carrusel");
-  ocultarElemento("video");
-});
+if (btn_foto) {
+  btn_foto.addEventListener("click", () => {
+    console.log('btn_foto')
+    mostrarElemento("carrusel");
+    ocultarElemento("video");
+  });
+}
 
-btn_video.addEventListener("click", () => {
-  console.log('btn_video')
-  mostrarElemento("video");
-  ocultarElemento("carrusel");
-});
+if (btn_video) {
+  btn_video.addEventListener("click", () => {
+    console.log('btn_video')
+    mostrarElemento("video");
+    ocultarElemento("carrusel");
+  });
+}
 
 const mostrarElemento = (id) => {
   let elemento = document.getElementById(id);

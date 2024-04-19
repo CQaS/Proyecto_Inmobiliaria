@@ -99,7 +99,7 @@
 
             <div>
               <label for="rg_cliente" class="formbold-form-label"> RG / RNM</label>
-              <input type="number" name="rg_cliente" id="rg_cliente" class="formbold-form-input" {% if cliedit %}
+              <input type="text" name="rg_cliente" id="rg_cliente" class="formbold-form-input" {% if cliedit %}
                 value="{{ cliedit.rg_cliente }}" {% else %} value="{{ clientes.rg_cliente.value }}" {% endif %} />
             </div>
           </div>
@@ -142,9 +142,11 @@
               <label class="formbold-form-label">Categoría Cliente</label>
               <select id="categoria" name="categoria" class="formbold-form-input" style="margin-top: 0;" required>
                 <option value="Selecciona">Selecciona</option>
-                <option value="Propietario" {% if cliedit.categoria == "Propietario" %} selected {% endif %}>Propietario
+                <option value="Propietario" {% if cliedit.categoria == "Propietario" %} selected
+                  {% elif clientes.categoria.value == "Propietario"%} selected {% endif %}>Propietario
                 </option>
-                <option value="Locatario" {% if cliedit.categoria == "Locatario" %} selected {% endif %}>Locatario
+                <option value="Locatario" {% if cliedit.categoria == "Locatario" %} selected
+                  {% elif clientes.categoria.value == "Locatario"%} selected {% endif %}>Locatario
                 </option>
               </select>
             </div>
