@@ -1,0 +1,73 @@
+{% extends 'layouts/base00.html' %} {% load static %} {% block content %}
+
+<style>
+        .container_img {
+            width: 50%;
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 8%;
+            margin: 0 auto;
+        }
+    
+        h4 {
+            text-align: center;
+            font-size: 35px;
+            margin-top: 20px;
+            text-transform: uppercase;
+        }
+
+        .gallery {
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            grid-gap: 10px;
+            justify-content: center;
+        }
+    
+        .gallery img {
+            width: 100%;
+            height: auto;
+            position: relative;
+        }
+
+        .fa-trash {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        } 
+
+</style>
+
+
+
+
+<script>
+    const btnDelete = (foto) => {
+        if window.confirm('Você tem certeza que quer deletar?') {
+            window.location.href = "/deleteFoto/" + foto;
+        }        
+    }
+</script>
+
+
+<h4>Fotos para excluir</h4>
+
+<div class="container_img">
+    <div class="gallery">
+        {% for f in fotos %}
+            
+            <div>
+                <img src="{{ f }}" alt="">
+                <i id="btnDelete" class="fa-solid fa-trash"></i>
+            </div>
+
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+{% endblock %}
