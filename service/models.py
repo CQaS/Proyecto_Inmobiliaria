@@ -269,6 +269,32 @@ def buscarProp_ID(id_inmueble):
         print("Error:", e)
         return {'ERR': ERR}
 
+    finally:
+        connection.close()
+
+
+def insertar_cliente(datos_cliente):
+
+    try:
+        query = "INSERT INTO Clientes (nom_cliente, dni_cliente, rg_cliente, dir_cliente, tel_cliente, email_cliente, ciudad_cliente, pais_cliente, fechnac, categoria) VALUES (%(nom_cliente)s, %(dni_cliente)s, %(rg_cliente)s, %(dir_cliente)s, %(tel_cliente)s, %(email_cliente)s, %(ciudad_cliente)s, %(pais_cliente)s, %(fechnac)s, %(categoria)s)"
+
+        with connection.cursor() as cursor:
+            cursor.execute(query, datos_cliente)
+
+        connection.commit()
+
+        print("¡Cliente criado com sucesso!")
+        return True
+
+    except Exception as e:
+
+        print('Algo deu errado, tente novamente ou entre em contato com o administrador')
+        print("Error:", e)
+        return False
+
+    finally:
+        connection.close()
+
 
 def liquidacion(id_p):
     query = """
@@ -289,6 +315,9 @@ def liquidacion(id_p):
         ERR = 'Algo deu errado, tente novamente ou entre em contato com o administrador'
         print("Error:", e)
         return {'ERR': ERR}
+
+    finally:
+        connection.close()
 
 
 def reciboCliente(id_cliente):
@@ -315,6 +344,9 @@ def reciboCliente(id_cliente):
         print("Error:", e)
         return {'ERR': ERR}
 
+    finally:
+        connection.close()
+
 
 def calendarCodRef(id_codRef):
     print(id_codRef)
@@ -336,6 +368,9 @@ def calendarCodRef(id_codRef):
         ERR = 'Algo deu errado, tente novamente ou entre em contato com o administrador'
         print("Error:", e)
         return {'ERR': ERR}
+
+    finally:
+        connection.close()
 
 
 def reemplazarFotoPortada(idInmueble):
@@ -361,6 +396,9 @@ def reemplazarFotoPortada(idInmueble):
         ERR = 'Algo deu errado, tente novamente ou entre em contato com o administrador'
         print("Error:", e)
         delete = False
+
+    finally:
+        connection.close()
 
     return {'delete': delete, 'err': ERR, 'img': img[0]}
 
@@ -388,6 +426,9 @@ def reemplazarVideo(idInmueble):
         ERR = 'Algo deu errado, tente novamente ou entre em contato com o administrador'
         print("Error:", e)
         delete = False
+
+    finally:
+        connection.close()
 
     return {'delete': delete, 'err': ERR, 'video': video}
 
@@ -419,6 +460,9 @@ def Buscar_inmueble(id_inmueble):
         print("Error:", e)
         print('Algo deu errado, tente novamente ou entre em contato com o administrador')
         return redirect('404')
+
+    finally:
+        connection.close()
 
     return {'inmueble': inmueble, 'lista': lista}
 

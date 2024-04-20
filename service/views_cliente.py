@@ -1,5 +1,6 @@
 import json
-from datetime import date
+import re
+from datetime import datetime
 from django.shortcuts import render, redirect
 from django.core.serializers import serialize
 from django.http import HttpResponse, JsonResponse
@@ -39,22 +40,154 @@ def crear_cliente(req):
     ERR = ''
     success = ''
 
-    try:
-        for nombre_variable, valor_variable in req.POST.items():
-            tipo_variable = type(valor_variable)
-            print(f"Variable '{nombre_variable}': {
-                valor_variable} (Tipo: {tipo_variable})")
+    if req.method == 'POST':
+        try:
+            for nombre_variable, valor_variable in req.POST.items():
+                tipo_variable = type(valor_variable)
+                print(f"Variable '{nombre_variable}': {
+                    valor_variable} (Tipo: {tipo_variable})")
 
-        clientes = ClienteForm(req.POST or None, req.FILES or None)
-        if clientes.is_valid():
-            print('cliente valido')
+            clientes = ClienteForm(req.POST or None, req.FILES or None)
 
-            try:
-                # Validar si el DNI o el correo electrónico ya existen en la base de datos
+            """ 
+                
+                VALIDAR CAMPOS MANUALMETE 
+                                            
+                                            """
 
-                if req.POST['dni_cliente'] != '0':
-                    if Clientes.objects.filter(dni_cliente=req.POST['dni_cliente']).exists():
-                        ERR = 'O DNI já está cadastrado no banco de dados.'
+            def validar_nombre(nombre):
+                patron = r'^[a-zA-Z\s]+$'
+                return bool(re.match(patron, nombre))
+
+            def validar_direccion(direccion):
+                patron = r'^[a-zA-Z0-9\s]+$'
+                return bool(re.match(patron, direccion))
+
+            def validar_numeros(campo):
+                patron = r'^\d+$'
+                return bool(re.match(patron, campo))
+
+            def validar_rg(rg):
+                patron = r'^[a-zA-Z0-9-]+$'
+                return bool(re.match(patron, rg))
+
+            def validar_email(email):
+                patron = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+                return bool(re.match(patron, email))
+
+            def es_mayor_de_edad(fecha_nacimiento, edad_minima=18):
+                fecha_nacimiento = datetime.strptime(
+                    fecha_nacimiento, '%Y-%m-%d')
+                fecha_actual = datetime.now().date()
+
+                diferencia_anios = fecha_actual.year - fecha_nacimiento.year
+
+                if (fecha_actual.month, fecha_actual.day) < (fecha_nacimiento.month, fecha_nacimiento.day):
+                    diferencia_anios -= 1
+                return diferencia_anios >= edad_minima
+
+            campos_validos = True
+
+            # Validar nombre
+            if 'nom_cliente' in req.POST and campos_validos:
+                nombre = req.POST['nom_cliente']
+                if not validar_nombre(nombre):
+                    campos_validos = False
+                    print('Nome do cliente invalido')
+                    ERR_validador = 'Nome do cliente invalido'
+
+            # Validar dirección
+            if 'dir_cliente' in req.POST and campos_validos:
+                direccion = req.POST['dir_cliente']
+                if not validar_direccion(direccion):
+                    campos_validos = False
+                    print('Endereço do cliente invalida')
+                    ERR_validador = 'Endereço do cliente invalida'
+
+            # Validar ciudad
+            if 'ciudad_cliente' in req.POST and campos_validos:
+                ciudad = req.POST['ciudad_cliente']
+                if not validar_direccion(ciudad):
+                    campos_validos = False
+                    print('Cidade do cliente invalido')
+                    ERR_validador = 'Cidade do cliente invalido'
+
+            # Validar pais
+            if 'pais_cliente' in req.POST and campos_validos:
+                pais = req.POST['pais_cliente']
+                if not validar_direccion(pais):
+                    campos_validos = False
+                    print('Pais do cliente invalido')
+                    ERR_validador = 'Pais do cliente invalido'
+
+            # Validar DNI
+            if 'dni_cliente' in req.POST and campos_validos:
+                dni = req.POST['dni_cliente']
+                if not validar_numeros(dni):
+                    campos_validos = False
+                    print('Dni do cliente invalido')
+                    ERR_validador = 'Dni do cliente invalido'
+
+            # Validar RG
+            if 'rg_cliente' in req.POST and campos_validos:
+                rg = req.POST['rg_cliente']
+                if not validar_rg(rg):
+                    campos_validos = False
+                    print('RG do cliente invalido')
+                    ERR_validador = 'RG do cliente invalido'
+
+            # Validar teléfono
+            if 'tel_cliente' in req.POST and campos_validos:
+                telefono = req.POST['tel_cliente']
+                if not validar_numeros(telefono):
+                    campos_validos = False
+                    print('Telefone do clinete invalido')
+                    ERR_validador = 'Telefone do clinete invalido'
+
+            # Validar correo electrónico
+            if 'email_cliente' in req.POST and campos_validos:
+                email = req.POST['email_cliente']
+                if not validar_email(email):
+                    campos_validos = False
+                    print('E-mail do clinete invalido')
+                    ERR_validador = 'E-mail do clinete invalido'
+
+            # Validar fecha de nacimiento
+            if 'fechnac' in req.POST and campos_validos:
+                fecha_nacimiento = req.POST['fechnac']
+                if not es_mayor_de_edad(fecha_nacimiento):
+                    campos_validos = False
+                    print('A data de nascimento do cliente não é maior de idade')
+                    ERR_validador = 'A data de nascimento do cliente não é maior de idade'
+
+            if campos_validos:
+                print('cliente valido')
+
+                try:
+                    # Validar si el DNI, RG o el correo electrónico ya existen en la base de datos
+
+                    if req.POST['dni_cliente'] != '0':
+                        if Clientes.objects.filter(dni_cliente=req.POST['dni_cliente']).exists():
+                            ERR = 'O DNI já está cadastrado no banco de dados.'
+                            contexto = {
+                                'clientes': clientes,
+                                'error': ERR,
+                                'success': success
+                            }
+                            return render(req, 'cliente/cliente_form.html', contexto)
+
+                    if req.POST['rg_cliente'] != '0':
+                        if Clientes.objects.filter(rg_cliente=req.POST['rg_cliente']).exists():
+                            ERR = 'O RG já está cadastrado no banco de dados.'
+                            contexto = {
+                                'clientes': clientes,
+                                'error': ERR,
+                                'success': success
+                            }
+                            return render(req, 'cliente/cliente_form.html', contexto)
+
+                    if Clientes.objects.filter(email_cliente=req.POST['email_cliente']).exists():
+                        ERR = 'O E-mail já está cadastrado no banco de dados.'
                         contexto = {
                             'clientes': clientes,
                             'error': ERR,
@@ -62,9 +195,29 @@ def crear_cliente(req):
                         }
                         return render(req, 'cliente/cliente_form.html', contexto)
 
-                if req.POST['rg_cliente'] != '0':
-                    if Clientes.objects.filter(rg_cliente=req.POST['rg_cliente']).exists():
-                        ERR = 'O RG já está cadastrado no banco de dados.'
+                    datos_cliente = {
+                        'nom_cliente': nombre,
+                        'dni_cliente': dni,
+                        'rg_cliente': rg,
+                        'dir_cliente': direccion,
+                        'tel_cliente': telefono,
+                        'email_cliente': email,
+                        'ciudad_cliente': ciudad,
+                        'pais_cliente': pais,
+                        'fechnac': fecha_nacimiento,
+                        'categoria': req.POST['categoria']
+                    }
+
+                    if insertar_cliente(datos_cliente):
+                        print('Cliente, OK')
+                        success = "Cliente criado com sucesso"
+                        contexto = {
+                            'error': ERR,
+                            'success': success
+                        }
+                        return render(req, 'cliente/cliente_form.html', contexto)
+                    else:
+                        ERR = 'Erro ao salvar o cliente!'
                         contexto = {
                             'clientes': clientes,
                             'error': ERR,
@@ -72,8 +225,10 @@ def crear_cliente(req):
                         }
                         return render(req, 'cliente/cliente_form.html', contexto)
 
-                if Clientes.objects.filter(email_cliente=req.POST['email_cliente']).exists():
-                    ERR = 'O E-mail já está cadastrado no banco de dados.'
+                except Exception as e:
+                    error_message = f"Erro ao salvar o cliente: {str(e)}"
+                    ERR = error_message
+                    print(f"error: {error_message}")
                     contexto = {
                         'clientes': clientes,
                         'error': ERR,
@@ -81,20 +236,18 @@ def crear_cliente(req):
                     }
                     return render(req, 'cliente/cliente_form.html', contexto)
 
-                C = clientes.save()
-                print(f'Cliente id: {C.id_cliente}')
-                print('Cliente, OK')
-                success = "Cliente criado com sucesso"
-                contexto = {
-                    'error': ERR,
-                    'success': success
-                }
-                return render(req, 'cliente/cliente_form.html', contexto)
+                except Clientes.DoesNotExist:
+                    print("NO ENCONTRADO")
+                    return redirect('404')
 
-            except Exception as e:
-                error_message = f"Erro ao salvar o cliente: {str(e)}"
+                except IntegrityError as e:
+                    ERR = 'Algo fallo, intenta nuevamente o ponte en contacto con Admin'
+                    print("Error:", e)
+
+            else:
+                error_message = f"Erro ao salvar o cliente: {ERR_validador}!"
                 ERR = error_message
-                print(f"error: {error_message}")
+                print(f"ERROR: {error_message}")
                 contexto = {
                     'clientes': clientes,
                     'error': ERR,
@@ -102,33 +255,18 @@ def crear_cliente(req):
                 }
                 return render(req, 'cliente/cliente_form.html', contexto)
 
-            except Clientes.DoesNotExist:
-                print("NO ENCONTRADO")
-                return redirect('404')
+        except Exception as e:
+            error_message = f"Erro ao salvar o cliente: {str(e)}"
+            print(f"ERROR: {error_message}")
+            error_ = f"Erro ao salvar o cliente"
+            ERR = error_
 
-            except IntegrityError as e:
-                ERR = 'Algo fallo, intenta nuevamente o ponte en contacto con Admin'
-                print("Error:", e)
-
-        else:
-            print(clientes.errors)
-            for field_name, error_msgs in clientes.errors.items():
-                for error_msg in error_msgs:
-                    ERR = 'Algun campo contiene Errores'
-                    print(f"Error en el campo '{field_name}': {error_msg}")
-
-    except Exception as e:
-        error_message = f"Erro ao salvar o cliente: {str(e)}"
-        error_ = f"Erro ao salvar o cliente"
-        ERR = error_
-        print(f"error: {error_message}")
-
-        contexto = {
-            'clientes': clientes,
-            'error': ERR,
-            'success': success
-        }
-        return render(req, 'cliente/cliente_form.html', contexto)
+            contexto = {
+                'clientes': clientes,
+                'error': ERR,
+                'success': success
+            }
+            return render(req, 'cliente/cliente_form.html', contexto)
 
     contexto = {
         'error': ERR,
