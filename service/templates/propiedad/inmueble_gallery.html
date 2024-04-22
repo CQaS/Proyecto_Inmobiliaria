@@ -58,13 +58,27 @@
 
 <script>
     function confirmarEliminar(element) {
-        if (confirm('¿Tem certeza de que deseja excluir esta foto?')) {
-            
-            alert('A foto foi excluída');
-        } else {
-            alert('Eliminação cancelada');
+        Swal.fire({
+            title: '¿Tem certeza?',
+            text: "Você não será capaz de reverter isso",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sim, remova-o',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Si el usuario confirma, eliminamos la foto
+                button.previousElementSibling.remove(); // Elimina la imagen anterior al botón
+                button.remove(); // Elimina el botón
+                Swal.fire(
+                'Removido!',
+                'Sua foto foi excluída.',
+                'success'
+                );
         }
-    }
+    });
 </script>
 
 
