@@ -41,17 +41,6 @@
 </style>
 
 
-
-
-<script>
-    const btnDelete = (foto) => {
-        if window.confirm('Você tem certeza que quer deletar?') {
-            window.location.href = "/deleteFoto/" + foto;
-        }        
-    }
-</script>
-
-
 <h4>Fotos para excluir</h4>
 
 <div class="container_img">
@@ -60,13 +49,23 @@
             
             <div>
                 <img src="{{ f }}" alt="">
-                <i id="btnDelete" class="fa-solid fa-trash"></i>
+                <i id="btnDelete" class="fa-solid fa-trash"onclick="confirmarEliminar(this)"></i>
             </div>
 
         {% endfor %}
     </div>
 </div>
 
+<script>
+    function confirmarEliminar(element) {
+        if (confirm('¿Tem certeza de que deseja excluir esta foto?')) {
+            
+            alert('A foto foi excluída');
+        } else {
+            alert('Eliminação cancelada');
+        }
+    }
+</script>
 
 
 
