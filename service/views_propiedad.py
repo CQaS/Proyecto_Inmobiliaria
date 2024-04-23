@@ -193,14 +193,6 @@ def editar_propiedad(req, id_inmueble=None):
     success = ''
 
     datos_inmueble = Buscar_inmueble(id_inmueble)
-    fotos = get_fotos_porinmueble(id_inmueble)
-
-    list_fotos = []
-    for foto in fotos:
-        if 'PORTADA' not in foto['image'] and not foto['image'].lower().endswith(('.mp4', '.avi', '.mov', '.mkv')):
-            print(foto['image'])
-            foto['image'] = foto['image'].replace('webapp', '')
-            list_fotos.append(foto['image'])
 
     inmueble_form = InmuebleForm(
         req.POST or None, req.FILES or None, instance=datos_inmueble['inmueble'])
@@ -354,7 +346,6 @@ def editar_propiedad(req, id_inmueble=None):
             'editar': datos_inmueble['inmueble'].id_inmueble,
             'inmueble': inmueble_form,
             'clientes': datos_inmueble['lista'],
-            'fotos': list_fotos,
             'error': ERR,
             'success': success
         }
@@ -363,12 +354,66 @@ def editar_propiedad(req, id_inmueble=None):
             'editar': datos_inmueble['inmueble'].id_inmueble,
             'inedit': datos_inmueble['inmueble'],
             'clientes': datos_inmueble['lista'],
-            'fotos': list_fotos,
             'error': ERR,
             'success': success
         }
 
     return render(req, 'propiedad/inmueble_form.html', context)
+
+
+def fotosporinmueble(req, id_inmueble):
+    data_fotos = get_fotos_porinmueble(id_inmueble)
+    fotos = data_fotos['fotos_mapeados']
+
+    list_fotos_conId = []
+    for foto in fotos:
+        if 'PORTADA' not in foto['image'] and not foto['image'].lower().endswith(('.mp4', '.avi', '.mov', '.mkv')):
+            foto['image'] = foto['image'].replace('webapp', '')
+            list_fotos_conId.append([foto['id_foto'], foto['image']])
+
+    print(list_fotos_conId)
+
+    context = {
+        'fotos': list_fotos_conId,
+    }
+
+    return render(req, 'propiedad/inmueble_gallery.html', context)
+
+
+def eliminarfotosporinmueble(req, id_foto):
+    R = eliminarUnaFoto(id_foto)
+    if R['delete']:
+        try:
+            ruta_foto = os.path.join(settings.MEDIA_ROOT, R['img'][0])
+            if os.path.isfile(ruta_foto):
+                os.remove(ruta_foto)
+            print('Foto excluída com sucesso do banco de dados')
+            data = {'foto_eliminada': True}
+
+        except IntegrityError as e:
+            print(f"Erro ao criar Portada: {e}")
+            print('Foto não excluída corretamente do banco de dados')
+            data = {'foto_eliminada': False}
+
+        except FileNotFoundError as e:
+            print(
+                f"Erro: Foto não excluída corretamente do banco de dados: {e}")
+            print(
+                'Foto não excluída corretamente do banco de dados')
+
+            data = {'foto_eliminada': False}
+
+        except Exception as e:
+            print(
+                f"Erro: Foto não excluída corretamente do banco de dados: {e}")
+            data = {'foto_eliminada': False}
+    else:
+        print(
+            'Foto não excluída corretamente do banco de dados')
+        print(R['err'])
+        data = {'foto_eliminada': False}
+
+    return JsonResponse(data)
 
 
 def detalles_propiedad(req, id_inmueble):
@@ -379,7 +424,9 @@ def detalles_propiedad(req, id_inmueble):
 
         for d in un_detalle:
             print(d.latitud, d.longitud)
-            fotos = get_fotos_porinmueble(id_inmueble)
+
+        data_fotos = get_fotos_porinmueble(id_inmueble)
+        fotos = data_fotos['fotos_mapeados']
 
         list_fotos = []
         portada_foto = ''

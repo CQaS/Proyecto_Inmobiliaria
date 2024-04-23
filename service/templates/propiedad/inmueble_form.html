@@ -394,8 +394,12 @@
             <input type="file" id="imgportada" name="imgportada">
           </div>
           <div class="formbold-input-flex">
-            <label class="">Renovar fotos parciais ou totais</label>
+            <label class="">Carregar novas fotos</label>
             <input type="file" id="imgs" name="imgs" multiple>
+          </div>
+          <div class="formbold-input-flex">
+            <a href="{% url 'fotos_por_inmueble' editar %}" class="formbold-confirm-btn"
+            style="text-transform: capitalize">Veja os existentes para renovação</a>
           </div>
           <div class="formbold-input-flex">
             <label class="">Renovar video</label>
@@ -418,7 +422,7 @@
               <button class="btn_volver_2">
                 Atras
               </button>
-              <a href="{% url 'index' %}" class=" formbold-confirm-btn">
+              <a href="{% url 'index' %}" class="formbold-confirm-btn">
                 <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="11" cy="11" r="10.5" fill="white" stroke="#DDE3EC" />
                   <g clip-path="url(#clip0_1667_1314)">

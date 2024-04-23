@@ -40,6 +40,10 @@ urlpatterns = [
          views_empleado.reportes_json_e, name="reportes_json_e"),
     path('reportes_json_t',
          views_contrato.reportes_json_t, name="reportes_json_t"),
+    path('propiedad/fotosporinmueble/<int:id_inmueble>',
+         views_propiedad.fotosporinmueble, name="fotos_por_inmueble"),
+    path('propiedad/eliminarfotosporinmueble/<int:id_foto>',
+         views_propiedad.eliminarfotosporinmueble, name="eliminar_fotos_por_inmueble"),
     ##### FIN RUTAS REPORTES #####
     ##### RUTAS CLIENTES #####
     path('cliente', views_cliente.index_cliente, name="index_cliente"),
@@ -82,7 +86,8 @@ urlpatterns = [
     path('reset_password', views_cliente.reset_password, name="reset_password"),
     ##### FIN RESET PASSWORD #####
     ##### CREATESUPERUSER #####
-    path('nuevo/create_superuser', views_user.create_superuser, name="create_superuser"),
+    path('nuevo/create_superuser',
+         views_user.create_superuser, name="create_superuser"),
     ##### FIN CREATESUPERUSER #####
 
 

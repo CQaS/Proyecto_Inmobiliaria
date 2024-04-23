@@ -403,6 +403,40 @@ def reemplazarFotoPortada(idInmueble):
     return {'delete': delete, 'err': ERR, 'img': img[0]}
 
 
+def eliminarUnaFoto(idFoto):
+    ERR = ''
+    delete = ''
+    img = ''
+    try:
+        with connection.cursor() as cursor:
+            queryimg = """
+                    SELECT f.image FROM fotos_prop f WHERE f.id_foto = {0}
+                    """.format(idFoto)
+            cursor.execute(queryimg)
+            img = cursor.fetchone()
+
+            query = """
+                    DELETE FROM fotos_prop WHERE id_foto = {0}
+                    """.format(idFoto)
+            cursor.execute(query)
+
+            cursor.close()
+
+        ERR = 'Foto excluída com sucesso do banco de dados'
+        delete = True
+
+    except IntegrityError as e:
+
+        ERR = 'Algo deu errado, tente novamente ou entre em contato com o administrador'
+        print("Error:", e)
+        delete = False
+
+    finally:
+        connection.close()
+
+    return {'delete': delete, 'err': ERR, 'img': img}
+
+
 def reemplazarVideo(idInmueble):
     ERR = ''
     delete = ''
@@ -468,6 +502,35 @@ def Buscar_inmueble(id_inmueble):
 
 
 def get_fotos_porinmueble(id_inmueble):
-    fotos = Fotos.objects.filter(
-        inmueble_id=id_inmueble).values('image', 'inmueble_id')
-    return fotos
+    try:
+
+        query = """
+        SELECT * FROM fotos_prop WHERE inmueble_id = {0}
+        """.format(id_inmueble)
+
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            columns = [col[0] for col in cursor.description]
+            res = cursor.fetchall()
+            cursor.close()
+
+        resultados_mapeados = []
+        for fila in res:
+            fila_mapeada = {}
+            for i, valor in enumerate(fila):
+                fila_mapeada[columns[i]] = valor
+            resultados_mapeados.append(fila_mapeada)
+
+        return {'fotos_mapeados': resultados_mapeados}
+
+    except Inmueble.DoesNotExist:
+        print("NAO ENCONTRADO")
+        return redirect('404')
+
+    except IntegrityError as e:
+        ERR = 'Algo deu errado, tente novamente ou entre em contato com o administrador'
+        print("Error:", e)
+        return {'ERR': ERR}
+
+    finally:
+        connection.close()

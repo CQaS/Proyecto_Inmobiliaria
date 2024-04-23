@@ -87,3 +87,57 @@ const ocultarElemento = (id) => {
   let elemento = document.getElementById(id);
   elemento.style.display = "none";
 }
+
+
+/* 
+
+                            SCRIPT PARA ELIMINAR FOTOS POR INMUEBLE                             
+                            
+                            
+*/
+
+const confirmarEliminar = (element) => {
+
+  let id_foto = element.id;
+  console.log("ID:", id_foto);
+
+  Swal.fire({
+    title: '¿Tem certeza?',
+    text: "Você não será capaz de reverter isso",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sim, remova-o',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+
+    if (result.isConfirmed) {
+
+      let url = `/propiedad/eliminarfotosporinmueble/${id_foto}`
+      $.get(url).done((res) => {
+
+        if (res.foto_eliminada) {
+          // Si el usuario confirma, eliminamos la foto
+          element.previousElementSibling.remove(); // Elimina la imagen anterior al botón
+          element.remove(); // Elimina el botón
+          Swal.fire(
+            'Removido!',
+            'Sua foto foi excluída.',
+            'success'
+          );
+
+        } else {
+
+          Swal.fire(
+            'Error!',
+            'Ocorreu um erro ao excluir a foto.',
+            'error'
+          )
+
+        }
+
+      })
+    }
+  });
+}
