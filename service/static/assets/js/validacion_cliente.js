@@ -66,7 +66,7 @@ c_rg_cliente.value = ''
         if (c_rg_cliente.value) {
             if (letras_numero_espacios(c_rg_cliente) == null || c_rg_cliente.value.length < 5) {
                 _alerta('RG de cliente inválido!')
-c_dni_cliente.value = ''
+c_dni.value = ''
                 return
             }
 
