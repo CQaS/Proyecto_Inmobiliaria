@@ -58,6 +58,8 @@ crear_cliente.addEventListener("click", (e) => {
                 _alerta('DNI de cliente inválido!')
                 return
             }
+        }else {
+            c_dni.value = 0
         }
 
         if (c_rg_cliente.value) {
@@ -66,9 +68,11 @@ crear_cliente.addEventListener("click", (e) => {
                 return
             }
 
+        }else {
+            c_rg_cliente.value = 0
         }
     }
-
+    
     if (solo_numeros(c_tel) == null || c_tel.value.length < 10) {
         _alerta('Número de telefone do cliente inválido!')
         return
