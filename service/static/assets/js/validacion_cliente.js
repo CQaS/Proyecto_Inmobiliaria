@@ -56,6 +56,7 @@ crear_cliente.addEventListener("click", (e) => {
         if (c_dni.value) {
             if (solo_numeros(c_dni) == null || c_dni.value.length < 5) {
                 _alerta('DNI de cliente inválido!')
+c_rg_cliente.value = ''
                 return
             }
         }else {
@@ -65,6 +66,7 @@ crear_cliente.addEventListener("click", (e) => {
         if (c_rg_cliente.value) {
             if (letras_numero_espacios(c_rg_cliente) == null || c_rg_cliente.value.length < 5) {
                 _alerta('RG de cliente inválido!')
+c_dni_cliente.value = ''
                 return
             }
 
