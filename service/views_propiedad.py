@@ -374,6 +374,7 @@ def fotosporinmueble(req, id_inmueble):
     print(list_fotos_conId)
 
     context = {
+        'id_inmueble':id_inmueble,
         'fotos': list_fotos_conId,
     }
 
