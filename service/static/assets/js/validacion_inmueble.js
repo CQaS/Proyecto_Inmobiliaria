@@ -28,18 +28,15 @@ const lati = document.getElementById('lat')
 const long = document.getElementById('lon')
 
 const pattern_mail = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
+const pattern_letras_numero_espacios_ = /^[a-zA-Z0-9\-.,\sáéíóúÁÉÍÓÚâêîôÂÊÎÔãõÃÕçÇ!?\s/]+$/
 
 if (send) {
     send.addEventListener("click", (e) => {
         e.preventDefault()
         console.log(`EDICION ${editar}`)
 
-        const letra_y_espacios = (DATO) => {
-            return DATO.value.match(pattern_letras_espacios)
-        }
-
         const letras_numero_espacios = (DATO) => {
-            return DATO.value.match(pattern_letras_numero_espacios)
+            return DATO.value.match(pattern_letras_numero_espacios_)
         }
 
         const solo_numeros = (DATO) => {
@@ -73,10 +70,12 @@ if (send) {
             return
         }
 
-        if (letras_numero_espacios(i_red) == null || i_red.value.length < 3) {
-            i_red.focus()
-            _alerta('Nome da rede Wi-Fi apenas letras/números!')
-            return
+        if (i_red.value) {
+            if (letras_numero_espacios(i_red) == null || i_red.value.length < 3) {
+                i_red.focus()
+                _alerta('Nome da rede Wi-Fi apenas letras/números!')
+                return
+            }
         }
 
         if (num_apto(i_num_apto) == null) {
@@ -163,9 +162,15 @@ if (send) {
             return
         }
 
-        if (letras_numero_espacios(i_descripcion) == null || i_descripcion.value.length > 200 || i_descripcion.value.length < 3) {
+        if (i_descripcion.value.length < 3 || i_descripcion.value.length > 5000) {
             i_descripcion.focus()
-            _alerta('Descrição do Imóvel apenas letras/números e iniciados em LETRAS MAIÚSCULAS, Máx. 200 caracteres!')
+            _alerta('Descrição do Imóvel apenas letras/números e iniciados em LETRAS MAIÚSCULAS!')
+            return
+        }
+
+        let caracteresPermitidos = /^[a-zA-Z0-9\-.,\sáéíóúÁÉÍÓÚâêîôÂÊÎÔãõÃÕçÇ!?\s]+$/
+        if (!i_descripcion.value.match(caracteresPermitidos)) {
+            _alerta("A descrição só pode conter letras, números, hífens, pontos e vírgulas.");
             return
         }
 
