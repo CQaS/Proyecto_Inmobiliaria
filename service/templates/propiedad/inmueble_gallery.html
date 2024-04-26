@@ -38,6 +38,18 @@
         justify-content: center;
         margin-top: 10px;
     }
+
+    img{
+        transition: .5s;
+    }
+
+    .image:hover img{
+        transform: scale(1.2);
+    }
+
+    i:hover{
+        color: red;
+    }
 </style>
 
 
@@ -46,7 +58,7 @@
 <div class="container_img">
     <div class="gallery">
         {% for f in fotos %}
-        <div>
+        <div class="image">
             <img src="{{ f.1 }}" alt="">
             <i id="{{ f.0 }}" class="fa-solid fa-trash" onclick="confirmarEliminar(this)" style="cursor: pointer;"></i>
         </div>
