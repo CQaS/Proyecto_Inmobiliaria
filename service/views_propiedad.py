@@ -1,5 +1,6 @@
+import string
+import random
 import json
-import uuid
 import os
 from datetime import date, datetime
 from django.shortcuts import render, redirect, get_object_or_404
@@ -18,6 +19,15 @@ from .models import *
 # query = "SELECT * FROM inmueble i WHERE (SELECT COUNT(c.id_contrato) AS contID FROM contrato c WHERE c.inmueble_id = i.id_inmueble AND ((c.fecha_ing BETWEEN @inicio AND @fin) OR (c.fecha_salida BETWEEN @inicio AND @fin) OR (c.fecha_ing < @inicio AND c.fecha_salida > @fin))) = 0 AND i.estado = 1"
 
 # "SELECT * FROM inmueble i WHERE (SELECT COUNT(c.id_contrato) AS contID FROM contrato c WHERE c.inmueble_id = i.id_inmueble AND ((c.fecha_ing BETWEEN '2023-10-01' AND '2023-10-31') OR (c.fecha_salida BETWEEN '2023-10-01' AND '2023-10-31') OR (c.fecha_ing > '2023-10-01' AND c.fecha_salida < '2023-10-31'))) = 0 AND i.id_inmueble = 10 AND i.estado = 1"
+
+
+def generar_palabra_aleatoria():
+    letras = string.ascii_letters
+    numeros = '123456789'
+    caracteres = letras + numeros
+    palabra = ''.join(random.sample(caracteres, 32))
+
+    return palabra
 
 
 def serialize_date(obj):
@@ -95,8 +105,8 @@ def crear_propiedad(req):
 
             try:
                 portadaName = req.FILES['imgportada']
-                # Genera un nuevo nombre de archivo (por ejemplo, usando un UUID)
-                new_fileportadaname = f"PORTADA_{uuid.uuid4().hex}{
+                # Genera un nuevo nombre de archivo (por ejemplo, usando un generar_palabra_aleatoria())
+                new_fileportadaname = f"PORTADA_{generar_palabra_aleatoria()}{
                     os.path.splitext(portadaName.name)[1]}"
 
                 # Asigna el nuevo nombre al archivo
@@ -114,8 +124,8 @@ def crear_propiedad(req):
 
             for image in images:
                 try:
-                    # Genera un nuevo nombre de archivo (por ejemplo, usando un UUID)
-                    new_filename = f"{uuid.uuid4().hex}{
+                    # Genera un nuevo nombre de archivo (por ejemplo, usando un generar_palabra_aleatoria())
+                    new_filename = f"{generar_palabra_aleatoria()}{
                         os.path.splitext(image.name)[1]}"
 
                     # Asigna el nuevo nombre al archivo
@@ -133,8 +143,8 @@ def crear_propiedad(req):
 
             try:
                 videoName = req.FILES['video']
-                # Genera un nuevo nombre de archivo (por ejemplo, usando un UUID)
-                new_fileVideoname = f"{uuid.uuid4().hex}{
+                # Genera un nuevo nombre de archivo (por ejemplo, usando un generar_palabra_aleatoria())
+                new_fileVideoname = f"{generar_palabra_aleatoria()}{
                     os.path.splitext(videoName.name)[1]}"
 
                 # Asigna el nuevo nombre al archivo
@@ -228,8 +238,8 @@ def editar_propiedad(req, id_inmueble=None):
                             os.remove(ruta_foto)
 
                         portadaName = req.FILES['imgportada']
-                        # Genera un nuevo nombre de archivo (por ejemplo, usando un UUID)
-                        new_fileportadaname = f"PORTADA_{uuid.uuid4().hex}{
+                        # Genera un nuevo nombre de archivo (por ejemplo, usando un generar_palabra_aleatoria())
+                        new_fileportadaname = f"PORTADA_{generar_palabra_aleatoria()}{
                             os.path.splitext(portadaName.name)[1]}"
 
                         # Asigna el nuevo nombre al archivo
@@ -264,8 +274,8 @@ def editar_propiedad(req, id_inmueble=None):
 
                 for image in images:
                     try:
-                        # Genera un nuevo nombre de archivo (por ejemplo, usando un UUID)
-                        new_filename = f"{uuid.uuid4().hex}{
+                        # Genera un nuevo nombre de archivo (por ejemplo, usando un generar_palabra_aleatoria())
+                        new_filename = f"{generar_palabra_aleatoria()}{
                             os.path.splitext(image.name)[1]}"
 
                         # Asigna el nuevo nombre al archivo
@@ -299,8 +309,8 @@ def editar_propiedad(req, id_inmueble=None):
                             os.remove(ruta_video)
 
                         videoName = req.FILES['video']
-                        # Genera un nuevo nombre de archivo (por ejemplo, usando un UUID)
-                        new_fileVideoname = f"{uuid.uuid4().hex}{
+                        # Genera un nuevo nombre de archivo (por ejemplo, usando un generar_palabra_aleatoria())
+                        new_fileVideoname = f"{generar_palabra_aleatoria()}{
                             os.path.splitext(videoName.name)[1]}"
 
                         # Asigna el nuevo nombre al archivo
@@ -374,7 +384,7 @@ def fotosporinmueble(req, id_inmueble):
     print(list_fotos_conId)
 
     context = {
-        'id_inmueble':id_inmueble,
+        'id_inmueble': id_inmueble,
         'fotos': list_fotos_conId,
     }
 
