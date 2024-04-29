@@ -106,8 +106,7 @@ def crear_propiedad(req):
             try:
                 portadaName = req.FILES['imgportada']
                 # Genera un nuevo nombre de archivo (por ejemplo, usando un generar_palabra_aleatoria())
-                new_fileportadaname = f"PORTADA_{generar_palabra_aleatoria()}{
-                    os.path.splitext(portadaName.name)[1]}"
+                new_fileportadaname = f"PORTADA_{generar_palabra_aleatoria()}{os.path.splitext(portadaName.name)[1]}"
 
                 # Asigna el nuevo nombre al archivo
                 portadaName.name = new_fileportadaname
@@ -239,8 +238,7 @@ def editar_propiedad(req, id_inmueble=None):
 
                         portadaName = req.FILES['imgportada']
                         # Genera un nuevo nombre de archivo (por ejemplo, usando un generar_palabra_aleatoria())
-                        new_fileportadaname = f"PORTADA_{generar_palabra_aleatoria()}{
-                            os.path.splitext(portadaName.name)[1]}"
+                        new_fileportadaname = f"PORTADA_{generar_palabra_aleatoria()}{os.path.splitext(portadaName.name)[1]}"
 
                         # Asigna el nuevo nombre al archivo
                         portadaName.name = new_fileportadaname
@@ -275,8 +273,7 @@ def editar_propiedad(req, id_inmueble=None):
                 for image in images:
                     try:
                         # Genera un nuevo nombre de archivo (por ejemplo, usando un generar_palabra_aleatoria())
-                        new_filename = f"{generar_palabra_aleatoria()}{
-                            os.path.splitext(image.name)[1]}"
+                        new_filename = f"{generar_palabra_aleatoria()}{os.path.splitext(image.name)[1]}"
 
                         # Asigna el nuevo nombre al archivo
                         image.name = new_filename
