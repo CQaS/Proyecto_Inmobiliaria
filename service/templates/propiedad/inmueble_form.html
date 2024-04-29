@@ -188,9 +188,9 @@
           <div class="formbold-input-flex">
             <div>
               <label for="descripcion" class="formbold-form-label"> Descrição </label>
-              <textarea name="descripcion" id="descripcion" class="formbold-form-input" {% if inedit %}
-                value="{{ inedit.descripcion }}" {% else %} value="{{ inmueble.descripcion.value }}" {% endif %}
-                >Descrição</textarea>
+              <textarea name="descripcion" id="descripcion" class="formbold-form-input" style="height: 48px;">
+                {% if inedit %} {{ inedit.descripcion }} {% else %} {{ inmueble.descripcion.value }} {% endif %}
+              </textarea>
             </div>
             <div>
               <label for="valor_inmueble" class="formbold-form-label"> Valor </label>
