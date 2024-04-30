@@ -44,8 +44,8 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER =config('EMAIL_HOST_USER')
 #'infoimoveismec@gmail.com'
 
-#ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['www.imoveismec.com.br']
+ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['www.imoveismec.com.br']
 
 # Application definition
 
@@ -102,10 +102,10 @@ DATABASES = {
             'sql_mode': 'traditional',
         },
         'NAME': 'inmobiliaria',
-        #'USER': 'root',
-        #'PASSWORD': '',
-        'USER': 'inmobiliariamec',
-        'PASSWORD': 'mec-2023',
+        'USER': 'root',
+        'PASSWORD': '',
+        #'USER': 'inmobiliariamec',
+        #'PASSWORD': 'mec-2023',
         'HOST': 'localhost'
     }
 }
