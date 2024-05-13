@@ -353,22 +353,22 @@
           <!-- pantalla 3 linea 4-5 cajas-->
           <div class="formbold-input-flex">
             <div class="check">
-              <input type="checkbox" name="tipo_servicio" value="WI-FI">
+              <input type="checkbox" name="tipo_servicio" id="WI-FI" value="WI-FI">
               <label class="" for="wifi">WI-FI</label>
             </div>
 
             <div class="check">
-              <input type="checkbox" name="tipo_servicio" value="Ropa de cama">
+              <input type="checkbox" name="tipo_servicio" id="Ropa de cama" value="Ropa de cama">
               <label class="" for="ropa_cama">Roupa/Cama</label>
             </div>
 
             <div class="check">
-              <input type="checkbox" name="tipo_servicio" value="Piscinas">
+              <input type="checkbox" name="tipo_servicio" id="Piscinas" value="Piscinas">
               <label class="" for="piscinas">Piscinas</label>
             </div>
 
             <div class="check">
-              <input type="checkbox" name="tipo_servicio" value="Mucama">
+              <input type="checkbox" name="tipo_servicio" id="Mucama" value="Mucama">
               <label class="" for="mucama">Faxina</label>
             </div>
           </div>
@@ -474,6 +474,31 @@
 </div>
 
 <!-- {-{ puntos|json_script:"puntos_json" }-} -->
+
+<script>
+  const t_s = {% if inedit %} value="{{ inedit.tipo_servicio }}" {% endif %}
+  console.log(t_s);
+  const partes = t_s.split(',');
+
+  partes.forEach(function(part) {
+  if(part.trim() == 'WI-FI'){
+    const check = document.getElementById(part.trim())
+    check.checked = true
+  }
+  if(part.trim() == 'Ropa de cama'){
+    const check = document.getElementById(part.trim())
+    check.checked = true
+  }
+  if(part.trim() == 'Piscinas'){
+    const check = document.getElementById(part.trim())
+    check.checked = true
+  }
+  if(part.trim() == 'Mucama'){
+    const check = document.getElementById(part.trim())
+    check.checked = true
+  }
+  })
+</script>
 
 <script>
   let inmueble_Form = true 
