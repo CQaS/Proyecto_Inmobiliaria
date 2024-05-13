@@ -22,6 +22,7 @@ def index_():
     ERR = ''
     columns = ''
     res = ''
+    exclusivos = 0
     try:
         with connection.cursor() as cursor:
             query = """
@@ -32,8 +33,21 @@ def index_():
             res = cursor.fetchall()
             cursor.close()
 
+        if len(res) > 0:
+            exclusivos = len(res)
+            print('exclusivos: ' + str(exclusivos))
+        else:
+            with connection.cursor() as cursor:
+                query = """
+                        SELECT * FROM inmueble i JOIN fotos_prop f ON i.id_inmueble = f.inmueble_id WHERE estado = {0} AND f.image LIKE '%PORTADA%' ORDER BY RAND() LIMIT 6
+                        """.format('1')
+                cursor.execute(query)
+                columns = [col[0] for col in cursor.description]
+                res = cursor.fetchall()
+                cursor.close()
+
     except IntegrityError as e:
         ERR = 'Algo fallo, intenta nuevamente o ponte en contacto con Admin'
         print("Error:", e)
 
-    return {'res': res, 'columns': columns, 'err': ERR}
+    return {'res': res, 'columns': columns, 'err': ERR, 'exclusivos': exclusivos}

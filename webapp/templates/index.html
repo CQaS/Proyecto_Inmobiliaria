@@ -70,12 +70,14 @@
 
 <!-- Propiedades exclusivos -->
 <section>
+  {% if total_exclusivos > 0 %}
   <div class="titulo">
-    <h4>Propriedades Exclusivas ({{ total_exclusivos }})</h4>
+    <h4>Propiedades Exclusivas ({{ total_exclusivos }})</h4>
   </div>
+  {% endif %}
 
   <ul class="cards">
-    {% for E in exclusivos_lista %}
+    {% for E in lista_index %}
     <li class="cards__item">
       <div class="card">
         <div class="card__image" style="background-image: url({{ E.image }});"></div>

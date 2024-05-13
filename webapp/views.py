@@ -28,7 +28,6 @@ def index(request):
     columns = R['columns']
     ERR = R['err']
 
-    # Convertir los resultados a una lista de diccionarios
     lista = []
     for row in res:
         row_dict = {}
@@ -37,10 +36,6 @@ def index(request):
             row_dict[column_name] = value
         lista.append(row_dict)
 
-    # Convertir a formato JSON
-    # json_result = json.dumps(lista, default=serialize_date)
-
-    # Crear un conjunto para almacenar los valores únicos de cliente_id
     valores_unicos = set()
     resultado = []
 
@@ -53,15 +48,13 @@ def index(request):
             resultado.append(item)
             valores_unicos.add(idInm)
 
-    print(len(resultado))
-
     form = ContactForm(request.POST or None, request.FILES or None)
     context = {
         'categoria': True,
         'error': ERR,
         'form': form,
-        'exclusivos_lista': resultado,
-        'total_exclusivos': len(resultado),
+        'lista_index': resultado,
+        'total_exclusivos': R['exclusivos'],
     }
     return render(request, 'index.html', context)
 
