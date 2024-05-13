@@ -33,6 +33,7 @@ const pattern_letras_numero_espacios_ = /^[a-zA-Z0-9\-.,\sáéíóúÁÉÍÓÚâ
 if (send) {
     send.addEventListener("click", (e) => {
         e.preventDefault()
+        i_descripcion.value = i_descripcion.value.trim()
         console.log(`EDICION ${editar}`)
 
         const letras_numero_espacios = (DATO) => {

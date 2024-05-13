@@ -44,8 +44,7 @@ def crear_cliente(req):
         try:
             for nombre_variable, valor_variable in req.POST.items():
                 tipo_variable = type(valor_variable)
-                print(f"Variable '{nombre_variable}': {
-                    valor_variable} (Tipo: {tipo_variable})")
+                print(f"Variable '{nombre_variable}': {valor_variable} (Tipo: {tipo_variable})")
 
             clientes = ClienteForm(req.POST or None, req.FILES or None)
 

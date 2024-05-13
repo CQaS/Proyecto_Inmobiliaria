@@ -276,7 +276,7 @@ def buscarProp_ID(id_inmueble):
 def insertar_cliente(datos_cliente):
 
     try:
-        query = "INSERT INTO Clientes (nom_cliente, dni_cliente, rg_cliente, dir_cliente, tel_cliente, email_cliente, ciudad_cliente, pais_cliente, fechnac, categoria) VALUES (%(nom_cliente)s, %(dni_cliente)s, %(rg_cliente)s, %(dir_cliente)s, %(tel_cliente)s, %(email_cliente)s, %(ciudad_cliente)s, %(pais_cliente)s, %(fechnac)s, %(categoria)s)"
+        query = "INSERT INTO clientes (nom_cliente, dni_cliente, rg_cliente, dir_cliente, tel_cliente, email_cliente, ciudad_cliente, pais_cliente, fechnac, categoria) VALUES (%(nom_cliente)s, %(dni_cliente)s, %(rg_cliente)s, %(dir_cliente)s, %(tel_cliente)s, %(email_cliente)s, %(ciudad_cliente)s, %(pais_cliente)s, %(fechnac)s, %(categoria)s)"
 
         with connection.cursor() as cursor:
             cursor.execute(query, datos_cliente)
