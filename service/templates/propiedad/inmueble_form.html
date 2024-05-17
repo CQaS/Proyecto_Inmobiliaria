@@ -328,7 +328,8 @@
           <!-- pantalla 3 linea 3-5 cajas-->
           <div class="formbold-input-flex">
             <div class="check">
-              <input type="checkbox" id="cochera" name="cochera" value="true" {% if inedit.cochera %} checked {% elif inmueble.cochera.value %} checked {% endif %}>
+              <input type="checkbox" id="cochera" name="cochera" value="true" 
+                {% if inedit.cochera %} checked {% elif inmueble.cochera.value %} checked {% endif %}>
               <label class="">Garagem</label>
             </div>
 
@@ -339,14 +340,14 @@
             </div>
 
             <div class="check">
-              <input type="checkbox" id="exclusividad" name="exclusividad" value="true" {% if inedit.exclusividad %}
-                checked {% elif inmueble.exclusividad.value %} checked {% endif %}>
+              <input type="checkbox" id="exclusividad" name="exclusividad" value="true" 
+                {% if inedit.exclusividad %} checked {% elif inmueble.exclusividad.value %} checked {% endif %}>
               <label class="">Exclusividade</label>
             </div>
 
             <div class="check">
-              <input type="checkbox" id="expensas" name="expensas" value="true" {% if inedit.expensas %} checked
-                {% elif inmueble.expensas.value %} checked {% endif %}>
+              <input type="checkbox" id="expensas" name="expensas" value="true" 
+                {% if inedit.expensas %} checked {% elif inmueble.expensas.value %} checked {% endif %}>
               <label class="">Expensas</label>
             </div>
           </div>
