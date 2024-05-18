@@ -70,3 +70,12 @@ Empleados
 - Calculo de pagos de limpieza y emision de recibo para imprimir y descontar lo que se
   le paga
 - pedir listado de puestos de trabajo
+
+SOLUCION A PROBLEMAS CON GIT AL DAR ESTE ERROR: "unexpected disconnect while reading sideband packet" o SIMILAR CON GIT PULL
+
+git config --global http.postBuffer 52428800
+git config --global core.compression 0
+
+$ git clone https://github.com/CQaS/Proyecto_inmobiliaria
+$ cd Proyecto_inmobiliaria
+$ git fetch --unshallow
