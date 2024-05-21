@@ -8,7 +8,7 @@ from django.db import connection, IntegrityError
 from django.shortcuts import redirect
 
 pattern_Nombre = r'^[A-Z]*[a-z]{2,}[a-zA-ZñÑáÁéÉíÍúÚóÓ. ]*$'
-pattern_Direccion = r'^[a-zA-Z0-9\-.,\sáéíóúÁÉÍÓÚâêîôÂÊÎÔãõÃÕçÇ!?\s/]+$'
+pattern_Direccion = r'^[a-zA-Z0-9\-.,:sáéíóúÁÉÍÓÚâêîôÂÊÎÔãõÃÕçÇ!?\s/]+$'
 pattern_Datos_envio = r'^[A-Z0-9][a-zA-ZñÑáÁéÉíÍúÚóÓ0-9,.:;\ -]*$'
 pattern_soloNumeros = r'^[0-9][0-9]*$'
 pattern_cod_ = r'^[a-zA-Z0-9-]*$'

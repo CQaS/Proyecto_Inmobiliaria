@@ -188,9 +188,8 @@
           <div class="formbold-input-flex">
             <div>
               <label for="descripcion" class="formbold-form-label"> Descrição </label>
-              <textarea name="descripcion" id="descripcion" class="formbold-form-input" style="height: 48px;">
-                {% if inedit %} {{ inedit.descripcion }} {% else %} {{ inmueble.descripcion.value }} {% endif %}
-              </textarea>
+              <input type="text" name="descripcion" id="descripcion" class="formbold-form-input" {% if inedit %}
+                value="{{ inedit.descripcion }}" {% else %} value="{{ inmueble.descripcion.value }}" {% endif %} />
             </div>
             <div>
               <label for="valor_inmueble" class="formbold-form-label"> Valor </label>
@@ -328,8 +327,7 @@
           <!-- pantalla 3 linea 3-5 cajas-->
           <div class="formbold-input-flex">
             <div class="check">
-              <input type="checkbox" id="cochera" name="cochera" value="true" 
-                {% if inedit.cochera %} checked {% elif inmueble.cochera.value %} checked {% endif %}>
+              <input type="checkbox" id="cochera" name="cochera" value="true" {% if inedit.cochera %} checked {% elif inmueble.cochera.value %} checked {% endif %}>
               <label class="">Garagem</label>
             </div>
 
@@ -340,36 +338,36 @@
             </div>
 
             <div class="check">
-              <input type="checkbox" id="exclusividad" name="exclusividad" value="true" 
-                {% if inedit.exclusividad %} checked {% elif inmueble.exclusividad.value %} checked {% endif %}>
+              <input type="checkbox" id="exclusividad" name="exclusividad" value="true" {% if inedit.exclusividad %}
+                checked {% elif inmueble.exclusividad.value %} checked {% endif %}>
               <label class="">Exclusividade</label>
             </div>
 
             <div class="check">
-              <input type="checkbox" id="expensas" name="expensas" value="true" 
-                {% if inedit.expensas %} checked {% elif inmueble.expensas.value %} checked {% endif %}>
-              <label class="">Expensas</label>
+              <input type="checkbox" id="expensas" name="expensas" value="true" {% if inedit.expensas %} checked
+                {% elif inmueble.expensas.value %} checked {% endif %}>
+              <label class="">Tasa de Limpieza</label>
             </div>
           </div>
           <!-- pantalla 3 linea 4-5 cajas-->
           <div class="formbold-input-flex">
             <div class="check">
-              <input type="checkbox" name="tipo_servicio" id="WI-FI" value="WI-FI">
+              <input type="checkbox" name="tipo_servicio" value="WI-FI">
               <label class="" for="wifi">WI-FI</label>
             </div>
 
             <div class="check">
-              <input type="checkbox" name="tipo_servicio" id="Ropa de cama" value="Ropa de cama">
+              <input type="checkbox" name="tipo_servicio" value="Ropa de cama">
               <label class="" for="ropa_cama">Roupa/Cama</label>
             </div>
 
             <div class="check">
-              <input type="checkbox" name="tipo_servicio" id="Piscinas" value="Piscinas">
+              <input type="checkbox" name="tipo_servicio" value="Piscinas">
               <label class="" for="piscinas">Piscinas</label>
             </div>
 
             <div class="check">
-              <input type="checkbox" name="tipo_servicio" id="Mucama" value="Mucama">
+              <input type="checkbox" name="tipo_servicio" value="Mucama">
               <label class="" for="mucama">Faxina</label>
             </div>
           </div>
@@ -475,31 +473,6 @@
 </div>
 
 <!-- {-{ puntos|json_script:"puntos_json" }-} -->
-
-<script>
-  const t_s = {% if inedit %} value="{{ inedit.tipo_servicio }}" {% endif %}
-  console.log(t_s);
-  const partes = t_s.split(',');
-
-  partes.forEach(function(part) {
-  if(part.trim() == 'WI-FI'){
-    const check = document.getElementById(part.trim())
-    check.checked = true
-  }
-  if(part.trim() == 'Ropa de cama'){
-    const check = document.getElementById(part.trim())
-    check.checked = true
-  }
-  if(part.trim() == 'Piscinas'){
-    const check = document.getElementById(part.trim())
-    check.checked = true
-  }
-  if(part.trim() == 'Mucama'){
-    const check = document.getElementById(part.trim())
-    check.checked = true
-  }
-  })
-</script>
 
 <script>
   let inmueble_Form = true 
