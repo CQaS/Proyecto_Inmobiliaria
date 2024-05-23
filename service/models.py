@@ -81,11 +81,11 @@ class Inmueble(models.Model):
                                      verbose_name='Tipo de Propiedad', validators=[validar_letras])
     tipo_operacion = models.CharField(
         max_length=25, null=False, blank=False, verbose_name='Tipo de Operacion', validators=[validar_letras])
-    sup_total = models.IntegerField(
+    sup_total = models.DecimalField( max_digits=9, decimal_places=3, default=0,
         null=False, blank=False, verbose_name='Superficie', validators=[validar_numero])
-    sup_cubierta = models.IntegerField(
+    sup_cubierta = models.DecimalField( max_digits=9, decimal_places=3, default=0,
         null=False, blank=False, verbose_name='Super. Cubierta', validators=[validar_numero])
-    sup_semicub = models.IntegerField(
+    sup_semicub = models.DecimalField( max_digits=9, decimal_places=3, default=0,
         null=False, blank=False, verbose_name='Super. Semicubierta', validators=[validar_numero])
     cant_plantas = models.IntegerField(
         null=False, blank=False, verbose_name='Cant. de Plantas', validators=[validar_numero])
