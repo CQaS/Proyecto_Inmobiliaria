@@ -169,7 +169,7 @@ if (send) {
             return
         }
 
-        let caracteresPermitidos = /^[a-zA-Z0-9\-.,:\sáéíóúÁÉÍÓÚâêîôÂÊÎÔãõÃÕñÑçÇ!?\s]+$/
+        let caracteresPermitidos = /^[a-zA-Z0-9\-.,:*+()sàèìòùáéíóúÁÉÍÓÚâêîôÂÊÎÔãõÃÕçÇ!?\s/]+$/
         if (!i_descripcion.value.match(caracteresPermitidos)) {
             _alerta("A descrição só pode conter letras, números, hífens, pontos e vírgulas.");
             return

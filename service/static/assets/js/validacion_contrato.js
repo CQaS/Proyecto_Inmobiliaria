@@ -323,8 +323,8 @@ const formulario_contrato = document.getElementById('formulario_contrato')
 const pattern_letras_espacios2 = /^[A-Z][a-zA-ZñÑáÁéÉíÍúÚóÓ ]*$/
 const pattern_letras_numero_espacios2 = /^[A-Z][a-zA-ZñÑáÁéÉíÍúÚóÓ0-9 ]*$/
 const pattern_datos_envio = /^[A-Z][a-zA-ZñÑáÁéÉíÍúÚóÓ0-9,.:;\- ]*$/
-const pattern_solo_numeros1 = /^[a-zA-ZñÑáÁéÉíÍúÚóÓ0-9-/ ]*$/
-const pattern_solo_numeros2 = /^[0-9][0-9#]*$/
+const pattern_solo_numeros1 = /^[a-zA-ZñÑáÁéÉíÍúÚóÓ0-9-,./ ]*$/
+const pattern_solo_numeros2 = /^[0-9][0-9#,.]*$/
 const pattern_mail2 = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
 
 crear_contrato.addEventListener("click", (e) => {

@@ -9,7 +9,7 @@ const e_puesto = document.getElementById('nom_puesto')
 
 const pattern_letras_espacios_ = /^[A-Z][a-zA-ZñÑáÁéÉíÍúÚóÓ ]*$/
 const pattern_letras_numero_espacios_ = /^[a-zA-ZñÑáÁéÉíÍúÚóÓ0-9 ]*$/
-const pattern_solo_numeros_ = /^[0-9][0-9]*$/
+const pattern_solo_numeros_ = /^[0-9][0-9,.]*$/
 const pattern_mail_ = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
 
 crear_empleado.addEventListener("click", (e) => {
