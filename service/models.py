@@ -81,12 +81,12 @@ class Inmueble(models.Model):
                                      verbose_name='Tipo de Propiedad', validators=[validar_letras])
     tipo_operacion = models.CharField(
         max_length=25, null=False, blank=False, verbose_name='Tipo de Operacion', validators=[validar_letras])
-    sup_total = models.DecimalField( max_digits=9, decimal_places=3, default=0,
-        null=False, blank=False, verbose_name='Superficie', validators=[validar_numero])
-    sup_cubierta = models.DecimalField( max_digits=9, decimal_places=3, default=0,
-        null=False, blank=False, verbose_name='Super. Cubierta', validators=[validar_numero])
-    sup_semicub = models.DecimalField( max_digits=9, decimal_places=3, default=0,
-        null=False, blank=False, verbose_name='Super. Semicubierta', validators=[validar_numero])
+    sup_total = models.DecimalField(max_digits=9, decimal_places=3, default=0,
+                                    null=False, blank=False, verbose_name='Superficie', validators=[validar_numero])
+    sup_cubierta = models.DecimalField(max_digits=9, decimal_places=3, default=0,
+                                       null=False, blank=False, verbose_name='Super. Cubierta', validators=[validar_numero])
+    sup_semicub = models.DecimalField(max_digits=9, decimal_places=3, default=0,
+                                      null=False, blank=False, verbose_name='Super. Semicubierta', validators=[validar_numero])
     cant_plantas = models.IntegerField(
         null=False, blank=False, verbose_name='Cant. de Plantas', validators=[validar_numero])
     cant_dormitorios = models.IntegerField(
@@ -104,7 +104,7 @@ class Inmueble(models.Model):
     expensas = models.BooleanField(
         verbose_name='Expensas', null=True, blank=True, default=False)
     descripcion = models.TextField(
-        null=False, blank=False, verbose_name='Descripcion', validators=[validar_direccion])
+        null=False, blank=False, verbose_name='Descripcion')
     clave_puerta_ingreso = models.CharField(
         max_length=100, null=False, blank=False, verbose_name='Clave Puerta Ingreso', validators=[validar_codigo])
     clave_puerta_ingreso2 = models.CharField(
