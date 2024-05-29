@@ -131,19 +131,19 @@
           <div class="formbold-input-flex">
             <div>
               <label for="sup_total" class="formbold-form-label"> Sup. Total </label>
-              <input type="number" step="0.01" min="0" max="100" name="sup_total" id="sup_total" class="formbold-form-input" {% if inedit %}
+              <input type="text" step="0.01" min="0" max="100" name="sup_total" id="sup_total" class="formbold-form-input" {% if inedit %}
                 value="{{ inedit.sup_total }}" {% else %} value="{{ inmueble.sup_total.value | default:'0' }}"
                 {% endif %} />
             </div>
             <div>
               <label for="sup_cubierta" class="formbold-form-label"> Sup. Coberta </label>
-              <input type="number" step="0.01" min="0" max="100" name="sup_cubierta" id="sup_cubierta" class="formbold-form-input" {% if inedit %}
+              <input type="text" step="0.01" min="0" max="100" name="sup_cubierta" id="sup_cubierta" class="formbold-form-input" {% if inedit %}
                 value="{{ inedit.sup_cubierta}}" {% else %} value="{{ inmueble.sup_cubierta.value | default:'0'}}"
                 {% endif %} />
             </div>
             <div>
               <label for="sup_semicub" class="formbold-form-label"> Sup. Semi Coberta </label>
-              <input type="number" step="0.01" min="0" max="100" name="sup_semicub" id="sup_semicub" class="formbold-form-input" {% if inedit %}
+              <input type="text" step="0.01" min="0" max="100" name="sup_semicub" id="sup_semicub" class="formbold-form-input" {% if inedit %}
                 value="{{ inedit.sup_semicub }}" {% else %} value="{{ inmueble.sup_semicub.value | default:'0' }}"
                 {% endif %} />
             </div>
@@ -193,7 +193,7 @@
             </div>
             <div>
               <label for="valor_inmueble" class="formbold-form-label"> Valor </label>
-              <input type="number" step="0.01" min="0" max="100" name="valor_inmueble" id="valor_inmueble" class="formbold-form-input" {% if inedit %}
+              <input type="text" step="0.01" min="0" max="100" name="valor_inmueble" id="valor_inmueble" class="formbold-form-input" {% if inedit %}
                 value="{{ inedit.valor_inmueble }}" {% else %} value="{{ inmueble.valor_inmueble.value }}"
                 {% endif %} />
             </div>
