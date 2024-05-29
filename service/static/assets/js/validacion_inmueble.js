@@ -283,7 +283,7 @@ if (send) {
         console.log('OK Inmueble FORM')
 
         // SI ESTA TODO BIEN SE ENVIA EL FORMULARIO...
-        // formulario.submit()
+        formulario.submit()
     })
 }
 
