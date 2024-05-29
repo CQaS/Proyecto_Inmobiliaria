@@ -115,7 +115,7 @@ class Inmueble(models.Model):
                                      default='SD', verbose_name='Tipo de Servicio')
     cliente_id = models.ForeignKey('Clientes',
                                    verbose_name='cliente_id', on_delete=models.CASCADE, unique=False, db_column='cliente_id')
-    valor_inmueble = models.IntegerField(
+    valor_inmueble = models.DecimalField(max_digits=9, decimal_places=3, default=0,
         verbose_name='Valor', null=False, blank=False, validators=[validar_numero])
     exclusividad = models.BooleanField(
         verbose_name='Exclusividad', null=True, blank=True, default=False)

@@ -193,7 +193,7 @@
             </div>
             <div>
               <label for="valor_inmueble" class="formbold-form-label"> Valor </label>
-              <input type="number" name="valor_inmueble" id="valor_inmueble" class="formbold-form-input" {% if inedit %}
+              <input type="number" step="0.01" min="0" max="100" name="valor_inmueble" id="valor_inmueble" class="formbold-form-input" {% if inedit %}
                 value="{{ inedit.valor_inmueble }}" {% else %} value="{{ inmueble.valor_inmueble.value }}"
                 {% endif %} />
             </div>
