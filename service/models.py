@@ -81,11 +81,11 @@ class Inmueble(models.Model):
                                      verbose_name='Tipo de Propiedad', validators=[validar_letras])
     tipo_operacion = models.CharField(
         max_length=25, null=False, blank=False, verbose_name='Tipo de Operacion', validators=[validar_letras])
-    sup_total = models.DecimalField(max_digits=9, decimal_places=3, default=0,
+    sup_total = models.CharField(max_length=15, 
                                     null=False, blank=False, verbose_name='Superficie', validators=[validar_numero])
-    sup_cubierta = models.DecimalField(max_digits=9, decimal_places=3, default=0,
+    sup_cubierta = models.CharField(max_length=15,
                                        null=False, blank=False, verbose_name='Super. Cubierta', validators=[validar_numero])
-    sup_semicub = models.DecimalField(max_digits=9, decimal_places=3, default=0,
+    sup_semicub = models.CharField(max_length=15,
                                       null=False, blank=False, verbose_name='Super. Semicubierta', validators=[validar_numero])
     cant_plantas = models.IntegerField(
         null=False, blank=False, verbose_name='Cant. de Plantas', validators=[validar_numero])
@@ -115,7 +115,7 @@ class Inmueble(models.Model):
                                      default='SD', verbose_name='Tipo de Servicio')
     cliente_id = models.ForeignKey('Clientes',
                                    verbose_name='cliente_id', on_delete=models.CASCADE, unique=False, db_column='cliente_id')
-    valor_inmueble = models.DecimalField(max_digits=9, decimal_places=3, default=0,
+    valor_inmueble = models.CharField(max_length=15,
         verbose_name='Valor', null=False, blank=False, validators=[validar_numero])
     exclusividad = models.BooleanField(
         verbose_name='Exclusividad', null=True, blank=True, default=False)
@@ -470,7 +470,6 @@ def reemplazarVideo(idInmueble):
 def Buscar_inmueble(id_inmueble):
     try:
         inmueble = Inmueble.objects.get(id_inmueble=id_inmueble)
-
         with connection.cursor() as cursor:
             cursor.execute(
                 "select * from clientes where categoria = 'Propietario'")

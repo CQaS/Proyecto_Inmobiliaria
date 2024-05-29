@@ -374,7 +374,7 @@ def editar_propiedad(req, id_inmueble=None):
             'error': ERR,
             'success': success
         }
-
+    
     return render(req, 'propiedad/inmueble_form.html', context)
 
 

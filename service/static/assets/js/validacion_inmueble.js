@@ -109,20 +109,20 @@ if (send) {
             return
         }
 
-        if (solo_numeros(i_suptotal) == null || Number(i_suptotal.value) < 0) {
+        if (solo_numeros(i_suptotal) == null ) {
             i_suptotal.focus()
             _alerta('Área Total do Imóvel não válida!')
             return
         }
 
-        if (solo_numeros(i_supcubierta) == null || Number(i_supcubierta.value) < 0) {
+        if (solo_numeros(i_supcubierta) == null) {
             i_supcubierta.value = "0"; // Establecer el valor predeterminado como "0"
             i_supcubierta.focus()
             _alerta('Superfície Coberta de Propriedade não válida!')
             return
         }
 
-        if (solo_numeros(i_supsemicubierta) == null || Number(i_supsemicubierta.value) < 0) {
+        if (solo_numeros(i_supsemicubierta) == null) {
             i_supsemicubierta.value = "0"; // Establecer el valor predeterminado como "0"
             i_supsemicubierta.focus()
             _alerta('Superfície de Imóvel Semi Coberta não é válida!')
@@ -180,7 +180,7 @@ if (send) {
             return
         }
 
-        if (solo_numeros(i_valorinmueble) == null || Number(i_valorinmueble.value) <= 0) {
+        if (solo_numeros(i_valorinmueble) == null ) {
             i_valorinmueble.focus()
             _alerta('Valor de propriedade inválido!')
             return
