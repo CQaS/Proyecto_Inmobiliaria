@@ -45,8 +45,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER =config('EMAIL_HOST_USER')
 #'infoimoveismec@gmail.com'
 
-ALLOWED_HOSTS = []
-#ALLOWED_HOSTS = ['www.imoveismec.com.br']
 
 # Application definition
 
@@ -92,6 +90,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
+# configuration hosting
+ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['www.imoveismec.com.br']
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
