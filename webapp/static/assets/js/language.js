@@ -80,13 +80,63 @@ if (btn_video) {
 
 const mostrarElemento = (id) => {
   let elemento = document.getElementById(id);
-  elemento.style.display = "block";
+  elemento.style.display = "";
 }
 
 const ocultarElemento = (id) => {
   let elemento = document.getElementById(id);
   elemento.style.display = "none";
 }
+
+let imgElement = document.querySelector('.carruselImagen')
+let randomIndex = Math.floor(Math.random() * pictures.length)
+imgElement.src = pictures[randomIndex]
+
+let videoElement = document.querySelector('.carruselVideo')
+
+if (videoSrc) {
+  let sourceElement = document.createElement('source')
+  sourceElement.src = videoSrc
+  sourceElement.type = 'video/mp4'
+  videoElement.innerHTML = ''
+  videoElement.appendChild(sourceElement)
+  videoElement.load()
+  videoElement.play()
+}
+
+let contador = 0
+const carrusel2 = (contenedor) => {
+  contenedor.addEventListener('click', e => {
+    let atras = contenedor.querySelector('.atras'),
+      adelante = contenedor.querySelector('.adelante'),
+      img = contenedor.querySelector('img'),
+      tgt = e.target
+    if (tgt == atras) {
+      if (contador > 0) {
+        img.src = pictures[contador - 1]
+        contador--
+      } else {
+        img.src = pictures[pictures.length - 1]
+        contador = pictures.length - 1
+      }
+    } else if (tgt == adelante) {
+      if (contador < pictures.length - 1) {
+        img.src = pictures[contador + 1]
+        contador++
+      } else {
+        img.src = pictures[0]
+        contador = 0
+      }
+    }
+
+  })
+}
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  let contenedor = document.querySelector('.carrusel')
+  carrusel2(contenedor)
+})
 
 
 /* 
