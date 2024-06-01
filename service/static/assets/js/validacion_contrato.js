@@ -487,6 +487,11 @@ crear_contrato.addEventListener("click", (e) => {
 
 /* CAMBIOS EN FECHAS */
 
+const manejarNaN = ()=> {
+  _alerta("O cálculo resultou em um valor não numérico. Verifique os dados inseridos.");
+  return "Número NO válido";
+}
+
 let fechaSeleccionada = 0
 
 f_in.addEventListener('change', () => {
@@ -513,19 +518,22 @@ f_sal.addEventListener('change', () => {
 })
 
 document.getElementById('monto_reserva').addEventListener('keyup', () => {
-  document.getElementById('saldo_pendiente').value = Number(document.getElementById('valor_total').value) -
-    Number(document.getElementById('monto_reserva').value)
+  document.getElementById('saldo_pendiente').value = isNaN(Number(document.getElementById('valor_total').value) -
+    Number(document.getElementById('monto_reserva').value)) ? manejarNaN() : Number(document.getElementById('valor_total').value) -
+      Number(document.getElementById('monto_reserva').value)
 })
 
 document.getElementById('valor_total').addEventListener('keyup', () => {
-  document.getElementById('saldo_pendiente').value = Number(document.getElementById('valor_total').value) -
-    Number(document.getElementById('monto_reserva').value)
+  document.getElementById('saldo_pendiente').value = isNaN(Number(document.getElementById('valor_total').value) -
+    Number(document.getElementById('monto_reserva').value)) ? manejarNaN() : Number(document.getElementById('valor_total').value) -
+      Number(document.getElementById('monto_reserva').value)
 })
 
 document.getElementById('taxa_limpeza').addEventListener('keyup', () => {
   document.getElementById('valor_total').value = (diferenciaDias * Number(document.getElementById('valor_inmueble').value)) + Number(document.getElementById('taxa_limpeza').value)
-  document.getElementById('saldo_pendiente').value = Number(document.getElementById('valor_total').value) -
-    Number(document.getElementById('monto_reserva').value)
+  document.getElementById('saldo_pendiente').value = isNaN(Number(document.getElementById('valor_total').value) -
+    Number(document.getElementById('monto_reserva').value)) ? manejarNaN() : Number(document.getElementById('valor_total').value) -
+      Number(document.getElementById('monto_reserva').value)
 })
 
 /* FIN VALIDACIONES FECHAS/CONFIRMACION docx2pdf */
