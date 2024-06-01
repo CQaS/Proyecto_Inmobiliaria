@@ -16,7 +16,7 @@
         object-fit: cover;
         max-width: 100%;
         max-height: 100%;
-        width: 800px;
+        width: 1000px;
         height: 500px;
     }
 
@@ -133,90 +133,114 @@
     </div>
     
     <div class="info-basica">
-        <div class="titulo-box-d">
-            <h3 class="titulo-d">INFORMAÇÃO BASICA</h3>
-            
-        </div>
+        <div class="row" style="width: 1320px;">
+            <div class="col-12 col-md-4">
+                <div class="card border border-info border-5" style="height: 350px">
+                    <div class="card-body">
+                        <div class="titulo-box-d text-center">
+                            <h3 class="titulo-d">INFORMAÇÃO BASICA</h3>    
+                        </div>
 
-        <!-- va una table 2 columnas x 4 filas -->
-        <div class="d-flex justify-content-between">
-            <label>Cidade:</label>
-            <span>{{ D.ciudad_inmueble }}</span>
-        </div>
-        <div class="d-flex justify-content-between">
-            <label>Tipo Imóvel:</label>
-            <span>{{ D.tipo_inmueble }}</span>
-        </div>
-        <div class="d-flex justify-content-between">
-            <label>Quantidade Plantas:</label>
-            <span>{{ D.cant_plantas }}</span>
-        </div>
-        <div class="d-flex justify-content-between">
-            <label>Quantidade Quartos:</label>
-            <span>{{ D.cant_dormitorios }}</span>
-        </div>
-        <div class="d-flex justify-content-between">
-            <label>Cantidad Banheiros:</label>
-            <span>{{ D.cant_banos }}</span>
-        </div>
-    </div>
-
-    <div class="sup-medidas">
-        <div class="titulo-box-d">
-            <h3 class="titulo-d">SUPERFICIES E ADICIONAIS</h3>
-        </div>
-        <div class="d-flex justify-content-between">
-            <label>Sup. Total:</label>
-            <span>{{ D.sup_total }} m2</span>
-        </div>
-        <div class="d-flex justify-content-between">
-            <label>Sup. Coberta:</label>
-            <span>{{ D.sup_cubierta }} m2</span>
-        </div>
-        <div class="d-flex justify-content-between">
-            <label>Sup. Semicoberta:</label>
-            <span>{{ D.sup_semicub}} m2</span>
-        </div>
-        <div class="d-flex justify-content-between">
-            <label>Garagem:</label>
-            <span>{% if D.cochera %}SI{% else %}NO{% endif %}</span>
-        </div>
-        <div class="d-flex justify-content-between">
-            <label>Tasa de Limpieza:</label>
-            <span>{% if D.expensas %}SI{% else %}NO{% endif %}</span>
-        </div>
-    </div>
-
-
-    <div class="descripcion">
-        <div class="titulo-box-d">
-            <h3 class="titulo-d">DESCRIPÇÃO</h3>
-        </div>
-        <p>{{ D.descripcion }}</p>
-    </div>
-
-    <div class="servicios">
-        <div class="titulo-box-d">
-            <h3 class="titulo-d">SERVIÇOS</h3>
-        </div>
-        <label for=""> {{ D.tipo_servicio }} </label>
-    </div>
-
-
-    <div class="mapa">
-        <div class="titulo-box-d">
-            <h3 class="titulo-d">LOCALIZAÇÃO</h3>
-        </div>
-        <p id="location-info"></p>
-
-        <div id="map_container" style="width: 100%;">
-            <div id="map" style="width: 800px; height: 400px; margin-left: 10%;">
+                        <!-- va una table 2 columnas x 4 filas -->
+                        <div class="d-flex justify-content-between">
+                            <label>Cidade:</label>
+                            <span>{{ D.ciudad_inmueble }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <label>Tipo Imóvel:</label>
+                            <span>{{ D.tipo_inmueble }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <label>Quantidade Plantas:</label>
+                            <span>{{ D.cant_plantas }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <label>Quantidade Quartos:</label>
+                            <span>{{ D.cant_dormitorios }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <label>Cantidad Banheiros:</label>
+                            <span>{{ D.cant_banos }}</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div id="loading-spinner" class="loading-spinner"></div>
+        
+            <div class="col-12 col-md-4">
+                <div class="card border border-info border-5" style="height: 350px">
+                    <div class="card-body text-center">
+                        <div class="titulo-box-d">
+                            <h3 class="titulo-d">SUPERFICIES E ADICIONAIS</h3>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <label>Sup. Total:</label>
+                            <span>{{ D.sup_total }} m2</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <label>Sup. Coberta:</label>
+                            <span>{{ D.sup_cubierta }} m2</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <label>Sup. Semicoberta:</label>
+                            <span>{{ D.sup_semicub}} m2</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <label>Garagem:</label>
+                            <span>{% if D.cochera %}SI{% else %}NO{% endif %}</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <label>Garagem Rotativo:</label>
+                            <span>{% if D.cochera_rotativa %}SI{% else %}NO{% endif %}</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <label>Tasa de Limpieza:</label>
+                            <span>{% if D.expensas %}SI{% else %}NO{% endif %}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+
+            <div class="col-12 col-md-4">
+                <div class="card border border-info border-5" style="height: 350px">
+                    <div class="card-body">
+                        <div class="servicios">
+                            <div class="titulo-box-d text-center">
+                                <h3 class="titulo-d">SERVIÇOS</h3>
+                            </div>
+                            <label for=""> {{ D.tipo_servicio }} </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-12 col-md-6 mb-3">
+            <div class="descripcion">
+                <div class="titulo-box-d">
+                    <h3 class="titulo-d">DESCRIPÇÃO</h3>
+                    <h4 class="titulo-d">{{ D.tipo_inmueble }} - {{ D.dir_inmueble }}</h4>
+                </div>
+                <p>{{ D.descripcion }}</p>
+            </div>
+        </div>
+
+        <div class="col-12"></div>
+            <div class="mapa">
+                <div class="titulo-box-d">
+                    <h3 class="titulo-d">LOCALIZAÇÃO</h3>
+                </div>
+                <p id="location-info"></p>
+
+                <div id="map_container" style="width: 100%;">
+                    <div id="map" style="width: 800px; height: 400px; margin-left: 10%;">
+                    </div>
+                    <div id="loading-spinner" class="loading-spinner"></div>
+                </div>
+            </div>
         </div>
     </div>
-
-</div>
 
 
 <script>

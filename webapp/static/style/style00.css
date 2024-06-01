@@ -577,7 +577,7 @@ footer ._container .sec_reset p {
 footer ._container .sci {
 	margin-top: 20px;
 	display: grid;
-	grid-template-columns: repeat(3, 50px);
+	grid-template-columns: repeat(4, 50px);
 	border-radius: 50%;
 }
 
@@ -590,11 +590,15 @@ footer ._container .sci li a {
 	width: 36px;
 	height: 36px;
 	border-radius: 50%;
-	background: var(--color1);
+	background: white;
 	display: grid;
 	align-content: center;
 	justify-content: center;
 	text-decoration: none;
+}
+
+footer ._container .sci li a:hover {
+	background: var(--color1);
 }
 
 footer ._container .sci li a i {
@@ -1035,13 +1039,16 @@ div.carrusel {
 	grid-column: 1/2;
 	margin: 10px auto auto 300px;
 	font-size: 16px;
+	
 }
 
 .info-basica label {
 	padding: 5px;
 	display: block;
+	justify-content: center;
 }
 
+/*
 .sup-medidas {
 	grid-column: 1/1;
 	margin: 10px auto auto 300px;
@@ -1052,7 +1059,7 @@ div.carrusel {
 .sup-medidas label {
 	padding: 5px;
 	display: block;
-}
+}*/
 
 .descripcion {
 	grid-column: 1/1;
@@ -1064,7 +1071,7 @@ div.carrusel {
 	padding: 5px;
 }
 
-.servicios {
+/*.servicios {
 	grid-column: 1/1;
 	margin: 10px auto auto 300px;
 	font-size: 16px;
@@ -1073,7 +1080,7 @@ div.carrusel {
 .servicios label {
 	padding: 5px;
 	display: block;
-}
+} */
 
 .mapa {
 	grid-column: 1/2;
