@@ -43,7 +43,7 @@ h6 {
 
 
 :root {
-	--color1: rgb(183,146,91);
+	--color1: rgb(198,156,60);
 	/*Color principal de la pagina*/
 }
 
@@ -517,14 +517,15 @@ footer {
 	right: 0;
 	width: 80%;
 	height: auto;
-	padding: 10px 60px 10px 60px;
-	background: white; */
+	padding: 10px 60px 10px 60px;*/
+	background-color: rgba(63,210,220,0); 
 	margin-top: 25px;
 }
 
 
 
 footer ._container {
+	background-color: rgb(0, 156, 142); 
 	position: relative;
 	padding: 10px 60px 10px 60px;
 	right: 0;
@@ -675,7 +676,7 @@ footer .form_input:focus {
 	background-color: #fff;
 	border-color: #86b7fe;
 	outline: 0;
-	box-shadow: 0 0 0 0.25rem rgb(183,146,91);
+	box-shadow: 0 0 0 0.25rem rgb(198,156,60);
 }
 
 .contactar {
@@ -684,7 +685,7 @@ footer .form_input:focus {
 	border: none;
 	border-radius: 5px;
 	padding: .7rem;
-	background-color: rgb(183,146,91);
+	background-color: rgb(198,156,60);
 	font-weight: 500;
 	margin-top: 10px;
 	font-size: 14px;
@@ -695,7 +696,7 @@ footer .form_input:focus {
 
 .contactar:hover {
 	color: white;
-	box-shadow: 0 0 0 0.25rem rgb(183,146,91)
+	box-shadow: 0 0 0 0.25rem rgb(198,156,60)
 }
 
 .copyrightText {
