@@ -52,77 +52,85 @@ def contrato_codRef2(req, codRef):
 
 @login_required(login_url='/#modal-opened')
 def contrato_idInmueble(req, id_inmueble):
+    print("Form Contato")
 
-    R = buscarProp_ID(id_inmueble)
-    res = R['res']
-    columns = R['columns']
-    ERR = R['ERR']
-    success = ''
+    try:
+        R = buscarProp_ID(id_inmueble)
+        res = R['res']
+        columns = R['columns']
+        ERR = R['ERR']
+        success = ''
 
-    # Convertir los resultados a una lista de diccionarios
-    lista = []
-    for row in res:
-        row_dict = {}
-        for i, value in enumerate(row):
-            column_name = columns[i]
-            row_dict[column_name] = value
-        lista.append(row_dict)
+        # Convertir los resultados a una lista de diccionarios
+        lista = []
+        for row in res:
+            row_dict = {}
+            for i, value in enumerate(row):
+                column_name = columns[i]
+                row_dict[column_name] = value
+            lista.append(row_dict)
 
-    # Convertir a formato JSON
-    res_JSON = json.dumps(lista, default=serialize_date)
+        print(lista)
+        if len(lista) == 0:
+            context = {
+                'error': 'Imóvel não encontrado ou não disponível para Contrato',
+                'success': success
+            }
+        else:
+            context = {
+                'error': ERR,
+                'success': success,
+                "id_inmueble": lista[0]['id_inmueble'],
+                "nom_propietario": lista[0]['nom_cliente'],
+                "cod_referencia": lista[0]['cod_referencia'],
+                "dir_inmueble": lista[0]['dir_inmueble'],
+                "ciudad_inmueble": lista[0]['ciudad_inmueble'],
+                "pass_hall1": lista[0]['clave_puerta_ingreso'],
+                "pass_hall2": lista[0]['clave_puerta_ingreso2'],
+                "pass_wifi": lista[0]['clave_wifi'],
+                "num_apto": lista[0]['num_apto'],
+                "valor_inmueble": lista[0]['valor_inmueble'],
+                "habitac_maxima": lista[0]['habitac_maxima'],
+            }
 
-    print(lista)
-    if len(lista) == 0:
-        context = {
-            'error': 'Imóvel não encontrado ou não disponível para Contrato',
-            'success': success
-        }
-    else:
-        context = {
-            'error': ERR,
-            'success': success,
-            "id_inmueble": lista[0]['id_inmueble'],
-            "nom_propietario": lista[0]['nom_cliente'],
-            "cod_referencia": lista[0]['cod_referencia'],
-            "dir_inmueble": lista[0]['dir_inmueble'],
-            "ciudad_inmueble": lista[0]['ciudad_inmueble'],
-            "pass_hall1": lista[0]['clave_puerta_ingreso'],
-            "pass_hall2": lista[0]['clave_puerta_ingreso2'],
-            "pass_wifi": lista[0]['clave_wifi'],
-            "num_apto": lista[0]['num_apto'],
-            "valor_inmueble": lista[0]['valor_inmueble'],
-            "habitac_maxima": lista[0]['habitac_maxima'],
-        }
+        return render(req, "contrato/contrato_form.html", context)
 
-    return render(req, "contrato/contrato_form.html", context)
+    except Exception as e:
+        error_message = f"Erro ao form o contrato: {str(e)}"
+        print(f"ERROR: {error_message}")
+        print("NAO CONTRATADO")
+        return redirect('404')
 
 
 @login_required(login_url='/#modal-opened')
 def crear_contrato(req):
-
-    ERR = ''
-    success = ''
-
-    valor_inmueble_palabras = num2words(
-        req.POST['valor_inmueble'], lang='pt_BR')
-    valor_total_palabras = num2words(req.POST['valor_total'], lang='pt_BR')
-    monto_reserva_palabras = num2words(req.POST['monto_reserva'], lang='pt_BR')
-    cod_referencia = req.POST['cod_referencia']
-
-    fecha_hora_hoy = datetime.now()
-    formateado = "%d/%m/%Y"
-    fecha_hoy = fecha_hora_hoy.strftime(formateado)
-
-    def formatFecha(D):
-        # Convierte la cadena en un objeto datetime
-        fecha_datetime = datetime.strptime(D, "%Y-%m-%d")
-
-        # Formatea la fecha en "dd/mm/yyyy"
-        formato_personalizado = "%d/%m/%Y"
-        fecha_formateada = fecha_datetime.strftime(formato_personalizado)
-        return fecha_formateada
-
+    print("Crear Contrato")
+    
     try:
+
+        ERR = ''
+        success = ''
+
+        valor_inmueble_palabras = num2words(
+            req.POST['valor_inmueble'], lang='pt_BR')
+        valor_total_palabras = num2words(req.POST['valor_total'], lang='pt_BR')
+        monto_reserva_palabras = num2words(req.POST['monto_reserva'], lang='pt_BR')
+        cod_referencia = req.POST['cod_referencia']
+
+        fecha_hora_hoy = datetime.now()
+        formateado = "%d/%m/%Y"
+        fecha_hoy = fecha_hora_hoy.strftime(formateado)
+
+        def formatFecha(D):
+            # Convierte la cadena en un objeto datetime
+            fecha_datetime = datetime.strptime(D, "%Y-%m-%d")
+
+            # Formatea la fecha en "dd/mm/yyyy"
+            formato_personalizado = "%d/%m/%Y"
+            fecha_formateada = fecha_datetime.strftime(formato_personalizado)
+            return fecha_formateada
+
+    
         cliente_instancia = Clientes.objects.get(
             id_cliente=req.POST['id_cliente'])
         inmueble_instancia = Inmueble.objects.get(

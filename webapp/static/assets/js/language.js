@@ -88,9 +88,13 @@ const ocultarElemento = (id) => {
   elemento.style.display = "none";
 }
 
-let imgElement = document.querySelector('.carruselImagen')
-let randomIndex = Math.floor(Math.random() * pictures.length)
-imgElement.src = pictures[randomIndex]
+try {
+  if (pictures !== undefined) {
+    let imgElement = document.querySelector('.carruselImagen')
+    let randomIndex = Math.floor(Math.random() * pictures.length)
+    imgElement.src = pictures[randomIndex]
+  }
+
 
 let videoElement = document.querySelector('.carruselVideo')
 
@@ -100,8 +104,8 @@ if (videoSrc) {
   sourceElement.type = 'video/mp4'
   videoElement.innerHTML = ''
   videoElement.appendChild(sourceElement)
-  videoElement.load()
-  videoElement.play()
+  /* videoElement.load()
+  videoElement.play() */
 }
 
 let contador = 0
@@ -138,6 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
   carrusel2(contenedor)
 })
 
+} catch (e) {}
 
 /* 
 
