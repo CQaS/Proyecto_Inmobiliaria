@@ -4,6 +4,79 @@
 
 {% block content %}
 
+<style>
+  .iconos_servicios{
+    position: absolute;
+    bottom: 70px;
+    left: 120px;
+    display: flex;
+    gap: 15px;
+    color: rgb(198,156,60);
+    font-size: 12px;
+    margin-bottom: 0;
+  }
+
+  .iconos_servicios :hover{
+    color: turquoise;
+  }
+
+  .card {
+    position: relative;
+  }
+  .card-footer {
+    position: absolute;
+    bottom: 70px;
+    right: 30px;
+    display: flex;
+    gap: 10px;
+    color: rgb(198,156,60);
+    font-size: 12px;
+  }
+  .card-footer i {
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  .liked {
+    color: red;
+  }
+  .share-card {
+    position: absolute;
+    bottom: 90px;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    display: none;
+  }
+
+  @media (max-width: 990px) {
+    .iconos_servicios{
+      font-size: 10px;
+      left: 90px;
+    } 
+    .card-footer{
+      font-size: 10px;
+    }
+  }
+
+  @media (max-width: 784px) {
+    .iconos_servicios{
+      font-size: 10px;
+      left: 120px;
+    } 
+    .card-footer{
+      font-size: 10px;
+    }
+  }
+
+
+  @media screen and (max-width: 400px) {
+    .iconos_servicios{
+      display: none;
+    }
+  }
+</style>
+
 <section style="margin-top: -5%;">
   <div class="slider-frame">
     <ul>
@@ -80,7 +153,8 @@
     <h4>Propiedades Exclusivas ({{ total_exclusivos }})</h4>
   </div>
   {% endif %}
-
+  
+  
   <ul class="cards">
     {% for E in lista_index %}
     <li class="cards__item">
@@ -90,14 +164,106 @@
           <div class="card__title">{{E.dir_inmueble}} - {{E.tipo_operacion}}</div>
           <p class="card__text">{{E.tipo_inmueble}} - {{E.ciudad_inmueble}} </p>
           <p class="card__text">R$ {{E.valor_inmueble}}</p>
+         <div class="iconos_servicios">
+            <i class="fa-solid fa-bed">  {{E.cant_dormitorios}}</i>
+            <i class="fa-solid fa-shower">  {{E.cant_banos}}</i>
+            <i class="fa-solid fa-car">  {{E.cochera}}</i>
+          </div>
           <a href="{% url 'detalles_propiedad' E.id_inmueble %}" class="btn btn--block card__btn"
             style="text-transform: capitalize">Mais Info</a>
         </div>
-      </div>
+        <div class="card-footer">
+          <i class="fas fa-heart"></i>
+          <i class="fas fa-share-alt"></i>
+        </div>
+        <div class="share-card">
+          <a href="https://wa.me/?text=" class="share-link" data-url="https://imoveismec.com.br/{{ E.id_inmueble }}"><i class="fab fa-whatsapp" style="color: #25D366;"></i></a>
+          <a href="https://www.instagram.com/" class="share-link" data-url="https://imoveismec.com.br/{{ E.id_inmueble }}"><i class="fab fa-instagram" style="color: #E1306C;"></i></a>
+          <a href="https://www.messenger.com/" class="share-link" data-url="https://imoveismec.com.br/{{ E.id_inmueble }}"><i class="fab fa-facebook-messenger" style="color: #0084FF;"></i></a>
+        </div>        
+      </div> 
     </li>
     {% endfor %}
   </ul>
 </section>
+
+<script>
+  // Obtener todos los elementos con la clase "card-footer"
+  const cardFooters = document.querySelectorAll('.card-footer');
+
+  // Recorrer cada elemento de la card-footer
+  cardFooters.forEach((cardFooter) => {
+    // Obtener los iconos de corazón y compartir
+    const heartIcon = cardFooter.querySelector('.fa-heart');
+    const shareIcon = cardFooter.querySelector('.fa-share-alt');
+    const shareCard = cardFooter.nextElementSibling;
+
+    // Agregar eventos de mouse hover y click al icono de corazón
+    heartIcon.addEventListener('mouseover', () => {
+      heartIcon.style.color = 'turquoise';
+    });
+    heartIcon.addEventListener('mouseout', () => {
+      if (!heartIcon.classList.contains('liked')) {
+        heartIcon.style.color = 'rgb(198,156,60)';
+      }
+    });
+    heartIcon.addEventListener('click', (event) => {
+      event.stopPropagation(); // Detener la propagación del evento
+      if (heartIcon.classList.contains('liked')) {
+        heartIcon.style.color = 'rgb(198,156,60)';
+        heartIcon.classList.remove('liked');
+      } else {
+        heartIcon.style.color = 'red';
+        heartIcon.classList.add('liked');
+      }
+    });
+
+    // Agregar eventos de mouse hover y click al icono de compartir
+    shareIcon.addEventListener('mouseover', () => {
+      shareIcon.style.color = 'turquoise';
+    });
+    shareIcon.addEventListener('mouseout', () => {
+      shareIcon.style.color = 'rgb(198,156,60)';
+    });
+    shareIcon.addEventListener('click', (event) => {
+      event.stopPropagation(); // Detener la propagación del evento
+      shareCard.style.display = 'block';
+    });
+
+    // Agregar evento de click fuera de la tarjeta de compartir
+    document.addEventListener('click', (event) => {
+      if (!event.target.closest('.card-footer') && !event.target.closest('.share-card')) {
+        shareCard.style.display = 'none';
+      }
+    });
+
+    // Agregar eventos de click a los enlaces de compartir
+    const shareLinks = shareCard.querySelectorAll('.share-link');
+    shareLinks.forEach((link) => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        const url = event.target.closest('a').href;
+        shareUrl(url);
+      });
+    });
+  });
+
+ // Función para compartir la URL
+function shareUrl(url) {
+  // Compartir en WhatsApp
+  const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(`Te invito a ver esta propiedad: ${url}`)}`;
+  window.open(whatsappUrl, '_blank');
+
+  // Compartir en Instagram
+  const instagramUrl = `https://www.instagram.com/share?url=${encodeURIComponent(url)}`;
+  window.open(instagramUrl, '_blank');
+
+  // Compartir en Messenger
+  const messengerUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+  window.open(messengerUrl, '_blank');
+}
+</script>
+
 
 
 {% endblock%}
