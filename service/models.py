@@ -81,12 +81,12 @@ class Inmueble(models.Model):
                                      verbose_name='Tipo de Propiedad', validators=[validar_letras])
     tipo_operacion = models.CharField(
         max_length=25, null=False, blank=False, verbose_name='Tipo de Operacion', validators=[validar_letras])
-    sup_total = models.CharField(max_length=15, 
-                                    null=False, blank=False, verbose_name='Superficie', validators=[validar_numero])
+    sup_total = models.CharField(max_length=15,
+                                 null=False, blank=False, verbose_name='Superficie', validators=[validar_numero])
     sup_cubierta = models.CharField(max_length=15,
-                                       null=False, blank=False, verbose_name='Super. Cubierta', validators=[validar_numero])
+                                    null=False, blank=False, verbose_name='Super. Cubierta', validators=[validar_numero])
     sup_semicub = models.CharField(max_length=15,
-                                      null=False, blank=False, verbose_name='Super. Semicubierta', validators=[validar_numero])
+                                   null=False, blank=False, verbose_name='Super. Semicubierta', validators=[validar_numero])
     cant_plantas = models.IntegerField(
         null=False, blank=False, verbose_name='Cant. de Plantas', validators=[validar_numero])
     cant_dormitorios = models.IntegerField(
@@ -116,7 +116,7 @@ class Inmueble(models.Model):
     cliente_id = models.ForeignKey('Clientes',
                                    verbose_name='cliente_id', on_delete=models.CASCADE, unique=False, db_column='cliente_id')
     valor_inmueble = models.CharField(max_length=15,
-        verbose_name='Valor', null=False, blank=False, validators=[validar_numero])
+                                      verbose_name='Valor', null=False, blank=False, validators=[validar_numero])
     exclusividad = models.BooleanField(
         verbose_name='Exclusividad', null=True, blank=True, default=False)
     habitac_maxima = models.IntegerField(
@@ -228,10 +228,10 @@ class Contrato(models.Model):
         null=False, blank=False, verbose_name='Cant. de Dias', validators=[validar_numero])
     cliente_id = models.ForeignKey(
         'Clientes', on_delete=models.CASCADE, verbose_name='Num. Cliente', db_column='cliente_id', unique=False)
-    valor_total = models.IntegerField(
-        null=False, blank=False, verbose_name='Valor Total', validators=[validar_numero])
-    monto_reserva = models.IntegerField(
-        null=False, blank=False, verbose_name='Monto reserva', validators=[validar_numero])
+    valor_total = models.CharField(max_length=15,
+                                   null=False, blank=False, verbose_name='Valor Total', validators=[validar_numero])
+    monto_reserva = models.CharField(max_length=15,
+                                     null=False, blank=False, verbose_name='Monto reserva', validators=[validar_numero])
     fecha_reserva = models.DateField(
         null=False, blank=False, verbose_name='Fecha de Reserva')
     datos_envio = models.CharField(max_length=250, null=False, blank=False,
@@ -525,6 +525,65 @@ def get_fotos_porinmueble(id_inmueble):
     except Inmueble.DoesNotExist:
         print("NAO ENCONTRADO")
         return redirect('404')
+
+    except IntegrityError as e:
+        ERR = 'Algo deu errado, tente novamente ou entre em contato com o administrador'
+        print("Error:", e)
+        return {'ERR': ERR}
+
+    finally:
+        connection.close()
+
+
+def buscarProp_Disponible(id_inmueble, fecha_ing, fecha_salida):
+    query = """
+        SELECT COUNT(i.id_inmueble) FROM inmueble i WHERE (SELECT COUNT(c.id_contrato) AS contID FROM contrato c WHERE c.inmueble_id = i.id_inmueble AND ((c.fecha_ing BETWEEN '{1}' AND '{2}') OR (c.fecha_salida BETWEEN '{1}' AND '{2}') OR (c.fecha_ing > '{1}' AND c.fecha_salida < '{2}'))) = 0 AND i.id_inmueble = {0} AND i.estado = 1
+        """.format(id_inmueble, fecha_ing, fecha_salida)
+
+    ERR = ''
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            res = cursor.fetchone()
+            cursor.close()
+
+            return {'res': res[0], 'ERR': ERR}
+
+    except IntegrityError as e:
+        ERR = 'Algo deu errado, tente novamente ou entre em contato com o administrador'
+        print("Error:", e)
+        return {'ERR': ERR}
+
+    finally:
+        connection.close()
+
+
+def buscarProp_Disponible2(id_inmueble, fecha_ing, fecha_salida):
+    query = """
+        SELECT DISTINCT i.* FROM inmueble i LEFT JOIN contrato c ON i.id_inmueble = c.inmueble_id AND(c.fecha_salida >= '{0}' AND c.fecha_ing <= '{1}') WHERE i.estado = 1 AND c.id_contrato IS NULL AND NOT EXISTS(SELECT 1 FROM contrato c2 WHERE c2.inmueble_id = i.id_inmueble AND(c2.fecha_salida >= '{0}' AND c2.fecha_ing <= '{1}'))
+        """.format(fecha_ing, fecha_salida)
+
+    ERR = ''
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            res = cursor.fetchall()
+            cursor.close()
+
+            ok = False
+            for row in res:
+                if row[0] == 10:
+                    ok = True
+                    break
+
+            # ok == true esta para alquilar, ok == false no esta para alquilar
+
+            if ok:
+                print('si esta')
+                return {'res': 1, 'ERR': ERR}
+            else:
+                print('no esta')
+                return {'res': 0, 'ERR': ERR}
 
     except IntegrityError as e:
         ERR = 'Algo deu errado, tente novamente ou entre em contato com o administrador'

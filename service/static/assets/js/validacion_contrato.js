@@ -20,6 +20,7 @@ let tel_cliente = document.getElementById('tel_cliente')
 let email_cliente = document.getElementById('email_cliente')
 let dir_cliente = document.getElementById('dir_cliente')
 let id_cliente = document.getElementById('id_cliente')
+let id_inmueble = document.getElementById('id_inmueble')
 
 /* fechas CONTRATO */
 
@@ -37,6 +38,39 @@ let f_in = document.getElementById("fecha_ing")
 let f_sal = document.getElementById("fecha_salida")
 f_in.setAttribute("min", fechaActual)
 f_sal.setAttribute("min", fechaActual)
+
+f_sal.addEventListener("change", () => {
+  if (f_in.value) {
+    console.log(f_in.value, f_sal.value)
+
+    verificar_fechas()
+
+  }
+})
+
+const verificar_fechas = () => {
+
+  $.get('/contrato/verificar-fechas/', {
+    id_inmueble: id_inmueble.value,
+    fecha_in: f_in.value,
+    fecha_sal: f_sal.value
+  }, function (data) {
+    console.log(data.resultado)
+    if (data.resultado == 1) {
+      
+      console.log('si esta')
+      $('#crear_contrato').prop('disabled', true)
+      _alerta("As datas SI existem")
+      
+    } else {
+      
+      console.log('no esta')
+      $('#crear_contrato').prop('disabled', false)
+      _alerta("As datas NO existem")
+
+    }
+  })
+}
 
 const parte_1 = document.querySelector('.parte_1')
 const parte_2 = document.querySelector('.parte_2')
@@ -174,8 +208,8 @@ if (codRef) {
             const end = document.getElementById('end').value
 
             // Obtener la fecha actual
-            const today = new Date();
-            const todayFormatted = today.toISOString().split('T')[0];
+            const today = new Date()
+            const todayFormatted = today.toISOString().split('T')[0]
 
             if (!start || !end) {
               Swal.showValidationMessage('Ambas fechas son requeridas')
@@ -183,8 +217,8 @@ if (codRef) {
 
             // Validar que ambas fechas no sean menores que hoy
             if (start < todayFormatted || end < todayFormatted) {
-              Swal.showValidationMessage('Las fechas no pueden ser menores que hoy');
-              return false;
+              Swal.showValidationMessage('Las fechas no pueden ser menores que hoy')
+              return false
             }
 
             return {
@@ -206,7 +240,7 @@ if (codRef) {
               console.log('Fecha de Finalizado:', end)
 
               // Calcular la diferencia en milisegundos entre las fechas
-              const differenceInMilliseconds = new Date(end) - new Date(start);
+              const differenceInMilliseconds = new Date(end) - new Date(start)
 
               // Convertir la diferencia a días
               const cantidadDeDias = differenceInMilliseconds / (1000 * 60 * 60 * 24)
@@ -229,10 +263,10 @@ if (codRef) {
                 url: '/propiedad/inmueble_indisponible', // La URL que definiste en urls.py
                 data: data,
                 success: (response) => {
-                  _alerta(response.message); // Mensaje recibido desde la vista
+                  _alerta(response.message) // Mensaje recibido desde la vista
                 },
                 error: (error) => {
-                  _alerta('Ocurrio un error!');
+                  _alerta('Ocurrio un error!')
                 }
               })
 
@@ -254,11 +288,11 @@ if (codRef) {
 
 // Función para obtener la fecha de hoy en formato YYYY-MM-DD
 const getFormattedToday = () => {
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = String(today.getMonth() + 1).padStart(2, '0');
-  const day = String(today.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
+  const today = new Date()
+  const year = today.getFullYear()
+  const month = String(today.getMonth() + 1).padStart(2, '0')
+  const day = String(today.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
 }
 
 const cod_referencia_url = () => {
@@ -487,9 +521,9 @@ crear_contrato.addEventListener("click", (e) => {
 
 /* CAMBIOS EN FECHAS */
 
-const manejarNaN = ()=> {
-  _alerta("O cálculo resultou em um valor não numérico. Verifique os dados inseridos.");
-  return "Número NO válido";
+const manejarNaN = () => {
+  _alerta("O cálculo resultou em um valor não numérico. Verifique os dados inseridos.")
+  return "Número NO válido"
 }
 
 let fechaSeleccionada = 0
@@ -519,21 +553,21 @@ f_sal.addEventListener('change', () => {
 
 document.getElementById('monto_reserva').addEventListener('keyup', () => {
   document.getElementById('saldo_pendiente').value = isNaN(Number(document.getElementById('valor_total').value) -
-    Number(document.getElementById('monto_reserva').value)) ? manejarNaN() : Number(document.getElementById('valor_total').value) -
-      Number(document.getElementById('monto_reserva').value)
+      Number(document.getElementById('monto_reserva').value)) ? manejarNaN() : Number(document.getElementById('valor_total').value) -
+    Number(document.getElementById('monto_reserva').value)
 })
 
 document.getElementById('valor_total').addEventListener('keyup', () => {
   document.getElementById('saldo_pendiente').value = isNaN(Number(document.getElementById('valor_total').value) -
-    Number(document.getElementById('monto_reserva').value)) ? manejarNaN() : Number(document.getElementById('valor_total').value) -
-      Number(document.getElementById('monto_reserva').value)
+      Number(document.getElementById('monto_reserva').value)) ? manejarNaN() : Number(document.getElementById('valor_total').value) -
+    Number(document.getElementById('monto_reserva').value)
 })
 
 document.getElementById('taxa_limpeza').addEventListener('keyup', () => {
   document.getElementById('valor_total').value = (diferenciaDias * Number(document.getElementById('valor_inmueble').value)) + Number(document.getElementById('taxa_limpeza').value)
   document.getElementById('saldo_pendiente').value = isNaN(Number(document.getElementById('valor_total').value) -
-    Number(document.getElementById('monto_reserva').value)) ? manejarNaN() : Number(document.getElementById('valor_total').value) -
-      Number(document.getElementById('monto_reserva').value)
+      Number(document.getElementById('monto_reserva').value)) ? manejarNaN() : Number(document.getElementById('valor_total').value) -
+    Number(document.getElementById('monto_reserva').value)
 })
 
 /* FIN VALIDACIONES FECHAS/CONFIRMACION docx2pdf */
