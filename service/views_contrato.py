@@ -105,103 +105,145 @@ def contrato_idInmueble(req, id_inmueble):
 @login_required(login_url='/#modal-opened')
 def crear_contrato(req):
     print("Crear Contrato")
-    
+
+    # query = "SELECT * FROM inmueble i WHERE (SELECT COUNT(c.id_contrato) AS contID FROM contrato c WHERE c.inmueble_id = i.id_inmueble AND ((c.fecha_ing BETWEEN @inicio AND @fin) OR (c.fecha_salida BETWEEN @inicio AND @fin) OR (c.fecha_ing < @inicio AND c.fecha_salida > @fin))) = 0 AND i.estado = 1"
+
+    # "SELECT COUNT(i.id_inmueble) FROM inmueble i WHERE (SELECT COUNT(c.id_contrato) AS contID FROM contrato c WHERE c.inmueble_id = i.id_inmueble AND ((c.fecha_ing BETWEEN '2023-10-01' AND '2023-10-31') OR (c.fecha_salida BETWEEN '2023-10-01' AND '2023-10-31') OR (c.fecha_ing > '2023-10-01' AND c.fecha_salida < '2023-10-31'))) = 0 AND i.id_inmueble = 10 AND i.estado = 1"
+    #
+    # COUNT(i.id_inmueble) si es 0 NO ESTA DISPONIBLE PARA ALQUILAR y si es 1 SI ESTA DISPONIBLE PARA ALQUILAR
+
+    # SELECT DISTINCT i.* FROM inmueble i LEFT JOIN contrato c ON i.id_inmueble = c.inmueble_id AND(c.fecha_salida >= '2024-10-02' AND c.fecha_ing <= '2024-10-24') WHERE i.estado = 1 AND c.id_contrato IS NULL AND NOT EXISTS(SELECT 1 FROM contrato c2 WHERE c2.inmueble_id = i.id_inmueble AND(c2.fecha_salida >= '2024-10-02' AND c2.fecha_ing <= '2024-10-24'))
+
+    ERR = ''
+    success = ''
+
     try:
 
-        ERR = ''
-        success = ''
+        res = buscarProp_Disponible(
+            req.POST['id_inmueble'], req.POST['fecha_ing'], req.POST['fecha_salida'])
+        print('resultado: buscarProp_Disponible para Contratar')
+        print(res['res'])
+        if res['res'] == 1:
 
-        valor_inmueble_palabras = num2words(
-            req.POST['valor_inmueble'], lang='pt_BR')
-        valor_total_palabras = num2words(req.POST['valor_total'], lang='pt_BR')
-        monto_reserva_palabras = num2words(req.POST['monto_reserva'], lang='pt_BR')
-        cod_referencia = req.POST['cod_referencia']
+            valor_inmueble_palabras = num2words(
+                req.POST['valor_inmueble'], lang='pt_BR')
+            valor_total_palabras = num2words(
+                req.POST['valor_total'], lang='pt_BR')
+            monto_reserva_palabras = num2words(
+                req.POST['monto_reserva'], lang='pt_BR')
+            cod_referencia = req.POST['cod_referencia']
 
-        fecha_hora_hoy = datetime.now()
-        formateado = "%d/%m/%Y"
-        fecha_hoy = fecha_hora_hoy.strftime(formateado)
+            fecha_hora_hoy = datetime.now()
+            formateado = "%d/%m/%Y"
+            fecha_hoy = fecha_hora_hoy.strftime(formateado)
 
-        def formatFecha(D):
-            # Convierte la cadena en un objeto datetime
-            fecha_datetime = datetime.strptime(D, "%Y-%m-%d")
+            def formatFecha(D):
+                # Convierte la cadena en un objeto datetime
+                fecha_datetime = datetime.strptime(D, "%Y-%m-%d")
 
-            # Formatea la fecha en "dd/mm/yyyy"
-            formato_personalizado = "%d/%m/%Y"
-            fecha_formateada = fecha_datetime.strftime(formato_personalizado)
-            return fecha_formateada
+                # Formatea la fecha en "dd/mm/yyyy"
+                formato_personalizado = "%d/%m/%Y"
+                fecha_formateada = fecha_datetime.strftime(
+                    formato_personalizado)
+                return fecha_formateada
 
-    
-        cliente_instancia = Clientes.objects.get(
-            id_cliente=req.POST['id_cliente'])
-        inmueble_instancia = Inmueble.objects.get(
-            id_inmueble=req.POST['id_inmueble'])
+            cliente_instancia = Clientes.objects.get(
+                id_cliente=req.POST['id_cliente'])
+            inmueble_instancia = Inmueble.objects.get(
+                id_inmueble=req.POST['id_inmueble'])
 
-        C = Contrato.objects.create(
-            tipo_operacion='S/D',
-            fecha_contrato=fecha_hora_hoy.date(),
-            fecha_ing=req.POST['fecha_ing'],
-            fecha_salida=req.POST['fecha_salida'],
-            cant_dias=req.POST['cant_dias'],
-            cliente_id=cliente_instancia,
-            valor_total=req.POST['valor_total'],
-            monto_reserva=req.POST['monto_reserva'],
-            fecha_reserva=fecha_hora_hoy.date(),
-            datos_envio=req.POST['datos_envio'],
-            inmueble_id=inmueble_instancia
-        )
+            C = Contrato.objects.create(
+                tipo_operacion='S/D',
+                fecha_contrato=fecha_hora_hoy.date(),
+                fecha_ing=req.POST['fecha_ing'],
+                fecha_salida=req.POST['fecha_salida'],
+                cant_dias=req.POST['cant_dias'],
+                cliente_id=cliente_instancia,
+                valor_total=req.POST['valor_total'],
+                monto_reserva=req.POST['monto_reserva'],
+                fecha_reserva=fecha_hora_hoy.date(),
+                datos_envio=req.POST['datos_envio'],
+                inmueble_id=inmueble_instancia
+            )
 
-        context = {
-            "id_contrato": C.id_contrato,
-            "nom_propietario": req.POST['nom_propietario'],
-            "nom_cliente": req.POST['nom_cliente'],
-            "rg_cliente": req.POST['rg_cliente'],
-            "dni_cliente": req.POST['dni_cliente'],
-            "dir_cliente": req.POST['dir_cliente'],
-            "ciudad_cliente": req.POST['ciudad_cliente'],
-            "tel_cliente": req.POST['tel_cliente'],
-            "email_cliente": req.POST['email_cliente'],
-            "cod_referencia": cod_referencia,
-            "dir_inmueble": req.POST['dir_inmueble'],
-            "ciudad_inmueble": req.POST['ciudad_inmueble'],
-            "pass_hall1": req.POST['pass_hall1'],
-            "pass_hall2": req.POST['pass_hall2'],
-            "pass_wifi": req.POST['pass_wifi'],
-            "num_apto": req.POST['num_apto'],
-            "fecha_ing": formatFecha(req.POST['fecha_ing']),
-            "fecha_salida": formatFecha(req.POST['fecha_salida']),
-            "valor_inmueble": req.POST['valor_inmueble'],
-            "valor_inmueble_palabras": valor_inmueble_palabras,
-            "cant_dias": req.POST['cant_dias'],
-            "valor_total": req.POST['valor_total'],
-            "valor_total_palabras": valor_total_palabras,
-            "monto_reserva": req.POST['monto_reserva'],
-            "monto_reserva_palabras": monto_reserva_palabras,
-            "fecha_reserva": fecha_hoy,
-            "datos_envio": req.POST['datos_envio'],
-            "saldo_pendiente": req.POST['saldo_pendiente'],
-            "habitac_maxima": req.POST['habitac_maxima'],
-            "fecha_contrato": fecha_hoy
-        }
+            if C and C.id_contrato:
+                # Contexto de datos para llenar el archivo DOCX
 
-        doc_Path = Path(__file__).parent  # ruta del proyecto
-        doc_Arch = doc_Path / 'static'/'contratos_guardados' / \
-            'contrato_plantilla.docx'  # ruta del archivo DOCX Plantilla
+                context = {
+                    "id_contrato": C.id_contrato,
+                    "nom_propietario": req.POST['nom_propietario'],
+                    "nom_cliente": req.POST['nom_cliente'],
+                    "rg_cliente": req.POST['rg_cliente'],
+                    "dni_cliente": req.POST['dni_cliente'],
+                    "dir_cliente": req.POST['dir_cliente'],
+                    "ciudad_cliente": req.POST['ciudad_cliente'],
+                    "tel_cliente": req.POST['tel_cliente'],
+                    "email_cliente": req.POST['email_cliente'],
+                    "cod_referencia": cod_referencia,
+                    "dir_inmueble": req.POST['dir_inmueble'],
+                    "ciudad_inmueble": req.POST['ciudad_inmueble'],
+                    "pass_hall1": req.POST['pass_hall1'],
+                    "pass_hall2": req.POST['pass_hall2'],
+                    "pass_wifi": req.POST['pass_wifi'],
+                    "num_apto": req.POST['num_apto'],
+                    "fecha_ing": formatFecha(req.POST['fecha_ing']),
+                    "fecha_salida": formatFecha(req.POST['fecha_salida']),
+                    "valor_inmueble": req.POST['valor_inmueble'],
+                    "valor_inmueble_palabras": valor_inmueble_palabras,
+                    "cant_dias": req.POST['cant_dias'],
+                    "valor_total": req.POST['valor_total'],
+                    "valor_total_palabras": valor_total_palabras,
+                    "monto_reserva": req.POST['monto_reserva'],
+                    "monto_reserva_palabras": monto_reserva_palabras,
+                    "fecha_reserva": fecha_hoy,
+                    "datos_envio": req.POST['datos_envio'],
+                    "saldo_pendiente": req.POST['saldo_pendiente'],
+                    "habitac_maxima": req.POST['habitac_maxima'],
+                    "fecha_contrato": fecha_hoy
+                }
 
-        # ruta del archivo DOCX contrato completo Cliente
-        doc = DocxTemplate(doc_Arch)
-        doc.render(context)
-        fecha_hora_actual = datetime.now()
-        formato_personalizado = "%Y-%m-%d_%H-%M-%S"
-        fecha_hora_formateada = fecha_hora_actual.strftime(
-            formato_personalizado)
-        doc_Arch_completo = doc_Path / 'static'/'contratos_guardados' / \
-            f'contrato_REF-{cod_referencia}-{fecha_hora_formateada}.docx'
-        doc.save(doc_Arch_completo)
+                doc_Path = Path(__file__).parent  # ruta del proyecto
+                doc_Arch = doc_Path / 'static'/'contratos_guardados' / \
+                    'contrato_plantilla.docx'  # ruta del archivo DOCX Plantilla
 
-        # Abrir el archivo con la aplicación predeterminada
-        os.startfile(doc_Arch_completo)
+                # ruta del archivo DOCX contrato completo Cliente
+                doc = DocxTemplate(doc_Arch)
+                doc.render(context)
+                fecha_hora_actual = datetime.now()
+                formato_personalizado = "%Y-%m-%d_%H-%M-%S"
+                fecha_hora_formateada = fecha_hora_actual.strftime(
+                    formato_personalizado)
+                doc_Arch_completo = doc_Path / 'static'/'contratos_guardados' / \
+                    f'contrato_REF-{cod_referencia}-{fecha_hora_formateada}.docx'
+                doc.save(doc_Arch_completo)
 
-        success = 'Contrato creado con Exito!'
+                try:
+                    # Abrir el archivo con la aplicación predeterminada
+                    # Abrir el archivo automáticamente dependiendo del sistema operativo
+                    abrir_archivo(doc_Arch_completo)
+                    success = "Contrato criado com sucesso!"
+
+                except Exception as e:
+                    try:
+                        # Intentar descargar el archivo
+                        success = "Contrato criado com sucesso!"
+                        return descargar_archivo(doc_Arch_completo)
+
+                    except Exception as e:
+                        print(
+                            "Contrato criado com sucesso. Não é possível abrir o arquivo automaticamente neste sistema operacional: " + str(e))
+                        success = "Contrato criado com sucesso. Não é possível abrir o arquivo automaticamente neste sistema operacional"
+
+            else:
+                print("Error: O contrato não foi criado corretamente")
+                ERR = "Error: O contrato não foi criado corretamente"
+
+        else:
+            print("Error: O contrato não foi criado Propiedad no Disponible")
+            ERR = "Error: O contrato não foi criado Propiedad no Disponible: " + \
+                str(req.POST['fecha_ing']) + " : " + \
+                str(req.POST['fecha_salida'])
+            success = ''
 
     except IntegrityError as e:
         ERR = f"Error al crear: {e}"
@@ -224,6 +266,46 @@ def crear_contrato(req):
         'success': success
     }
     return render(req, "contrato/contrato_form.html", context)
+
+
+def verificar_fechas(req):
+    id_inmueble = req.GET.get('id_inmueble')
+    fecha_in = req.GET.get('fecha_in')
+    fecha_sal = req.GET.get('fecha_sal')
+    res = buscarProp_Disponible2(id_inmueble, fecha_in, fecha_sal)
+    print('res')
+    print(res['res'])
+    if res['res'] == 1:
+        print('si esta disponible')
+        return JsonResponse({'resultado': 1})
+    else:
+        print('no esta disponible')
+        return JsonResponse({'resultado': 0})
+
+
+def abrir_archivo(ruta):
+    if os.name == 'nt':  # Windows
+        os.startfile(ruta)
+    elif os.name == 'posix':  # Sistemas POSIX (Linux, macOS, etc.)
+        if sys.platform == 'darwin':  # macOS
+            subprocess.run(["open", ruta], check=True)
+        else:  # Asumir Linux u otros sistemas POSIX
+            subprocess.run(["xdg-open", ruta], check=True)
+    else:
+        print("Sistema operacional não suportado")
+        ERR = "Sistema operacional não suportado"
+
+
+def descargar_archivo(ruta):
+    try:
+        with open(ruta, 'rb') as f:
+            response = HttpResponse(f.read(
+            ), content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
+            response['Content-Disposition'] = 'attachment; filename="Contrato.docx"'
+            return response
+    except Exception as e:
+        print(f"Erro ao ler arquivo para download: {str(e)}")
+        ERR = "Erro ao ler arquivo para download"
 
 
 @login_required(login_url='/#modal-opened')

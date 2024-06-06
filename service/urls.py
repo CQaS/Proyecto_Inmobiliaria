@@ -9,7 +9,7 @@ urlpatterns = [
     path('propiedad', views_propiedad.index_propiedad, name="index_propiedad"),
     path('propiedad/crear', views_propiedad.crear_propiedad, name="crear_propiedad"),
     path('propiedad/editar/<int:id_inmueble>',
-         views_propiedad.editar_propiedad,name="editar_propiedad"),
+         views_propiedad.editar_propiedad, name="editar_propiedad"),
     path('propiedad/detalles/<int:id_inmueble>',
          views_propiedad.detalles_propiedad, name="detalles_propiedad"),
     path('propiedad/eliminar/<int:id_inmueble>',
@@ -81,6 +81,8 @@ urlpatterns = [
     path('contrato/crear', views_contrato.crear_contrato, name="crear_contrato"),
     path('contrato/condetalles/<int:detalleid>',
          views_contrato.condetalles, name="condetalles"),
+    path('contrato/verificar-fechas/', views_contrato.verificar_fechas,
+         name="verificar_fechas"),
     ##### FIN RUTAS CONTRATOS #####
     ##### RESET PASSWORD #####
     path('reset_password', views_cliente.reset_password, name="reset_password"),
