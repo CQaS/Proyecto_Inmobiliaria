@@ -83,7 +83,25 @@
     .adelante {
         right: 2%;
     }
+
+    
+        .background-container {
+            background-size: cover;
+            background-position: center;
+            position: fixed;
+            height: 100vh; /* Ajusta según tus necesidades */
+            width: 100%; /* Ajusta según tus necesidades */
+            z-index: -1;
+                    
+        }
+    </style>
+    
+
 </style>
+
+    <div class="background-container">
+        <img src="{% static '/assets/fondo.jpg' %}" alt="logo">
+  </div>
 
 {% for D in detalle %}
 <input type="hidden" name="codRef" id="cod_ref" value="{{ D.cod_referencia }}">
@@ -111,6 +129,9 @@
 </section>
 <div class="box">
     <div class="formbold-form-btn-wrapper">
+        <button class="btn_compartir" id="btn_compartir">
+           Compartir
+         </button>
         <button class="btn_foto" id="btn_foto">
           Fotos
         </button>
@@ -121,6 +142,7 @@
         {% endif %}
     </div>
 
+    
     <div class="carrusel" id="carrusel">
         <div class="atras botones">&#60;</div>  
         <div class="adelante botones">&#62;</div>
