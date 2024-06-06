@@ -276,10 +276,10 @@ def verificar_fechas(req):
     print('res')
     print(res['res'])
     if res['res'] == 1:
-        print('si esta')
+        print('si esta disponible')
         return JsonResponse({'resultado': 1})
     else:
-        print('no esta')
+        print('no esta disponible')
         return JsonResponse({'resultado': 0})
 
 

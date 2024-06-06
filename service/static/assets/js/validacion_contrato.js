@@ -57,16 +57,16 @@ const verificar_fechas = () => {
   }, function (data) {
     console.log(data.resultado)
     if (data.resultado == 1) {
-      
-      console.log('si esta')
-      $('#crear_contrato').prop('disabled', true)
-      _alerta("As datas SI existem")
-      
-    } else {
-      
-      console.log('no esta')
+
+      console.log('si esta disponible')
+      console.log("As datas SI existem")
       $('#crear_contrato').prop('disabled', false)
-      _alerta("As datas NO existem")
+
+    } else {
+
+      console.log('no esta disponible')
+      $('#crear_contrato').prop('disabled', true)
+      _alerta(`Imóvel não disponível entre as datas: "${f_in.value}"  e  "${f_sal.value}"`)
 
     }
   })
