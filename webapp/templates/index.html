@@ -177,9 +177,9 @@
           <i class="fas fa-share-alt"></i>
         </div>
         <div class="share-card">
-          <a href="https://wa.me/?text=" class="share-link" data-url="https://imoveismec.com.br/{{ E.id_inmueble }}"><i class="fab fa-whatsapp" style="color: #25D366;"></i></a>
-          <a href="https://www.instagram.com/" class="share-link" data-url="https://imoveismec.com.br/{{ E.id_inmueble }}"><i class="fab fa-instagram" style="color: #E1306C;"></i></a>
-          <a href="https://www.messenger.com/" class="share-link" data-url="https://imoveismec.com.br/{{ E.id_inmueble }}"><i class="fab fa-facebook-messenger" style="color: #0084FF;"></i></a>
+          <a href="https://wa.me/?text=¡Mira esta propiedad! {{ request.build_absolute_uri }}" class="share-link" target="_blank"><i class="fab fa-whatsapp" style="color: #25D366;"></i></a>
+          <a href="https://www.instagram.com/share?url={{ request.build_absolute_uri }}" class="share-link" target="_blank"><i class="fab fa-instagram" style="color: #E1306C;"></i></a>
+          <a href="https://www.messenger.com/share?link={{ request.build_absolute_uri }}" class="share-link" target="_blank"><i class="fab fa-facebook-messenger" style="color: #0084FF;"></i></a>
         </div>        
       </div> 
     </li>
