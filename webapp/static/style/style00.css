@@ -1065,6 +1065,8 @@ div.carrusel {
 	grid-column: 1/1;
 	margin: 10px auto auto 300px;
 	font-size: 16px;
+	margin-left: 0; /* Ajusta este valor según necesites */
+	padding-left: 0; /* Ajusta este valor según necesites */
 }
 
 .descripcion p {

@@ -127,9 +127,31 @@
 </section>
 <div class="box">
     <div class="formbold-form-btn-wrapper">
-        <button class="btn_compartir" id="btn_compartir">
-           Compartir
-         </button>
+        <a href="https://wa.me/?text=¡Mira esta propiedad! {{ request.build_absolute_uri }}" class="share-link" target="_blank">
+
+            <button class="btn_compartir" id="btn_compartir">
+                WhatsApp <i class="fab fa-whatsapp" style="color: #25D366;"></i>
+            </button>
+        </a>
+        
+        <a href="https://www.instagram.com/imoveis.mec?igsh=MTFuZm14b2M5bGI4ZQ%3D%3D {{ request.build_absolute_uri }}" class="share-link" target="_blank">
+            <button class="btn_compartir" id="btn_compartir">
+                Instagram <i class="fab fa-instagram" style="color: #E1306C;"></i>
+            </button>
+        </a>
+
+        <a href="https://www.messenger.com/share?link= {{ request.build_absolute_uri }}" class="share-link" target="_blank">
+            <button class="btn_compartir" id="btn_compartir">
+                Messenger <i class="fab fa-facebook-messenger" style="color: #0084FF;"></i>
+            </button>
+        </a>
+
+        <a href="#formulario_msg">
+            <button class="btn_compartir" id="ir_a_msg">
+                Mail <i class="fa-regular fa-envelope"></i>
+            </button>
+        </a>
+        
         <button class="btn_foto" id="btn_foto">
           Fotos
         </button>
