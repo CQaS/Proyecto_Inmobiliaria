@@ -119,8 +119,7 @@ def crear_contrato(req):
 
     try:
 
-        res = buscarProp_Disponible(
-            req.POST['id_inmueble'], req.POST['fecha_ing'], req.POST['fecha_salida'])
+        res = buscarProp_Disponible(req.POST['fecha_ing'], req.POST['fecha_salida'])
         print('resultado: buscarProp_Disponible para Contratar')
         print(res['res'])
         if res['res'] == 1:
@@ -272,7 +271,7 @@ def verificar_fechas(req):
     id_inmueble = req.GET.get('id_inmueble')
     fecha_in = req.GET.get('fecha_in')
     fecha_sal = req.GET.get('fecha_sal')
-    res = buscarProp_Disponible2(id_inmueble, fecha_in, fecha_sal)
+    res = buscarProp_Disponible(fecha_in, fecha_sal)
     print('res')
     print(res['res'])
     if res['res'] == 1:

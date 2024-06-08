@@ -535,30 +535,7 @@ def get_fotos_porinmueble(id_inmueble):
         connection.close()
 
 
-def buscarProp_Disponible(id_inmueble, fecha_ing, fecha_salida):
-    query = """
-        SELECT COUNT(i.id_inmueble) FROM inmueble i WHERE (SELECT COUNT(c.id_contrato) AS contID FROM contrato c WHERE c.inmueble_id = i.id_inmueble AND ((c.fecha_ing BETWEEN '{1}' AND '{2}') OR (c.fecha_salida BETWEEN '{1}' AND '{2}') OR (c.fecha_ing > '{1}' AND c.fecha_salida < '{2}'))) = 0 AND i.id_inmueble = {0} AND i.estado = 1
-        """.format(id_inmueble, fecha_ing, fecha_salida)
-
-    ERR = ''
-    try:
-        with connection.cursor() as cursor:
-            cursor.execute(query)
-            res = cursor.fetchone()
-            cursor.close()
-
-            return {'res': res[0], 'ERR': ERR}
-
-    except IntegrityError as e:
-        ERR = 'Algo deu errado, tente novamente ou entre em contato com o administrador'
-        print("Error:", e)
-        return {'ERR': ERR}
-
-    finally:
-        connection.close()
-
-
-def buscarProp_Disponible2(id_inmueble, fecha_ing, fecha_salida):
+def buscarProp_Disponible(fecha_ing, fecha_salida):
     query = """
         SELECT DISTINCT i.* FROM inmueble i LEFT JOIN contrato c ON i.id_inmueble = c.inmueble_id AND(c.fecha_salida >= '{0}' AND c.fecha_ing <= '{1}') WHERE i.estado = 1 AND c.id_contrato IS NULL AND NOT EXISTS(SELECT 1 FROM contrato c2 WHERE c2.inmueble_id = i.id_inmueble AND(c2.fecha_salida >= '{0}' AND c2.fecha_ing <= '{1}'))
         """.format(fecha_ing, fecha_salida)
