@@ -56,6 +56,29 @@ ul {
 }
 
 /* FIN DE ESTILOS GENERALES*/
+.background-container {
+	background-size: cover;
+	background-position: center;
+	position: fixed;
+	height: 100vh; /* Ajusta según tus necesidades */
+	width: 100%; /* Ajusta según tus necesidades */
+	z-index: -1;
+	background: linear-gradient(135deg, #2e6464, #87d9e6, #47d8ee,  #06c0dc, #147e8f,  #045d6b);
+	background-size: 500%;
+	animation: gradient 10s infinite;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+} 
 
 /* MENU */
 .sidebar {

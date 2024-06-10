@@ -10,6 +10,10 @@
 <div id="overlay"></div>
 <link rel="stylesheet" href="{% static '/style/inmueble_detalles.css' %}">
 <style>
+    body { 
+        margin: 0; 
+    }
+
     .carruselImagen {
         object-fit: cover;
         max-width: 100%;
@@ -82,24 +86,31 @@
         right: 2%;
     }
 
+    .card {
+        border-radius: 15px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 50px;
+    }
+
+    .card:hover {
+        border-color: rgb(198,156,60)!important; 
+    }
     
-        .background-container {
-            background-size: cover;
-            background-position: center;
-            position: fixed;
-            height: 100vh; /* Ajusta según tus necesidades */
-            width: 100%; /* Ajusta según tus necesidades */
-            z-index: -1;
-                    
+        .scroll {
+            max-height: 250px;
+            overflow-y: auto;
         }
+
+        .description-container {
+            flex-grow: 1;
+            overflow-y: auto !important;
+            padding-bottom: 1rem; /* Ajusta el espacio inferior si es necesario */
+        }
+        
     </style>
-    
 
-</style>
 
-    <div class="background-container">
-        <img src="{% static '/assets/fondo.jpg' %}" alt="logo">
-  </div>
+    <div class="background-container"></div>
 
 {% for D in detalle %}
 <input type="hidden" name="codRef" id="cod_ref" value="{{ D.cod_referencia }}">
@@ -177,7 +188,7 @@
     <div class="info-basica">
         <div class="row" style="width: 1320px;">
             <div class="col-12 col-md-4">
-                <div class="card border border-info border-5" style="height: 350px">
+                <div class="card border border border-5" style="height: 410px">
                     <div class="card-body">
                         <div class="titulo-box-d text-center">
                             <h3 class="titulo-d">INFORMAÇÃO BASICA</h3>    
@@ -204,12 +215,16 @@
                             <label>Cantidad Banheiros:</label>
                             <span>{{ D.cant_banos }}</span>
                         </div>
+                        <div class="titulo-box-d text-center">
+                            <h3 class="titulo-d">SERVIÇOS</h3>
+                        </div>
+                        <label for=""> {{ D.tipo_servicio }} </label>
                     </div>
                 </div>
             </div>
         
             <div class="col-12 col-md-4">
-                <div class="card border border-info border-5" style="height: 350px">
+                <div class="card border border border-5" style="height: 410px">
                     <div class="card-body text-center">
                         <div class="titulo-box-d">
                             <h3 class="titulo-d">SUPERFICIES E ADICIONAIS</h3>
@@ -242,33 +257,26 @@
                 </div>
             </div>
         
-
             <div class="col-12 col-md-4">
-                <div class="card border border-info border-5" style="height: 350px">
+                <div class="card border border border-5 " style="height: 410px">
                     <div class="card-body">
                         <div class="servicios">
-                            <div class="titulo-box-d text-center">
-                                <h3 class="titulo-d">SERVIÇOS</h3>
+                            <div class="titulo-box-d text-center ">
+                                <h3 class="titulo-d">DESCRIPÇÃO</h3>
+                                <h4 class="titulo-d">{{ D.tipo_inmueble }} - {{ D.dir_inmueble }}</h4>
                             </div>
-                            <label for=""> {{ D.tipo_servicio }} </label>
+                            <div class="descripcion-container">
+                                <p class="scroll">{{ D.descripcion }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-
-        <div class="col-12 col-md-6 mb-3">
-            <div class="descripcion">
-                <div class="titulo-box-d">
-                    <h3 class="titulo-d">DESCRIPÇÃO</h3>
-                    <h4 class="titulo-d">{{ D.tipo_inmueble }} - {{ D.dir_inmueble }}</h4>
-                </div>
-                <p>{{ D.descripcion }}</p>
-            </div>
-        </div>
-
-        <div class="col-12"></div>
+<div class="col-12 col-md-4 mt-50" style="width: 100%;">
+    <div class="card border border border-5 ">
+        <!-- <div class="col-12"></div> -->
             <div class="mapa">
                 <div class="titulo-box-d">
                     <h3 class="titulo-d">LOCALIZAÇÃO</h3>
@@ -281,8 +289,8 @@
                     <div id="loading-spinner" class="loading-spinner"></div>
                 </div>
             </div>
-        </div>
     </div>
+</div>
 
 
 <script>

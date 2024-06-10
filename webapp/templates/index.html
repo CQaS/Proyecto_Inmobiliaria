@@ -178,8 +178,10 @@
         </div>
         <div class="share-card">
           <a href="https://wa.me/?text=¡Mira esta propiedad! {{ request.build_absolute_uri }}" class="share-link" target="_blank"><i class="fab fa-whatsapp" style="color: #25D366;"></i></a>
-          <a href="https://www.instagram.com/share?url={{ request.build_absolute_uri }}" class="share-link" target="_blank"><i class="fab fa-instagram" style="color: #E1306C;"></i></a>
-          <a href="https://www.messenger.com/share?link={{ request.build_absolute_uri }}" class="share-link" target="_blank"><i class="fab fa-facebook-messenger" style="color: #0084FF;"></i></a>
+          <a href="https://www.instagram.com/imoveis.mec/?igsh=MTFuZm14b2M5bGI4ZQ%3D%3D={{ request.build_absolute_uri }}" class="share-link" target="_blank"><i class="fab fa-instagram" style="color: #E1306C;"></i></a>
+          <a href="https://www.facebook.com/profile.php?id=61558284636622&mibextid=ZbWKwL={{ request.build_absolute_uri }}" class="share-link" target="_blank"><i class="fab fa-facebook" style="color: #0084FF;"></i></a>
+          <a href="https://www.tiktok.com/@mec.imoveis?_t=8mq8i8OWHPp&_r=1={{ request.build_absolute_uri }}" class="share-link" target="_blank"><i class="fa-brands fa-tiktok" style="color: black;"></i></a>
+          <a href="#ir_a_msg" class="share-link" target="_blank"><i class="fa-regular fa-envelope" style="color:black"></i></a>
         </div>        
       </div> 
     </li>
@@ -257,6 +259,10 @@ function shareUrl(url) {
   // Compartir en Instagram
   const instagramUrl = `https://www.instagram.com/share?url=${encodeURIComponent(url)}`;
   window.open(instagramUrl, '_blank');
+
+  // Compartir en Tiktok
+  const tiktokUrl = `https://www.tiktok.com/share?url=${encodeURIComponent(url)}`;
+  window.open(tiktokUrl, '_blank');
 
   // Compartir en Messenger
   const messengerUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
