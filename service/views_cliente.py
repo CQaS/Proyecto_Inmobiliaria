@@ -4,6 +4,12 @@ from datetime import datetime
 from django.shortcuts import render, redirect
 from django.core.serializers import serialize
 from django.http import HttpResponse, JsonResponse
+from django.core.exceptions import ObjectDoesNotExist
+import logging
+
+# Configurar el logger
+logger = logging.getLogger(__name__)
+
 # LOGIN
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -12,27 +18,54 @@ from .forms import *
 
 
 def JSONclientes_Inq(request, Name):
-    list = Clientes.objects.filter(
-        categoria='Locatario', nom_cliente__icontains=Name)
-    return HttpResponse(serialize('json', list), 'application/json')
+    try:
+        list = Clientes.objects.filter(
+            categoria='Locatario', nom_cliente__icontains=Name)
+        return HttpResponse(serialize('json', list), content_type='application/json')
+    except ObjectDoesNotExist:
+        return JsonResponse({'erro': 'Nenhum cliente encontrado com os critérios especificados'}, status=404)
+    except Exception as e:
+        logger.error(f"Erro inesperado: {e}")
+        return JsonResponse({'erro': 'Ocorreu um erro inesperado'}, status=500)
 
 
 def JSONclientes_dni_Inq(request, dni):
-    list = Clientes.objects.filter(
-        categoria='Locatario', dni_cliente__icontains=dni)
-    return HttpResponse(serialize('json', list), 'application/json')
+    try:
+        list = Clientes.objects.filter(
+            categoria='Locatario', dni_cliente__icontains=dni)
+        return HttpResponse(serialize('json', list), 'application/json')
+    except ObjectDoesNotExist:
+        return JsonResponse({'erro': 'Nenhum cliente encontrado com os critérios especificados'}, status=404)
+    except Exception as e:
+        logger.error(f"Erro inesperado: {e}")
+        return JsonResponse({'erro': 'Ocorreu um erro inesperado'}, status=500)
 
 
 def JSONclientes_Prop(request, Name):
-    lista = Clientes.objects.filter(
-        categoria='Propietario', nom_cliente__icontains=Name).values('id_cliente', 'nom_cliente')
-    return JsonResponse(list(lista), safe=False)
+    try:
+        lista = Clientes.objects.filter(
+            categoria='Propietario', nom_cliente__icontains=Name).values('id_cliente', 'nom_cliente')
+        return JsonResponse(list(lista), safe=False)
+    except ObjectDoesNotExist:
+        return JsonResponse({'erro': 'Nenhum cliente encontrado com os critérios especificados'}, status=404)
+    except Exception as e:
+        logger.error(f"Erro inesperado: {e}")
+        return JsonResponse({'erro': 'Ocorreu um erro inesperado'}, status=500)
 
 
 @login_required(login_url='/#modal-opened')
 def index_cliente(req):
-    list = Clientes.objects.all()
-    return render(req, 'cliente/index.html', {'list': list})
+    try:
+        list = Clientes.objects.all()
+        return render(req, 'cliente/index.html', {'list': list})
+    except ObjectDoesNotExist:
+        return render(req, 'cliente/index.html', {'erro': 'Nenhum cliente encontrado'}, status=404)
+    except Exception as e:
+        logger.error(f"Erro inesperado: {e}")
+        return render(req, 'cliente/index.html', {'erro': 'Ocorreu um erro inesperado'}, status=500)
+    finally:
+        # Código opcional que siempre se ejecuta
+        pass
 
 
 @login_required(login_url='/#modal-opened')
@@ -460,13 +493,25 @@ def reset_password(req):
 
 @login_required(login_url='/#modal-opened')  # Cliente Locatario
 def reportes_json_c(req):
-    cliente = list(Clientes.objects.filter(categoria='Locatario').values())
-    data = {'cliente': cliente}
-    return JsonResponse(data)
+    try:
+        cliente = list(Clientes.objects.filter(categoria='Locatario').values())
+        data = {'cliente': cliente}
+        return JsonResponse(data)
+    except ObjectDoesNotExist:
+        return JsonResponse({'erro': 'Nenhum cliente encontrado'}, status=404)
+    except Exception as e:
+        logger.error(f"Erro inesperado: {e}")
+        return JsonResponse({'erro': 'Ocorreu um erro inesperado'}, status=500)
 
 
 @login_required(login_url='/#modal-opened')  # Cliente Propietario
 def reportes_json_p(req):
-    cliente = list(Clientes.objects.filter(categoria='Propietario').values())
-    data = {'cliente': cliente}
-    return JsonResponse(data)
+    try:
+        cliente = list(Clientes.objects.filter(categoria='Propietario').values())
+        data = {'cliente': cliente}
+        return JsonResponse(data)
+    except ObjectDoesNotExist:
+        return JsonResponse({'erro': 'Nenhum cliente encontrado'}, status=404)
+    except Exception as e:
+        logger.error(f"Erro inesperado: {e}")
+        return JsonResponse({'erro': 'Ocorreu um erro inesperado'}, status=500)

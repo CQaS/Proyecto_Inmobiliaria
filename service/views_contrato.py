@@ -119,7 +119,8 @@ def crear_contrato(req):
 
     try:
 
-        res = buscarProp_Disponible(req.POST['fecha_ing'], req.POST['fecha_salida'])
+        res = buscarProp_Disponible(
+            req.POST['id_inmueble'], req.POST['fecha_ing'], req.POST['fecha_salida'])
         print('resultado: buscarProp_Disponible para Contratar')
         print(res['res'])
         if res['res'] == 1:
@@ -268,12 +269,12 @@ def crear_contrato(req):
 
 
 def verificar_fechas(req):
+    print(req)
     id_inmueble = req.GET.get('id_inmueble')
     fecha_in = req.GET.get('fecha_in')
     fecha_sal = req.GET.get('fecha_sal')
-    res = buscarProp_Disponible(fecha_in, fecha_sal)
-    print('res')
-    print(res['res'])
+    res = buscarProp_Disponible(id_inmueble, fecha_in, fecha_sal)
+    
     if res['res'] == 1:
         print('si esta disponible')
         return JsonResponse({'resultado': 1})
@@ -309,26 +310,26 @@ def descargar_archivo(ruta):
 
 @login_required(login_url='/#modal-opened')
 def reportes_json_t(req):
-    # Utiliza raw para realizar una consulta SQL personalizada
-    query = '''
-        SELECT c.*, cl.*, i.*, clP.nom_cliente as nom_prop
-        FROM contrato c 
-        JOIN clientes cl ON c.cliente_id = cl.id_cliente 
-        JOIN inmueble i ON c.inmueble_id = i.id_inmueble
-        JOIN clientes clP ON clP.id_cliente = i.cliente_id
-    '''
 
-    contratos = Contrato.objects.raw(query)
-    # Convierte los resultados a una lista
-    contratos_list = []
-    for contrato in contratos:
-        contrato_dict = contrato.__dict__
-        contrato_dict.pop('_state', None)
-        contratos_list.append(contrato_dict)
+    try:
+        res = reportes_json_t_()
+        # Convierte los resultados a una lista
+        if res['res']:
+            contratos_list = []
+            for contrato in res['res']:
+                contrato_dict = contrato.__dict__
+                contrato_dict.pop('_state', None)
+                contratos_list.append(contrato_dict)
 
-    print(contratos_list)
-    data = {'contrato': contratos_list}
-    return JsonResponse(data)
+            print(contratos_list)
+            data = {'contrato': contratos_list}
+            return JsonResponse(data)
+
+    except ObjectDoesNotExist:
+        return JsonResponse({'err': 'Nenhum contrato encontrado'}, status=404)
+    except Exception as e:
+        logger.error(f"Erro inesperado: {e}")
+        return JsonResponse({'err': 'Ocorreu um erro inesperado'}, status=500)
 
 
 def condetalles(req, detalleid):

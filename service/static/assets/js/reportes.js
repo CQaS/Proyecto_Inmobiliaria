@@ -379,6 +379,20 @@ const condetalles = (v) => {
 
 }
 
+// Obtén la fecha actual en el formato YYYY-MM-DD
+let fecha_Actual = new Date().toISOString().split("T")[0]
+
+// Establece la fecha actual como el valor mínimo
+let f_ini = document.getElementById("f_ini")
+let f_fin = document.getElementById("f_fin")
+f_ini.setAttribute("min", fecha_Actual)
+f_fin.setAttribute("min", fecha_Actual)
+
+
+f_ini.addEventListener('change', () => {
+    f_fin.setAttribute('min', f_ini.value)
+})
+
 porFecha.addEventListener('click', async () => {
     f_i = f_ini.value
     f_f = f_fin.value
@@ -407,16 +421,18 @@ const listInmueblesDisponibles = async (url) => {
         const data = await response.json()
         console.log(data)
 
+        data.ERR ? console.log(data.ERR) : null
+
         let content = ``
         data.forEach((p, i) => {
             content += `
                 <tr>
-                    <td >${p.inmueble.cod_referencia}</td>
-                    <td >${p.inmueble.dir_inmueble}</td>
-                    <td >${p.inmueble.tipo_inmueble}</td>
-                    <td >${p.inmueble.valor_inmueble}</td>
-                    <td >${p.inmueble.habitac_maxima}</td>
-                    <td >${p.inmueble.tipo_servicio}</td>                    
+                    <td >${p.inmueble[i].cod_referencia}</td>
+                    <td >${p.inmueble[i].dir_inmueble}</td>
+                    <td >${p.inmueble[i].tipo_inmueble}</td>
+                    <td >${p.inmueble[i].valor_inmueble}</td>
+                    <td >${p.inmueble[i].habitac_maxima}</td>
+                    <td >${p.inmueble[i].tipo_servicio}</td>                    
                     <td >
                         <a href="/propiedad/detalles/${p.fotos[0].inmueble_id}" class='btn btn-info'><i class="fa-solid fa-eye"></i></a>
                     </td>
@@ -424,6 +440,7 @@ const listInmueblesDisponibles = async (url) => {
         })
         tableBody_reportes.innerHTML = content
     } catch (ex) {
+        dataTable.bootstrapTable('destroy')
         _alerta('Algo errado, entre em contato com o administrador!')
     }
 }

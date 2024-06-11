@@ -3,9 +3,10 @@ import random
 import json
 import os
 from datetime import date, datetime
+from decimal import Decimal
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db import models, connection, IntegrityError
-from django.db.models import Count, Q
+from django.db.models import Count, Q, OuterRef, Exists
 from django.core import serializers
 from django.core.serializers import serialize
 from django.http import HttpResponse, Http404
@@ -106,7 +107,8 @@ def crear_propiedad(req):
             try:
                 portadaName = req.FILES['imgportada']
                 # Genera un nuevo nombre de archivo (por ejemplo, usando un generar_palabra_aleatoria())
-                new_fileportadaname = f"PORTADA_{generar_palabra_aleatoria()}{os.path.splitext(portadaName.name)[1]}"
+                new_fileportadaname = f"PORTADA_{generar_palabra_aleatoria()}{
+                    os.path.splitext(portadaName.name)[1]}"
 
                 # Asigna el nuevo nombre al archivo
                 portadaName.name = new_fileportadaname
@@ -124,7 +126,8 @@ def crear_propiedad(req):
             for image in images:
                 try:
                     # Genera un nuevo nombre de archivo (por ejemplo, usando un generar_palabra_aleatoria())
-                    new_filename = f"{generar_palabra_aleatoria()}{os.path.splitext(image.name)[1]}"
+                    new_filename = f"{generar_palabra_aleatoria()}{
+                        os.path.splitext(image.name)[1]}"
 
                     # Asigna el nuevo nombre al archivo
                     image.name = new_filename
@@ -142,7 +145,8 @@ def crear_propiedad(req):
             try:
                 videoName = req.FILES['video']
                 # Genera un nuevo nombre de archivo (por ejemplo, usando un generar_palabra_aleatoria())
-                new_fileVideoname = f"{generar_palabra_aleatoria()}{os.path.splitext(videoName.name)[1]}"
+                new_fileVideoname = f"{generar_palabra_aleatoria()}{
+                    os.path.splitext(videoName.name)[1]}"
 
                 # Asigna el nuevo nombre al archivo
                 videoName.name = new_fileVideoname
@@ -249,7 +253,8 @@ def editar_propiedad(req, id_inmueble=None):
 
                         portadaName = req.FILES['imgportada']
                         # Genera un nuevo nombre de archivo (por ejemplo, usando un generar_palabra_aleatoria())
-                        new_fileportadaname = f"PORTADA_{generar_palabra_aleatoria()}{os.path.splitext(portadaName.name)[1]}"
+                        new_fileportadaname = f"PORTADA_{generar_palabra_aleatoria()}{
+                            os.path.splitext(portadaName.name)[1]}"
 
                         # Asigna el nuevo nombre al archivo
                         portadaName.name = new_fileportadaname
@@ -284,7 +289,8 @@ def editar_propiedad(req, id_inmueble=None):
                 for image in images:
                     try:
                         # Genera un nuevo nombre de archivo (por ejemplo, usando un generar_palabra_aleatoria())
-                        new_filename = f"{generar_palabra_aleatoria()}{os.path.splitext(image.name)[1]}"
+                        new_filename = f"{generar_palabra_aleatoria()}{
+                            os.path.splitext(image.name)[1]}"
 
                         # Asigna el nuevo nombre al archivo
                         image.name = new_filename
@@ -318,7 +324,8 @@ def editar_propiedad(req, id_inmueble=None):
 
                         videoName = req.FILES['video']
                         # Genera un nuevo nombre de archivo (por ejemplo, usando un generar_palabra_aleatoria())
-                        new_fileVideoname = f"{generar_palabra_aleatoria()}{os.path.splitext(videoName.name)[1]}"
+                        new_fileVideoname = f"{generar_palabra_aleatoria()}{
+                            os.path.splitext(videoName.name)[1]}"
 
                         # Asigna el nuevo nombre al archivo
                         videoName.name = new_fileVideoname
@@ -374,7 +381,7 @@ def editar_propiedad(req, id_inmueble=None):
             'error': ERR,
             'success': success
         }
-    
+
     return render(req, 'propiedad/inmueble_form.html', context)
 
 
@@ -497,46 +504,41 @@ def eliminar_propiedad(req, id_inmueble):
 @login_required(login_url='/#modal-opened')
 def buscar_por_fechas(req, f_ini, f_fin):
     try:
-        print(f_ini, f_fin)
+        res = buscarProp_Disponible(0, f_ini, f_fin)
 
-        list = Inmueble.objects.annotate(
-            num_contratos=Count('contrato', filter=Q(
-                contrato__fecha_ing__range=[f_ini, f_fin]) |
-                Q(contrato__fecha_salida__range=[f_ini, f_fin]) |
-                Q(contrato__fecha_ing__gt=f_ini,
-                  contrato__fecha_salida__lt=f_fin)
-            )
-        ).filter(num_contratos=0, estado=1)
+        arrayDataInmuebleFotos = []
 
-        data = []
+        def decimal_default(obj):
+            if isinstance(obj, Decimal):
+                return float(obj)
+            raise TypeError
 
-        for inmueble in list:
+        for R in res['res']:
             fotos = Fotos.objects.filter(
-                inmueble_id=inmueble.id_inmueble).values('image', 'inmueble_id')
+                inmueble_id=R['id_inmueble']).values('image', 'inmueble_id')
 
             # Convierte el QuerySet en una lista de diccionarios
             fotos_data = [{'image': foto['image'],
                            'inmueble_id': foto['inmueble_id']} for foto in fotos]
-
-            # Convierte la lista en formato JSON
-            response_data = json.dumps(fotos_data)
-
-            # Serializar los objetos Inmueble y Fotos a formato JSON
-            inmueble_json = serializers.serialize('json', [inmueble])
-
-            # Convertir JSON a diccionarios
-            inmueble_data = json.loads(inmueble_json)[0]['fields']
-
-            data.append({
-                'inmueble': inmueble_data,
+            arrayDataInmuebleFotos.append({
+                'inmueble': res['res'],
                 'fotos': fotos_data
             })
+        arrayInmuebleFotos_json = json.dumps(
+            arrayDataInmuebleFotos, default=decimal_default, ensure_ascii=False)
 
-        # Convertir la lista de datos a JSON
-        response_data = json.dumps(data)
-        return HttpResponse(response_data, 'application/json')
+        print(arrayInmuebleFotos_json)
+        print('--------------------------------')
+        return HttpResponse(arrayInmuebleFotos_json, 'application/json')
+
+    except ObjectDoesNotExist:
+        errors = json.dumps({
+            'ERR': 'Error en la lista de datos'
+        })
+        return HttpResponse(errors, 'application/json')
     except Exception as e:
         print(e)
+        return JsonResponse({'ERR': 'Ocorreu um erro inesperado'}, status=500)
 
 
 def propiedad_por_tipo(req, tipo_o, tipo_p, temporada, anual, venda):

@@ -1,11 +1,17 @@
 import re
 from PIL import Image
+import logging
+import psycopg2
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.db import connection, IntegrityError
 from django.shortcuts import redirect
+from django.http import JsonResponse
+from django.core.exceptions import ObjectDoesNotExist
+
+logger = logging.getLogger(__name__)
 
 pattern_Nombre = r'^[A-Z]*[a-z]{2,}[a-zA-ZñÑáÁéÉíÍúÚóÓ. ]*$'
 pattern_Direccion = r'^[a-zA-Z0-9\-.,:*+()sàèìòùáéíóúÁÉÍÓÚâêîôÂÊÎÔãõÃÕçÇ!?\s/]+$'
@@ -535,7 +541,7 @@ def get_fotos_porinmueble(id_inmueble):
         connection.close()
 
 
-def buscarProp_Disponible(fecha_ing, fecha_salida):
+def buscarProp_Disponible(id_inmueble, fecha_ing, fecha_salida):
     query = """
         SELECT DISTINCT i.* FROM inmueble i LEFT JOIN contrato c ON i.id_inmueble = c.inmueble_id AND(c.fecha_salida >= '{0}' AND c.fecha_ing <= '{1}') WHERE i.estado = 1 AND c.id_contrato IS NULL AND NOT EXISTS(SELECT 1 FROM contrato c2 WHERE c2.inmueble_id = i.id_inmueble AND(c2.fecha_salida >= '{0}' AND c2.fecha_ing <= '{1}'))
         """.format(fecha_ing, fecha_salida)
@@ -544,23 +550,35 @@ def buscarProp_Disponible(fecha_ing, fecha_salida):
     try:
         with connection.cursor() as cursor:
             cursor.execute(query)
+            columns = [col[0] for col in cursor.description]
             res = cursor.fetchall()
             cursor.close()
 
-            ok = False
-            for row in res:
-                if row[0] == 10:
-                    ok = True
-                    break
+            if id_inmueble != 0:
 
-            # ok == true esta para alquilar, ok == false no esta para alquilar
+                ok = False
+                for row in res:
+                    if row[0] == int(id_inmueble):
+                        ok = True
+                        break
 
-            if ok:
-                print('si esta')
-                return {'res': 1, 'ERR': ERR}
+                # ok == true esta para alquilar, ok == false no esta para alquilar
+
+                if ok:
+                    print('si esta')
+                    return {'res': 1, 'ERR': ERR}
+                else:
+                    print('no esta')
+                    return {'res': 0, 'ERR': ERR}
             else:
-                print('no esta')
-                return {'res': 0, 'ERR': ERR}
+                inmeble_clave_valor = []
+                for row in res:
+                    row_dict = {}
+                    for i, value in enumerate(row):
+                        column_name = columns[i]
+                        row_dict[column_name] = value
+                    inmeble_clave_valor.append(row_dict)
+                return {'res': inmeble_clave_valor}
 
     except IntegrityError as e:
         ERR = 'Algo deu errado, tente novamente ou entre em contato com o administrador'
@@ -569,3 +587,24 @@ def buscarProp_Disponible(fecha_ing, fecha_salida):
 
     finally:
         connection.close()
+
+
+def reportes_json_t_():
+    try:
+        # Utiliza raw para realizar una consulta SQL personalizada
+        query = '''
+            SELECT c.*, cl.*, i.*, clP.nom_cliente as nom_prop
+            FROM contrato c
+            JOIN clientes cl ON c.cliente_id = cl.id_cliente
+            JOIN inmueble i ON c.inmueble_id = i.id_inmueble
+            JOIN clientes clP ON clP.id_cliente = i.cliente_id
+        '''
+        return {'res': Contrato.objects.raw(query)}
+    except ObjectDoesNotExist:
+        return {'err': 'Nenhum contrato encontrado'}
+    except psycopg2.Error as e:
+        logger.error(f"Erro de banco de dados: {e}")
+        return JsonResponse({'erro': 'Erro de banco de dados'}, status=500)
+    except Exception as e:
+        logger.error(f"Erro inesperado: {e}")
+        return {'err': 'Ocorreu um erro inesperado'}
