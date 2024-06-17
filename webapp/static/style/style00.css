@@ -3,11 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
 /* @import url('https://fonts.cdnfonts.com/css/georgia-western'); */
 
-<<<<<<< HEAD
 /*** ESTILOS GENERALES*/
-=======
-/* ESTILOS GENERALES**/
->>>>>>> 082855f20815c282bdffcc676b2bb660bffd1c81
 * {
 	margin: 0;
 	padding: 0;
@@ -86,7 +82,7 @@ ul {
 	}
 } 
 
-/* MENU */
+/*** MENU */
 .sidebar {
 	position: fixed;
 	top: 0;
