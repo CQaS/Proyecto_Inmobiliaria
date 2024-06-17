@@ -142,7 +142,7 @@
                 <div class="titulo-single-box">
                     <h1 class="titulo-single">{{ D.tipo_inmueble }} - {{ D.dir_inmueble }}</h1>
                     <h1 class="titulo-single">R$ {{ D.valor_inmueble }}</h1>
-                    <span class="color-text-a">{{ D.tipo_operacion }}</span>
+                    <span>{{ D.tipo_operacion }}</span>
                     {% if user.is_authenticated %}
                     {% if D.tipo_operacion != 'Venta' %}
                     | <a href="{% url 'contrato_idInmueble' D.id_inmueble %}">Contratar</a>
