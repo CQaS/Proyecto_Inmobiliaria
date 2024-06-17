@@ -71,6 +71,26 @@
             max-height: 100%;
             min-height: 500px;
         }
+
+        .card {
+            width: auto;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+
+        .scroll {
+            max-height: 250px;
+            overflow-y: auto;
+        }
+
+        .description-container {
+            flex-grow: 1;
+            overflow-y: auto !important;
+            padding-bottom: 1rem; /* Ajusta el espacio inferior si es necesario */
+        }
+        
     }
 
     .botones:hover {
@@ -302,8 +322,6 @@
     let videoSrc = '{{video}}'
     
 </script>
-
-
 
 {% endfor %}
 {% endblock%}
