@@ -159,6 +159,13 @@
 </section>
 <div class="box">
     <div class="formbold-form-btn-wrapper">
+
+        <a href="{% url 'disponibilidad' %}">
+            <button class="btn_compartir" id="ir_a_msg ">
+                Disponible <i class="fa-regular fa-calendar-days" style="color: #FFA500;"></i>
+            </button>
+         </a>
+
         <a href="https://wa.me/?text=¡Mira esta propiedad! {{ request.build_absolute_uri }}" class="share-link" target="_blank">
 
             <button class="btn_compartir" id="btn_compartir">
@@ -184,6 +191,7 @@
             </button>
         </a>
         
+        
         <button class="btn_foto" id="btn_foto">
           Fotos
         </button>
@@ -192,6 +200,8 @@
             Video
             </button>
         {% endif %}
+
+        
     </div>
 
     

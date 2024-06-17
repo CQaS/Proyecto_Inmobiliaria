@@ -927,8 +927,6 @@ footer .form_input:focus {
 
 .box {
 	display: grid;
-	/* grid-template-columns: repeat(2, 1fr); 
-        grid-gap: 10px 10px;*/
 	grid-template-columns: 80% 20%;
 	justify-content: space-between;
 	grid-gap: 10px;
