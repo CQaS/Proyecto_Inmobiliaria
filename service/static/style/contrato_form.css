@@ -322,9 +322,9 @@
 }
 
 
-/* Existing styles remain unchanged */
+/*** Existing styles remain unchanged */
 
-/* For screens up to 700px width */
+/**** For screens up to 700px width */
 @media (max-width: 700px) {
   .formbold-steps li {
     font-size: 14px;
@@ -348,7 +348,7 @@
     font-size: 14px;
     padding: 8px 20px;
   }
-}
+
 
 /* For screens up to 400px width */
 @media (max-width: 400px) {

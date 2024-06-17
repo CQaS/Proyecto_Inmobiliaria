@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
 /* @import url('https://fonts.cdnfonts.com/css/georgia-western'); */
 
-/* ESTILOS GENERALES*/
+/*** ESTILOS GENERALES*/
 * {
 	margin: 0;
 	padding: 0;
@@ -55,7 +55,9 @@ ul {
 	transition: .5s;
 }
 
-/* FIN DE ESTILOS GENERALES*/
+/*** FIN DE ESTILOS GENERALES*/
+
+/*** GGRADIENT DE INDEX E INMUEBLES*/
 .background-container {
 	background-size: cover;
 	background-position: center;
@@ -331,6 +333,7 @@ ul {
 	margin-left: 15px;
 }
 
+/*** TRADUCTOR */
 .google {
 	position: absolute;
 	top: 20px;
@@ -362,7 +365,7 @@ ul {
 
 }
 
-/****CARRUSEL DE FOTOS ******/
+/****CARRUSEL DE FOTOS INDEX******/
 .slider-frame {
 	width: 100%;
 	height: auto;
@@ -421,7 +424,7 @@ ul {
 	}
 }
 
-/*Filtro de propiedades*/
+/***Filtro de propiedades*/
 
 .search-bar {
 	position: absolute;
@@ -533,32 +536,23 @@ h4 {
 	background-color: var(--color1);
 }
 
-/*FOOTER */
+/*? FOOTER */
 
 footer {
-	/* position: absolute;
-	right: 0;
-	width: 80%;
-	height: auto;
-	padding: 10px 60px 10px 60px;*/
 	background-color: rgba(63,210,220,0); 
 	margin-top: 25px;
 }
-
-
 
 footer ._container {
 	background-color: rgb(0, 156, 142); 
 	position: relative;
 	padding: 10px 60px 10px 60px;
 	right: 0;
-	width: 90%;
+	width: 92%;
 	display: grid;
 	grid-template-columns: 40% 25% 35%;
 	justify-content: space-between;
 	grid-gap: 30px;
-	/* margin-left: -60px;
-	margin-top: 50px; */
 	margin-left: 90px;
 	justify-content: center;
 	transition: .5s;
@@ -829,13 +823,21 @@ footer .form_input:focus {
 		font-size: 12px;
 	}
 
+	footer {
+		padding: 40px;
+		margin-right: 10px;
+	}
+
 	footer ._container {
-		width: 100%;
+		width: 80%;
 		display: grid;
 		grid-template-columns: repeat(1, 1fr);
 		grid-gap: 20px;
 	}
 
+	.copyrightText {
+		width: 80%;
+	}
 }
 
 
@@ -880,9 +882,25 @@ footer .form_input:focus {
 		grid-template-columns: repeat(1, 1fr);
 	}
 
+	footer {
+		padding: 40px;
+		margin-right: 10px;
+	}
+
+	footer ._container {
+		width: 60%;
+		display: grid;
+		grid-template-columns: repeat(1, 1fr);
+		grid-gap: 20px;
+	}
+
+	.copyrightText {
+		width: 70%;
+	}
+
 }
 
-/* 								ESTILO PAGINA MAS DETALLES DE INMUEBLE 						*/
+/*** 								ESTILO PAGINA MAS DETALLES DE INMUEBLE 						*/
 
 #overlay {
 	position: fixed;
@@ -1071,19 +1089,6 @@ div.carrusel {
 	justify-content: center;
 }
 
-/*
-.sup-medidas {
-	grid-column: 1/1;
-	margin: 10px auto auto 300px;
-	font-size: 16px;
-}
-
-
-.sup-medidas label {
-	padding: 5px;
-	display: block;
-}*/
-
 .descripcion {
 	grid-column: 1/1;
 	margin: 10px auto auto 300px;
@@ -1096,17 +1101,6 @@ div.carrusel {
 	padding: 5px;
 }
 
-/*.servicios {
-	grid-column: 1/1;
-	margin: 10px auto auto 300px;
-	font-size: 16px;
-}
-
-.servicios label {
-	padding: 5px;
-	display: block;
-} */
-
 .mapa {
 	grid-column: 1/2;
 	margin: 10px auto auto 200px;
@@ -1116,7 +1110,7 @@ div.carrusel {
 
 }
 
-/* mientras carga el mapa muestra una animacion */
+/** mientras carga el mapa muestra una animacion */
 @keyframes spin {
 	0% {
 		transform: rotate(0deg);
@@ -1167,12 +1161,8 @@ div.carrusel {
 	overflow: hidden;
 }
 
-/* .contratar:hover {
-	color: white;
-	box-shadow: 0 2px 20px rgb(183, 146, 91);;
-} */
 
-/* REPORTES STYLE */
+/*** REPORTES STYLE */
 caption {
 	color: white !important;
 	font-size: large !important;
