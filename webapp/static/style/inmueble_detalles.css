@@ -2,24 +2,6 @@
     display: flex !important;
 }
 
-.intro-single .color-text-a{
-    padding: 3rem 0 0;
-    transition: .5s;
-    margin-left: 80px;
-}
-
-.intro-single1 {
-    margin-left: 230px;
-}
-
-@media (max-width: 767px) {
-    .intro-single .color-text-a {
-        padding-top: 9rem;
-        margin-left: 80px;
-    }
-
-}
-
 .intro-single .titulo-single-box {
     padding: 1rem 0 1rem 2rem;
 }
@@ -34,11 +16,14 @@
 }
 
 
-@media (min-width: 992px) {
-    .intro-single .titulo-single-box .titulo-single .color-text-a{
-        font-size: 2.1rem;
-        margin-left: 80px;
-    }
+.intro-single .color-text-a{
+    padding: 3rem 0 0;
+    transition: .5s;
+    margin-left: 80px;
+}
+
+.intro-single1 {
+    margin-left: 230px;
 }
 
 .titulo-box-d {
@@ -62,9 +47,24 @@
     left: 0;
 }
 
-#map {
+div.carrusel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto auto 300px;
     width: 100%;
-    height: 400px;
+    position: relative;
+    padding: 10px;
+    height: 50vh;
+    max-height: 200px;
+}
+
+.carruselImagen {
+    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
+    width: 1000px;
+    height: 500px;
 }
 
 .containerCarrusel {
@@ -79,10 +79,19 @@
     box-shadow: 0 30px 50px #dbdbdb;
 }
 
-#slide {
-    width: max-contentCarrusel;
-    margin-top: 50px;
+.botones:hover {
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 1);
 }
+
+.atras {
+    left: 2%;
+}
+
+.adelante {
+    right: 2%;
+}
+
 
 .itemCarrusel {
     width: 200px;
@@ -153,3 +162,113 @@
     cursor: pointer;
     background-color: #bac383;
 }
+
+
+/* .botones {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, .3);
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    position: absolute;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(255, 255, 255, .6);
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    top: 45%;
+} */
+
+.card {
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+    height: 410px
+}
+
+.card:hover {
+    border-color: rgb(198,156,60)!important; 
+}
+
+    .scroll {
+        max-height: 250px;
+        overflow-y: auto;
+    }
+
+    .description-container {
+        flex-grow: 1;
+        overflow-y: auto !important;
+        padding-bottom: 1rem; /* Ajusta el espacio inferior si es necesario */
+    }
+
+#map {
+    width: 100%;
+    height: 400px;
+}
+
+@media (min-width: 992px) {
+    .intro-single .titulo-single-box .titulo-single .color-text-a{
+        font-size: 2.1rem;
+        margin-left: 80px;
+    }
+    .card {
+        width: auto;
+    }
+    
+}
+
+@media (max-width: 767px) {
+    .intro-single .color-text-a {
+        padding-top: 9rem;
+        margin-left: 80px;
+    }
+    
+    
+
+}
+
+
+@media only screen and (min-width:326px) {
+    .botones {
+        font-size: 20px;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+    }
+
+    div.carrusel {
+        max-height: 100%;
+        min-height: 300px;
+    }
+
+    .card {
+        width: auto;
+    }
+
+
+    .scroll {
+        max-height: 250px;
+        overflow-y: auto;
+    }
+
+    .description-container {
+        flex-grow: 1;
+        overflow-y: auto !important;
+        padding-bottom: 1rem; /* Ajusta el espacio inferior si es necesario */
+    }
+    
+}
+
+
+
+
+
+
+
+#slide {
+    width: max-contentCarrusel;
+    margin-top: 50px;
+}
+

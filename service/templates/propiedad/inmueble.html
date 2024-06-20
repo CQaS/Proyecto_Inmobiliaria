@@ -5,134 +5,15 @@
 {% block content %}
 
 <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"/>
-
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"/> -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <div id="overlay"></div>
 <link rel="stylesheet" href="{% static '/style/inmueble_detalles.css' %}">
+
 <style>
-    {% comment %} - {% endcomment %}
-    body { 
-        margin: 0; 
-    }
 
-    .carruselImagen {
-        object-fit: cover;
-        max-width: 100%;
-        max-height: 100%;
-        width: 1000px;
-        height: 500px;
-    }
-
-    .imagen {
-        grid-column: 1/3;
-        margin: 10px auto auto 300px;
-
-    }
-
-    div.carrusel {
-        grid-column: 1/2;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 10px auto auto 300px;
-        width: 100%;
-        position: relative;
-        padding: 10px;
-        height: 50vh;
-        max-height: 200px;
-
-    }
-
-    .botones {
-        width: 35px;
-        height: 35px;
-        border-radius: 50%;
-        background-color: rgba(0, 0, 0, .3);
-        text-align: center;
-        font-size: 30px;
-        font-weight: bold;
-        position: absolute;
-        color: #fff;
-        box-shadow: 0 0 10px rgba(255, 255, 255, .6);
-        -webkit-transition: all 0.3s ease;
-        -o-transition: all 0.3s ease;
-        transition: all 0.3s ease;
-        top: 45%;
-    }
-
-    @media only screen and (min-width:326px) {
-        .botones {
-            font-size: 20px;
-            width: 50px;
-            height: 50px;
-            line-height: 50px;
-        }
-
-        div.carrusel {
-            max-height: 100%;
-            min-height: 500px;
-        }
-
-        .card {
-            width: auto;
-            border-radius: 15px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-top: 50px;
-        }
-
-
-        .scroll {
-            max-height: 250px;
-            overflow-y: auto;
-        }
-
-        .description-container {
-            flex-grow: 1;
-            overflow-y: auto !important;
-            padding-bottom: 1rem; /* Ajusta el espacio inferior si es necesario */
-        }
-        
-    }
-
-    .botones:hover {
-        cursor: pointer;
-        box-shadow: 0 0 20px rgba(255, 255, 255, 1);
-    }
-
-    .atras {
-        left: 2%;
-    }
-
-    .adelante {
-        right: 2%;
-    }
-
-    .card {
-        border-radius: 15px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        margin-top: 50px;
-    }
-
-    .card:hover {
-        border-color: rgb(198,156,60)!important; 
-    }
-    
-        .scroll {
-            max-height: 250px;
-            overflow-y: auto;
-        }
-
-        .description-container {
-            flex-grow: 1;
-            overflow-y: auto !important;
-            padding-bottom: 1rem; /* Ajusta el espacio inferior si es necesario */
-        }
-        
-        
-    </style>
-
-
-    <div class="background-container"></div>
+</style>
+<div class="background-container"></div>
 
 {% for D in detalle %}
 <input type="hidden" name="codRef" id="cod_ref" value="{{ D.cod_referencia }}">
@@ -158,49 +39,48 @@
         </div>
     </div>
 </section>
-<div class="box">
+
+<section class="box">
+
+    <!-- Start botones de compartir redes  -->
     <div class="formbold-form-btn-wrapper d-flex ms-auto">
-
-        
         <a href="https://wa.me/?text=¡Mira esta propiedad! {{ request.build_absolute_uri }}" class="share-link" target="_blank">
-
-            <button class="btn_compartir" id="btn_compartir">
+            <button type="button" class="btn btn-success me-2" id="btn_compartir">
                 WhatsApp <i class="fab fa-whatsapp" style="color: #25D366;"></i>
             </button>
         </a>
         
         <a href="https://www.instagram.com/imoveis.mec?igsh=MTFuZm14b2M5bGI4ZQ%3D%3D {{ request.build_absolute_uri }}" class="share-link" target="_blank">
-            <button class="btn_compartir" id="btn_compartir">
-                Instagram <i class="fab fa-instagram" style="color: #E1306C;"></i>
+            <button type="button" class="btn btn-danger" id="btn_compartir">
+                Instagram <i class="fab fa-instagram" style="color: #de5c87;"></i>
             </button>
         </a>
 
         <a href="https://www.messenger.com/share?link= {{ request.build_absolute_uri }}" class="share-link" target="_blank">
-            <button class="btn_compartir" id="btn_compartir">
+            <button type="button" class="btn btn-primary" id="btn_compartir">
                 Messenger <i class="fab fa-facebook-messenger" style="color: #0084FF;"></i>
             </button>
         </a>
 
         <a href="#formulario_msg">
-            <button class="btn_compartir" id="ir_a_msg">
+            <button type="button" class="btn btn-light" id="ir_a_msg">
                 Mail <i class="fa-regular fa-envelope"></i>
             </button>
         </a>
         
-        
-        <button class="btn_foto" id="btn_foto">
-          Fotos
+        <button type="button" class="btn btn-warning" id="btn_foto">
+            Fotos
         </button>
         {%if video %}
-            <button class="btn_video" id="btn_video">
-            Video
+            <button type="button" class="btn btn-dark" id="btn_video">
+                Video
             </button>
-        {% endif %}
-
-        
+        {% endif %}    
+        </div>
     </div>
+    <!-- Finish botones de compartir  -->
 
-    
+    <!-- Carrusel -->
     <div class="carrusel" id="carrusel">
         <div class="atras botones">&#60;</div>  
         <div class="adelante botones">&#62;</div>
@@ -211,11 +91,14 @@
             Tu navegador no soporta la etiqueta de video.
         </video>
     </div>
-    
+    <!-- finish carrusel -->
+
+
+    <!-- Start tarjetas info basica, medidas, descripcion y mapa -->
     <div class="info-basica">
         <div class="row" style="width: 1320px;">
             <div class="col-12 col-md-4">
-                <div class="card border border border-5" style="height: 410px">
+                <div class="card border border border-5">
                     <div class="card-body">
                         <div class="titulo-box-d text-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-square" viewBox="0 0 16 16">
@@ -225,7 +108,6 @@
                             <h3 class="titulo-d">INFORMAÇÃO BASICA</h3>    
                         </div>
 
-                        <!-- va una table 2 columnas x 4 filas -->
                         <div class="d-flex justify-content-between">
                             <label>Cidade:</label>
                             <span>{{ D.ciudad_inmueble }}</span>
@@ -255,7 +137,7 @@
             </div>
         
             <div class="col-12 col-md-4">
-                <div class="card border border border-5" style="height: 410px">
+                <div class="card border border border-5">
                     <div class="card-body text-center">
                         <div class="titulo-box-d">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-collapse" viewBox="0 0 16 16">
@@ -292,7 +174,7 @@
             </div>
         
             <div class="col-12 col-md-4">
-                <div class="card border border border-5 " style="height: 410px">
+                <div class="card border border border-5 ">
                     <div class="card-body">
                         <div class="servicios">
                             <div class="titulo-box-d text-center ">
@@ -310,30 +192,33 @@
                     </div>
                 </div>
             </div>
-        </div>
+        
+            <div class="col-12 col-md-4 mt-50" style="width: 100%;">
+                <div class="card border border border-5 ">
+                    <div class="mapa">
+                        <div class="titulo-box-d">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                                <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"/>
+                                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                            </svg>
+                            <h3 class="titulo-d">LOCALIZAÇÃO</h3>
+                        </div>
+                        <p id="location-info"></p>
 
-<div class="col-12 col-md-4 mt-50" style="width: 100%;">
-    <div class="card border border border-5 ">
-            <div class="mapa">
-                <div class="titulo-box-d">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
-                        <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"/>
-                        <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
-                    </svg>
-                    <h3 class="titulo-d">LOCALIZAÇÃO</h3>
-                </div>
-                <p id="location-info"></p>
-
-                <div id="map_container" style="width: 100%;">
-                    <div id="map" style="width: 800px; height: 400px; margin-left: 10%;">
+                        <div id="map_container" style="width: 100%;">
+                            <div id="map" style="width: 800px; height: 400px; margin-left: 10%;">
+                            </div>
+                            <div id="loading-spinner" class="loading-spinner"></div>
+                        </div>
                     </div>
-                    <div id="loading-spinner" class="loading-spinner"></div>
                 </div>
             </div>
-    </div>
-</div>
+        </div>
+    </div>   
+    <!-- finish tarjetas -->
+</section> 
 
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" ></script>  
 <script>
     let inmueble_html = true
     //Arreglo de imagenes
@@ -345,4 +230,4 @@
 </script>
 
 {% endfor %}
-{% endblock%}
+{% endblock %}
