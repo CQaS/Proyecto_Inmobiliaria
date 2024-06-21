@@ -137,17 +137,6 @@ const consulta = () => {
     let ul = resultados_por.querySelector("ul")
     ul ? resultados_por.removeChild(ul) : null
 
-    /* let f_ini = document.getElementById("f_ini").value
-    let f_fin = document.getElementById("f_fin").value
-
-    console.log(f_ini, f_fin)
-    let url2 = `/propiedad/buscar_por_fechas/2024-10-01/2024-10-31`
-    $.get(url2).done((res) => {
-        console.log('PRUEBA FECHAS INICIO')
-        console.log(res)
-        console.log('PRUEBA FECHAS INICIO')
-    })*/
-
     try {
         const param = {
             tipo_o: tipo_o,

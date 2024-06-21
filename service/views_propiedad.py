@@ -12,6 +12,7 @@ from django.core.serializers import serialize
 from django.http import HttpResponse, Http404
 from django.http.response import JsonResponse
 from django.conf import settings
+from django.db.models.query import QuerySet
 # LOGIN
 from django.contrib.auth.decorators import login_required
 from .forms import InmuebleForm
@@ -35,6 +36,12 @@ def serialize_date(obj):
     if isinstance(obj, date):
         return obj.strftime('%Y-%m-%d')
     raise TypeError("Type not serializable")
+
+
+def decimal_default(obj):
+    if isinstance(obj, Decimal):
+        return float(obj)
+    raise TypeError
 
 
 @login_required(login_url='/#modal-opened')
@@ -547,9 +554,6 @@ def propiedad_por_tipo(req):
 
         tipo_o = req.GET.get('tipo_o')
         tipo_p = req.GET.get('tipo_p')
-        """ temporada = req.GET.get('temporada')
-        anual = req.GET.get('anual')
-        venda = req.GET.get('venda') """
         f_1 = req.GET.get('f_1')
         f_2 = req.GET.get('f_2')
 
@@ -570,16 +574,16 @@ def propiedad_por_tipo(req):
             fecha_formateada = f_1
             fecha_formateada2 = f_2
 
-        list = ''
+        lista_resultado = ''
 
         if tipo_p and not tipo_o:
             print(f'Tipo Operacion = null, Tipo Propiedad = {tipo_p}')
-            list = Inmueble.objects.filter(
+            lista_resultado = Inmueble.objects.filter(
                 tipo_inmueble__icontains=tipo_p, estado=1)
 
         elif tipo_o and tipo_o == 'Alquiler temporario' and not tipo_p:
             print(f'Tipo Operacion = {tipo_o}, Tipo Propiedad = null')
-            list = Inmueble.objects.annotate(
+            lista_resultado = Inmueble.objects.annotate(
                 num_contratos=models.Count('contrato', filter=(
                     models.Q(contrato__fecha_ing__gt=fecha_formateada,
                              contrato__fecha_salida__lt=fecha_formateada2)
@@ -588,7 +592,7 @@ def propiedad_por_tipo(req):
 
         elif tipo_o and tipo_o == 'Alquiler temporario' and tipo_p:
             print(f'Tipo Operacion = {tipo_o}, Tipo Propiedad = {tipo_p}')
-            list = Inmueble.objects.annotate(
+            lista_resultado = Inmueble.objects.annotate(
                 num_contratos=models.Count('contrato', filter=(
                     models.Q(contrato__fecha_ing__gt=fecha_formateada,
                              contrato__fecha_salida__lt=fecha_formateada2)
@@ -597,7 +601,7 @@ def propiedad_por_tipo(req):
 
         elif tipo_o and tipo_o == 'Alquiler permanente' and not tipo_p:
             print(f'Tipo Operacion = {tipo_o}, Tipo Propiedad = null')
-            list = Inmueble.objects.annotate(
+            lista_resultado = Inmueble.objects.annotate(
                 num_contratos=models.Count('contrato', filter=(
                     models.Q(contrato__fecha_ing__gt=fecha_formateada,
                              contrato__fecha_salida__lt=fecha_formateada2)
@@ -606,7 +610,7 @@ def propiedad_por_tipo(req):
 
         elif tipo_o and tipo_o == 'Alquiler permanente' and tipo_p:
             print(f'Tipo Operacion = {tipo_o}, Tipo Propiedad = {tipo_p}')
-            list = Inmueble.objects.annotate(
+            lista_resultado = Inmueble.objects.annotate(
                 num_contratos=models.Count('contrato', filter=(
                     models.Q(contrato__fecha_ing__gt=fecha_formateada,
                              contrato__fecha_salida__lt=fecha_formateada2)
@@ -615,46 +619,68 @@ def propiedad_por_tipo(req):
 
         elif tipo_o and tipo_o == 'Venta' and not tipo_p:
             print(f'Tipo Operacion = {tipo_o}, Tipo Propiedad = null')
-            list = Inmueble.objects.filter(
+            lista_resultado = Inmueble.objects.filter(
                 tipo_operacion__icontains=tipo_o, estado=1)
 
         elif tipo_o and tipo_o == 'Venta' and tipo_p:
             print(f'Tipo Operacion = {tipo_o}, Tipo Propiedad = {tipo_p}')
-            list = Inmueble.objects.filter(
+            lista_resultado = Inmueble.objects.filter(
                 tipo_operacion__icontains=tipo_o, tipo_inmueble__icontains=tipo_p, estado=1)
 
         elif not tipo_p and not tipo_o:
             print(
                 f'Tipo Operacion = null, Tipo Propiedad = null - Busca entre fechas: {f_1} - {f_2}')
             res = buscarProp_Disponible(0, f_1, f_2)
-            list = res['res']
+            lista_resultado = res['res']
 
         data = []
 
-        for inmueble in list:
+        print('Recorridando Lista de resultados')
+        for inmueble in lista_resultado:
+
+            if type(lista_resultado) == list:
+                idInmueble = inmueble['id_inmueble']
+
+            elif type(lista_resultado) == QuerySet:
+                idInmueble = inmueble.id_inmueble
+
+            print('Obteniendo Fotos de cada Inmueble')
             fotos = Fotos.objects.filter(
-                inmueble_id=inmueble.id_inmueble).values('image', 'inmueble_id')
+                inmueble_id=idInmueble).values('image', 'inmueble_id')
 
             # Convierte el QuerySet en una lista de diccionarios
+            print('Convierte el QuerySet en una lista de diccionarios')
             fotos_data = [{'image': foto['image'],
                            'inmueble_id': foto['inmueble_id']} for foto in fotos]
 
-            # Convierte la lista en formato JSON
-            response_data = json.dumps(fotos_data)
+            if type(lista_resultado) == QuerySet:
+                # Serializar los objetos Inmueble y Fotos a formato JSON
+                print('Serializar los objetos Inmueble y Fotos a formato JSON')
+                inmueble_json = serializers.serialize('json', [inmueble])
 
-            # Serializar los objetos Inmueble y Fotos a formato JSON
-            inmueble_json = serializers.serialize('json', [inmueble])
+                # Convertir JSON a diccionarios
+                print('Convertir JSON a diccionarios')
+                inmueble_data = json.loads(inmueble_json)[0]['fields']
+                inmuebleData = inmueble_data
 
-            # Convertir JSON a diccionarios
-            inmueble_data = json.loads(inmueble_json)[0]['fields']
+            else:
+                inmuebleData = inmueble
 
             data.append({
-                'inmueble': inmueble_data,
+                'inmueble': inmuebleData,
                 'fotos': fotos_data
             })
 
         # Convertir la lista de datos a JSON
-        response_data = json.dumps(data)
+        print('Convertir la lista de datos a JSON')
+
+        if type(lista_resultado) == list:
+            response_data = json.dumps(data, default=decimal_default)
+
+        elif type(lista_resultado) == QuerySet:
+            response_data = json.dumps(data)
+
+        print('Respuesta CORRECTA')
         return HttpResponse(response_data, 'application/json')
 
     except IntegrityError as e:
