@@ -50,33 +50,35 @@ let propiedad_por_tipo = document.getElementById("propiedad_por_tipo")
 
 let temporada = document.getElementById("temporada")
 temporada ? temporada.addEventListener('click', () => {
-    tipo_o = null
-    tipo_p = null
-    venda = false
-    anual = false
-    temporada = true
+    tipo_o = 'Alquiler temporario'
     consulta()
 }) : null
 
 let anual = document.getElementById("anual")
 anual ? anual.addEventListener('click', () => {
-    tipo_o = null
-    tipo_p = null
-    venda = false
-    temporada = false
-    anual = true
+    tipo_o = 'Alquiler permanente'
     consulta()
 }) : null
 
 let venda = document.getElementById("venda")
 venda ? venda.addEventListener('click', () => {
-    tipo_o = null
-    tipo_p = null
-    anual = false
-    temporada = false
-    venda = true
+    tipo_o = 'Venta'
     consulta()
 }) : null
+
+// Obtén la fecha actual en el formato YYYY-MM-DD
+let fecha_Actual = new Date().toISOString().split("T")[0]
+
+// Establece la fecha actual como el valor mínimo
+let f_ini = document.getElementById("f_ini")
+let f_fin = document.getElementById("f_fin")
+f_ini.setAttribute("min", fecha_Actual)
+f_fin.setAttribute("min", fecha_Actual)
+
+
+f_ini.addEventListener('change', () => {
+    f_fin.setAttribute('min', f_ini.value)
+})
 
 if (propiedad_por_tipo) {
     propiedad_por_tipo.addEventListener("click", () => {
@@ -85,16 +87,29 @@ if (propiedad_por_tipo) {
         let por_propiedad = document.getElementById("por_propiedad")
         tipo_o = por_operacion.options[por_operacion.selectedIndex].value
         tipo_p = por_propiedad.options[por_propiedad.selectedIndex].value
+        f_1 = f_ini.value
+        f_2 = f_fin.value
 
-        tipo_o ? console.log(tipo_o) : tipo_o = false
-        tipo_p ? console.log(tipo_p) : tipo_p = false
-        temporada = false
-        anual = false
-        venda = false
+        tipo_o ? console.log(tipo_o) : null
+        tipo_p ? console.log(tipo_p) : null
 
         if (!tipo_o && !tipo_p) {
-            _alerta('Selecciona al menos Un tipo de Busqueda!')
-            return
+            if (f_1 == '' && f_2 == '') {
+
+                console.log('Selecione pelo menos um tipo de pesquisa!')
+                _alerta('Selecione pelo menos um tipo de pesquisa!')
+                return
+
+            } else if (f_1 != '' && f_2 == '') {
+                _alerta('Selecione as duas datas!')
+                return
+
+            } else if (f_1 == '' && f_2 != '') {
+                _alerta('Selecione as duas datas!')
+                return
+
+            }
+
         }
 
         consulta()
@@ -122,37 +137,55 @@ const consulta = () => {
     let ul = resultados_por.querySelector("ul")
     ul ? resultados_por.removeChild(ul) : null
 
-    let url = `/propiedad/propiedad_por_tipo/${tipo_o}/${tipo_p}/${temporada}/${anual}/${venda}`
-
     /* let f_ini = document.getElementById("f_ini").value
     let f_fin = document.getElementById("f_fin").value
 
     console.log(f_ini, f_fin)
-    let url2 = `/propiedad/buscar_por_fechas/${f_ini}/${f_fin}` */
-
-    $.get(url).done((res) => {
+    let url2 = `/propiedad/buscar_por_fechas/2024-10-01/2024-10-31`
+    $.get(url2).done((res) => {
+        console.log('PRUEBA FECHAS INICIO')
         console.log(res)
+        console.log('PRUEBA FECHAS INICIO')
+    })*/
 
-        if (res !== undefined && res !== null && res.length > 0) {
+    try {
+        const param = {
+            tipo_o: tipo_o,
+            tipo_p: tipo_p,
+            f_1: f_1,
+            f_2: f_2
+        }
 
-            let h2Element = document.createElement('h2')
-            h2Element.textContent = 'Resultados de la Búsqueda'
-            h2Element.style.marginLeft = '8%'
+        console.log(param)
 
-            resultados_por.appendChild(h2Element)
+        $.get('/propiedad/propiedad_por_tipo', param, (res) => {
+                console.log(res)
 
-            // Crear un elemento <ul>
-            let ulElement = document.createElement('ul')
-            ulElement.className = 'cards'
-            resultados_por.appendChild(ulElement)
+                if (res[0].ERR) {
+                    _alerta(res[0].ERR)
+                    return
+                }
 
-            let _cards = document.querySelector('.cards')
+                if (res !== undefined && res !== null && res.length > 0) {
 
-            $.each(res, (i, R) => {
-                let url = R.fotos[0].image.replace('webapp/', '')
+                    let h2Element = document.createElement('h2')
+                    h2Element.textContent = 'Procurar Resultados'
+                    h2Element.style.marginLeft = '8%'
 
-                // HTML con el bloque completo a agregar
-                let bloqueCARD = `
+                    resultados_por.appendChild(h2Element)
+
+                    // Crear un elemento <ul>
+                    let ulElement = document.createElement('ul')
+                    ulElement.className = 'cards'
+                    resultados_por.appendChild(ulElement)
+
+                    let _cards = document.querySelector('.cards')
+
+                    $.each(res, (i, R) => {
+                        let url = R.fotos[0].image.replace('webapp/', '')
+
+                        // HTML con el bloque completo a agregar
+                        let bloqueCARD = `
                                 <li class="cards__item">
                                     <div class="card">
                                         <div class="card__image" style="background-image: url(${url});"></div>
@@ -168,24 +201,29 @@ const consulta = () => {
                                 </li>
                                 `;
 
-                // Agregar el bloque HTML al contenido del <ul>
-                _cards.innerHTML += bloqueCARD
+                        // Agregar el bloque HTML al contenido del <ul>
+                        _cards.innerHTML += bloqueCARD
 
+                    })
+
+                    let hr = document.createElement('hr')
+                    resultados_por.appendChild(hr)
+                    window.location.hash = '#resultados_por'
+
+                } else {
+
+                    _alerta("Nenhum resultado de pesquisa!")
+                }
+            })
+            .fail((jqXHR, textStatus, errorThrown) => {
+                console.error("Erro de solicitação:", textStatus, errorThrown)
+                _alerta('Erro de solicitação');
             })
 
-            let hr = document.createElement('hr')
-            resultados_por.appendChild(hr)
-            window.location.hash = '#resultados_por'
-
-        } else {
-
-            let h2Element = document.createElement('h2')
-            h2Element.textContent = 'Sin Resultados de la Búsqueda'
-            h2Element.style.marginLeft = '8%'
-            resultados_por.appendChild(h2Element)
-            window.location.hash = '#resultados_por'
-        }
-    })
+    } catch (error) {
+        console.error("Um erro inesperado ocorreu: ", error);
+        _alerta('Um erro inesperado ocorreu');
+    }
 }
 
 /*                      script detalles de inmuebles y MAPA                 */

@@ -425,7 +425,9 @@ const listInmueblesDisponibles = async (url) => {
 
         let content = ``
         data.forEach((p, i) => {
-            content += `
+            if (p.inmueble[i].tipo_operacion == 'Alquiler temporario' || p.inmueble[i].tipo_operacion == 'Alquiler permanente') {
+                console.log(p.inmueble[i].tipo_operacion)
+                content += `
                 <tr>
                     <td >${p.inmueble[i].cod_referencia}</td>
                     <td >${p.inmueble[i].dir_inmueble}</td>
@@ -437,6 +439,8 @@ const listInmueblesDisponibles = async (url) => {
                         <a href="/propiedad/detalles/${p.fotos[0].inmueble_id}" class='btn btn-info'><i class="fa-solid fa-eye"></i></a>
                     </td>
                 </tr>`;
+            }
+
         })
         tableBody_reportes.innerHTML = content
     } catch (ex) {
