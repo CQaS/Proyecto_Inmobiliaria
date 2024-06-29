@@ -457,15 +457,13 @@ ul {
 	justify-content: center;
 	align-items: center;
 	margin-right: 10px;
-	margin-top: 5px;
+	margin-top: 10px;
 	padding: 10px;
 	height: 100%;
 	/* Iguala la altura de los elementos input con el botón */
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	height: 100%;
 	border-radius: 10px;
+	
 }
 
 .search-input select {
@@ -759,10 +757,10 @@ footer .form_input:focus {
 	.search-input {
 		flex-direction: column;
 		justify-content: flex-start;
-		height: auto;
+		height: 100%;
 		margin-top: 0;
 		font-size: 12px;
-		line-height: 1.5;
+		line-height: 1;
 	}
 
 	footer {
