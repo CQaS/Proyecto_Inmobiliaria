@@ -551,10 +551,9 @@ footer ._container {
 	width: 92%;
 	display: grid;
 	grid-template-columns: 40% 25% 35%;
-	justify-content: space-between;
+	justify-content: center;
 	grid-gap: 30px;
 	margin-left: 90px;
-	justify-content: center;
 	transition: .5s;
 }
 
@@ -927,11 +926,13 @@ footer .form_input:focus {
 
 .box {
 	display: grid;
-	grid-template-columns: 80% 20%;
+	/* grid-template-columns: 80% 20%; */
 	justify-content: space-between;
 	grid-gap: 10px;
 	margin-left: -200px;
 	transition: .5s;
+	position: relative;
+	width: 92%;
 }
 
 .box1 {
@@ -1027,7 +1028,18 @@ div.carrusel {
 	top: 45%;
 }
 
+@media only screen and (min-width:768px) {
+	.box {	
+		width: 50%;
+	}
+}
+
 @media only screen and (min-width:326px) {
+	.box {
+		padding: 40px;
+		margin-right: 10px;
+	}
+
 	.botones {
 		font-size: 20px;
 		width: 50px;
@@ -1078,6 +1090,8 @@ div.carrusel {
 	grid-column: 1/2;
 	margin: 10px auto auto 300px;
 	font-size: 16px;
+	position: relative;
+	width: 100%;
 	
 }
 
