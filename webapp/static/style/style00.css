@@ -439,7 +439,7 @@ ul {
 	flex-direction: row;
 	display: flex;
 	width: 60%;
-	height: 90px;
+	height: 160px;
 	justify-content: center;
 	align-items: center;
 	transition: .5s;
