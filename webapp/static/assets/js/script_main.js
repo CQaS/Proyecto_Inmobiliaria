@@ -72,13 +72,19 @@ let fecha_Actual = new Date().toISOString().split("T")[0]
 // Establece la fecha actual como el valor mínimo
 let f_ini = document.getElementById("f_ini")
 let f_fin = document.getElementById("f_fin")
-f_ini.setAttribute("min", fecha_Actual)
-f_fin.setAttribute("min", fecha_Actual)
+
+if (f_ini || f_fin) {
+
+    f_ini.setAttribute("min", fecha_Actual)
+    f_fin.setAttribute("min", fecha_Actual)
+
+    f_ini.addEventListener('change', () => {
+        f_fin.setAttribute('min', f_ini.value)
+    })
+}
 
 
-f_ini.addEventListener('change', () => {
-    f_fin.setAttribute('min', f_ini.value)
-})
+
 
 if (propiedad_por_tipo) {
     propiedad_por_tipo.addEventListener("click", () => {
