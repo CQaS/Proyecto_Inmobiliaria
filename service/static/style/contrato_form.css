@@ -201,15 +201,6 @@
   display: block;
 }
 
-.formbold-form-btn-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 25px;
-  margin-top: 25px;
-  
-}
-
 /* .btn_compartir{
   display: flex;
   align-items: center;

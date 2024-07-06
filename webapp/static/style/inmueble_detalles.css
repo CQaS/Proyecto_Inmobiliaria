@@ -51,7 +51,7 @@ div.carrusel {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 10px auto auto 300px;
+    margin: 10px auto auto 100px;
     width: 100%;
     position: relative;
     padding: 10px;
@@ -262,9 +262,7 @@ div.carrusel {
 }
 
 
-
 #slide {
     width: max-contentCarrusel;
     margin-top: 50px;
 }
-
