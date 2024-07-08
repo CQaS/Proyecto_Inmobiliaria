@@ -1113,7 +1113,7 @@ div.carrusel {
 
 .mapa {
 	grid-column: 1/2;
-	margin: 10px auto auto 200px;
+	margin: 10px auto auto auto;
 	border: var(--color1);
 	/* height: 50px;
         width: 100%; */
