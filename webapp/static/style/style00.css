@@ -438,7 +438,7 @@ ul {
 	/* Opcional: para centrar el contenido dentro del .search-bar*/
 	flex-direction: row;
 	display: flex;
-	width: 60%;
+	width: auto;
 	height: 160px;
 	justify-content: center;
 	align-items: center;
@@ -744,6 +744,7 @@ footer .form_input:focus {
 	/*Filtro de propiedades*/
 
 	.search-bar {
+		width: 80%;
 		height: auto;
 		margin-left: 40px;
 		flex-direction: column;
@@ -793,11 +794,17 @@ footer .form_input:focus {
 		right: 0px;
 	}
 
+	.titulo {
+		margin-left: 5px;
+		font-size: 12px;
+	}
+
 	.search-bar {
+		margin-bottom: -15px;
 		flex-direction: column;
 		position: relative;
-		top: -20px;
-		width: 80%;
+		top: -120px;
+		width: 60%;
 		height: auto;
 		font-size: 12px;
 	}
@@ -815,10 +822,7 @@ footer .form_input:focus {
 		font-size: 12px;
 	}
 
-	.titulo {
-		margin-left: 140px;
-		font-size: 12px;
-	}
+	
 
 	footer {
 		padding: 40px;
@@ -843,6 +847,15 @@ footer .form_input:focus {
 	.home-section .home-content .bx-menu,
 	.home-section .home-content .text {
 		margin-left: 15px;
+	}
+
+	.search-bar {
+		flex-direction: column;
+		position: relative;
+		top: -20px;
+		width: 40%;
+		height: auto;
+		font-size: 12px;
 	}
 
 	.sidebar {
