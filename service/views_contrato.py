@@ -202,7 +202,8 @@ def crear_contrato(req):
                     "datos_envio": datos_de_envio,
                     "saldo_pendiente": req.POST['saldo_pendiente'],
                     "habitac_maxima": req.POST['habitac_maxima'],
-                    "fecha_contrato": fecha_hoy
+                    "fecha_contrato": fecha_hoy,
+                    "taxa_limpeza": req.POST['taxa_limpeza']
                 }
 
                 doc_Path = Path(__file__).parent  # ruta del proyecto

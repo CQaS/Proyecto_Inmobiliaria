@@ -569,7 +569,9 @@ document.getElementById('valor_total').addEventListener('keyup', () => {
 })
 
 document.getElementById('taxa_limpeza').addEventListener('keyup', () => {
-  document.getElementById('valor_total').value = (diferenciaDias * Number(document.getElementById('valor_inmueble').value)) + Number(document.getElementById('taxa_limpeza').value)
+
+  document.getElementById('valor_total').value = isNaN((diferenciaDias * Number(document.getElementById('valor_inmueble').value)) + Number(document.getElementById('taxa_limpeza').value)) ? manejarNaN() : Number((diferenciaDias * Number(document.getElementById('valor_inmueble').value)) + Number(document.getElementById('taxa_limpeza').value))
+
   document.getElementById('saldo_pendiente').value = isNaN(Number(document.getElementById('valor_total').value) -
       Number(document.getElementById('monto_reserva').value)) ? manejarNaN() : Number(document.getElementById('valor_total').value) -
     Number(document.getElementById('monto_reserva').value)
