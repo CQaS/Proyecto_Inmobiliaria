@@ -188,8 +188,8 @@ if (codRef) {
       title: '¿Quieres dejar Indisponible este Inmueble?',
       icon: 'question',
       showCancelButton: true,
-      confirmButtonText: 'Sí',
-      cancelButtonText: 'No'
+      confirmButtonText: 'Sí, ingreso fechas',
+      cancelButtonText: 'No, hago contrato'
     }).then((result) => {
       if (result.isConfirmed) {
         // Muestra el formulario personalizado
