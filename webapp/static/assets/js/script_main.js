@@ -34,16 +34,6 @@ sidebarBtn.addEventListener("click", () => {
     _resultados_por ? _resultados_por.classList.toggle("cards1") : null
 })
 
-//////ALERTAS////////
-
-const _alerta = (texto) => {
-    Swal.fire({
-        icon: 'error',
-        title: 'Alerta',
-        text: `${texto}`
-    })
-}
-
 //Search de busqueda //
 let resultados_por = document.getElementById('resultados_por')
 let propiedad_por_tipo = document.getElementById("propiedad_por_tipo")

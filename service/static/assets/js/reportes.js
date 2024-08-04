@@ -309,7 +309,7 @@ const listContrato = async () => {
                     <td >${t.valor_total}</td>                   
                     <td >
                         <button onclick='condetalles(${t.id_contrato})' class='btn btn-sm btn_pencil' title='Ver'><i class='fa-solid fa-file-invoice-dollar'></i></button>
-                        <button title='Excluir' onclick='excluirContrato(${t.id_contrato})' class='btn btn-sm btn_trash'><i class='fa-solid fa-trash-can'></i></button>
+                        <button title='Excluir' onclick='excluirContrato(${t.id_contrato}_${t.cod_referencia})' class='btn btn-sm btn_trash'><i class='fa-solid fa-trash-can'></i></button>
                     </td>
                 </tr>`;
         })
@@ -320,6 +320,12 @@ const listContrato = async () => {
 }
 
 const excluirContrato = (c) => {
+
+    let xStr = c.toString().replace('_', '');
+
+    let firstPart = parseInt(xStr.substring(0, 2))
+    let secondPart = parseInt(xStr.substring(2))
+
     Swal.fire({
         title: 'Você tem certeza de que deseja alterar o Estado do Contrato ?',
         text: "Esta ação não pode ser desfeita",
@@ -331,7 +337,22 @@ const excluirContrato = (c) => {
         cancelButtonText: 'Cancelar'
     }).then((result) => {
         if (result.isConfirmed) {
-            console.log('ok', c)
+            let url = `/contrato/eliminar/${firstPart}`
+            $.get(url).done((res) => {
+                if (res.excluido) {
+                    console.log(res)
+                    _alerta(res.mensagem, 'success')
+
+                    $("#fresh-table").bootstrapTable('remove', {
+                        field: 'cod_ref',
+                        values: [secondPart]
+                    }).bootstrapTable('refresh')
+
+                } else {
+                    console.log(res)
+                    _alerta(res.mensagem, 'error')
+                }
+            })
         }
     })
 }

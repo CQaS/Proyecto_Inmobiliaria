@@ -240,7 +240,7 @@ class Contrato(models.Model):
                                      null=False, blank=False, verbose_name='Monto reserva', validators=[validar_numero])
     fecha_reserva = models.DateField(
         null=False, blank=False, verbose_name='Fecha de Reserva')
-    datos_envio = models.CharField(max_length=250, null=False, blank=False,
+    datos_envio = models.CharField(max_length=250, null=True, blank=True,
                                    verbose_name='Datos de envio', validators=[validar_Datos_envio])
     inmueble_id = models.ForeignKey(
         'Inmueble', unique=False, on_delete=models.CASCADE, verbose_name='Inmueble id', db_column='inmueble_id')

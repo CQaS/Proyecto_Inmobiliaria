@@ -25,7 +25,7 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!--FONT-->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  
+
   <!-- <link href="https://fonts.cdnfonts.com/css/orator-std" rel="stylesheet"> -->
   <!-- Script alert  -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -41,6 +41,19 @@
 
   <title>Imóveis MEC</title>
   <script type="text/javascript">
+    //////ALERTAS////////
+
+    const _alerta = (texto, icon) => {
+
+      const iconTipo = icon || 'info'
+
+      Swal.fire({
+        icon: iconTipo,
+        title: 'Alerta',
+        text: `${texto}`
+      })
+    }
+
     function googleTranslateElementInit() {
       new google.translate.TranslateElement({
         pageLanguage: 'pt',
@@ -116,7 +129,7 @@
         </ul>
       </li>
       {% endif %}
-      
+
       {% if user.is_authenticated %}
       <li>
         <a class="salir" href="{% url 'salir' %}" id="" title="Sair">
@@ -163,10 +176,14 @@
 
 
         <ul class="sci">
-          <li><a href="https://www.facebook.com/profile.php?id=61558284636622&mibextid=ZbWKwL"><i class="fa-brands fa-facebook" style="color:blue"></i></a></li>
-          <li><a href="https://www.instagram.com/imoveis.mec/?igsh=MTFuZm14b2M5bGI4ZQ%3D%3D"><i class="fa-brands fa-instagram" style="color:rgb(255, 0, 183)"></i></a></li>
-          <li><a href="https://www.tiktok.com/@mec.imoveis?_t=8mq8i8OWHPp&_r=1"><i class="fa-brands fa-tiktok" style="color:black"></i></a></li>
-          <li><a href="https://wa.me/5547999197056"><i class="fa-brands fa-whatsapp" style="color:rgb(30, 212, 17)"></i></a></li>
+          <li><a href="https://www.facebook.com/profile.php?id=61558284636622&mibextid=ZbWKwL"><i
+                class="fa-brands fa-facebook" style="color:blue"></i></a></li>
+          <li><a href="https://www.instagram.com/imoveis.mec/?igsh=MTFuZm14b2M5bGI4ZQ%3D%3D"><i
+                class="fa-brands fa-instagram" style="color:rgb(255, 0, 183)"></i></a></li>
+          <li><a href="https://www.tiktok.com/@mec.imoveis?_t=8mq8i8OWHPp&_r=1"><i class="fa-brands fa-tiktok"
+                style="color:black"></i></a></li>
+          <li><a href="https://wa.me/5547999197056"><i class="fa-brands fa-whatsapp"
+                style="color:rgb(30, 212, 17)"></i></a></li>
         </ul>
       </div>
 

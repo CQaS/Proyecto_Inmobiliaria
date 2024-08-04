@@ -125,6 +125,9 @@ def crear_contrato(req):
         print(res['res'])
         if res['res'] == 1:
 
+            datos_de_envio = req.POST.get(
+                'datos_envio', '-')
+
             valor_inmueble_palabras = num2words(
                 req.POST['valor_inmueble'], lang='pt_BR')
             valor_total_palabras = num2words(
@@ -162,7 +165,7 @@ def crear_contrato(req):
                 valor_total=req.POST['valor_total'],
                 monto_reserva=req.POST['monto_reserva'],
                 fecha_reserva=fecha_hora_hoy.date(),
-                datos_envio=req.POST['datos_envio'],
+                datos_envio=datos_de_envio,
                 inmueble_id=inmueble_instancia
             )
 
@@ -196,7 +199,7 @@ def crear_contrato(req):
                     "monto_reserva": req.POST['monto_reserva'],
                     "monto_reserva_palabras": monto_reserva_palabras,
                     "fecha_reserva": fecha_hoy,
-                    "datos_envio": req.POST['datos_envio'],
+                    "datos_envio": datos_de_envio,
                     "saldo_pendiente": req.POST['saldo_pendiente'],
                     "habitac_maxima": req.POST['habitac_maxima'],
                     "fecha_contrato": fecha_hoy
@@ -274,7 +277,7 @@ def verificar_fechas(req):
     fecha_in = req.GET.get('fecha_in')
     fecha_sal = req.GET.get('fecha_sal')
     res = buscarProp_Disponible(id_inmueble, fecha_in, fecha_sal)
-    
+
     if res['res'] == 1:
         print('si esta disponible')
         return JsonResponse({'resultado': 1})
@@ -348,3 +351,18 @@ def condetalles(req, detalleid):
     else:
         mensaje_error = {'error': 'Contrato no encontrado'}
         return HttpResponse(json.dumps(mensaje_error), content_type='application/json')
+
+
+@login_required(login_url='/#modal-opened')
+def eliminar_contrato(req, id_contrato):
+    try:
+        contrato = Contrato.objects.get(id_contrato=id_contrato)
+        print(contrato)
+        contrato.delete()
+        return JsonResponse({'excluido': True, 'mensagem': 'Estado do Imóveis Habilitado!'})
+
+    except Contrato.DoesNotExist:
+        return JsonResponse({'excluido': False, 'mensagem': 'O Contrato não existe'}, status=404)
+
+    except Exception as e:
+        return JsonResponse({'excluido': False, 'mensagem': f'Erro: {str(e)}'}, status=500)

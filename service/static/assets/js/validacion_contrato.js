@@ -263,10 +263,13 @@ if (codRef) {
                 url: '/propiedad/inmueble_indisponible', // La URL que definiste en urls.py
                 data: data,
                 success: (response) => {
+                  console.log(response)
                   _alerta(response.message) // Mensaje recibido desde la vista
                 },
                 error: (error) => {
-                  _alerta('Ocurrio un error!')
+                  console.error(error.responseJSON.message)
+
+                  _alerta(`${error.responseJSON.message}`)
                 }
               })
 
@@ -487,9 +490,11 @@ crear_contrato.addEventListener("click", (e) => {
     return
   }
 
-  if (d_envio(datos_envio) == null || datos_envio.value.length < 3) {
-    _alerta('Informações de envio inválidas!')
-    return
+  if (datos_envio) {
+    if (d_envio(datos_envio) == null || datos_envio.value.length < 3) {
+      _alerta('Informações de envio inválidas!')
+      return
+    }
   }
 
   if (parseFloat(cant_dias.value) < 0 || cant_dias.value === '' || isNaN(cant_dias.value)) {

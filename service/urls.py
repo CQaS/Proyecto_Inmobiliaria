@@ -83,6 +83,8 @@ urlpatterns = [
          views_contrato.condetalles, name="condetalles"),
     path('contrato/verificar-fechas/', views_contrato.verificar_fechas,
          name="verificar_fechas"),
+    path('contrato/eliminar/<int:id_contrato>',
+         views_contrato.eliminar_contrato, name="eliminar_contrato"),
     ##### FIN RUTAS CONTRATOS #####
     ##### RESET PASSWORD #####
     path('reset_password', views_cliente.reset_password, name="reset_password"),

@@ -760,7 +760,7 @@ def inmueble_indisponible(req):
             print(cliente_instancia)
 
             C = Contrato.objects.create(
-                tipo_operacion='S/D',
+                tipo_operacion='Propriedade indisponível por Admin',
                 fecha_contrato=fecha_hora_hoy.date(),
                 fecha_ing=start,
                 fecha_salida=end,
@@ -777,6 +777,9 @@ def inmueble_indisponible(req):
             """
 
             return JsonResponse({'message': 'Propriedade indisponível com sucesso'}, status=200)
+        except Inmueble.DoesNotExist:
+            return JsonResponse({'message': f'Propriedade não indisponível! Cod_ref: {cod_referencia} invalido '}, status=404)
+
         except IntegrityError as e:
             ERR = f"Error al crear"
             print(e)
