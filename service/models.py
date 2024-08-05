@@ -543,7 +543,7 @@ def get_fotos_porinmueble(id_inmueble):
 
 def buscarProp_Disponible(id_inmueble, fecha_ing, fecha_salida):
     query = """
-        SELECT DISTINCT i.* FROM inmueble i LEFT JOIN contrato c ON i.id_inmueble = c.inmueble_id AND(c.fecha_salida >= '{0}' AND c.fecha_ing <= '{1}') WHERE i.estado = 1 AND c.id_contrato IS NULL AND NOT EXISTS(SELECT 1 FROM contrato c2 WHERE c2.inmueble_id = i.id_inmueble AND(c2.fecha_salida >= '{0}' AND c2.fecha_ing <= '{1}'))
+        SELECT DISTINCT i.* FROM inmueble i LEFT JOIN contrato c ON i.id_inmueble = c.inmueble_id AND(DATE_SUB(c.fecha_salida, INTERVAL 1 DAY) >= '{0}' AND c.fecha_ing <= '{1}') WHERE i.estado = 1 AND c.id_contrato IS NULL AND NOT EXISTS(SELECT 1 FROM contrato c2 WHERE c2.inmueble_id = i.id_inmueble AND(DATE_SUB(c2.fecha_salida, INTERVAL 1 DAY) >= '{0}' AND c2.fecha_ing <= '{1}'))
         """.format(fecha_ing, fecha_salida)
 
     ERR = ''

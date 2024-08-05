@@ -39,39 +39,6 @@ let f_sal = document.getElementById("fecha_salida")
 f_in.setAttribute("min", fechaActual)
 f_sal.setAttribute("min", fechaActual)
 
-f_sal.addEventListener("change", () => {
-  if (f_in.value) {
-    console.log(f_in.value, f_sal.value)
-
-    verificar_fechas()
-
-  }
-})
-
-const verificar_fechas = () => {
-
-  $.get('/contrato/verificar-fechas/', {
-    id_inmueble: id_inmueble.value,
-    fecha_in: f_in.value,
-    fecha_sal: f_sal.value
-  }, function (data) {
-    console.log(data.resultado)
-    if (data.resultado == 1) {
-
-      console.log('si esta disponible')
-      console.log("As datas SI existem")
-      $('#crear_contrato').prop('disabled', false)
-
-    } else {
-
-      console.log('no esta disponible')
-      $('#crear_contrato').prop('disabled', true)
-      _alerta(`Imóvel não disponível entre as datas: "${f_in.value}"  e  "${f_sal.value}"`)
-
-    }
-  })
-}
-
 const parte_1 = document.querySelector('.parte_1')
 const parte_2 = document.querySelector('.parte_2')
 const confirmar_3 = document.querySelector('.confirmar_3')
@@ -547,14 +514,48 @@ f_in.addEventListener('change', () => {
 
 let diferenciaDias = 0
 f_sal.addEventListener('change', () => {
-  const fechaSeleccionada2 = new Date(f_sal.value)
-  let unDia = 24 * 60 * 60 * 1000
-  diferenciaDias = Math.floor((fechaSeleccionada2 - fechaSeleccionada) / unDia) + 1
 
-  // Muestra la diferencia en días en el elemento de salida
-  document.getElementById('cant_dias').value = diferenciaDias
-  document.getElementById('valor_total').value = (diferenciaDias * Number(document.getElementById('valor_inmueble').value)) + Number(document.getElementById('taxa_limpeza').value)
+  if (f_in.value) {
+    console.log('VERIFICANDO')
+    console.log(f_in.value, f_sal.value)
+
+    verificar_fechas()
+
+  }
 })
+
+const verificar_fechas = () => {
+
+  $.get('/contrato/verificar-fechas/', {
+    id_inmueble: id_inmueble.value,
+    fecha_in: f_in.value,
+    fecha_sal: f_sal.value
+  }, function (data) {
+    console.log(data.resultado)
+    if (data.resultado == 1) {
+
+      console.log('si esta disponible')
+      console.log("As datas SI existem")
+      $('#crear_contrato').prop('disabled', false)
+
+      console.log('CALCULANDO MONTOS')
+      const fechaSeleccionada2 = new Date(f_sal.value)
+      let unDia = 24 * 60 * 60 * 1000
+      diferenciaDias = Math.floor((fechaSeleccionada2 - fechaSeleccionada) / unDia) + 1
+
+      // Muestra la diferencia en días en el elemento de salida
+      document.getElementById('cant_dias').value = diferenciaDias
+      document.getElementById('valor_total').value = (diferenciaDias * Number(document.getElementById('valor_inmueble').value)) + Number(document.getElementById('taxa_limpeza').value)
+
+    } else {
+
+      console.log('no esta disponible')
+      $('#crear_contrato').prop('disabled', true)
+      _alerta(`Imóvel não disponível entre as datas: "${f_in.value}"  e  "${f_sal.value}"`)
+
+    }
+  })
+}
 
 document.getElementById('monto_reserva').addEventListener('keyup', () => {
   document.getElementById('saldo_pendiente').value = isNaN(Number(document.getElementById('valor_total').value) -
