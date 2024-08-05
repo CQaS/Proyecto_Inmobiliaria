@@ -240,7 +240,7 @@ class Contrato(models.Model):
                                      null=False, blank=False, verbose_name='Monto reserva', validators=[validar_numero])
     fecha_reserva = models.DateField(
         null=False, blank=False, verbose_name='Fecha de Reserva')
-    datos_envio = models.CharField(max_length=250, null=False, blank=False,
+    datos_envio = models.CharField(max_length=250, null=True, blank=True,
                                    verbose_name='Datos de envio', validators=[validar_Datos_envio])
     inmueble_id = models.ForeignKey(
         'Inmueble', unique=False, on_delete=models.CASCADE, verbose_name='Inmueble id', db_column='inmueble_id')
@@ -543,7 +543,7 @@ def get_fotos_porinmueble(id_inmueble):
 
 def buscarProp_Disponible(id_inmueble, fecha_ing, fecha_salida):
     query = """
-        SELECT DISTINCT i.* FROM inmueble i LEFT JOIN contrato c ON i.id_inmueble = c.inmueble_id AND(c.fecha_salida >= '{0}' AND c.fecha_ing <= '{1}') WHERE i.estado = 1 AND c.id_contrato IS NULL AND NOT EXISTS(SELECT 1 FROM contrato c2 WHERE c2.inmueble_id = i.id_inmueble AND(c2.fecha_salida >= '{0}' AND c2.fecha_ing <= '{1}'))
+        SELECT DISTINCT i.* FROM inmueble i LEFT JOIN contrato c ON i.id_inmueble = c.inmueble_id AND(DATE_SUB(c.fecha_salida, INTERVAL 1 DAY) >= '{0}' AND c.fecha_ing <= '{1}') WHERE i.estado = 1 AND c.id_contrato IS NULL AND NOT EXISTS(SELECT 1 FROM contrato c2 WHERE c2.inmueble_id = i.id_inmueble AND(DATE_SUB(c2.fecha_salida, INTERVAL 1 DAY) >= '{0}' AND c2.fecha_ing <= '{1}'))
         """.format(fecha_ing, fecha_salida)
 
     ERR = ''

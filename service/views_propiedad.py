@@ -1,11 +1,12 @@
-import string
-import random
-import json
 import os
+import re
+import json
+import random
+import string
 from datetime import date, datetime
 from decimal import Decimal
 from django.shortcuts import render, redirect, get_object_or_404
-from django.db import models, connection, IntegrityError
+from django.db import models, connection, IntegrityError, DatabaseError
 from django.db.models import Count, Q, OuterRef, Exists
 from django.core import serializers
 from django.core.serializers import serialize
@@ -173,6 +174,21 @@ def crear_propiedad(req):
                 'success': success
             }
             return render(req, 'propiedad/inmueble_form.html', context)
+
+        except DatabaseError as e:
+            error_message = str(e)
+
+            match = re.search(
+                r"Data truncated for column '(\w+)'", error_message)
+            if match:
+                column_name = match.group(1)
+                error_message = f"Erro ao salvar o imóvel: {column_name}"
+                ERR = error_message
+                print(f"Error en la columna {column_name}")
+            else:
+                error_message = f"Erro ao salvar o imóvel: {str(e)}"
+                ERR = error_message
+                print(f"Error de base de datos: {error_message}")
 
         except Exception as e:
             error_message = f"Erro ao salvar o imóvel: {str(e)}"
@@ -754,7 +770,7 @@ def inmueble_indisponible(req):
             print(cliente_instancia)
 
             C = Contrato.objects.create(
-                tipo_operacion='S/D',
+                tipo_operacion='Propriedade indisponível por Admin',
                 fecha_contrato=fecha_hora_hoy.date(),
                 fecha_ing=start,
                 fecha_salida=end,
@@ -771,6 +787,9 @@ def inmueble_indisponible(req):
             """
 
             return JsonResponse({'message': 'Propriedade indisponível com sucesso'}, status=200)
+        except Inmueble.DoesNotExist:
+            return JsonResponse({'message': f'Propriedade não indisponível! Cod_ref: {cod_referencia} invalido '}, status=404)
+
         except IntegrityError as e:
             ERR = f"Error al crear"
             print(e)
