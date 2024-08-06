@@ -357,13 +357,20 @@ def condetalles(req, detalleid):
 @login_required(login_url='/#modal-opened')
 def eliminar_contrato(req, id_contrato):
     try:
-        contrato = Contrato.objects.get(id_contrato=id_contrato)
+        """ contrato = Contrato.objects.get(id_contrato=id_contrato)
         print(contrato)
         contrato.delete()
         return JsonResponse({'excluido': True, 'mensagem': 'Estado do Imóveis Habilitado!'})
 
     except Contrato.DoesNotExist:
-        return JsonResponse({'excluido': False, 'mensagem': 'O Contrato não existe'}, status=404)
+        return JsonResponse({'excluido': False, 'mensagem': 'O Contrato não existe'}, status=404) """
+
+        if eliminarContrato(id_contrato):
+            print('Contrato eliminado, OK')
+            return JsonResponse({'excluido': True, 'mensagem': 'Estado do Imóveis Habilitado!'})
+        else:
+            print('Erro ao eliminar o contrato!')
+            return JsonResponse({'excluido': False, 'mensagem': 'O Contrato não existe'}, status=404)
 
     except Exception as e:
         return JsonResponse({'excluido': False, 'mensagem': f'Erro: {str(e)}'}, status=500)
