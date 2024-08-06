@@ -608,3 +608,30 @@ def reportes_json_t_():
     except Exception as e:
         logger.error(f"Erro inesperado: {e}")
         return {'err': 'Ocorreu um erro inesperado'}
+
+
+def eliminarContrato(idContrato):
+
+    try:
+        query = "DELETE FROM contrato WHERE id_contrato =  %s"
+
+        with connection.cursor() as cursor:
+            cursor.execute(query, [idContrato])
+            rows_affected = cursor.rowcount
+
+        if rows_affected > 0:
+            print("Contrato eliminado com sucesso!")
+            return True
+        else:
+            print(
+                'Algo deu errado, tente novamente ou entre em contato com o administrador')
+            return False
+
+    except Exception as e:
+
+        print('Algo deu errado, tente novamente ou entre em contato com o administrador')
+        print("Error:", e)
+        return False
+
+    finally:
+        connection.close()
