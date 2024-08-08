@@ -601,13 +601,13 @@ def reportes_json_t_():
         '''
         return {'res': Contrato.objects.raw(query)}
     except ObjectDoesNotExist:
-        return {'err': 'Nenhum contrato encontrado'}
+        return JsonResponse({'err': 'Nenhum contrato encontrado'}, status=404)
     except psycopg2.Error as e:
         logger.error(f"Erro de banco de dados: {e}")
-        return JsonResponse({'erro': 'Erro de banco de dados'}, status=500)
+        return JsonResponse({'err': 'Erro de banco de dados'}, status=500)
     except Exception as e:
         logger.error(f"Erro inesperado: {e}")
-        return {'err': 'Ocorreu um erro inesperado'}
+        return JsonResponse({'err': 'Ocorreu um erro inesperado'}, status=404)
 
 
 def eliminarContrato(idContrato):
