@@ -315,6 +315,7 @@ const listContrato = async () => {
         })
         tableBody_reportes.innerHTML = content
     } catch (ex) {
+        console.log(ex)
         _alerta('Algo errado, entre em contato com o administrador!')
     }
 }
